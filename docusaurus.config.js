@@ -19,15 +19,15 @@ const config = {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
-  url: 'https://wiki.dshanpi.org',
+  url: 'https://zephyr.100ask.org',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'dshanpi', // Usually your GitHub org/user name.
-  projectName: 'Docs', // Usually your repo name.
+  organizationName: '100askTeam', // Usually your GitHub org/user name.
+  projectName: 'zephyr-docs', // Usually your repo name.
 
   onBrokenLinks: 'throw',
 
@@ -48,7 +48,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/dshanpi/Docs/tree/main/',
+            'https://github.com/100askTeam/zephyr-docs/tree/master/',
         },
         blog: {
           showReadingTime: true,
@@ -61,7 +61,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/dshanpi/Docs/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/100askTeam/zephyr-docs/tree/master/blog/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'ignore',
           onInlineAuthors: 'ignore',
