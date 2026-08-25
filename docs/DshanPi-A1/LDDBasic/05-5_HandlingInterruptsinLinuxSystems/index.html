@@ -1,0 +1,398 @@
+<!doctype html><html lang=zh-Hans dir=ltr class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-DshanPi-A1/LDDBasic/05-5_HandlingInterruptsinLinuxSystems" data-has-hydrated=false><head><meta charset=UTF-8><meta name=generator content="Docusaurus v3.10.2"><title data-rh=true>Linux系统对中断的处理 | 东山Π</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"/><meta data-rh=true name=twitter:card content=summary_large_image /><meta data-rh=true property=og:image content=https://zephyr.100ask.org/img/docusaurus-social-card.jpg /><meta data-rh=true name=twitter:image content=https://zephyr.100ask.org/img/docusaurus-social-card.jpg /><meta data-rh=true property=og:url content=https://zephyr.100ask.org/docs/DshanPi-A1/LDDBasic/05-5_HandlingInterruptsinLinuxSystems /><meta data-rh=true property=og:locale content=zh_Hans /><meta data-rh=true property=og:locale:alternate content=en /><meta data-rh=true name=docusaurus_locale content=zh-Hans /><meta data-rh=true name=docsearch:language content=zh-Hans /><meta data-rh=true name=docusaurus_version content=current /><meta data-rh=true name=docusaurus_tag content=docs-default-current /><meta data-rh=true name=docsearch:version content=current /><meta data-rh=true name=docsearch:docusaurus_tag content=docs-default-current /><meta data-rh=true property=og:title content="Linux系统对中断的处理 | 东山Π"/><meta data-rh=true name=description content="1.1 进程、线程、中断的核心：栈"/><meta data-rh=true property=og:description content="1.1 进程、线程、中断的核心：栈"/><link data-rh=true rel=icon href=/img/favicon.ico /><link data-rh=true rel=canonical href=https://zephyr.100ask.org/docs/DshanPi-A1/LDDBasic/05-5_HandlingInterruptsinLinuxSystems /><link data-rh=true rel=alternate href=https://zephyr.100ask.org/docs/DshanPi-A1/LDDBasic/05-5_HandlingInterruptsinLinuxSystems hreflang=zh-Hans /><link data-rh=true rel=alternate href=https://zephyr.100ask.org/en/docs/DshanPi-A1/LDDBasic/05-5_HandlingInterruptsinLinuxSystems hreflang=en /><link data-rh=true rel=alternate href=https://zephyr.100ask.org/docs/DshanPi-A1/LDDBasic/05-5_HandlingInterruptsinLinuxSystems hreflang=x-default /><script data-rh=true type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://zephyr.100ask.org/docs/category/驱动基础","name":"驱动基础","position":1},{"@type":"ListItem","item":"https://zephyr.100ask.org/docs/DshanPi-A1/LDDBasic/05-5_HandlingInterruptsinLinuxSystems","name":"Linux系统对中断的处理","position":2}]}</script><link rel=alternate type=application/rss+xml href=/blog/rss.xml title="东山Π RSS Feed"><link rel=alternate type=application/atom+xml href=/blog/atom.xml title="东山Π Atom Feed"><link rel=stylesheet href=/assets/css/styles.6e3daa0f.css /><script src=/assets/js/runtime~main.7a096c0d.js defer></script><script src=/assets/js/main.b84950c5.js defer></script></head><body><svg style="display: none;"><defs>
+<symbol id=theme-svg-external-link viewBox="0 0 24 24"><path fill=currentColor d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme-6f6")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id=__docusaurus><link rel=preload as=image href=/img/logo.svg /><div role=region aria-label=跳到主要内容><a class=skipToContent_fXgn href=#__docusaurus_skipToContent_fallback>跳到主要内容</a></div><nav aria-label=主导航 class="theme-layout-navbar navbar navbar--fixed-top"><div class=navbar__inner><div class="theme-layout-navbar-left navbar__items"><button aria-label=切换导航栏 aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"/></svg></button><a class=navbar__brand href=/><div class=navbar__logo><img src=/img/logo.svg alt=东山PI class="themedComponent_mlkZ themedComponent--light_NVdE"/><img src=/img/logo.svg alt=东山PI class="themedComponent_mlkZ themedComponent--dark_xIcU"/></div><b class="navbar__title text--truncate">东山Π</b></a><div class="navbar__item dropdown dropdown--hoverable"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link>DshanPi-A1</a><ul class=dropdown__menu><li><a aria-current=page class="dropdown__link dropdown__link--active" href=/docs/DshanPi-A1/intro>DshanPi-A1</a><li><a class=dropdown__link href=/docs/DshanPi-A1_CM5/intro>DshanPi-A1(CM5)</a></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link>RK3568系列</a><ul class=dropdown__menu><li><a class=dropdown__link href=/docs/DshanPi-R1/intro>DshanPi-R1+</a><li><a class=dropdown__link href=/docs/100ASK_RK3568/BoardIntroduction>100ASK-RK3568</a></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a class="navbar__item navbar__link" href=/blog>Blog</a><a href=https://github.com/dshanpi/Docs target=_blank rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link><svg viewBox="0 0 24 24" width=20 height=20 aria-hidden=true class=iconLanguage_nlXk><path fill=currentColor d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>简体中文</a><ul class=dropdown__menu><li><a href=/docs/DshanPi-A1/LDDBasic/05-5_HandlingInterruptsinLinuxSystems target=_self rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang=zh-Hans>简体中文</a><li><a href=/en/docs/DshanPi-A1/LDDBasic/05-5_HandlingInterruptsinLinuxSystems target=_self rel="noopener noreferrer" class=dropdown__link lang=en>English</a></ul></div><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type=button disabled title="system mode" aria-label="切换浅色/暗黑模式（当前为system mode）"><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill=currentColor d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"/></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill=currentColor d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill=currentColor d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"/></svg></button></div><div class=navbarSearchContainer_Bca1><div class="navbar__search searchBarContainer_NW3z" dir=ltr><input placeholder=搜索 aria-label=Search class="navbar__search-input searchInput_YFbd" value="" /><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class=docsWrapper_hBAB><button aria-label=回到顶部 class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type=button></button><div class=docRoot_UBD9><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class=sidebarViewport_aRkj><div class=sidebar_njMd><nav aria-label=文档侧边栏 class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/docs/DshanPi-A1/intro><span class=linkLabel_WmDU>DshanPi-A1 Education</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/快速使用><span class=categoryLinkLabel_W154>快速使用</span></a><button aria-label="展开侧边栏分类 '快速使用'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/系统配置><span class=categoryLinkLabel_W154>系统配置</span></a><button aria-label="展开侧边栏分类 '系统配置'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/应用基础><span class=categoryLinkLabel_W154>应用基础</span></a><button aria-label="展开侧边栏分类 '应用基础'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/应用开发><span class=categoryLinkLabel_W154>应用开发</span></a><button aria-label="展开侧边栏分类 '应用开发'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href=/docs/category/驱动基础><span class=categoryLinkLabel_W154>驱动基础</span></a><button aria-label="折叠侧边栏分类 '驱动基础'" aria-expanded=true type=button class="clean-btn menu__caret"></button></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/LDDBasic/05-1_HelloDriver><span class=linkLabel_WmDU>Hello 驱动开发入门 (无硬件操作)</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/LDDBasic/05-2_ArmbainDtsOverlay><span class=linkLabel_WmDU>设备树与 Overlay 指南</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/LDDBasic/05-3_GPIOAndPinctrl><span class=linkLabel_WmDU>GPIO 与 Pinctrl 子系统</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/LDDBasic/05-4_EAIPFlow><span class=linkLabel_WmDU>异常与中断的概念及处理流程</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current=page tabindex=0 href=/docs/DshanPi-A1/LDDBasic/05-5_HandlingInterruptsinLinuxSystems><span class=linkLabel_WmDU>Linux系统对中断的处理</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/LDDBasic/05-6_DriverFoundation><span class=linkLabel_WmDU>驱动程序基石</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/LDDBasic/05-7_TuYa_ws2812><span class=linkLabel_WmDU>TuYa WS2812 移植指南</span></a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/系统开发><span class=categoryLinkLabel_W154>系统开发</span></a><button aria-label="展开侧边栏分类 '系统开发'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/项目案例><span class=categoryLinkLabel_W154>项目案例</span></a><button aria-label="展开侧边栏分类 '项目案例'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/其他系统><span class=categoryLinkLabel_W154>其他系统</span></a><button aria-label="展开侧边栏分类 '其他系统'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/原厂在线文档><span class=categoryLinkLabel_W154>原厂在线文档</span></a><button aria-label="展开侧边栏分类 '原厂在线文档'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div></ul></nav><button type=button title=收起侧边栏 aria-label=收起侧边栏 class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width=20 height=20 aria-hidden=true class=collapseSidebarButtonIcon_kv0_><g fill=#7a7a7a><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"/><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"/></g></svg></button></div></div></aside><main class=docMainContainer_TBSr><div class="container padding-top--md padding-bottom--lg"><div class=row><div class="col docItemCol_VOVn"><div class=docItemContainer_Djhp><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label=页面路径><ul class=breadcrumbs><li class=breadcrumbs__item><a aria-label=主页面 class=breadcrumbs__link href=/><svg viewBox="0 0 24 24" class=breadcrumbHomeIcon_YNFT><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill=currentColor /></svg></a><li class=breadcrumbs__item><a class=breadcrumbs__link href=/docs/category/驱动基础><span>驱动基础</span></a><li class="breadcrumbs__item breadcrumbs__item--active"><span class=breadcrumbs__link>Linux系统对中断的处理</span></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type=button class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>Linux系统对中断的处理</h1></header>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=11-进程线程中断的核心栈>1.1 进程、线程、中断的核心：栈<a href=#11-进程线程中断的核心栈 class=hash-link aria-label="1.1 进程、线程、中断的核心：栈的直接链接" title="1.1 进程、线程、中断的核心：栈的直接链接" translate=no>​</a></h2>
+<p>中断中断，中断谁？</p>
+<p>中断当前正在运行的进程、线程。</p>
+<p>进程、线程是什么？内核如何切换进程、线程、中断？</p>
+<p>要理解这些概念，必须理解栈的作用。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=111-arm处理器程序运行的过程>1.1.1 ARM处理器程序运行的过程<a href=#111-arm处理器程序运行的过程 class=hash-link aria-label="1.1.1 ARM处理器程序运行的过程的直接链接" title="1.1.1 ARM处理器程序运行的过程的直接链接" translate=no>​</a></h3>
+<p>ARM芯片属于精简指令集计算机(RISC：Reduced Instruction Set Computing)，它所用的指令比较简单，有如下特点：</p>
+<p>①  对内存只有读、写指令</p>
+<p>②  对于数据的运算是在CPU内部实现</p>
+<p>③  使用RISC指令的CPU复杂度小一点，易于设计</p>
+<p>比如对于a=a+b这样的算式，需要经过下面4个步骤才可以实现：</p>
+<p>细看这几个步骤，有些疑问：</p>
+<p>①  读a，那么a的值读出来后保存在CPU里面哪里？</p>
+<p>②  读b，那么b的值读出来后保存在CPU里面哪里？</p>
+<p>③   a+b的结果又保存在哪里？</p>
+<p>我们需要深入ARM处理器的内部。简单概括如下，我们先忽略各种CPU模式(系统模式、用户模式等等)。</p>
+<p>CPU运行时，先去取得指令，再执行指令：</p>
+<p>①  把内存a的值读入CPU寄存器R0</p>
+<p>②   把内存b的值读入CPU寄存器R1</p>
+<p>③   把R0、R1累加，存入R0</p>
+<p>④   把R0的值写入内存a</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=112-程序被中断时怎么保存现场>1.1.2 程序被中断时，怎么保存现场<a href=#112-程序被中断时怎么保存现场 class=hash-link aria-label="1.1.2 程序被中断时，怎么保存现场的直接链接" title="1.1.2 程序被中断时，怎么保存现场的直接链接" translate=no>​</a></h3>
+<p>从上图可知，CPU内部的寄存器很重要，如果要暂停一个程序，中断一个程序，就需要把这些寄存器的值保存下来：这就称为保存现场。</p>
+<p>保存在哪里？内存，这块内存就称之为栈。</p>
+<p>程序要继续执行，就先从栈中恢复那些CPU内部寄存器的值。</p>
+<p>这个场景并不局限于中断，下图可以概括程序A、B的切换过程，其他情况是类似的：</p>
+<p>①  函数调用：</p>
+<p>a)   在函数A里调用函数B，实际就是中断函数A的执行。</p>
+<p>b)   那么需要把函数A调用B之前瞬间的CPU寄存器的值，保存到栈里；</p>
+<p>c)   再去执行函数B；</p>
+<p>d)   函数B返回之后，就从栈中恢复函数A对应的CPU寄存器值，继续执行。</p>
+<p>②      中断处理</p>
+<p>a)   进程A正在执行，这时候发生了中断。</p>
+<p>b)   CPU强制跳到中断异常向量地址去执行，</p>
+<p>c)   这时就需要保存进程A被中断瞬间的CPU寄存器值，</p>
+<p>d)   可以保存在进程A的内核态栈，也可以保存在进程A的内核结构体中。</p>
+<p>e)   中断处理完毕，要继续运行进程A之前，恢复这些值。</p>
+<p>③      进程切换</p>
+<p>a)   在所谓的多任务操作系统中，我们以为多个程序是同时运行的。</p>
+<p>b)   如果我们能感知微秒、纳秒级的事件，可以发现操作系统时让这些程序依次执行一小段时间，进程A的时间用完了，就切换到进程B。</p>
+<p>c)   怎么切换？</p>
+<p>d)   切换过程是发生在内核态里的，跟中断的处理类似。</p>
+<p>e)   进程A的被切换瞬间的CPU寄存器值保存在某个地方；</p>
+<p>f)    恢复进程B之前保存的CPU寄存器值，这样就可以运行进程B了。</p>
+<p>所以，在中断处理的过程中，伴存着进程的保存现场、恢复现场。进程的调度也是使用栈来保存、恢复现场：</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=113-进程线程的概念>1.1.3 进程、线程的概念<a href=#113-进程线程的概念 class=hash-link aria-label="1.1.3 进程、线程的概念的直接链接" title="1.1.3 进程、线程的概念的直接链接" translate=no>​</a></h3>
+<p>假设我们写一个音乐播放器，在播放音乐的同时会根据按键选择下一首歌。把事情简化为2件事：发送音频数据、读取按键。那可以这样写程序：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">int main(int argc, char **argv)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	int key;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	while (1)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		key = read_key();</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		if (key != -1)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">			switch (key)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">			{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">				case NEXT:</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">					select_next_music(); // 在GUI选中下一首歌</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">					break;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">			}</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		}</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		else</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">			send_music();</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		}</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	}</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	return 0;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">}</span><br/></div></code></pre></div></div>
+<p>这个程序只有一条主线，读按键、播放音乐都是顺序执行。</p>
+<p>无论按键是否被按下，read_key函数必须马上返回，否则会使得后续的send_music受到阻滞导致音乐播放不流畅。</p>
+<p>读取按键、播放音乐能否分为两个程序进行？可以，但是开销太大：读按键的程序，要把按键通知播放音乐的程序，进程间通信的效率没那么高。</p>
+<p>这时可以用多线程之编程，读取按键是一个线程，播放音乐是另一个线程，它们之间可以通过全局变量传递数据，示意代码如下：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">int g_key;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">void key_thread_fn()</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	while (1)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		g_key = read_key();</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		if (g_key != -1)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">			switch (g_key)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">			{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">				case NEXT:</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">					select_next_music(); // 在GUI选中下一首歌</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">					break;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">			}</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		}</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	}</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">}</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">void music_fn()</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	while (1)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		if (g_key == STOP)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">			stop_music();</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		else</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	       send_music();</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		}</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	}</span><br/></div><div class=token-line style=color:#393A34><span class="token plain" style=display:inline-block></span><br/></div><div class=token-line style=color:#393A34><span class="token plain">}</span><br/></div><div class=token-line style=color:#393A34><span class="token plain" style=display:inline-block></span><br/></div><div class=token-line style=color:#393A34><span class="token plain">int main(int argc, char **argv)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	int key;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	create_thread(key_thread_fn);</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	create_thread(music_fn);</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	while (1) </span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		sleep(10);</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	}</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	return 0;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">}</span><br/></div></code></pre></div></div>
+<p>这样，按键的读取及GUI显示、音乐的播放，可以分开来，不必混杂在一起。</p>
+<p>按键线程可以使用阻塞方式读取按键，无按键时是休眠的，这可以节省CPU资源。</p>
+<p>音乐线程专注于音乐的播放和控制，不用理会按键的具体读取工作。并且这2个线程通过全局变量g_key传递数据，高效而简单。</p>
+<p>在Linux中：资源分配的单位是进程，调度的单位是线程。</p>
+<p>也就是说，在一个进程里，可能有多个线程，这些线程共用打开的文件句柄、全局变量等等。</p>
+<p>而这些线程，之间是互相独立的，“同时运行”，也就是说：每一个线程，都有自己的栈。如下图示：</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=12-linux系统对中断处理的演进>1.2 Linux系统对中断处理的演进<a href=#12-linux系统对中断处理的演进 class=hash-link aria-label="1.2 Linux系统对中断处理的演进的直接链接" title="1.2 Linux系统对中断处理的演进的直接链接" translate=no>​</a></h2>
+<p>从2005年我接触Linux到现在15年了，Linux中断系统的变化并不大。比较重要的就是引入了threaded irq：使用内核线程来处理中断。</p>
+<p>Linux系统中有硬件中断，也有软件中断。对硬件中断的处理有2个原则：不能嵌套，越快越好。</p>
+<p>参考资料：<a href=https://blog.csdn.net/myarrow/article/details/9287169 target=_blank rel="noopener noreferrer" class=""><strong>https://blog.csdn.net/myarrow/article/details/9287169</strong></a></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=121-linux对中断的扩展硬件中断软件中断>1.2.1 Linux对中断的扩展：硬件中断、软件中断<a href=#121-linux对中断的扩展硬件中断软件中断 class=hash-link aria-label="1.2.1 Linux对中断的扩展：硬件中断、软件中断的直接链接" title="1.2.1 Linux对中断的扩展：硬件中断、软件中断的直接链接" translate=no>​</a></h3>
+<p>Linux系统把中断的意义扩展了，对于按键中断等硬件产生的中断，称之为“硬件中断”(hard irq)。每个硬件中断都有对应的处理函数，比如按键中断、网卡中断的处理函数肯定不一样。</p>
+<p>为方便理解，你可以先认为对硬件中断的处理是用数组来实现的，数组里存放的是函数指针：</p>
+<p><strong>注意</strong>：上图是简化的，Linux中这个数组复杂多了。</p>
+<p>当发生A中断时，对应的irq_function_A函数被调用。硬件导致该函数被调用。</p>
+<p>相对的，还可以人为地制造中断：软件中断(soft irq)，如下图所示：</p>
+<p><strong>注意</strong>：上图是简化的，Linux中这个数组复杂多了。</p>
+<p>问题来了：</p>
+<p>①  软件中断何时生产？</p>
+<p>由软件决定，对于X号软件中断，只需要把它的flag设置为1就表示发生了该中断。</p>
+<p>②   软件中断何时处理？</p>
+<p>软件中断嘛，并不是那么十万火急，有空再处理它好了。</p>
+<p>什么时候有空？不能让它一直等吧？</p>
+<p>Linux系统中，各种硬件中断频繁发生，至少定时器中断每10ms发生一次，那取个巧？</p>
+<p>在处理完硬件中断后，再去处理软件中断？就这么办！</p>
+<p>③      有哪些软件中断？</p>
+<p>查内核源码include/linux/interrupt.h</p>
+<p>怎么触发软件中断？最核心的函数是raise_softirq，简单地理解就是设置softirq_veq[nr]的标记位：</p>
+<p>怎么设置软件中断的处理函数：</p>
+<p>extern void open_softirq(int nr, void (<em>action) (struct soft_action</em>));</p>
+<p>后面讲到的中断下半部tasklet就是使用软件中断实现的。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=122-中断处理原则1不能嵌套>1.2.2 中断处理原则1：不能嵌套<a href=#122-中断处理原则1不能嵌套 class=hash-link aria-label="1.2.2 中断处理原则1：不能嵌套的直接链接" title="1.2.2 中断处理原则1：不能嵌套的直接链接" translate=no>​</a></h3>
+<p>官方资料：中断处理不能嵌套<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=e58aa3d2d0cc" target=_blank rel="noopener noreferrer" class=""><strong>https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=e58aa3d2d0cc</strong></a></p>
+<p>中断处理函数需要调用C函数，这就需要用到栈。</p>
+<ul>
+<li class="">
+<p>中断A正在处理的过程中，假设又发生了中断B，那么在栈里要保存A的现场，然后处理B。</p>
+</li>
+<li class="">
+<p>在处理B的过程中又发生了中断C，那么在栈里要保存B的现场，然后处理C。</p>
+</li>
+</ul>
+<p>如果中断嵌套突然暴发，那么栈将越来越大，栈终将耗尽。</p>
+<p>所以，为了防止这种情况发生，也是为了简单化中断的处理，在Linux系统上中断无法嵌套：即当前中断A没处理完之前，不会响应另一个中断B(即使它的优先级更高)。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=123-中断处理原则2越快越好>1.2.3 中断处理原则2：越快越好<a href=#123-中断处理原则2越快越好 class=hash-link aria-label="1.2.3 中断处理原则2：越快越好的直接链接" title="1.2.3 中断处理原则2：越快越好的直接链接" translate=no>​</a></h3>
+<p>妈妈在家中照顾小孩时，门铃响起，她开门取快递：这就是中断的处理。她取个快递敢花上半天吗？不怕小孩出意外吗？</p>
+<p>同理，在Linux系统中，中断的处理也是越快越好。</p>
+<p>在单芯片系统中，假设中断处理很慢，那应用程序在这段时间内就无法执行：系统显得很迟顿。</p>
+<p>在SMP系统中，假设中断处理很慢，那么正在处理这个中断的CPU上的其他线程也无法执行。</p>
+<p>在中断的处理过程中，该CPU是不能进行进程调度的，所以中断的处理要越快越好，尽早让其他中断能被处理──进程调度靠定时器中断来实现。</p>
+<p>在Linux系统中使用中断是挺简单的，为某个中断irq注册中断处理函数handler，可以使用request_irq函数：</p>
+<p>在handler函数中，代码尽可能高效。</p>
+<p>但是，处理某个中断要做的事情就是很多，没办法加快。比如对于按键中断，我们需要等待几十毫秒消除机械抖动。难道要在handler中等待吗？对于计算机来说，这可是一个段很长的时间。</p>
+<p>怎么办？</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=124-要处理的事情实在太多拆分为上半部下半部>1.2.4 要处理的事情实在太多，拆分为：上半部、下半部<a href=#124-要处理的事情实在太多拆分为上半部下半部 class=hash-link aria-label="1.2.4 要处理的事情实在太多，拆分为：上半部、下半部的直接链接" title="1.2.4 要处理的事情实在太多，拆分为：上半部、下半部的直接链接" translate=no>​</a></h3>
+<p>当一个中断要耗费很多时间来处理时，它的坏处是：在这段时间内，其他中断无法被处理。换句话说，在这段时间内，系统是关中断的。</p>
+<p>如果某个中断就是要做那么多事，我们能不能把它拆分成两部分：紧急的、不紧急的？</p>
+<p>在handler函数里只做紧急的事，然后就重新开中断，让系统得以正常运行；那些不紧急的事，以后再处理，处理时是开中断的。</p>
+<p>中断下半部的实现有很多种方法，讲2种主要的：tasklet(小任务)、work queue(工作队列)。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=125-下半部要做的事情耗时不是太长tasklet>1.2.5 下半部要做的事情耗时不是太长：tasklet<a href=#125-下半部要做的事情耗时不是太长tasklet class=hash-link aria-label="1.2.5 下半部要做的事情耗时不是太长：tasklet的直接链接" title="1.2.5 下半部要做的事情耗时不是太长：tasklet的直接链接" translate=no>​</a></h3>
+<p>假设我们把中断分为上半部、下半部。发生中断时，上半部下半部的代码何时、如何被调用？</p>
+<p>当下半部比较耗时但是能忍受，并且它的处理比较简单时，可以用tasklet来处理下半部。tasklet是使用软件中断来实现。</p>
+<p>看代码一目了然：</p>
+<p>使用流程图简化一下：</p>
+<p>假设硬件中断A的上半部函数为irq_top_half_A，下半部为irq_bottom_half_A。</p>
+<p>使用情景化的分析，才能理解上述代码的精华。</p>
+<ul>
+<li class="">硬件中断A处理过程中，没有其他中断发生：</li>
+</ul>
+<p>一开始，preempt_count = 0；</p>
+<p>上述流程图①～⑨依次执行，上半部、下半部的代码各执行一次。</p>
+<ul>
+<li class="">硬件中断A处理过程中，又再次发生了中断A：</li>
+</ul>
+<p>一开始，preempt_count = 0；</p>
+<p>执行到第⑥时，一开中断后，中断A又再次使得CPU跳到中断向量表。</p>
+<p><strong>注意</strong>：这时preempt_count等于1，并且中断下半部的代码并未执行。</p>
+<p>CPU又从①开始再次执行中断A的上半部代码：</p>
+<p>在第①步preempt_count等于2；</p>
+<p>在第③步preempt_count等于1；</p>
+<p>在第④步发现preempt_count等于1，所以直接结束当前第2次中断的处理；</p>
+<p><strong>注意</strong>：重点来了，第2次中断发生后，打断了第一次中断的第⑦步处理。当第2次中断处理完毕，CPU会继续去执行第⑦步。</p>
+<p>可以看到，发生2次硬件中断A时，它的上半部代码执行了2次，但是下半部代码只执行了一次。</p>
+<p>所以，同一个中断的上半部、下半部，在执行时是多对一的关系。</p>
+<p>l 硬件中断A处理过程中，又再次发生了中断B：</p>
+<p>一开始，preempt_count = 0；</p>
+<p>执行到第⑥时，一开中断后，中断B又再次使得CPU跳到中断向量表。</p>
+<p><strong>注意</strong>：这时preempt_count等于1，并且中断A下半部的代码并未执行。</p>
+<p>CPU又从①开始再次执行中断B的上半部代码：</p>
+<p>在第①步preempt_count等于2；</p>
+<p>在第③步preempt_count等于1；</p>
+<p>在第④步发现preempt_count等于1，所以直接结束当前第2次中断的处理；</p>
+<p><strong>注意</strong>：重点来了，第2次中断发生后，打断了第一次中断A的第⑦步处理。当第2次中断B处理完毕，CPU会继续去执行第⑦步。</p>
+<p>在第⑦步里，它会去执行中断A的下半部，也会去执行中断B的下半部。</p>
+<p>所以，多个中断的下半部，是汇集在一起处理的。</p>
+<p><strong>总结</strong>：</p>
+<p>①  中断的处理可以分为上半部，下半部</p>
+<p>②  中断上半部，用来处理紧急的事，它是在关中断的状态下执行的</p>
+<p>③  中断下半部，用来处理耗时的、不那么紧急的事，它是在开中断的状态下执行的</p>
+<p>④  中断下半部执行时，有可能会被多次打断，有可能会再次发生同一个中断</p>
+<p>⑤  中断上半部执行完后，触发中断下半部的处理</p>
+<p>⑥  中断上半部、下半部的执行过程中，不能休眠：中断休眠的话，以后谁来调度进程啊？</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=126-下半部要做的事情太多并且很复杂工作队列>1.2.6 下半部要做的事情太多并且很复杂：工作队列<a href=#126-下半部要做的事情太多并且很复杂工作队列 class=hash-link aria-label="1.2.6 下半部要做的事情太多并且很复杂：工作队列的直接链接" title="1.2.6 下半部要做的事情太多并且很复杂：工作队列的直接链接" translate=no>​</a></h3>
+<p>在中断下半部的执行过程中，虽然是开中断的，期间可以处理各类中断。但是毕竟整个中断的处理还没走完，这期间APP是无法执行的。</p>
+<p>假设下半部要执行1、2分钟，在这1、2分钟里APP都是无法响应的。</p>
+<p>这谁受得了？所以，如果中断要做的事情实在太耗时，那就不能用软件中断来做，而应该用内核线程来做：在中断上半部唤醒内核线程。内核线程和APP都一样竞争执行，APP有机会执行，系统不会卡顿。</p>
+<p>这个内核线程是系统帮我们创建的，一般是kworker线程，内核中有很多这样的线程：</p>
+<p>kworker线程要去“工作队列”(work queue)上取出一个一个“工作”(work)，来执行它里面的函数。</p>
+<p>那我们怎么使用work、work queue呢？</p>
+<p>①  创建work：</p>
+<p>你得先写出一个函数，然后用这个函数填充一个work结构体。比如：</p>
+<p>②  要执行这个函数时，把work提交给work queue就可以了：</p>
+<p>上述函数会把work提供给系统默认的work queue：system_wq，它是一个队列。</p>
+<p>③  谁来执行work中的函数？</p>
+<p>不用我们管，schedule_work函数不仅仅是把work放入队列，还会把kworker线程唤醒。此线程抢到时间运行时，它就会从队列中取出work，执行里面的函数。</p>
+<p>④  谁把work提交给work queue？</p>
+<p>在中断场景中，可以在中断上半部调用schedule_work函数。</p>
+<p><strong>总结</strong>：</p>
+<ul>
+<li class="">
+<p>很耗时的中断处理，应该放到线程里去</p>
+</li>
+<li class="">
+<p>可以使用work、work queue</p>
+</li>
+<li class="">
+<p>在中断上半部调用schedule_work函数，触发work的处理</p>
+</li>
+<li class="">
+<p>既然是在线程中运行，那对应的函数可以休眠。</p>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=127-新技术threaded-irq>1.2.7 新技术：threaded irq<a href=#127-新技术threaded-irq class=hash-link aria-label="1.2.7 新技术：threaded irq的直接链接" title="1.2.7 新技术：threaded irq的直接链接" translate=no>​</a></h3>
+<p>使用线程来处理中断，并不是什么新鲜事。使用work就可以实现，但是需要定义work、调用schedule_work，好麻烦啊。</p>
+<p>太懒了太懒了，就这2步你们都不愿意做。</p>
+<p>好，内核是为懒人服务的，再杀出一个函数：</p>
+<p>你可以只提供thread_fn，系统会为这个函数创建一个内核线程。发生中断时，内核线程就会执行这个函数。</p>
+<p>说你懒是开玩笑，内核开发者也不会那么在乎懒人。</p>
+<p>以前用work来线程化地处理中断，一个worker线程只能由一个CPU执行，多个中断的work都由同一个worker线程来处理，在单CPU系统中也只能忍着了。但是在SMP系统中，明明有那么多CPU空着，你偏偏让多个中断挤在这个CPU上？</p>
+<p>新技术threaded irq，为每一个中断都创建一个内核线程；多个中断的内核线程可以分配到多个CPU上执行，这提高了效率。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=13-linux中断系统中的重要数据结构>1.3 Linux中断系统中的重要数据结构<a href=#13-linux中断系统中的重要数据结构 class=hash-link aria-label="1.3 Linux中断系统中的重要数据结构的直接链接" title="1.3 Linux中断系统中的重要数据结构的直接链接" translate=no>​</a></h2>
+<p>本节内容，可以从request_irq(include/linux/interrupt.h)函数一路分析得到。</p>
+<p>能弄清楚下面这个图，对Linux中断系统的掌握也基本到位了。</p>
+<p>最核心的结构体是irq_desc，之前为了易于理解，我们说在Linux内核中有一个中断数组，对于每一个硬件中断，都有一个数组项，这个数组就是irq_desc数组。</p>
+<p><strong>注意</strong>：如果内核配置了CONFIG_SPARSE_IRQ，那么它就会用基数树(radix tree)来代替irq_desc数组。SPARSE的意思是“稀疏”，假设大小为1000的数组中只用到2个数组项，那不是浪费嘛？所以在中断比较“稀疏”的情况下可以用基数树来代替数组。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=131-irq_desc数组>1.3.1 irq_desc数组<a href=#131-irq_desc数组 class=hash-link aria-label="1.3.1 irq_desc数组的直接链接" title="1.3.1 irq_desc数组的直接链接" translate=no>​</a></h3>
+<p>irq_desc结构体在include/linux/irqdesc.h中定义，主要内容如下图：</p>
+<p>每一个irq_desc数组项中都有一个函数：handle_irq，还有一个action链表。要理解它们，需要先看中断结构图：</p>
+<p>外部设备1、外部设备n共享一个GPIO中断B，多个GPIO中断汇聚到GIC(通用中断控制器)的A号中断，GIC再去中断CPU。那么软件处理时就是反过来，先读取GIC获得中断号A，再细分出GPIO中断B，最后判断是哪一个外部芯片发生了中断。</p>
+<p>所以，中断的处理函数来源有三：</p>
+<p>①  GIC的处理函数：</p>
+<p>假设irq_desc[A].handle_irq是XXX_gpio_irq_handler(XXX指厂家)，这个函数需要读取芯片的GPIO控制器，细分发生的是哪一个GPIO中断(假设是B)，再去调用irq_desc[B]. handle_irq。</p>
+<p><strong>注意</strong>：irq_desc[A].handle_irq细分出中断后B，调用对应的irq_desc[B].handle_irq。</p>
+<p>显然中断A是CPU感受到的顶层的中断，GIC中断CPU时，CPU读取GIC状态得到中断A。</p>
+<p>②  模块的中断处理函数：</p>
+<p>比如对于GPIO模块向GIC发出的中断B，它的处理函数是irq_desc[B].handle_irq。</p>
+<p>BSP开发人员会设置对应的处理函数，一般是handle_level_irq或handle_edge_irq，从名字上看是用来处理电平触发的中断、边沿触发的中断。</p>
+<p><strong>注意</strong>：导致GPIO中断B发生的原因很多，可能是外部设备1，可能是外部设备n，可能只是某一个设备，也可能是多个设备。所以irq_desc[B].handle_irq会调用某个链表里的函数，这些函数由外部设备提供。这些函数自行判断该中断是否自己产生，若是则处理。</p>
+<p>③  外部设备提供的处理函数：</p>
+<p>这里说的“外部设备”可能是芯片，也可能总是简单的按键。它们的处理函数由自己驱动程序提供，这是最熟悉这个设备的“人”：它知道如何判断设备是否发生了中断，如何处理中断。</p>
+<p>对于共享中断，比如GPIO中断B，它的中断来源可能有多个，每个中断源对应一个中断处理函数。所以irq_desc[B]中应该有一个链表，存放着多个中断源的处理函数。</p>
+<p>一旦程序确定发生了GPIO中断B，那么就会从链表里把那些函数取出来，一一执行。这个链表就是action链表。</p>
+<p>对于我们举的这个例子来说，irq_desc数组如下：</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=132-irqaction结构体>1.3.2 irqaction结构体<a href=#132-irqaction结构体 class=hash-link aria-label="1.3.2 irqaction结构体的直接链接" title="1.3.2 irqaction结构体的直接链接" translate=no>​</a></h3>
+<p>irqaction结构体在include/linux/interrupt.h中定义，主要内容如下图：</p>
+<p>当调用request_irq、request_threaded_irq注册中断处理函数时，内核就会构造一个irqaction结构体。在里面保存name、dev_id等，最重要的是handler、thread_fn、thread。</p>
+<p>handler是中断处理的上半部函数，用来处理紧急的事情。</p>
+<p>thread_fn对应一个内核线程thread，当handler执行完毕，Linux内核会唤醒对应的内核线程。在内核线程里，会调用thread_fn函数。</p>
+<p>l 可以提供handler而不提供thread_fn，就退化为一般的request_irq函数。</p>
+<p>l 可以不提供handler只提供thread_fn，完全由内核线程来处理中断。</p>
+<p>l 也可以既提供handler也提供thread_fn，这就是中断上半部、下半部。</p>
+<p>里面还有一个名为sedondary的irqaction结构体，它的作用以后再分析。</p>
+<p>在reqeust_irq时可以传入dev_id，为何需要dev_id？作用有2：</p>
+<p>①  中断处理函数执行时，可以使用dev_id</p>
+<p>②  卸载中断时要传入dev_id，这样才能在action链表中根据dev_id找到对应项</p>
+<p>所以在共享中断中必须提供dev_id，非共享中断可以不提供。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=133-irq_data结构体>1.3.3 irq_data结构体<a href=#133-irq_data结构体 class=hash-link aria-label="1.3.3 irq_data结构体的直接链接" title="1.3.3 irq_data结构体的直接链接" translate=no>​</a></h3>
+<p>irq_data结构体在include/linux/irq.h中定义，主要内容如下图：</p>
+<p>它就是个中转站，里面有irq_chip指针 irq_domain指针，都是指向别的结构体。</p>
+<p>比较有意思的是irq、hwirq，irq是软件中断号，hwirq是硬件中断号。比如上面我们举的例子，在GPIO中断B是软件中断号，可以找到irq_desc[B]这个数组项；GPIO里的第x号中断，这就是hwirq。</p>
+<p>谁来建立irq、hwirq之间的联系呢？由irq_domain来建立。irq_domain会把本地的hwirq映射为全局的irq，什么意思？比如GPIO控制器里有第1号中断，UART模块里也有第1号中断，这两个“第1号中断”是不一样的，它们属于不同的“域”──irq_domain。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=134-irq_domain结构体>1.3.4 irq_domain结构体<a href=#134-irq_domain结构体 class=hash-link aria-label="1.3.4 irq_domain结构体的直接链接" title="1.3.4 irq_domain结构体的直接链接" translate=no>​</a></h3>
+<p>irq_domain结构体在include/linux/irqdomain.h中定义，主要内容如下图：</p>
+<p>当我们后面从设备树讲起，如何在设备树中指定中断，设备树的中断如何被转换为irq时，irq_domain将会起到极大的作为。</p>
+<p>这里基于入门的解度简单讲讲，在设备树中你会看到这样的属性：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">interrupt-parent = &lt;&gpio1>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">interrupts = &lt;5 IRQ_TYPE_EDGE_RISING>;</span><br/></div></code></pre></div></div>
+<p>它表示要使用gpio1里的第5号中断，hwirq就是5。</p>
+<p>但是我们在驱动中会使用request_irq(irq, handler)这样的函数来注册中断，irq是什么？它是软件中断号，它应该从“gpio1的第5号中断”转换得来。</p>
+<p>谁把hwirq转换为irq？由gpio1的相关数据结构，就是gpio1对应的irq_domain结构体。</p>
+<p>irq_domain结构体中有一个irq_domain_ops结构体，里面有各种操作函数，主要是：</p>
+<ul>
+<li class="">xlate</li>
+</ul>
+<p>​	用来解析设备树的中断属性，提取出hwirq、type等信息。</p>
+<ul>
+<li class="">map</li>
+</ul>
+<p>​	把hwirq转换为irq。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=135-irq_chip结构体>1.3.5 irq_chip结构体<a href=#135-irq_chip结构体 class=hash-link aria-label="1.3.5 irq_chip结构体的直接链接" title="1.3.5 irq_chip结构体的直接链接" translate=no>​</a></h3>
+<p>irq_chip结构体在include/linux/irq.h中定义，主要内容如下图：</p>
+<p>这个结构体跟“chip”即芯片相关，里面各成员的作用在头文件中也列得很清楚，摘录部分如下：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">* @irq_startup:	start up the interrupt (defaults to ->enable if NULL)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">* @irq_shutdown:	shut down the interrupt (defaults to ->disable if NULL)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">* @irq_enable:		enable the interrupt (defaults to chip->unmask if NULL)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">* @irq_disable:	disable the interrupt</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">* @irq_ack:		start of a new interrupt</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">* @irq_mask:		mask an interrupt source</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">* @irq_mask_ack:	ack and mask an interrupt source</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">* @irq_unmask:		unmask an interrupt source</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">* @irq_eoi:		end of interrupt</span><br/></div></code></pre></div></div>
+<p>我们在request_irq后，并不需要手工去使能中断，原因就是系统调用对应的irq_chip里的函数帮我们使能了中断。</p>
+<p>我们提供的中断处理函数中，也不需要执行主芯片相关的清中断操作，也是系统帮我们调用irq_chip中的相关函数。</p>
+<p>但是对于外部设备相关的清中断操作，还是需要我们自己做的。</p>
+<p>就像上面图里的“外部设备1“、“外部设备n”，外设备千变万化，内核里可没有对应的清除中断操作。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=14-在设备树中指定中断_在代码中获得中断>1.4 在设备树中指定中断_在代码中获得中断<a href=#14-在设备树中指定中断_在代码中获得中断 class=hash-link aria-label="1.4 在设备树中指定中断_在代码中获得中断的直接链接" title="1.4 在设备树中指定中断_在代码中获得中断的直接链接" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=141-设备树里中断节点的语法>1.4.1 设备树里中断节点的语法<a href=#141-设备树里中断节点的语法 class=hash-link aria-label="1.4.1 设备树里中断节点的语法的直接链接" title="1.4.1 设备树里中断节点的语法的直接链接" translate=no>​</a></h3>
+<p>参考文档：</p>
+<p>内核Documentation\devicetree\bindings\interrupt-controller\interrupts.txt</p>
+<p><strong>1 设备树里的中断控制器</strong></p>
+<p>中断的硬件框图如下：</p>
+<p>在硬件上，“中断控制器”只有GIC这一个，但是我们在软件上也可以把上图中的“GPIO”称为“中断控制器”。很多芯片有多个GPIO模块，比如GPIO1、GPIO2等等。所以软件上的“中断控制器”就有很多个：GIC、GPIO1、GPIO2等等。</p>
+<p>GPIO1连接到GIC，GPIO2连接到GIC，所以GPIO1的父亲是GIC，GPIO2的父亲是GIC。</p>
+<p>假设GPIO1有32个中断源，但是它把其中的16个汇聚起来向GIC发出一个中断，把另外16个汇聚起来向GIC发出另一个中断。这就意味着GPIO1会用到GIC的两个中断，会涉及GIC里的2个hwirq。</p>
+<p>这些层级关系、中断号(hwirq)，都会在设备树中有所体现。</p>
+<p>在设备树中，中断控制器节点中必须有一个属性：interrupt-controller，表明它是“中断控制器”。</p>
+<p>还必须有一个属性：#interrupt-cells，表明引用这个中断控制器的话需要多少个cell。</p>
+<p>#interrupt-cells的值一般有如下取值：</p>
+<ul>
+<li class="">#interrupt-cells=<code>&lt;1></code></li>
+</ul>
+<p>别的节点要使用这个中断控制器时，只需要一个cell来表明使用“哪一个中断”。</p>
+<ul>
+<li class="">#interrupt-cells=<code>&lt;2></code></li>
+</ul>
+<p>别的节点要使用这个中断控制器时，需要一个cell来表明使用“哪一个中断”；</p>
+<p>还需要另一个cell来描述中断，一般是表明触发类型：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">第2个cell的bits[3:0] 用来表示中断触发类型(trigger type and level flags)：</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">1 = low-to-high edge triggered，上升沿触发</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">2 = high-to-low edge triggered，下降沿触发</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">4 = active high level-sensitive，高电平触发</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">8 = active low level-sensitive，低电平触发</span><br/></div></code></pre></div></div>
+<p>示例如下：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">vic: intc@10140000 {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	compatible = "arm,versatile-vic";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	interrupt-controller;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	#interrupt-cells = &lt;1>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	reg = &lt;0x10140000 0x1000>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">};</span><br/></div></code></pre></div></div>
+<p>如果中断控制器有级联关系，下级的中断控制器还需要表明它的“interrupt-parent”是谁，用了interrupt-parent”中的哪一个“interrupts”，请看下一小节。</p>
+<p><strong>2 设备树里使用中断</strong></p>
+<p>一个外设，它的中断信号接到哪个“中断控制器”的哪个“中断引脚”，这个中断的触发方式是怎样的？</p>
+<p>这3个问题，在设备树里使用中断时，都要有所体现。</p>
+<ul>
+<li class="">interrupt-parent=<code>&lt;&XXXX></code></li>
+</ul>
+<p>你要用哪一个中断控制器里的中断？</p>
+<ul>
+<li class="">interrupts</li>
+</ul>
+<p>你要用哪一个中断？</p>
+<p>Interrupts里要用几个cell，由interrupt-parent对应的中断控制器决定。在中断控制器里有“#interrupt-cells”属性，它指明了要用几个cell来描述中断。</p>
+<p>比如：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">i2c@7000c000 {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	gpioext: gpio-adnp@41 {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		compatible = "ad,gpio-adnp";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain" style=display:inline-block></span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		interrupt-parent = &lt;&gpio>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		interrupts = &lt;160 1>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain" style=display:inline-block></span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		gpio-controller;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		#gpio-cells = &lt;1>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain" style=display:inline-block></span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		interrupt-controller;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		#interrupt-cells = &lt;2>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	};</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">......</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">};</span><br/></div></code></pre></div></div>
+<ul>
+<li class="">新写法：interrupts-extended</li>
+</ul>
+<p>一个“interrupts-extended”属性就可以既指定“interrupt-parent”，也指定“interrupts”，比如：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">interrupts-extended = &lt;&intc1 5 1>, &lt;&intc2 1 0>;</span><br/></div></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=142-设备树里中断节点的示例>1.4.2 设备树里中断节点的示例<a href=#142-设备树里中断节点的示例 class=hash-link aria-label="1.4.2 设备树里中断节点的示例的直接链接" title="1.4.2 设备树里中断节点的示例的直接链接" translate=no>​</a></h3>
+<p>使用root用户权限进入<code>/boot/dtb-6.1.115-vendor-rk35xx/rockchip</code>目录下，把设备树文件<code>rk3576-100ask-dshanpi-a1.dtb</code>反汇编为<code>rk3576-100ask-dshanpi-a1.dts</code>。</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">dtc -I dtb -O dts rk3576-100ask-dshanpi-a1.dtb -o rk3576-100ask-dshanpi-a1.dts</span><br/></div></code></pre></div></div>
+<p>以DshanPI A1内核源码“rk3576-100ask-dshanpi-a1.dts”中可以看到如下源码：</p>
+<p>这跟芯片手册的说法一致：DshanPI A1集成 <strong>5 个 GPIO Bank（GPIO0~GPIO4）</strong>，最多提供 <strong>160 位 GPIO</strong> 信号。全部 GPIO 均支持外部中断功能。<strong>每个引脚</strong>可配置触发类型（上/下沿、双沿或高/低电平），并支持<strong>单针脚中断的独立屏蔽与清除</strong>。
+中断上报方式为“<strong>按 Bank 合并上报</strong>”：<strong>每个 Bank 仅输出 1 路父中断</strong>至全芯片的 <strong>GIC</strong>（通用中断控制器），由 GIC 统一完成分发与<strong>优先级管理</strong>（优先级以 <strong>Bank 级</strong>区分，默认不对单针脚做硬件优先级区分）。
+因此，<strong>GPIO0~GPIO4</strong> 的中断均采用“<strong>Bank 合并上报、控制器内部按引脚分发</strong>”的机制（共 <strong>5 路父中断</strong>），<strong>不存在</strong>将若干 Bank 再在模块内二次合并为单一中断线的设计。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=143-在代码中获得中断>1.4.3 在代码中获得中断<a href=#143-在代码中获得中断 class=hash-link aria-label="1.4.3 在代码中获得中断的直接链接" title="1.4.3 在代码中获得中断的直接链接" translate=no>​</a></h3>
+<p>之前我们提到过，设备树中的节点有些能被转换为内核里的platform_device，有些不能，回顾如下：</p>
+<p>①  根节点下含有compatile属性的子节点，会转换为platform_device</p>
+<p>②  含有特定compatile属性的节点的子节点，会转换为platform_device</p>
+<p>如果一个节点的compatile属性，它的值是这4者之一："simple-bus","simple-mfd","isa","arm,amba-bus",</p>
+<p>那么它的子结点(需含compatile属性)也可以转换为platform_device。</p>
+<p>③  总线I2C、SPI节点下的子节点：不转换为platform_device</p>
+<p>某个总线下到子节点，应该交给对应的总线驱动程序来处理, 它们不应该被转换为platform_device。</p>
+<p><strong>1 对于platform_device</strong></p>
+<p>一个节点能被转换为platform_device，如果它的设备树里指定了中断属性，那么可以从platform_device中获得“中断资源”，函数如下，可以使用下列函数获得IORESOURCE_IRQ资源，即中断号：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">/**</span><br/></div><div class=token-line style=color:#393A34><span class="token plain"> * platform_get_resource - get a resource for a device</span><br/></div><div class=token-line style=color:#393A34><span class="token plain"> * @dev: platform device</span><br/></div><div class=token-line style=color:#393A34><span class="token plain"> * @type: resource type   // 取哪类资源？IORESOURCE_MEM、IORESOURCE_REG</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">*                      // IORESOURCE_IRQ等</span><br/></div><div class=token-line style=color:#393A34><span class="token plain"> * @num: resource index  // 这类资源中的哪一个？</span><br/></div><div class=token-line style=color:#393A34><span class="token plain"> */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">struct resource *platform_get_resource(struct platform_device *dev,</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">unsigned int type,</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">unsigned int num);</span><br/></div></code></pre></div></div>
+<p>2 对于I2C设备、SPI设备</p>
+<p>对于I2C设备节点，I2C总线驱动在处理设备树里的I2C子节点时，也会处理其中的中断信息。一个I2C设备会被转换为一个i2c_client结构体，中断号会保存在i2c_client的irq成员里，代码如下(drivers/i2c/i2c-core.c)：</p>
+<p>对于SPI设备节点，SPI总线驱动在处理设备树里的SPI子节点时，也会处理其中的中断信息。一个SPI设备会被转换为一个spi_device结构体，中断号会保存在spi_device的irq成员里，代码如下(drivers/spi/spi.c)：</p>
+<p>3 调用of_irq_get获得中断号</p>
+<p>如果你的设备节点既不能转换为platform_device，它也不是I2C设备，不是SPI设备，那么在驱动程序中可以自行调用of_irq_get函数去解析设备树，得到中断号。</p>
+<p>4 对于GPIO</p>
+<p>参考：drivers/input/keyboard/gpio_keys.c</p>
+<p>可以使用gpio_to_irq或gpiod_to_irq获得中断号。</p>
+<p>举例，假设在设备树中有如下节点：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">gpio-keys {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		compatible = "gpio-keys";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		pinctrl-names = "default";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain" style=display:inline-block></span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		user {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">				label = "User Button";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">				gpios = &lt;&gpio5 1 GPIO_ACTIVE_HIGH>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">				gpio-key,wakeup;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">				linux,code = &lt;KEY_1>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		};</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">};</span><br/></div></code></pre></div></div>
+<p>那么可以使用下面的函数获得引脚和flag：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">button->gpio = of_get_gpio_flags(pp, 0, &flags);</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">bdata->gpiod = gpio_to_desc(button->gpio);</span><br/></div></code></pre></div></div>
+<p>再去使用gpiod_to_irq获得中断号：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">irq = gpiod_to_irq(bdata->gpiod);</span><br/></div></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=15-编写使用中断的按键驱动程序>1.5 编写使用中断的按键驱动程序<a href=#15-编写使用中断的按键驱动程序 class=hash-link aria-label="1.5 编写使用中断的按键驱动程序的直接链接" title="1.5 编写使用中断的按键驱动程序的直接链接" translate=no>​</a></h2>
+<p>写在前面的话：对于GPIO按键，我们并不需要去写驱动程序，使用内核自带的驱动程序drivers/input/keyboard/gpio_keys.c就可以，然后你需要做的只是修改设备树指定引脚及键值。</p>
+<p>但是我还是要教你怎么从头写按键驱动，特别是如何使用中断。因为中断是引入其他基础知识的前提，后面要讲的这些内容都离不开中断：休眠-唤醒、POLL机制、异步通知、定时器、中断的线程化处理。</p>
+<p>这些基础知识是更复杂的驱动程序的基础要素，以后的复杂驱动也就是对硬件操作的封装彼此不同，但是用到的基础编程知识是一样的。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=151-编程思路>1.5.1 编程思路<a href=#151-编程思路 class=hash-link aria-label="1.5.1 编程思路的直接链接" title="1.5.1 编程思路的直接链接" translate=no>​</a></h3>
+<p><strong>1 设备树相关</strong></p>
+<p>查看原理图确定按键使用的引脚，再在设备树中添加节点，在节点里指定中断信息。</p>
+<p>例子：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">gpio_keys_100ask {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	compatible = "100ask,gpio_key";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	gpios = &lt;&gpio5 1 GPIO_ACTIVE_HIGH</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">			 &gpio4 14 GPIO_ACTIVE_HIGH>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">};</span><br/></div></code></pre></div></div>
+<p>2  驱动代码相关</p>
+<ul>
+<li class="">
+<p>首先要获得中断号，参考上面<a href=#143-%E5%9C%A8%E4%BB%A3%E7%A0%81%E4%B8%AD%E8%8E%B7%E5%BE%97%E4%B8%AD%E6%96%AD class="">《1.4.3 在代码中获得中断》</a>；</p>
+</li>
+<li class="">
+<p>然后编写中断处理函数；</p>
+</li>
+<li class="">
+<p>最后request_irq。</p>
+</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=152-先编写驱动程序>1.5.2 先编写驱动程序<a href=#152-先编写驱动程序 class=hash-link aria-label="1.5.2 先编写驱动程序的直接链接" title="1.5.2 先编写驱动程序的直接链接" translate=no>​</a></h3>
+<p>参考：内核源码drivers/input/keyboard/gpio_keys.c</p>
+<p>源码gpio_key_drv.c位于这个目录下：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">source\06_gpio_irq\01_simple</span><br/></div></code></pre></div></div>
+<p>1 从设备树获得GPIO</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">count = of_gpio_count(node);</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">for (i = 0; i &lt; count; i++)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">    gpio_keys_100ask[i].gpio = of_get_gpio_flags(node, i, &flag);</span><br/></div></code></pre></div></div>
+<p>2 从GPIO获得中断号</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">gpio_keys_100ask[i].irq = gpio_to_irq(gpio_keys_100ask[i].gpio);</span><br/></div></code></pre></div></div>
+<p>3 申请中断</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">err = request_irq(gpio_keys_100ask[i].irq, gpio_key_isr, \ </span><br/></div><div class=token-line style=color:#393A34><span class="token plain">IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING, "100ask_gpio_key", &gpio_keys_100ask[i]);</span><br/></div></code></pre></div></div>
+<p>4 中断函数</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">static irqreturn_t gpio_key_isr(int irq, void *dev_id)</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">{</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	struct gpio_key *gpio_key = dev_id;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	int val;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	val = gpiod_get_value(gpio_key->gpiod);</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	</span><br/></div><div class=token-line style=color:#393A34><span class="token plain" style=display:inline-block></span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	printk("key %d %d\n", gpio_key->gpio, val);</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">	return IRQ_HANDLED;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">}</span><br/></div></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=16-dshanpi-a1设备树修改及上机实验>1.6 DshanPI A1设备树修改及上机实验<a href=#16-dshanpi-a1设备树修改及上机实验 class=hash-link aria-label="1.6 DshanPI A1设备树修改及上机实验的直接链接" title="1.6 DshanPI A1设备树修改及上机实验的直接链接" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=161-查看原理图确定按键引脚>1.6.1 查看原理图确定按键引脚<a href=#161-查看原理图确定按键引脚 class=hash-link aria-label="1.6.1 查看原理图确定按键引脚的直接链接" title="1.6.1 查看原理图确定按键引脚的直接链接" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=162-修改设备树>1.6.2 修改设备树<a href=#162-修改设备树 class=hash-link aria-label="1.6.2 修改设备树的直接链接" title="1.6.2 修改设备树的直接链接" translate=no>​</a></h3>
+<p>按照一般开发过程，我们应该修改设备树文件，增加如下节点：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">    gpio_keys_100ask {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">        compatible = "100ask,gpio_key";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">		gpios = &lt;&gpio0 0 GPIO_ACTIVE_LOW>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">    };</span><br/></div></code></pre></div></div>
+<p>但是我们在开发板上进行编译操作，里面没有放置“巨大的内核源码”。所以我们通过反汇编dtb文件得到dts文件，在dts文件里加入新节点。</p>
+<p>先新建额外的dts文件，命令如下：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain"># cd /boot</span><br/></div><div class=token-line style=color:#393A34><span class="token plain"># vi keys_100ask.dts</span><br/></div></code></pre></div></div>
+<p>在文本内添加如下内容：：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">/dts-v1/;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">/plugin/;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">/ {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">        compatible = "rockchip,rk3576";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain" style=display:inline-block></span><br/></div><div class=token-line style=color:#393A34><span class="token plain">        fragment@0 {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">                target-path = "/";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">                __overlay__ {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">                    gpio_keys_100ask {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">                            compatible = "100ask,gpio_key";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">                            gpios = &lt;&gpio0 0 1>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain" style=display:inline-block></span><br/></div><div class=token-line style=color:#393A34><span class="token plain">                        };</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">                    };</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">        };</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">};</span><br/></div></code></pre></div></div>
+<p>以“&gpio0 0 1”为例，它是要引用节点“gpio0”，每个节点都有一个“phandle”属性，它是一个不重复的数字，用来表示节点，比如：</p>
+<p>对于<code>gpio0 0</code>对应<code>GPIO0_A0</code>。</p>
+<p>然后执行如下命令生成dtb文件（因为使用到了C语言的宏，所以先使用gcc进行预编译）：</p>
+<p>进入root用户权限：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">su</span><br/></div></code></pre></div></div>
+<p>增加额外的设备树：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain"># armbian-add-overlay keys_100ask.dts</span><br/></div></code></pre></div></div>
+<p>运行效果：</p>
+<p>重新启动板子后，就会使用新的设备树文件，可以如下确认：</p>
+<p>设备树节点：</p>
+<p>platform_devices：</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=163-上机实验>1.6.3 上机实验<a href=#163-上机实验 class=hash-link aria-label="1.6.3 上机实验的直接链接" title="1.6.3 上机实验的直接链接" translate=no>​</a></h3>
+<p>把源码放到开发板后，如下操作：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain"># cd 06_gpio_irq/01_simple</span><br/></div><div class=token-line style=color:#393A34><span class="token plain"># make</span><br/></div><div class=token-line style=color:#393A34><span class="token plain"># su</span><br/></div><div class=token-line style=color:#393A34><span class="token plain"># echo "7 4 1 7" > /proc/sys/kernel/printk</span><br/></div><div class=token-line style=color:#393A34><span class="token plain"># insmod gpio_key_drv.ko</span><br/></div><div class=token-line style=color:#393A34><span class="token plain" style=display:inline-block></span><br/></div><div class=token-line style=color:#393A34><span class="token plain"># 然后操作按键，再输入dmesg可以看到如下打印信息</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">[  198.752239] key 501 1</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">[  198.904287] key 501 0</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">[  200.494386] key 489 1</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">[  200.671775] key 489 0</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">[  203.037915] key 490 1</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">[  203.217441] key 490 0</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">[  204.036330] key 469 1</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">[  204.189784] key 469 0</span><br/></div></code></pre></div></div>
+<p>如下所示：</div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href=https://github.com/100askTeam/zephyr-docs/tree/master/docs/DshanPi-A1/5-LDDBasic/05-5_HandlingInterruptsinLinuxSystems.md target=_blank rel="noopener noreferrer" class=theme-edit-this-page><svg fill=currentColor height=20 width=20 viewBox="0 0 40 40" class=iconEdit_Z9Sw aria-hidden=true><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"/></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label=文件选项卡><a class="pagination-nav__link pagination-nav__link--prev" href=/docs/DshanPi-A1/LDDBasic/05-4_EAIPFlow><div class=pagination-nav__sublabel>上一页</div><div class=pagination-nav__label>异常与中断的概念及处理流程</div></a><a class="pagination-nav__link pagination-nav__link--next" href=/docs/DshanPi-A1/LDDBasic/05-6_DriverFoundation><div class=pagination-nav__sublabel>下一页</div><div class=pagination-nav__label>驱动程序基石</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href=#11-进程线程中断的核心栈 class="table-of-contents__link toc-highlight">1.1 进程、线程、中断的核心：栈</a><ul><li><a href=#111-arm处理器程序运行的过程 class="table-of-contents__link toc-highlight">1.1.1 ARM处理器程序运行的过程</a><li><a href=#112-程序被中断时怎么保存现场 class="table-of-contents__link toc-highlight">1.1.2 程序被中断时，怎么保存现场</a><li><a href=#113-进程线程的概念 class="table-of-contents__link toc-highlight">1.1.3 进程、线程的概念</a></ul><li><a href=#12-linux系统对中断处理的演进 class="table-of-contents__link toc-highlight">1.2 Linux系统对中断处理的演进</a><ul><li><a href=#121-linux对中断的扩展硬件中断软件中断 class="table-of-contents__link toc-highlight">1.2.1 Linux对中断的扩展：硬件中断、软件中断</a><li><a href=#122-中断处理原则1不能嵌套 class="table-of-contents__link toc-highlight">1.2.2 中断处理原则1：不能嵌套</a><li><a href=#123-中断处理原则2越快越好 class="table-of-contents__link toc-highlight">1.2.3 中断处理原则2：越快越好</a><li><a href=#124-要处理的事情实在太多拆分为上半部下半部 class="table-of-contents__link toc-highlight">1.2.4 要处理的事情实在太多，拆分为：上半部、下半部</a><li><a href=#125-下半部要做的事情耗时不是太长tasklet class="table-of-contents__link toc-highlight">1.2.5 下半部要做的事情耗时不是太长：tasklet</a><li><a href=#126-下半部要做的事情太多并且很复杂工作队列 class="table-of-contents__link toc-highlight">1.2.6 下半部要做的事情太多并且很复杂：工作队列</a><li><a href=#127-新技术threaded-irq class="table-of-contents__link toc-highlight">1.2.7 新技术：threaded irq</a></ul><li><a href=#13-linux中断系统中的重要数据结构 class="table-of-contents__link toc-highlight">1.3 Linux中断系统中的重要数据结构</a><ul><li><a href=#131-irq_desc数组 class="table-of-contents__link toc-highlight">1.3.1 irq_desc数组</a><li><a href=#132-irqaction结构体 class="table-of-contents__link toc-highlight">1.3.2 irqaction结构体</a><li><a href=#133-irq_data结构体 class="table-of-contents__link toc-highlight">1.3.3 irq_data结构体</a><li><a href=#134-irq_domain结构体 class="table-of-contents__link toc-highlight">1.3.4 irq_domain结构体</a><li><a href=#135-irq_chip结构体 class="table-of-contents__link toc-highlight">1.3.5 irq_chip结构体</a></ul><li><a href=#14-在设备树中指定中断_在代码中获得中断 class="table-of-contents__link toc-highlight">1.4 在设备树中指定中断_在代码中获得中断</a><ul><li><a href=#141-设备树里中断节点的语法 class="table-of-contents__link toc-highlight">1.4.1 设备树里中断节点的语法</a><li><a href=#142-设备树里中断节点的示例 class="table-of-contents__link toc-highlight">1.4.2 设备树里中断节点的示例</a><li><a href=#143-在代码中获得中断 class="table-of-contents__link toc-highlight">1.4.3 在代码中获得中断</a></ul><li><a href=#15-编写使用中断的按键驱动程序 class="table-of-contents__link toc-highlight">1.5 编写使用中断的按键驱动程序</a><ul><li><a href=#151-编程思路 class="table-of-contents__link toc-highlight">1.5.1 编程思路</a><li><a href=#152-先编写驱动程序 class="table-of-contents__link toc-highlight">1.5.2 先编写驱动程序</a></ul><li><a href=#16-dshanpi-a1设备树修改及上机实验 class="table-of-contents__link toc-highlight">1.6 DshanPI A1设备树修改及上机实验</a><ul><li><a href=#161-查看原理图确定按键引脚 class="table-of-contents__link toc-highlight">1.6.1 查看原理图确定按键引脚</a><li><a href=#162-修改设备树 class="table-of-contents__link toc-highlight">1.6.2 修改设备树</a><li><a href=#163-上机实验 class="table-of-contents__link toc-highlight">1.6.3 上机实验</a></ul></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class=footer__copyright>Copyright © 2026 100askTeam, Inc. Built with Docusaurus.</div></div></div></footer></div></body>

@@ -1,0 +1,1653 @@
+<!doctype html><html lang=zh-Hans dir=ltr class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-DshanPi-A1/原厂在线文档/Common/ISP/RKISP1-IQ-Parameters-User-Guide-v1.0-20190606" data-has-hydrated=false><head><meta charset=UTF-8><meta name=generator content="Docusaurus v3.10.2"><title data-rh=true>RKISP1\_IQ\_Parameters\_User\_Guide | 东山Π</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"/><meta data-rh=true name=twitter:card content=summary_large_image /><meta data-rh=true property=og:image content=https://zephyr.100ask.org/img/docusaurus-social-card.jpg /><meta data-rh=true name=twitter:image content=https://zephyr.100ask.org/img/docusaurus-social-card.jpg /><meta data-rh=true property=og:url content=https://zephyr.100ask.org/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP1-IQ-Parameters-User-Guide-v1.0-20190606 /><meta data-rh=true property=og:locale content=zh_Hans /><meta data-rh=true property=og:locale:alternate content=en /><meta data-rh=true name=docusaurus_locale content=zh-Hans /><meta data-rh=true name=docsearch:language content=zh-Hans /><meta data-rh=true name=docusaurus_version content=current /><meta data-rh=true name=docusaurus_tag content=docs-default-current /><meta data-rh=true name=docsearch:version content=current /><meta data-rh=true name=docsearch:docusaurus_tag content=docs-default-current /><meta data-rh=true property=og:title content="RKISP1\_IQ\_Parameters\_User\_Guide | 东山Π"/><meta data-rh=true name=description content="3.1 header 参数说明"/><meta data-rh=true property=og:description content="3.1 header 参数说明"/><link data-rh=true rel=icon href=/img/favicon.ico /><link data-rh=true rel=canonical href=https://zephyr.100ask.org/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP1-IQ-Parameters-User-Guide-v1.0-20190606 /><link data-rh=true rel=alternate href=https://zephyr.100ask.org/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP1-IQ-Parameters-User-Guide-v1.0-20190606 hreflang=zh-Hans /><link data-rh=true rel=alternate href=https://zephyr.100ask.org/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP1-IQ-Parameters-User-Guide-v1.0-20190606 hreflang=en /><link data-rh=true rel=alternate href=https://zephyr.100ask.org/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP1-IQ-Parameters-User-Guide-v1.0-20190606 hreflang=x-default /><script data-rh=true type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://zephyr.100ask.org/docs/category/原厂在线文档","name":"原厂在线文档","position":1},{"@type":"ListItem","item":"https://zephyr.100ask.org/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP1-IQ-Parameters-User-Guide-v1.0-20190606","name":"RKISP1\\_IQ\\_Parameters\\_User\\_Guide","position":2}]}</script><link rel=alternate type=application/rss+xml href=/blog/rss.xml title="东山Π RSS Feed"><link rel=alternate type=application/atom+xml href=/blog/atom.xml title="东山Π Atom Feed"><link rel=stylesheet href=/assets/css/styles.6e3daa0f.css /><script src=/assets/js/runtime~main.7a096c0d.js defer></script><script src=/assets/js/main.b84950c5.js defer></script></head><body><svg style="display: none;"><defs>
+<symbol id=theme-svg-external-link viewBox="0 0 24 24"><path fill=currentColor d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme-6f6")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id=__docusaurus><link rel=preload as=image href=/img/logo.svg /><div role=region aria-label=跳到主要内容><a class=skipToContent_fXgn href=#__docusaurus_skipToContent_fallback>跳到主要内容</a></div><nav aria-label=主导航 class="theme-layout-navbar navbar navbar--fixed-top"><div class=navbar__inner><div class="theme-layout-navbar-left navbar__items"><button aria-label=切换导航栏 aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"/></svg></button><a class=navbar__brand href=/><div class=navbar__logo><img src=/img/logo.svg alt=东山PI class="themedComponent_mlkZ themedComponent--light_NVdE"/><img src=/img/logo.svg alt=东山PI class="themedComponent_mlkZ themedComponent--dark_xIcU"/></div><b class="navbar__title text--truncate">东山Π</b></a><div class="navbar__item dropdown dropdown--hoverable"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link>DshanPi-A1</a><ul class=dropdown__menu><li><a aria-current=page class="dropdown__link dropdown__link--active" href=/docs/DshanPi-A1/intro>DshanPi-A1</a><li><a class=dropdown__link href=/docs/DshanPi-A1_CM5/intro>DshanPi-A1(CM5)</a></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link>RK3568系列</a><ul class=dropdown__menu><li><a class=dropdown__link href=/docs/DshanPi-R1/intro>DshanPi-R1+</a><li><a class=dropdown__link href=/docs/100ASK_RK3568/BoardIntroduction>100ASK-RK3568</a></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a class="navbar__item navbar__link" href=/blog>Blog</a><a href=https://github.com/dshanpi/Docs target=_blank rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link><svg viewBox="0 0 24 24" width=20 height=20 aria-hidden=true class=iconLanguage_nlXk><path fill=currentColor d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>简体中文</a><ul class=dropdown__menu><li><a href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP1-IQ-Parameters-User-Guide-v1.0-20190606 target=_self rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang=zh-Hans>简体中文</a><li><a href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP1-IQ-Parameters-User-Guide-v1.0-20190606 target=_self rel="noopener noreferrer" class=dropdown__link lang=en>English</a></ul></div><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type=button disabled title="system mode" aria-label="切换浅色/暗黑模式（当前为system mode）"><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill=currentColor d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"/></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill=currentColor d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill=currentColor d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"/></svg></button></div><div class=navbarSearchContainer_Bca1><div class="navbar__search searchBarContainer_NW3z" dir=ltr><input placeholder=搜索 aria-label=Search class="navbar__search-input searchInput_YFbd" value="" /><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class=docsWrapper_hBAB><button aria-label=回到顶部 class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type=button></button><div class=docRoot_UBD9><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class=sidebarViewport_aRkj><div class=sidebar_njMd><nav aria-label=文档侧边栏 class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/docs/DshanPi-A1/intro><span class=linkLabel_WmDU>DshanPi-A1 Education</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/快速使用><span class=categoryLinkLabel_W154>快速使用</span></a><button aria-label="展开侧边栏分类 '快速使用'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/系统配置><span class=categoryLinkLabel_W154>系统配置</span></a><button aria-label="展开侧边栏分类 '系统配置'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/应用基础><span class=categoryLinkLabel_W154>应用基础</span></a><button aria-label="展开侧边栏分类 '应用基础'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/应用开发><span class=categoryLinkLabel_W154>应用开发</span></a><button aria-label="展开侧边栏分类 '应用开发'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/驱动基础><span class=categoryLinkLabel_W154>驱动基础</span></a><button aria-label="展开侧边栏分类 '驱动基础'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/系统开发><span class=categoryLinkLabel_W154>系统开发</span></a><button aria-label="展开侧边栏分类 '系统开发'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/项目案例><span class=categoryLinkLabel_W154>项目案例</span></a><button aria-label="展开侧边栏分类 '项目案例'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/docs/category/其他系统><span class=categoryLinkLabel_W154>其他系统</span></a><button aria-label="展开侧边栏分类 '其他系统'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href=/docs/category/原厂在线文档><span class=categoryLinkLabel_W154>原厂在线文档</span></a><button aria-label="折叠侧边栏分类 '原厂在线文档'" aria-expanded=true type=button class="clean-btn menu__caret"></button></div><ul class=menu__list><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role=button aria-expanded=true tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/AMP/><span class=categoryLinkLabel_W154>Common</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/AMP/><span class=linkLabel_WmDU>瑞芯微多核异构系统开发指南</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/AUDIO/><span class=categoryLinkLabel_W154>Rockchip Audio 开发指南</span></a><button aria-label="展开侧边栏分类 'Rockchip Audio 开发指南'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/CAN/><span class=categoryLinkLabel_W154>Rockchip Can 开发文档</span></a><button aria-label="展开侧边栏分类 'Rockchip Can 开发文档'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/DDR/><span class=linkLabel_WmDU>DDR</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/DSMC/><span class=categoryLinkLabel_W154>Rockchip DSMC 开发文档</span></a><button aria-label="展开侧边栏分类 'Rockchip DSMC 开发文档'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/I2C/><span class=linkLabel_WmDU>ROCKCHIP I2C 开发指南</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/MPP/><span class=linkLabel_WmDU>MPP</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/PCIe/><span class=categoryLinkLabel_W154>Rockchip Linux PCIe 开发指南</span></a><button aria-label="展开侧边栏分类 'Rockchip Linux PCIe 开发指南'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/RGA/><span class=categoryLinkLabel_W154>RGA IM2D API 开发指南</span></a><button aria-label="展开侧边栏分类 'RGA IM2D API 开发指南'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/THERMAL/><span class=linkLabel_WmDU>Thermal 开发指南</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/TRUST/><span class=categoryLinkLabel_W154>Trust</span></a><button aria-label="展开侧边栏分类 'Trust'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/UART/><span class=categoryLinkLabel_W154>UART</span></a><button aria-label="展开侧边栏分类 'UART'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/USB/><span class=categoryLinkLabel_W154>Rockchip Linux USB 开发指南</span></a><button aria-label="展开侧边栏分类 'Rockchip Linux USB 开发指南'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/AVL/RK-SpiNor-and-SLC-Nand-SupportList-V1.50-20240901><span class=categoryLinkLabel_W154>AVL</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/CLK/Clock><span class=categoryLinkLabel_W154>CLK</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/CRYPTO/Crypto-HWRNG><span class=categoryLinkLabel_W154>CRYPTO</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/DEBUG/DS5><span class=categoryLinkLabel_W154>DEBUG</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/DISPLAY/BT656-TX-AND-BT1120-TX-Developer-Guide><span class=categoryLinkLabel_W154>DISPLAY</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/DVFS/CPUFreq><span class=categoryLinkLabel_W154>DVFS</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/FLEXBUS/Linux-FLEXBUS-ADC-and-DAC-MODE><span class=categoryLinkLabel_W154>FLEXBUS</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/FS/Developer-FAQ-FileSystem><span class=categoryLinkLabel_W154>FS</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/GMAC/Linux-GMAC-DPDK><span class=categoryLinkLabel_W154>GMAC</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/HDMI-IN/HDMI-IN-Based-On-CameraHal3><span class=categoryLinkLabel_W154>HDMI-IN</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/IO-DOMAIN/Linux-IO-DOMAIN><span class=categoryLinkLabel_W154>IO-DOMAIN</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/IOMMU/Linux-IOMMU><span class=categoryLinkLabel_W154>IOMMU</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role=button aria-expanded=true tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Camera-Module-OTP-Calibration-Guide><span class=categoryLinkLabel_W154>ISP</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Camera-Module-OTP-Calibration-Guide><span class=linkLabel_WmDU>Rockchip Camera Module OTP Calibration Guide</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Color-Optimization-Guide-ISP21-CN><span class=linkLabel_WmDU>Rockchip\_Color\_Optimization\_Guide\_ISP 21\_CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Color-Optimization-Guide-ISP30-CN><span class=linkLabel_WmDU>Rockchip\_Color\_Optimization\_Guide\_ISP 30\_CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Color-Optimization-Guide-ISP32-Lite-CN><span class=linkLabel_WmDU>Rockchip\_Color\_Optimization\_Guide\_ISP 32\_Lite\_CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Color-Optimization-Guide-ISP39-CN><span class=linkLabel_WmDU>Color-Optimization-Guide-ISP39-CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Development-Guide-3A-ISP30-CN><span class=linkLabel_WmDU>Rockchip Developement Guide 3A ISP30</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Development-Guide-3A-ISP39><span class=linkLabel_WmDU>Rockchip Developement Guide 3A ISP39</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Development-Guide-ISP21-CN><span class=linkLabel_WmDU>Rockchip Developement Guide ISP21</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Development-Guide-ISP30-CN><span class=linkLabel_WmDU>Rockchip Developement Guide ISP30</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Development-Guide-ISP32-Lite-CN><span class=linkLabel_WmDU>Development-Guide-ISP32-Lite-CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Development-Guide-ISP39-CN-alpha><span class=linkLabel_WmDU>Rockchip Developement Guide ISP39</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Driver-Guide-VI-CN><span class=linkLabel_WmDU>Driver-Guide-VI-CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/IQ-Tools-Guide-CN><span class=linkLabel_WmDU>IQ-Tools-Guide-CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/IQ-Tools-Guide><span class=linkLabel_WmDU>IQ-Tools-Guide</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP-Driver-User-Manual-v1.3-20190919><span class=linkLabel_WmDU>RKISP\_Driver\_User\_Manual</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link menu__link--active" aria-current=page tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP1-IQ-Parameters-User-Guide-v1.0-20190606><span class=linkLabel_WmDU>RKISP1\_IQ\_Parameters\_User\_Guide</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href="/docs/DshanPi-A1/原厂在线文档/Common/ISP/Rockchip Camera Module OTP Calibration Guide-CN"><span class=linkLabel_WmDU>Rockchip Camera Module OTP Calibration Guide</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP21-CN><span class=linkLabel_WmDU>Tuning-Guide-ISP21-CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP30-CN><span class=linkLabel_WmDU>Tuning-Guide-ISP30-CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP32-lite-CN><span class=linkLabel_WmDU>Rockchip Tunning Guide ISP32-lite</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP39-CN-v1.0><span class=linkLabel_WmDU>Rockchip Tunning Guide ISP39</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/camera-engine-rkisp-user-manual-v2.0><span class=linkLabel_WmDU>Camera\_Engine\_Rkisp\_User\_Manual（ISP 部）</span></a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/MCU/RK3399-Developer-Guide-MCU><span class=categoryLinkLabel_W154>MCU</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/MEMORY/Introduction-Internal-SRAM-Memory-Layout><span class=categoryLinkLabel_W154>MEMORY</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/MMC/SD-Boot><span class=categoryLinkLabel_W154>MMC</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/NPU/RKNN-Compiler-Support-Operator-List><span class=categoryLinkLabel_W154>NPU</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/NVM/Application-Notes-Storage><span class=categoryLinkLabel_W154>NVM</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/PERF/Linux-RealTime-Performance-Test-Report><span class=categoryLinkLabel_W154>PERF</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/PINCTRL/Linux-Pinctrl><span class=categoryLinkLabel_W154>PINCTRL</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/PMIC/RK805-Developer-Guide><span class=categoryLinkLabel_W154>PMIC</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/POWER/Power-Analysis><span class=categoryLinkLabel_W154>POWER</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/PWM/Linux-PWM><span class=categoryLinkLabel_W154>PWM</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/RTT/RT-Thread-CAN-CANFD><span class=categoryLinkLabel_W154>RTT</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/SARADC/Linux-SARADC><span class=categoryLinkLabel_W154>SARADC</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/SECURITY/Anti-Copy-Board><span class=categoryLinkLabel_W154>SECURITY</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/SPI/Linux-SPI><span class=categoryLinkLabel_W154>SPI</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/TOOL/Introduction-Partition><span class=categoryLinkLabel_W154>TOOL</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/UBOOT/Introduction-UBoot-rkdevelop-vs-nextdev><span class=categoryLinkLabel_W154>UBOOT</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/docs/DshanPi-A1/原厂在线文档/Common/WATCHDOG/Linux-WDT><span class=categoryLinkLabel_W154>WATCHDOG</span></a></div></ul></ul></ul></nav><button type=button title=收起侧边栏 aria-label=收起侧边栏 class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width=20 height=20 aria-hidden=true class=collapseSidebarButtonIcon_kv0_><g fill=#7a7a7a><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"/><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"/></g></svg></button></div></div></aside><main class=docMainContainer_TBSr><div class="container padding-top--md padding-bottom--lg"><div class=row><div class="col docItemCol_VOVn"><div class=docItemContainer_Djhp><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label=页面路径><ul class=breadcrumbs><li class=breadcrumbs__item><a aria-label=主页面 class=breadcrumbs__link href=/><svg viewBox="0 0 24 24" class=breadcrumbHomeIcon_YNFT><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill=currentColor /></svg></a><li class=breadcrumbs__item><a class=breadcrumbs__link href=/docs/category/原厂在线文档><span>原厂在线文档</span></a><li class=breadcrumbs__item><span class=breadcrumbs__link>Common</span><li class=breadcrumbs__item><span class=breadcrumbs__link>ISP</span><li class="breadcrumbs__item breadcrumbs__item--active"><span class=breadcrumbs__link>RKISP1\_IQ\_Parameters\_User\_Guide</span></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type=button class="clean-btn tocCollapsibleButton_TO0P">本页总览</button></div><div class="theme-doc-markdown markdown"><header><h1>RKISP1_IQ_Parameters_User_Guide</h1></header>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=31-header-参数说明>3.1 header 参数说明<a href=#31-header-参数说明 class=hash-link aria-label="3.1 header 参数说明的直接链接" title="3.1 header 参数说明的直接链接" translate=no>​</a></h3>
+<p>Header 主要定义 IQ 创建日期，tuning 负责人，sensor 名称，镜头名称，IQ xml 版本号和 sensor支持的分辨率等一些信息。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=311-iq-基本信息>3.1.1 IQ 基本信息<a href=#311-iq-基本信息 class=hash-link aria-label="3.1.1 IQ 基本信息的直接链接" title="3.1.1 IQ 基本信息的直接链接" translate=no>​</a></h4>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3111-code_xml_parse_version>3.1.1.1 code_xml_parse_version<a href=#3111-code_xml_parse_version class=hash-link aria-label="3.1.1.1 code_xml_parse_version的直接链接" title="3.1.1.1 code_xml_parse_version的直接链接" translate=no>​</a></h5>
+<p>IQ相对应代码解析版本号</p>
+<p>header</p>
+<p>a= type = struct</p>
+<p>code_xml_parse_version v1.0.0</p>
+<p>eisp_output_type color</p>
+<p>creation_date 2017-12-13</p>
+<p>creator Liquid</p>
+<p>sensor_name OV5695</p>
+<p>sample_name no</p>
+<p>generator_version V1.0</p>
+<p>sdk_IQfile_Verify test</p>
+<p>resolution</p>
+<p>Log 上会有提示，如下：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">if(strcmp(meta data.code xml parse version, CODE XML PARSE VERSION)){</span><br/></div></code></pre></div></div>
+<p>std::cout</p>
+<p>&lt;&lt; code xml parse version is no match</p>
+<p>&lt;&lt; meta data.code xml parse version</p>
+<p>&lt;&lt; " != ("</p>
+<p>&lt;&lt; CODE XML PARSE VERSION</p>
+<p>&lt;&lt; std::endl;</p>
+<p>return (false);</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3112-其余-iq-基本信息>3.1.1.2 其余 IQ 基本信息<a href=#3112-其余-iq-基本信息 class=hash-link aria-label="3.1.1.2 其余 IQ 基本信息的直接链接" title="3.1.1.2 其余 IQ 基本信息的直接链接" translate=no>​</a></h5>
+<p>&lt;header size="[1 1]" type="struct"></p>
+<p>&lt;creation_date index="1" size="[1 10]" type="char"></p>
+<p>2016-08-31 IQ创建日期</p>
+<p>&lt;/creation_date></p>
+<p>&lt;creator index="1" size="[1 4]" type="char"></p>
+<p>OYYF 调试人员名字</p>
+<p>&lt;/creator></p>
+<p>&lt;sensor_name index="1" size="[1 6]" type="char"></p>
+<p>OV4689</p>
+<p>sensor名称</p>
+<p>&lt;/sensor_name></p>
+<p>&lt;sample_name index="1" size="[1 9]" type="char"></p>
+<p>LA6111PA</p>
+<p>&lt;/sample_name> 镜头名称</p>
+<p>&lt;generator_version index="1" size="[16]" type="char"></p>
+<p>v0.4.0 IQ版本</p>
+<p>&lt;/generator_version> 口</p>
+<p>&lt;isp_output_type index="1" type="char" size="[1 6]"></p>
+<p>color</p>
+<p>&lt;/isp_output_type></p>
+<p>isp_output_type：选择 isp 输出色彩模式: 目前共定义了 3 种模式：</p>
+<p>1：color: 彩色图像模式，ISP 输出彩色图像；</p>
+<p>2：gray: 灰度图像模式，ISP 输出灰度图像；</p>
+<p>灰度图像模式下 awb 相关参数，均采用 BW 光源的相关参数配置。</p>
+<p>&lt;sdk_IQfile_Verify index="1" type="char" size="[1 4]"></p>
+<p>Object_verify</p>
+<p>&lt;/sdk_IQfile_Verify></p>
+<p>sdk_IQfile_Verify: 用于 avl 模组的 IQ 效果是否经过测试的标志位。</p>
+<p>1：Object_verify: 客户测试通过</p>
+<p>2：Subject_verify: 主观测试通过</p>
+<p>3：Both_verify: 主客观均通过测试。</p>
+<p>4：Test<!-- -->:IQ<!-- -->可以使用，但未经过 rk 主客观测试。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=312-header-支持配置多个分辨率>3.1.2 header 支持配置多个分辨率<a href=#312-header-支持配置多个分辨率 class=hash-link aria-label="3.1.2 header 支持配置多个分辨率的直接链接" title="3.1.2 header 支持配置多个分辨率的直接链接" translate=no>​</a></h4>
+<p>RK 在 Sensor 实际效果调试一般会调试两个分辨率，</p>
+<p>一个作为拍照用的全分辨率（一般为 FULL分辨率）。</p>
+<p>车机或者无人机的产品一般只调试一个分辨率。</p>
+<p>需要支持更多或更少时，需要将 resolution 字段的定义进行相应修改，并对 sensor 参数中依赖分辨率的其他参数进行修改。</p>
+<p>每个分辨率为一个 cell 依次填写在 resolution 字段内。</p>
+<p>&lt;resolution index="1" size="[1 2]"type="cell"> 支持多个分辨率</p>
+<p>&lt;cell index="1" size="[1 1] type="struct"></p>
+<p>&lt;name index=1" size="[1 9]" type="char"> 第一个分辨率</p>
+<p>1920x1080 分辨率名称由宽x高命名</p>
+<p>&lt;/name></p>
+<p>&lt;id index="1" size="[1 10]" type="char"></p>
+<p>0x00000001 分辨率id号，按顺序从1递增</p>
+<p>&lt;/id></p>
+<p>&lt;width index="1" size="[1 1]" type="double"></p>
+<p>[1920] 分辨率的宽</p>
+<p>&lt;/width></p>
+<p>&lt;height index="1" size="[1 1]" type="double"></p>
+<p>[1080] 分辨率的高</p>
+<p>&lt;/height></p>
+<p>&lt;framerate index="1" size="[1 3]" type="cell"></p>
+<p>&lt;cell index="1" size="I1 1]" type="struct"></p>
+<p>&lt;name index="1" size="[1 6]" type="char"></p>
+<p>FPS_15 分辨率序列对于帧率</p>
+<p>&lt;/name> 命名为FSP_帧率</p>
+<p>&lt;fps index="1" size="[1 1]" type="double"></p>
+<p>[15.0000]</p>
+<p>&lt;/fps> 帧率</p>
+<p>&lt;/cell></p>
+<p>&lt;/framerate></p>
+<p>&lt;/cell></p>
+<p>&lt;cell index="2" size="[1 1]" type="struct"> 第二个分辨率</p>
+<p>&lt;name index="T" size="[1 9]" type="char"></p>
+<p>2688×1520</p>
+<p>&lt;/name></p>
+<p>&lt;id index="1" size="[1 10]" type="char"></p>
+<p>0x00000002</p>
+<p>&lt;/id></p>
+<p>&lt;width index="1" size="[1 1]" type="double"></p>
+<p>[2688]</p>
+<p>&lt;/width></p>
+<p>&lt;height index="1" size="[1 1]" type="double"></p>
+<p>[1520]</p>
+<p>&lt;/height></p>
+<p>&lt;framerate index="1" size="[1 1]" type="cell"></p>
+<p>&lt;cell index="1" size="[1 1]" type="struct"></p>
+<p>&lt;name index="1" size="[1 6]" type="char"></p>
+<p>FPS_08</p>
+<p>&lt;/name></p>
+<p>&lt;fps index="1" size="[1 1]" type="double"></p>
+<p>[7.5000]</p>
+<p>&lt;/fps></p>
+<p>&lt;/cell></p>
+<p>&lt;/framerate></p>
+<p>&lt;/cell></p>
+<p>&lt;/resolution></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=32-sensor-模块参数说明>3.2 sensor 模块参数说明<a href=#32-sensor-模块参数说明 class=hash-link aria-label="3.2 sensor 模块参数说明的直接链接" title="3.2 sensor 模块参数说明的直接链接" translate=no>​</a></h3>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=321-awb-模块参数说明>3.2.1 awb 模块参数说明<a href=#321-awb-模块参数说明 class=hash-link aria-label="3.2.1 awb 模块参数说明的直接链接" title="3.2.1 awb 模块参数说明的直接链接" translate=no>​</a></h4>
+<p>AWB</p>
+<p>index =1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>valid_version_name</p>
+<p>index =1</p>
+<p>type = char</p>
+<p>size = [1 18]</p>
+<p>version_10_para</p>
+<p>a= index = 1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>globals</p>
+<p>illumination</p>
+<p>version_11_para</p>
+<p>a= index = 1</p>
+<p>type = struct</p>
+<p>a= size = [1 1]</p>
+<p>globals</p>
+<p>illumination</p>
+<p>目前 awb参数有两个版本，版本适配情况如下：</p>
+<table><thead><tr><th>AWB 版本<th>版本适配情况<tbody><tr><td>AWB VERSION 10<td>camera_engine_rkisp<!-- -->:v2<!-- -->.0.0IQ magic version code: 635075<tr><td>AWB VERSION 11<td>不支持</table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=两者的区别仅在白点参数条件和光源判断条件不同其他参数都是相同的>两者的区别仅在白点参数条件和光源判断条件不同，其他参数都是相同的：<a href=#两者的区别仅在白点参数条件和光源判断条件不同其他参数都是相同的 class=hash-link aria-label=两者的区别仅在白点参数条件和光源判断条件不同，其他参数都是相同的：的直接链接 title=两者的区别仅在白点参数条件和光源判断条件不同，其他参数都是相同的：的直接链接 translate=no>​</a></h3>
+<p>AWBVERSION_10：白点条件参数还需经过多次转换，最后和寄存器条件相同。判断光源采用二维高斯分布方式来判断，和白平衡范围图上采用不同坐标，比较不直观。</p>
+<p>AWBVERSION_11：白点条件参数直接使用寄存器相对应的条件，更为直观，方便调试。判断光源方式采用欧式距离方式判断，比较直观判断光源。</p>
+<p>因此，下面对 awb 参数进行描述时采用是 V10 参数，仅在白点条件和光源判断上增加 V11不同点的描述。</p>
+<p>Awb 模块包含 globals 和 illumination 两部分参数。</p>
+<p>globals 主要为白平衡白点条件参数和判断光源相关参数。</p>
+<p>一般有几个分辨率就配置几个 cell，每个 cell 的参数基本相同，除了分辨率不同而已。如上所说，rk 调试一般选择两个分辨率，所以 cell 一般为 2 个。</p>
+<p>illumination 为调试时候选择的几种标准光源的特性信息，包括白平衡，ccm，lsc 插值和 cc插值相关信息，以及光源特性参数。Illumination 的 Size必须和实际调试光源个数必须相匹配。Xml 解析会按照填写的个数去解析，多余的不解析。rk 调试一般只选择 A、CWF、TL84、D65 四个标准光源而已，所以填写 4。后面针对一些黑白摄像头，新增一个光源为 BW，用于黑白显示时候采用此光源的 awb，ccm，lsc 参数。所以目前版本一般是填 5。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3211-globals-参数说明>3.2.1.1 globals 参数说明<a href=#3211-globals-参数说明 class=hash-link aria-label="3.2.1.1 globals 参数说明的直接链接" title="3.2.1.1 globals 参数说明的直接链接" translate=no>​</a></h5>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32111-分辨率信息参数>3.2.1.1.1 分辨率信息参数<a href=#32111-分辨率信息参数 class=hash-link aria-label="3.2.1.1.1 分辨率信息参数的直接链接" title="3.2.1.1.1 分辨率信息参数的直接链接" translate=no>​</a></h5>
+<p>Name 命名为 width x heightResolution 命名也为 width x height</p>
+<p>globals</p>
+<p>a= index = 1</p>
+<p>a= size = [1 2]</p>
+<p>a= type = cell</p>
+<p>cell</p>
+<p>index =1</p>
+<p>size = [1 1]</p>
+<p>type = struct</p>
+<p>由name 1920×1080</p>
+<p>resolution 1920x1080</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32112-光源判断参数>3.2.1.1.2 光源判断参数<a href=#32112-光源判断参数 class=hash-link aria-label="3.2.1.1.2 光源判断参数的直接链接" title="3.2.1.1.2 光源判断参数的直接链接" translate=no>​</a></h5>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=1-awb-version_10-光源判断参数>1: AWB VERSION_10 光源判断参数<a href=#1-awb-version_10-光源判断参数 class=hash-link aria-label="1: AWB VERSION_10 光源判断参数的直接链接" title="1: AWB VERSION_10 光源判断参数的直接链接" translate=no>​</a></h3>
+<p>在做白平衡 tuning 是会产生此参数，将其填入如下位置。</p>
+<p>SVDMeanValue [0.3405073885950044 0.4</p>
+<p>PCAMatrix [-0.6787904814407830-0.053</p>
+<p>CenterLine [-0.7251382973142543-0.68</p>
+<p>SVDMeanValue：为多个光源下的白点对应的 R,G,B 三通道的均值。</p>
+<p>PCAMatrix：为多个光源下白点的 R,G,B 三通道均值确定的特征空间。</p>
+<p>这边引入 PCA（主成分分析）的目的是让各个光源在 PCAMatrix 特征空间下的投影的方差最</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=2-awb-version_11-光源判断参数>2: AWB VERSION_11 光源判断参数<a href=#2-awb-version_11-光源判断参数 class=hash-link aria-label="2: AWB VERSION_11 光源判断参数的直接链接" title="2: AWB VERSION_11 光源判断参数的直接链接" translate=no>​</a></h3>
+<p>不再有上面 AWB VERSION_10 对应的三个参数。</p>
+<p>直接通过统计的白平衡(rgainbgain)坐标,计算和多个标准光源(rgain,bgain)距离，距离最小的光源被判断是该场景对应的光源。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32113-白平衡范围大小参数>3.2.1.1.3 白平衡范围大小参数<a href=#32113-白平衡范围大小参数 class=hash-link aria-label="3.2.1.1.3 白平衡范围大小参数的直接链接" title="3.2.1.1.3 白平衡范围大小参数的直接链接" translate=no>​</a></h5>
+<p>白平衡会对整个白平衡区域做范围大小限制，tuning 过程中会产生此参数，请将其填入如下位置。</p>
+<p>上面的这几个参数均为 tuning 后得到的，与白平衡 tuning 时的绘制的白点区域相关，详细描述如下图：</p>
+<p>图-1 白点区域曲线</p>
+<p>当得到该场景的(gainR/gainG, gainB/gainG)后并不是直接运用于白平衡校正，而是会进行一定的调整。首先会判断该点是否超出了上图中橙色虚线的范围，接着用 IIR 滤波器将当前的该场景的(gainR/gainG, gainB/gainG)与前一帧的(gainR/gainG, gainB/gainG)关联起来（具体的实现见 AwbIIRDampCoef 参数的描述部分），最后用上图中的黑色虚线将(gainR/gainG,gainB/gainG)限制在黑色虚线的范围内</p>
+<p>ExpPriorOutExpPriorOut = func(fGExp)，</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32114-曝光和白点范围条件>3.2.1.1.4 曝光和白点范围条件<a href=#32114-曝光和白点范围条件 class=hash-link aria-label="3.2.1.1.4 曝光和白点范围条件的直接链接" title="3.2.1.1.4 曝光和白点范围条件的直接链接" translate=no>​</a></h5>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=1awb-version_10-白点条件参数说明>1：AWB VERSION_10 白点条件参数说明<a href=#1awb-version_10-白点条件参数说明 class=hash-link aria-label="1：AWB VERSION_10 白点条件参数说明的直接链接" title="1：AWB VERSION_10 白点条件参数说明的直接链接" translate=no>​</a></h3>
+<table><thead><tr><th><th><th><th><th>K_Factor afFade2 afCbMinRegionMax afCrMinRegionMax afMaxCSumRegionMax afCbMinRegionMin afCrMinRegionMin afMaxCSumRegionMin afMinCRegionMax afMaxYRegionMax afMinYMaxGRegionMax afMinCRegionMin afMaxYRegionMin<th>[4.5676] 1.8 1.95 2.1 2.35] [115 110 105 100 96 93 [90 95 105 113 120 125] [20 16 14 12 12 10] [128 126 124 122 120 1 [90 95 105 116123 126] [12 10 9 9 9 9] [20 17 15 15 14 13] [230 230 230 230 230 23 [30 30 30 30 30 30] [16 14 13 12 12 10] [230 230 230 230 230 23 [30 30 30 30 30 30]<th>[1.2 1.55 afMinYMaxGRegionMin<tbody><tr><td><td><td><td>田<td>afRefCr RegionSize [1]<td>[128128128128128128] [128128 128128128 128]<td><tr><td><td><td><td><td>RegionSizelnc<td>[0.3]<td><tr><td><td><td><td>RegionSizeDec<td>[0.02]<td><td></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=k_factor>K_Factor：<a href=#k_factor class=hash-link aria-label=K_Factor：的直接链接 title=K_Factor：的直接链接 translate=no>​</a></h3>
+<p>计算光源为室外光源的概率：</p>
+<p>fGExp = (SensorGain * IntegrationTime * K_Factor );</p>
+<p>曝光参数越大为室外光源的概率就越小。</p>
+<p>若 ExpPriorOut>=1,则判定为室外光源，</p>
+<p>若 ExpPriorOut&lt;=0.5,则判定为室内光源。</p>
+<p>若 0.5&lt;ExpPriorOut&lt;1,则该光源即可能是室外光源也可能是室内光源。</p>
+<p>光圈大的 sensor 在 A光下需要的曝光比较小，容易导致 ExpPriorOut>1，被判定为室外光源。</p>
+<p>此时可以增大 K_Factor，减小 ExpPriorOut，使得 A 光不会被判断为室外光源。</p>
+<p>f_CbMin_regionMax, f_CbMin_regionMin,</p>
+<p>f_CrMin_regionMax, f_CrMin_regionMin,</p>
+<p>f_MaxCSum_regionMax, f_MaxCSum_regionMin</p>
+<p>上面 6 个参数矩阵中不同位置的值与 afFade2 矩阵中相应位置的值一一对应。</p>
+<p>这些参数并不是 tuning 后得到的，需要参考白平衡范围坐标进行微调。</p>
+<p>afFade2 中的值为多个 gainR/gainG 值下在 CenterLine 投影的横坐标。</p>
+<p>afRefCb 和 afRefCr：影响白点的 refcb 和 refcr 分量基准，一般为 128。</p>
+<p>f_CrMin=RegionSize * f_CrMin_regionMax + (1.0f - RegionSize) * f_CrMin_regionM in</p>
+<p>f_MaxCSum =RegionSize * f_MaxCSum_regionMax + (1.0f - RegionSize) * f_Max CSum_regionMin</p>
+<p>MeasWdw.RefCr_MaxR=0.5 *(f_CrMin - f_CbM in )+128</p>
+<p>MeasWdw.RefCb_MaxB=0.5 *(f_CbMin - f_CrM in )+128</p>
+<p>MeasWdw.MinC =-0.5 *(f_CbMin +f_Cr Min )+128</p>
+<p>MeasWdw.MaxCSum=f_MaxCSum</p>
+<p>其中 RegionSize根据当前帧的白点数量进行调整，</p>
+<p>如果白点数量小于白点数量的最小值</p>
+<p>如果白点数量大于白点数量的最大值且白点在外部的白点边界线外</p>
+<p>概况的说：白平衡白点条件随着 afFade2 参数的变化进行变化。</p>
+<p>afCbMinRegionMax 和 afCbMinRegionMin：影响白点的 refcb 分量条件。</p>
+<p>afCrMinRegionMax 和 afCrMinRegionMin：影响白点的 refcr 分量条件。</p>
+<p>RegionSize、RegionSizeInc、RegionSizeDec：</p>
+<p>此三个参数受白点检测出数量影响，从而影响上面白平衡条件。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=2awb-version_11-白点条件参数说明>2：AWB VERSION_11 白点条件参数说明<a href=#2awb-version_11-白点条件参数说明 class=hash-link aria-label="2：AWB VERSION_11 白点条件参数说明的直接链接" title="2：AWB VERSION_11 白点条件参数说明的直接链接" translate=no>​</a></h3>
+<p>为了使白点条件调节更为直观有效，方便调试，直接使用下图边界参数作为调试参数。</p>
+<p>下面是对 VERSION_11 版本白点条件描述。</p>
+<table><thead><tr><th>由afFade田e由e田田田<th>2                     [1.2 1.55 1.8 2.05 2.3 2.5]afmaxCSum_br                     [20 16 14 12 12 10]afmaxCSum_sr                     [12 10 9 9 9 9]afminC_br                     [20 17 15 15 14 13]afMaxY_br                     [230 230 230 230 230 230]afMinY_br                     [30 30 30 30 30 30]<th>=<tbody><tr><td>由<td>afminC_sr                     [16 14 13 12 12 10]afMaxY_sr                     [230 230 230 230 230 230]<td><tr><td>田afMiafRafR<td><td><tr><td>nY_sr                     [30 30 30 30 30 30]efCb                     [140.5134 128126.5120.5 113]efCr                     [115.5 122 128 129.5 135.5 143]<td><td></table>
+<p>afFade2：afFade2 中的值为 awb 白平衡范围图上多个 gainR/gainG 值下在 CenterLine 投影的横坐标。用来控制不同色温下使用不同的白点条件。</p>
+<p>afmaxCSum_br，afmaxCSum_sr：</p>
+<p>白点边界图上 AWB_MAX_CSUM，brsr 后缀为，白点数量多和少时候对应插值边界。</p>
+<p>afminC_br，afminC_sr：</p>
+<p>白点边界图上 AWB_MIN_C，brsr后缀为，白点数量多和少时候对应插值边界。</p>
+<p>afMaxY_br，afMaxY_sr：</p>
+<p>白点边界图上 AWB_MAX_Y，brsr 后缀为，白点数量多和少时候对应插值边界。</p>
+<p>afMinY_br，afMinY_sr：</p>
+<p>白点边界图上 AWB_MIN_Y，brsr后缀为，白点数量多和少时候对应插值边界。</p>
+<p>afRefCb：白点边界图上 AWB_REF_CB。</p>
+<p>afRefCr：白点边界图上 AWB_REF_CR。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32115-白平衡范围特殊限制>3.2.1.1.5 白平衡范围特殊限制<a href=#32115-白平衡范围特殊限制 class=hash-link aria-label="3.2.1.1.5 白平衡范围特殊限制的直接链接" title="3.2.1.1.5 白平衡范围特殊限制的直接链接" translate=no>​</a></h5>
+<p>fRgProjlndoorMin [1.15] fRgProjMax [2.4663] fRgProjMaxSky [2.55] fRgProjOutdoorMin [1.9] fRgProjYellowLimitEnable [0] fRgProjALimit [5.0] fRgProjAWeight [0.0] fRgProjYellowLimit [1.4] fRgProjllIToCwfEnable [0] fRgProjlIIToCwf [-0.15] fRgProjIlIToCwfWeight [0.0] awb_clip_outdoor D65</p>
+<p>fRgProjIndoorMin：最小可设定白平衡范围。</p>
+<p>为图-1 中黑色虚线左端与 CenterLine的交点,为室内光源下 RgProj 的最小值。</p>
+<p>fRgProjMax：最大可设定白平衡范围。</p>
+<p>为图-1 中黑色虚线右端与 CenterLine 的交点，为 RgProj 的最大值。</p>
+<p>fRgProjMaxSky：最大可检测白平衡范围。</p>
+<p>fRgProjOutdoorMin：室内外分界白平衡界限。</p>
+<p>为图-1 中斜的蓝色虚线与 CenterLine的交点，为室外光源下 RgProj 的最小值。</p>
+<p>上面四个参数均为 tuning 过程中，会自动产生参数。</p>
+<p>（1）当判定该场景的光源为室内光源时，调整后的 gainR/gainG 在 CenterLine 上投影的横坐标均大于等于 fRgProjIndoorMin；</p>
+<p>（2）当判定该场景的光源为室外光源时，调整后的 gainR/gainG 在 CenterLine 上投影的横坐标均大于等于 fRgProjOutdoorMin；</p>
+<p>下面 7 个参数均为特殊处理参数，一般是保持关闭状态，仅在特殊状况下会使用。通过 fRgProjYellowLimitEnable 和 fRgProjIllToCwfEnable 设置为 0 关闭，设置 1 为打开。fRgProjYellowLimitEnable、fRgProjALimit、fRgProjAWeight、fRgProjYellowLimit：改变对黄色物体白平衡微调。</p>
+<p>是对 cwf和 d65 光源判断一个调节。</p>
+<p>此参数需要人工对 sensor 的白平衡信息进行调节，非自动化产生参数。</p>
+<p>awb_clip_outdoor 此参数无需改变。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32116-iir-参数>3.2.1.1.6 IIR 参数<a href=#32116-iir-参数 class=hash-link aria-label="3.2.1.1.6 IIR 参数的直接链接" title="3.2.1.1.6 IIR 参数的直接链接" translate=no>​</a></h5>
+<p>IIR 主要包括两部分参数：一部分是 DAMP 参数，一部分是 ExpPrior 参数。此部分参数一般无需改变。</p>
+<p>DAMP：通过当前帧与前一帧白平衡值进行加权平均，影响白平衡调节的快慢速度。</p>
+<p>DampCoefAdd：damp 系数加加时每次加的值。</p>
+<p>DampCoefSub：damp 系数减减时每次减的值。</p>
+<p>DampingCoefMin：damp 系数最小值。</p>
+<p>DampingCoefMax：damp 系数最大值。</p>
+<p>DampingCoefInit：damp 系数初始值。</p>
+<p>ExpPrior：基本保持不变，会记录 50 帧的 ExpPriorIn 参数，对其求均值 mean。</p>
+<p>通过判断 mean - 当前 ExpPriorIn 是否超过 DampFilterThreshold，来决定 DAMP 系数增减，影响白平衡调节的快慢速度。</p>
+<p>ExpPriorFilterSizeMax：ExpPrior 最大记录帧数，代码已定最大值为 50，此参数不可大于 50。</p>
+<p>ExpPriorFilterSizeMin：ExpPrior 最小记录帧数。</p>
+<p>ExpPriorMiddle：</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3212-illumination-参数说明>3.2.1.2 illumination 参数说明<a href=#3212-illumination-参数说明 class=hash-link aria-label="3.2.1.2 illumination 参数说明的直接链接" title="3.2.1.2 illumination 参数说明的直接链接" translate=no>​</a></h5>
+<p>每个 cell 保存相应光源的特性信息，这些特性信息主要为白平衡，色彩校正矩阵，lsc和 cc 插值矩阵。</p>
+<p>illumination</p>
+<p>index =1</p>
+<p>size = [1 4]</p>
+<p>a= type = cell</p>
+<p>日 cell</p>
+<p>a= index = 1</p>
+<p>size = [1 1]</p>
+<p>type = struct</p>
+<p>name A</p>
+<p>doorType Indoor</p>
+<p>GMM</p>
+<p>aLSC</p>
+<p>manualWB [1.34618003063887401.000000000</p>
+<p>manualccMatrix [1.3160902308619769 0.0894</p>
+<p>manualccOffsets [-113.155424248-33.37502</p>
+<p>awbType AUTO</p>
+<p>sat_CT</p>
+<p>vig_CT</p>
+<p>aCC</p>
+<p>由ecell</p>
+<p>cell</p>
+<p>末cell</p>
+<p>cell</p>
+<p>cell</p>
+<p>cell</p>
+<p>Name：光源名称</p>
+<p>doorType：区分室内室外光源，室内光源为 Indoor，室外光源 Outdoor。</p>
+<p>alsc: 该光源支持几个分辨率和几种补偿百分比的 lsc 调试参数。</p>
+<p>manualWB：该光源白平衡数值。</p>
+<p>manualccMatrix：该光源色彩校正矩阵。</p>
+<p>awbType：默认都是 AUTO，自动白平衡。</p>
+<p>sat_CT：根据不同曝光的 gain值，可对选择不同曝光进行不同饱和度设定策略。</p>
+<p>vig_CT：根据不同曝光的 gain值，可对选择不同曝光进行不同 lsc 补偿程度设定策略。</p>
+<p>aCC：色彩校正矩阵支持的几种饱和度的校正信息。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32121-光源判断参数>3.2.1.2.1 光源判断参数<a href=#32121-光源判断参数 class=hash-link aria-label="3.2.1.2.1 光源判断参数的直接链接" title="3.2.1.2.1 光源判断参数的直接链接" translate=no>​</a></h5>
+<p>1：AWB VERSION_10 光源判断参数</p>
+<p>GMM：高斯概率参数，决定落在该光源内的概率。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=gmm-包含-invcovmatrixgaussianscalingfactortau>GMM 包含 invCovMatrix，GaussianScalingFactor，tau<a href=#gmm-包含-invcovmatrixgaussianscalingfactortau class=hash-link aria-label="GMM 包含 invCovMatrix，GaussianScalingFactor，tau的直接链接" title="GMM 包含 invCovMatrix，GaussianScalingFactor，tau的直接链接" translate=no>​</a></h3>
+<p>&lt;GMM index="1" type="struct" size="[1 1]"></p>
+<p>&lt;invCovMatrix index="1" type="double" size="[1 4]"></p>
+<p>[1101.4841561222.582536 1222.582536 4296.764664]</p>
+<p>&lt;/invCovMatrix></p>
+<p>&lt;GaussianScalingFactor index="1" type="double" size="[1 1]"></p>
+<p>[286.39534]</p>
+<p>&lt;/GaussianScalingFactor></p>
+<p>&lt;tau index="1" type="double" size="[1 2]"></p>
+<p>[0.82 0.9]</p>
+<p>&lt;/tau></p>
+<p>&lt;GaussianMeanValue index="1"type="double" size="[1 2]"></p>
+<p>[-0.046689-0.061919]</p>
+<p>&lt;/GaussianMeanValue></p>
+<p>&lt;/GMM></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=2awb-version_11-光源判断参数>2：AWB VERSION_11 光源判断参数<a href=#2awb-version_11-光源判断参数 class=hash-link aria-label="2：AWB VERSION_11 光源判断参数的直接链接" title="2：AWB VERSION_11 光源判断参数的直接链接" translate=no>​</a></h3>
+<p>&lt;referenceWBgain index="1" type="double" size="[1 4]"></p>
+<p>[1.1212713678806511 2.42632503376925]</p>
+<p>&lt;/referenceWBgain></p>
+<p>referenceWBgain：标准光源对应 awb 四通道值白平衡值。</p>
+<p>Awbv11版本光源判断，直接将当前白点统计出来的白平衡值和几个标准光源进行距离判断。距离谁最近，判断最近光源为当前帧应用的光源。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32122-manualwbmanualccmatrixmanualccoffset>3.2.1.2.2. manualWB，manualccMatrix，manualccOffset<a href=#32122-manualwbmanualccmatrixmanualccoffset class=hash-link aria-label="3.2.1.2.2. manualWB，manualccMatrix，manualccOffset的直接链接" title="3.2.1.2.2. manualWB，manualccMatrix，manualccOffset的直接链接" translate=no>​</a></h5>
+<p>&lt;manualWB index="1" type="double" size="[1 4]"></p>
+<p>[1.25109573759722112.25820001637039]</p>
+<p>&lt;/manualWB></p>
+<p>&lt;manualccMatrix index="1" type="double" size="[3 3]"></p>
+<p>[1.55343699952413 0.210099486880679-0.76353648640481</p>
+<p>-0.570668483789862.09533041607586-0.524661932285995</p>
+<p>-0.226803432256232-1.67598771013265 2.90279114238889]</p>
+<p>&lt;/manualccMatrix></p>
+<p>&lt;manualccOffsets index="1" type="double" size="[1 3]"></p>
+<p>[0 0 0]</p>
+<p>&lt;/manualccOffsets></p>
+<p>&lt;awbType index="1" type="char" size="[1 4]"></p>
+<p>AUTO</p>
+<p>&lt;/awbType></p>
+<p>上面这些参数主要用于计算 ACC 部分的色彩校正参数，下面将逐一介绍。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=manualwb>manualWB：<a href=#manualwb class=hash-link aria-label=manualWB：的直接链接 title=manualWB：的直接链接 translate=no>​</a></h3>
+<p>为各个光源下 tuning 后得到的白平衡校正参数，对应于 R,Gr,Gb,B通道的调节参数。</p>
+<p>manualccMatrix 与 manualccOffset：</p>
+<p>为各个光源下选择 100%或者 74%的饱和度进行 tuning 后得到的参数。</p>
+<p>awbType: 1：AUTO, 自动 awb 参与计算的光源。</p>
+<p>2：MANUAL, 像黑白摄像头，不会参与 awb 计算的光源。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32123-sat_ct>3.2.1.2.3 sat_CT<a href=#32123-sat_ct class=hash-link aria-label="3.2.1.2.3 sat_CT的直接链接" title="3.2.1.2.3 sat_CT的直接链接" translate=no>​</a></h5>
+<p>&lt;sat_CT index="1" type="struct" size="[1 1]"></p>
+<p>&lt;gains index="1" type="double" size="[1 4]"></p>
+<p>[12 48]</p>
+<p>&lt;/gains></p>
+<p>&lt;sat index="1" type="double" size="[1 4]"></p>
+<p>[100 100 100 100]</p>
+<p>&lt;/sat></p>
+<p>&lt;/sat_CT></p>
+<p>sat_CT 表示饱和度与 gains 一一对应。</p>
+<p>当确定了当前场景所落在的区域，获取 ACC 对应的 CCM 过程如下：</p>
+<p>1：若为区域 A，CCM 只由主导光源确定</p>
+<p>1.1：已知当前帧的 gain 利用 sat 和 gains 进行插值得到对应的 saturation，即通过 gain来确定当前场景对应的 saturation值；</p>
+<p>1.3：根据 saturation 得到相应的 CCMoffset 矩阵，与 1.2 类似。</p>
+<p>2：若为区域 B 或 C,CCM 由 tuning 时用到的所有光源共同决定，当为区域 B 时主导光源的贡献更多。</p>
+<p>首先，按下列步骤计算出每一个光源 i 对应的 CCM_i 矩阵，offset_i 矩阵</p>
+<p>2.1：已知当前帧的 gain 利用 sat 和 gains 进行插值得到对应的 saturation，即通过 gain来确定当前场景对应的 saturation值；</p>
+<p>2.4：由权值 WeightTrans_i 对所有光源的矩阵进行加权和得到最终未 damp 的矩阵 CCM</p>
+<p>2.5：对矩阵进行 damp，用前一帧的矩阵和当前帧的矩阵进行加权和确定最终的矩阵，权值为 AwbIIRDampCoef（计算白平衡的校正参数也用到这个参数）。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32124-vig_ct>3.2.1.2.4 vig_CT<a href=#32124-vig_ct class=hash-link aria-label="3.2.1.2.4 vig_CT的直接链接" title="3.2.1.2.4 vig_CT的直接链接" translate=no>​</a></h5>
+<p>&lt;vig_CT index="1" type="struct" size="[1 1]"></p>
+<p>&lt;gains index="1" type="double" size="[1 4]"></p>
+<p>[1 24 8]</p>
+<p>&lt;/gains></p>
+<p>&lt;vig index="1" type="double" size="[1 4]"></p>
+<p>[100 100 100 100]</p>
+<p>&lt;/vig></p>
+<p>&lt;/vig_CT></p>
+<p>vig_CT 表示图像四周的亮度与图像中心的亮度的比值，vig_CT 与 gains 一一对应，及对应的 gain 下校正后的图像图像四周的亮度与图像中心的亮度的比值为 vig_CT 中对应的值。</p>
+<p>当确定了当前场景对应的曝光 gain 后，获取 ALSC 对应的校正参数过程如下：</p>
+<p>（a）已知该场景对应的 gain，利用 vig_CT 和 gains 进行插值得到对应的 vig ，即通过gain 来确定当前场景对应的 vig 值；</p>
+<p>（c）对 LSC 参数进行 damp，用前一帧的 LSC参数和当前帧的 LSC 参数进行加权和确定最终的 LSC 参数，权值为 AwbIIRDampCoef（计算白平衡的校正参数也用到这个参数）。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32125-acc>3.2.1.2.5 aCC<a href=#32125-acc class=hash-link aria-label="3.2.1.2.5 aCC的直接链接" title="3.2.1.2.5 aCC的直接链接" translate=no>​</a></h5>
+<p>&lt;aCC index="1" type="struct" size="[1 1]"></p>
+<p>&lt;CC_PROFILE_LIST index="1" type="char" size="[1 10]"></p>
+<p>A_100 A_74</p>
+<p>&lt;/CC_PROFILE_LIST></p>
+<p>&lt;/aCC></p>
+<p>aCC 对应该光源在 sensor 底下 CC 中调试了几个饱和度的内容。</p>
+<p>一般 rk 默认一个光源要调试 2 个饱和度对应的 ccm。</p>
+<p>一个是 100%饱和度，一个是 74%的饱和度。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=322-lsc-参数说明>3.2.2 LSC 参数说明<a href=#322-lsc-参数说明 class=hash-link aria-label="3.2.2 LSC 参数说明的直接链接" title="3.2.2 LSC 参数说明的直接链接" translate=no>​</a></h4>
+<p>LSC 模块全称：Lens Shading Correction。</p>
+<table><thead><tr><th>适用软件及版本<th>ISP版本<th>补偿位数<th>取值范围<th>最大补偿倍数<tbody><tr><td>camera_engine_rkisp: v2.0.0 IQ magic code: 635075<td>ISP10<td>12bit 2bit 整数，10bit 小数<td>1024-4095<td>4<tr><td>ISP11<td>12bit 2bit 整数，10bit 小数<td>1024-4095<td>4<td><tr><td>ISP12<td>13bit 3bit 整数，10bit 小数<td>1024-8191<td>8<td></table>
+<p>LSC参数包含的 cell 个数 = 分辨 x 光源个数 x补偿程度个数。</p>
+<p>RKIQ一般调试 2 个分辨率，4 种光源，100%和 70%的两种补偿程度，</p>
+<p>那么就有 2 x 4 x 2 = 16 个 cell 要填写。</p>
+<p>默认 xml文件中，我们设定是 7 钟光源，2 个分辨率，2 种补偿程度的 28 个 cell。</p>
+<p>新增分辨率，光源或者补偿程度，请自行修改增加相应的 cell 信息。</p>
+<p>白LSC</p>
+<p>index =1</p>
+<p>size = [1 28]</p>
+<p>type = cell</p>
+<p>cell</p>
+<p>index = 1</p>
+<p>size = [1 1]</p>
+<p>a= type = struct</p>
+<p>+name 1920×1080_A_70</p>
+<p>resolution 1920x1080</p>
+<p>+illumination A</p>
+<p>LSC_sectors [16]</p>
+<p>LSC_No [10]</p>
+<p>LSC_Xo [15]</p>
+<p>LSC_Yo [15]</p>
+<p>LSC_SECT_SIZE_X [120 120 120 120 120 120</p>
+<p>LSC_SECT_SIZE_Y [68 67 68 67 68 67 68 67</p>
+<p>vignetting [70]</p>
+<p>LSC_SAMPLES_red [2871 2617 2385 2234 208</p>
+<p>LSC_SAMPLES_greenR [2570 2335 2142 2022</p>
+<p>LSC_SAMPLES_greenB [2602 2354 2146 2023</p>
+<p>+LSC_SAMPLES_blue [2484 2254 2064 1941 18</p>
+<p>Name: widthxheight_光源名称_补偿程度。</p>
+<p>Resolution：widthxheight。</p>
+<p>Illumination: 光源名称。</p>
+<p>LSC_sectors: LSC 分为 16 x 16 的分区，产生 17x17 的网格点。</p>
+<p>LSC_No: 实际未用到参数，请保持原值。</p>
+<p>LSC_Xo: LSC17x17 网格点 width 方向进行双线性插值系数预先计算所需参数。</p>
+<p>LSC_Yo: LSC17x17 网格点 height 方向进行双线性插值系数预先计算所需参数。</p>
+<p>LSC_SAMPLES_red、LSC_SAMPLES_greenR、LSC_SAMPLES_greenB、LSC_SAMPLES_blue：分别代表 r, gr, gb,b 四通道 lsc 补偿系数，矩阵为 17x17。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=323-cc-参数说明>3.2.3 CC 参数说明<a href=#323-cc-参数说明 class=hash-link aria-label="3.2.3 CC 参数说明的直接链接" title="3.2.3 CC 参数说明的直接链接" translate=no>​</a></h4>
+<p>CC 参数总个数= 光源个数 X 饱和度个数</p>
+<p>RkIQ 调试一般选择 5 个光源（A、CWF、TL84、D65、BW），两种饱和度（100%， 74%）。</p>
+<p>CC</p>
+<p>index =1</p>
+<p>size = [1 14]</p>
+<p>type = cell</p>
+<p>cell</p>
+<p>a= index = 1</p>
+<p>size = [1 1]</p>
+<p>type = struct</p>
+<p>name A_74</p>
+<p>saturation [74]</p>
+<p>ccMatrix [1.02391158168734</p>
+<p>+ccOffsets [-95.911013132144</p>
+<p>田wb [1.3047267444900894 1.</p>
+<p>Name：命名规则，光源名称_饱和度数值。</p>
+<p>Saturation：饱和度数值。</p>
+<p>ccMatrix：色彩校正矩阵，tuningccm 过程会产生此参数。</p>
+<p>ccOffsets：色彩校正矩阵 offset，tuning ccm 过程可选择是否需要 offset。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=324-af-参数说明>3.2.4 AF 参数说明<a href=#324-af-参数说明 class=hash-link aria-label="3.2.4 AF 参数说明的直接链接" title="3.2.4 AF 参数说明的直接链接" translate=no>​</a></h4>
+<p>AF</p>
+<p>index =1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>WindowNum [1]</p>
+<p>WindowA</p>
+<p>WindowB</p>
+<p>WindowC</p>
+<p>contrast_af</p>
+<p>laser_af</p>
+<p>pdaf</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3241-窗口参数说明>3.2.4.1 窗口参数说明<a href=#3241-窗口参数说明 class=hash-link aria-label="3.2.4.1 窗口参数说明的直接链接" title="3.2.4.1 窗口参数说明的直接链接" translate=no>​</a></h5>
+<p>WindowNum [1]</p>
+<p>a= index = 1</p>
+<p>a= type = double</p>
+<p>size = [1 1]</p>
+<p>WindowA</p>
+<p>index = 1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>由h_offs [0]</p>
+<p>田v_offs [0]</p>
+<p>h_size [0]</p>
+<p>+v_size [0]</p>
+<p>WindowB</p>
+<p>index =1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>h_offs [0]</p>
+<p>v_offs [0]</p>
+<p>h_size [0]</p>
+<p>田v_size [0]</p>
+<p>WindowC</p>
+<p>index = 1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>田h_offs [0]</p>
+<p>田v_offs [0]</p>
+<p>h_size [0]</p>
+<p>+v_size [0]</p>
+<p>A</p>
+<p>WindowNum：统计窗口个数设置，目前暂时支持窗口 A设置；</p>
+<p>h_offs：窗口 horizontal offset 坐标；</p>
+<p>v_offs：窗口 vertical offset 坐标；</p>
+<p>h_size：窗口 horizontal size 大小；</p>
+<p>v_size：窗口 vertical size 大小；</p>
+<p>5&lt;= h_offs +h_size &lt;=line last pixel；</p>
+<p>2&lt;=v_offs+v_size&lt;=number of lines - 2；</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3242-contrast_af-参数说明>3.2.4.2 contrast_af 参数说明<a href=#3242-contrast_af-参数说明 class=hash-link aria-label="3.2.4.2 contrast_af 参数说明的直接链接" title="3.2.4.2 contrast_af 参数说明的直接链接" translate=no>​</a></h5>
+<p>contrast_af</p>
+<p>index =1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>enable [1]</p>
+<p>AfSearchStrategy ADAPTIVE_RANGE</p>
+<p>+eFullDir ADAPTIVE</p>
+<p>FullRangeTbl [0 9 17 24 32 40 48 56 64]</p>
+<p>AdaptiveDir ADAPTIVE</p>
+<p>AdaptRangeTbl [1 10 18 26 33 40 46 52 57 61 64]</p>
+<p>TrigThers [0.075]</p>
+<p>TrigValue [20]</p>
+<p>TrigFrames [1]</p>
+<p>TrigAntiFlash [1]</p>
+<p>+FinishThersMain [0.3]</p>
+<p>eFinishThersSub [0.2]</p>
+<p>+FinishThersOffset [30]</p>
+<p>+StableThers [0.02]</p>
+<p>StableValue [8]</p>
+<p>+StableFrames [3]</p>
+<p>+StableTime [200]</p>
+<p>OutFocusValue [50]</p>
+<p>OutFocusLuma [15]</p>
+<p>OutFocusPos [30]</p>
+<p>Enable：反差式对焦使能位，0 关闭，1 打开。</p>
+<p>FULLRANGE：全局遍历搜索</p>
+<p>HILLCLIMBING：爬山算法搜索</p>
+<p>ADAPTIVE_RANGE：自适应搜索</p>
+<p>FullDir：全局遍历搜索方向，支持以下三种模式：</p>
+<p>POSITIVE：从远焦向近焦开始搜索；</p>
+<p>NEGATIVE：从近焦向远焦开始搜索；</p>
+<p>ADAPTIVE：根据当前 position 自适应最优搜索方向；</p>
+<p>FullRangeTbl：全局遍历搜索 step 的 table 表；</p>
+<p>AdaptiveDir：自适应搜索方向，支持以下三种模式：</p>
+<p>POSITIVE：从远焦向近焦开始搜索；</p>
+<p>NEGATIVE：从近焦向远焦开始搜索；</p>
+<p>ADAPTIVE：根据当前 position 自适应最优搜索方向；</p>
+<p>AdaptRangeTbl：自适应搜索 step 的 table 表；</p>
+<p>TrigThers：触发对焦阈值，越小越灵敏；</p>
+<p>TrigValue：暂未使用；</p>
+<p>TrigFrames：暂未使用；</p>
+<p>TrigAntiFlash：防抖机制开关；</p>
+<p>FinishThersMain：快速对焦完成时 main 阈值，越小越容易判断对焦已完成；</p>
+<p>FinishThersSub：快速对焦完成时 sub 阈值，一般情况 main 值>sub 值；</p>
+<p>FinishThersOffset：快速对焦 offset，用于同时调整 main 和 sub 的整体阈值；</p>
+<p>StableValue：暂未使用；</p>
+<p>StableFrames：稳定帧数，用于衡量画面稳定时间，越小触发越灵敏；</p>
+<p>StableTime：稳定时间（ms），用于衡量画面稳定时间，越小触发越灵敏；</p>
+<p>OutFocusValue：失焦锐度阈值，通过判断锐度低于该阈值，即认为失焦状态， 通 常 设定为 0 或者较小值；</p>
+<p>OutFocusLuma：失焦亮度阈值，在 LumaTriggerEnable 使能时有效，当环境 亮 度 小 于该阈值，认为此时锐度无法正确表征清晰度，取值范围 0&lt;=OutFocusLuma&lt;=255；</p>
+<p>OutFocusPos：失焦后 position 停留位置，取值范围：0&lt;=OutFocusPos &lt;=64；</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3243-laser_af-参数说明>3.2.4.3 laser_af 参数说明<a href=#3243-laser_af-参数说明 class=hash-link aria-label="3.2.4.3 laser_af 参数说明的直接链接" title="3.2.4.3 laser_af 参数说明的直接链接" translate=no>​</a></h5>
+<table><thead><tr><th><th><th><tbody><tr><td><td><td></table>
+<p>&lt;laser_af index="1" type="struct" size="[1 3]"></p>
+<p>&lt;enable index="1" type="double" size="[1 1]"></p>
+<p>[0]</p>
+<p>&lt;/enable></p>
+<p>&lt;vcmDot index="1" type="double" size="[1 7]"></p>
+<p>[0 16 32 40 48 56 64]</p>
+<p>&lt;/vcmDot></p>
+<p>&lt;distanceDot index="1" type="double" size="[1 7]"></p>
+<p>[0.2 0.24 0.34 0.4 0.66 1 3]</p>
+<p>&lt;/distanceDot></p>
+<p>&lt;/laser_af></p>
+<p>Enable：激光对焦使能位，0 关闭，1 打开。</p>
+<p>vcmDot：马达对焦值。</p>
+<p>distanceDot：与马达对焦值对应的距离。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3243-pdaf-参数说明>3.2.4.3 Pdaf 参数说明<a href=#3243-pdaf-参数说明 class=hash-link aria-label="3.2.4.3 Pdaf 参数说明的直接链接" title="3.2.4.3 Pdaf 参数说明的直接链接" translate=no>​</a></h5>
+<table><thead><tr><th><th><th><tbody><tr><td><td><td></table>
+<p>$$</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">\begin{array} { r l } & { &lt; \mathsf { p d a f ~ i n d e x } = ^ { \ast } 1 ^ { \ast } \mathsf { \Pi } \tau \mathsf { p p e } = ^ { \ast } \mathsf { s t r u c t } ^ { \ast } \mathsf { s i z e } = ^ { \ast } [ 1 \mathsf { \Pi } ] ^ { \ast } > } \\ & { \qquad &lt; \mathsf { e n a b l e ~ i n d e x } = ^ { \ast } \mathsf { I } ^ { \ast } \tau \mathsf { v p e } = ^ { \ast } \mathsf { d o u b l e } ^ { \ast } \mathsf { s i z e } = ^ { \ast } [ 1 \mathsf { \Pi } ] ^ { \ast } > } \\ & { \qquad [ 0 ] } \\ & { \qquad &lt; / \mathsf { e n a b l e } > } \\ & { &lt; / \mathsf { p d a f } > } \end{array}</span><br/></div></code></pre></div></div>
+<p>$$</p>
+<p>Enable：相位对焦使能位，0 关闭，1 打开。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=325-aec-参数说明>3.2.5 AEC 参数说明<a href=#325-aec-参数说明 class=hash-link aria-label="3.2.5 AEC 参数说明的直接链接" title="3.2.5 AEC 参数说明的直接链接" translate=no>​</a></h4>
+<p>AEC 模块全称：Auto Exposure Control。</p>
+<p>AEC</p>
+<p>index =1</p>
+<p>a= type = struct</p>
+<p>à= size = [1 1]</p>
+<p>SetPoint [70]</p>
+<p>NightSetpoint [60]</p>
+<p>DynamicSetpoint</p>
+<p>CamerlclspHistMode RGB</p>
+<p>CamerlcIspExpMeasuringMode</p>
+<p>GridWeights [1344544</p>
+<p>NightGridWeights [1344:</p>
+<p>GainRange [1 16 16 0 1 16</p>
+<p>TimeFactor [0 0 1 0.5]</p>
+<p>ClmTolerance [10]</p>
+<p>DampOver [0.6]</p>
+<p>DampUnder [0.7]</p>
+<p>DampOverVideo [0.7]</p>
+<p>DampUnderVideo [0.9]</p>
+<p>ECM</p>
+<p>aFpsMaxGain [8]</p>
+<p>ExposureSeparate</p>
+<p>FpsSetConfig</p>
+<p>AEC_Interval_Adjust_Strategy</p>
+<p>AOE_Enable [0]</p>
+<p>AOE_Max_point [70]</p>
+<p>AOE_Min_point [50]</p>
+<p>AOE_Y_Max_th [0.2]</p>
+<p>AOE_Y_Min_th [0.1]</p>
+<p>AOE_Step_Inc [2]</p>
+<p>+AOE_Step_Dec [2]</p>
+<p>DON</p>
+<p>NLSC_Config</p>
+<p>BackLight_Config</p>
+<p>Hist_2_hal</p>
+<p>LockAE</p>
+<p>HdrCtrl</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3251-aec-基本参数>3.2.5.1 AEC 基本参数<a href=#3251-aec-基本参数 class=hash-link aria-label="3.2.5.1 AEC 基本参数的直接链接" title="3.2.5.1 AEC 基本参数的直接链接" translate=no>​</a></h5>
+<p>NightSetpoint：夜晚曝光目标值。前面 setpoint 为 normal 模式，NightSetpoint 为 night 模式。DynamicSetpoint：</p>
+<p>gain转换成 reg 值的公式。</p>
+<p>转换公式为：set to driver reg = （gain*C1 - C0）/M0 + 0.5</p>
+<p>&lt;GainRange index="1" type="double" size="[4 7]"></p>
+<p>[1.0 2.0 128.0 0.0 1.0 128 255</p>
+<p>2.0 4.0 64.0 -248.0 1.0 376 504</p>
+<p>4.0 8.0 32.0 -756.0 1.0 884 1012</p>
+<p>8.0 16.0 16.0 -1784 1.0 1912 2040]</p>
+<p>&lt;/GainRange></p>
+<p>xml 参数对应：</p>
+<p>第一列：gain区间起始值，</p>
+<p>第二列 gain 区间结束值，</p>
+<p>第三列：C1，</p>
+<p>第四列：C0，</p>
+<p>第五列：M0，</p>
+<p>第六列：gain起始值对应 reg，</p>
+<p>第七列：gain结束值对应 reg。</p>
+<p>&lt;DynamicSetpoint index="1" type="cell" size="[1 2]"></p>
+<p>&lt;cell index="1" type="struct" size="[1 1]"></p>
+<p>&lt;name index="1" type="char" size="[1 6]">normal&lt;/name></p>
+<p>&lt;Enable index="1" type="double" size="[1 1]">[1]&lt;/Enable></p>
+<p>&lt;ExposueValue index="1" type="double" size="[1 6]">[0 0.06 0.15 0.5 0.95 1.0]&lt;/ExposueValue></p>
+<p>&lt;DySetpoint index="1" type="double" size="[1 6]">[58 58 55 50 35 35]&lt;/DySetpoint></p>
+<p>&lt;/cell></p>
+<p>&lt;cell index="2" type="struct" size="[1 1]"></p>
+<p>&lt;name index="1" type="char" size="[1 6]">night&lt;/name></p>
+<p>&lt;Enable index="1"type="double" size="[1 1]">[1]&lt;/Enable></p>
+<p>&lt;ExposueValue index="1"type="double" size="[1 6]">[0 0.06 0.15 0.5 0.91.0]&lt;/ExposueValue></p>
+<p>&lt;DySetpoint index="1" type="double" size="[1 6]">[40 40 40 35 35 35]&lt;/DySetpoint></p>
+<p>&lt;/cell></p>
+<p>&lt;/DynamicSetpoint></p>
+<p>动态目标值设置，跟随曝光值变化。</p>
+<p>Name： 模式名称，目前只支持 normal 和 night 2 种模式。</p>
+<p>Enable：该模式 dynamic setpoint 功能是否开启，0：关闭，1：开启。</p>
+<p>ExposueValue：最大曝光量的百分比，对应不同曝光量下曝光目标值改变。</p>
+<p>DySetpoint：动态曝光目标值，与上面 ExposueValue 一一对应</p>
+<p>CamerIcIspHistMode: histogram 测量模式，模式有五种：R,G,B,RGB,Y.</p>
+<p>CamerIcIspExpMeasuringMode: ae mean luma 测量模式，模式只有两种：Y 和 RGB。</p>
+<p>GridWeights：normal 模式下 ae 分区权重，此版本 xml 权重个数必须为 9x9 个。</p>
+<p>NightGridWeights：night 模式下 ae 分区权重，此版本 xml 权重个数必须为 9x9 个。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3252-gainrange-timefactor>3.2.5.2 GainRange 、TimeFactor<a href=#3252-gainrange-timefactor class=hash-link aria-label="3.2.5.2 GainRange 、TimeFactor的直接链接" title="3.2.5.2 GainRange 、TimeFactor的直接链接" translate=no>​</a></h5>
+<p>Gain 和 time 的理论值转换到寄存器值的转换公式。</p>
+<p>TimeFactor：time 值转化成驱动 reg 值公式。</p>
+<p>转换公式： $\mathsf { r e g } = \mathsf C 0 ^ { \ast } \mathsf { V } \mathsf { T S } + \mathsf C 1 + \mathsf C 2 ^ { \ast } \left( \mathsf { t i m e } ^ { \ast } \mathsf { p c l k } / \mathsf { H T S } + \mathsf C 3 \right)$</p>
+<p>&lt;TimeFactor index="1" type="double" size="[1 4]"></p>
+<p>[0.0 0.0 1.0 0.5]</p>
+<p>&lt;/TimeFactor></p>
+<p>xml 对应参数：</p>
+<p>第一个：C0 ，</p>
+<p>第二个：C1，</p>
+<p>第三个 C2，</p>
+<p>第四个 C3</p>
+<p>根据公式，反过来计算曝光时间为：</p>
+<p>Time = ((reg - C0*vts - C1) / C2 - C3)*hts/pclk</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3253-clmtolerance-damp>3.2.5.3 ClmTolerance 、Damp<a href=#3253-clmtolerance-damp class=hash-link aria-label="3.2.5.3 ClmTolerance 、Damp的直接链接" title="3.2.5.3 ClmTolerance 、Damp的直接链接" translate=no>​</a></h5>
+<p>ClmTolerance：目标亮度值容忍度。</p>
+<p>实际值曝光区间为[setpoint - setpoint x ClmTolerance, setpoint + setpoint x ClmTolerance]。</p>
+<p>Damp 系数：用来调整 ae 调节速度，当前曝光值与上一帧曝光值加权平均。</p>
+<p>最终曝光值 = 当前曝光值 x DampCoef + 上一帧曝光值 x（1 - DampCoef ）</p>
+<p>为保证 aec 调节速度和平滑过度，damp 系数一般取值区间为[0.5,0.8] 。</p>
+<p>DampOver：当亮度值高于 setpoint，aec Damp 系数。</p>
+<p>DampOverVideo：video 模式下，当亮度值高于 setpoint，aec Damp 系数。</p>
+<p>DampUnderVideo：video 模式下，当亮度值低于 setpoint，aec Damp 系数。</p>
+<p>aFpsMaxGain：目前此参数也未被使用。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3254-exposureseparate>3.2.5.4 ExposureSeparate<a href=#3254-exposureseparate class=hash-link aria-label="3.2.5.4 ExposureSeparate的直接链接" title="3.2.5.4 ExposureSeparate的直接链接" translate=no>​</a></h5>
+<p>&lt;ExposureSeparate index="1" type="cell" size="[1 2]"></p>
+<p>&lt;cell index="1" type="struct" size="[1 1]"></p>
+<p>&lt;name index="1" type="char" size="[1 6]"></p>
+<p>normal</p>
+<p>&lt;/name></p>
+<p>&lt;TimeDot index="1" type="double" size="[1 6]"></p>
+<p>[0 0.03 0.03 0.03 0.03 0.03]</p>
+<p>&lt;/TimeDot></p>
+<p>&lt;LTimeDot index="1" type="double" size="[1 6]"></p>
+<p>[0 0.03 0.03 0.03 0.03 0.03]</p>
+<p>&lt;/LTimeDot></p>
+<p>&lt;STimeDot index="1" type="double" size="[1 6]"></p>
+<p>[0 0.03 0.03 0.03 0.03 0.03]</p>
+<p>&lt;/STimeDot></p>
+<p>&lt;GainDot index="1" type="double" size="[1 6]"></p>
+<p>[1 1 5 5 8 16]</p>
+<p>&lt;/GainDot></p>
+<p>&lt;LGainDot index="1" type="double" size="[1 6]"></p>
+<p>[1 1 5 5 8 16]</p>
+<p>&lt;/LGainDot></p>
+<p>&lt;SGainDot index="1" type="double" size="[1 6]"></p>
+<p>[1 1 5 5 8 16]</p>
+<p>&lt;/SGainDot></p>
+<p>&lt;/cell></p>
+<p>曝光分解参数里共有 3 组分解曲线，分别是:</p>
+<p>TimeDot、GainDot：</p>
+<p>对应非 HDRsensor正常曝光分解曲线，也对应 HDRsensor 的中帧曝光分解曲线。</p>
+<p>纵坐标 gain：6 个 gain 对应坐标，gain 单位为 1x real gain。</p>
+<p>每段区间要么 time 固定 gain 变化，要么 gain 固定 time 变化。</p>
+<p>最后一段区间由最后两个点定义变化，最后一个点为最大曝光时间和曝光 gain值。</p>
+<p>FpsSetConfig：固定帧率曝光时间分解控制，</p>
+<p>&lt;FpsSetConfig index="1" type="struct" size="[1 1]"></p>
+<p>&lt;FpsSet_enable index="1" type="double" size="[1 1]"></p>
+<p>[i]</p>
+<p>&lt;/FpsSet_enable></p>
+<p>&lt;isFpsFix index="1" type="double" size="[1 1]"></p>
+<p>[1]</p>
+<p>&lt;/isFpsFix></p>
+<p>&lt;FpsFix_TimeDot index="1" type="double" size="[1 6]"></p>
+<p>[0 1.0 1.0 1.0 1.0 1.0]</p>
+<p>&lt;/FpsFix_TimeDot></p>
+<p>&lt;/FpsSetConfig></p>
+<p>isFpsFix：是否是固定帧率，0：不是固定帧率，1：固定帧率。</p>
+<p>FpsFix_TimeDot：固定帧率采用曝光时间分解点值，按照固定帧率最大曝光时间百分比来填。</p>
+<p>替换上面 ExposureSeparate 中 TimeDot。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=aec-antiflicker-的方式>Aec Antiflicker 的方式：<a href=#aec-antiflicker-的方式 class=hash-link aria-label="Aec Antiflicker 的方式：的直接链接" title="Aec Antiflicker 的方式：的直接链接" translate=no>​</a></h3>
+<p>曝光分解过程中，对 flicker进行调节方式是：</p>
+<p>凡是曝光时间大于 flicker时间的，必须为 flicker整数倍。</p>
+<p>另外此曝光分解策略同时定义了最大曝光时间和最大曝光 gain。</p>
+<p>想改变帧率的，请在这里调节最大曝光时间。</p>
+<p>想改变最大 gain 的，请在这里调节最大 gain 值，但不能超过驱动设置最大值。</p>
+<p>驱动最大值由 GainRange里决定。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3255-aec_interval_adjust_strategy>3.2.5.5 AEC_Interval_Adjust_Strategy<a href=#3255-aec_interval_adjust_strategy class=hash-link aria-label="3.2.5.5 AEC_Interval_Adjust_Strategy的直接链接" title="3.2.5.5 AEC_Interval_Adjust_Strategy的直接链接" translate=no>​</a></h5>
+<p>曝光控制调节策略</p>
+<p>&lt;AEC Interval Adiust Strategy index="1" type="struct" size="[1 1]"></p>
+<p>&lt;enable index="1" type="double" size="[11]">[1]&lt;/enable></p>
+<p>&lt;dLuma_high_th index="1"type="double" size="[1 1]">[0.5]&lt;/dLuma_high_th></p>
+<p>&lt;dLuma_low_th index="1" type="double" size="1 1]">[0.03]&lt;/dLuma_low_th></p>
+<p>&lt;adjust_trigger_frame index="1"type="double" size="[1 1]">[100]&lt;/adjust_trigger_frame></p>
+<p>&lt;/AEC_Interval_Adjust_Strategy></p>
+<p>Enable：是否使用曝光控制策略，0：关闭 ， 1：开启。</p>
+<p>dLuma_high_th：当两帧图像亮度差大于等于此值时，立即进行曝光调整。</p>
+<p>dLuma_low_th：当两帧图像亮度差大于等于此值时，则认为场景曝光不稳定，等待曝光稳定再进行调节。</p>
+<p>adjust_trigger_frame：当曝光不稳定时候，统计帧数，如果其中有相邻两帧曝光差有大于dLuma_low_th 时候，则认为曝光不稳定。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3256-aoe>3.2.5.6 AOE<a href=#3256-aoe class=hash-link aria-label="3.2.5.6 AOE的直接链接" title="3.2.5.6 AOE的直接链接" translate=no>​</a></h5>
+<p>&lt;AOE_Enable index="1" type="double" size="[1 1]"></p>
+<p>[0]</p>
+<p>&lt;/AOE_Enable></p>
+<p>&lt;AOE_Max_point index="1" type="double" size="[1 1]"></p>
+<p>[70]</p>
+<p>&lt;/AOE_Max_point></p>
+<p>&lt;AOE_Min_point index="1" type="double" size="[1 1]"></p>
+<p>[50]</p>
+<p>&lt;/AOE_Min_point></p>
+<p>&lt;AOE_Y_Max_th index="1"type="double" size="[1 1]"></p>
+<p>[0.2]</p>
+<p>&lt;/AOE_Y_Max_th></p>
+<p>&lt;AOE_Y_Min_th index="1" type="double" size="[1 1]"></p>
+<p>[0.1]</p>
+<p>&lt;/AOE_Y_Min_th></p>
+<p>&lt;AOE_Step_Inc index="1" type="double" size="[1 1]"></p>
+<p>[2]</p>
+<p>&lt;/AOE_Step_Inc></p>
+<p>&lt;AOE_Step_Dec index="1" type="double" size="[1 1]"></p>
+<p>[2]</p>
+<p>&lt;/AOE_Step_Dec></p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3256-don>3.2.5.6 DON<a href=#3256-don class=hash-link aria-label="3.2.5.6 DON的直接链接" title="3.2.5.6 DON的直接链接" translate=no>​</a></h5>
+<table><thead><tr><th><th><th><tbody><tr><td><td><td></table>
+<p>DON：夜晚模式判断</p>
+<p>&lt;DON index="1" type="struct" size="[1 1]"></p>
+<p>&lt;NightTrigger index="1" type="double" size="[1 1]"></p>
+<p>[0]</p>
+<p>&lt;/NightTrigger></p>
+<p>&lt;NightMode index="1" type="double" size="[1 1]"></p>
+<p>[1]</p>
+<p>&lt;/NightMode></p>
+<p>&lt;DON_Day2Night_Fac_th index="1" type="double" size="[1 1]"></p>
+<p>[7]</p>
+<p>&lt;/DON Day2Night Fac th></p>
+<p>&lt;DON_Night2Day_Fac_th index="1" type="double" size="[1 1]"></p>
+<p>[15]</p>
+<p>&lt;/DON_Night2Day_Fac_th></p>
+<p>&lt;DON_Bouncing_th index="1" type="double" size="[1 1]"></p>
+<p>[100]</p>
+<p>&lt;/DON_Bouncing_th></p>
+<p>&lt;/DON></p>
+<p>此模块是软件上判断白天和夜晚的一些参数。</p>
+<p>以前软件判断比较简单，后面有进行升级。一些参数含义重新定义或者删除。</p>
+<p>Night_Trigger：用于配置模式切换所依赖的触发条件。</p>
+<p>0：不启用 Night 模式(TRIGGER_OFF)</p>
+<p>1：依赖感光元件(LIGHT_SENS)</p>
+<p>2：依赖曝光参数(NO_LIGHT_SENS)</p>
+<p>1：正常模式(NORMAL)</p>
+<p>2：黑白模式(WHITE_BLACK)</p>
+<p>当 Night_Trigger=2 时，AEC 模块将依赖以下公式与参数决定使用白天或黑夜模式</p>
+<p>公式：Factor = (MeanLuma/(Gain x Time x 10))</p>
+<p>DON_Bouncing_th：稳定帧数</p>
+<p>DON_Day2Night_Fac_th：处于白天模式时，Factor小于该值且不间断持续大于稳定帧数时切至黑夜模式</p>
+<p>DON_Night2Day_Fac_th：处于黑夜模式时，Factor大于该值且不间断持续大于稳定帧数时切至白天模式。</p>
+<h2></h2>
+<table><thead><tr><th><th><th><tbody><tr><td><td><td></table>
+<p>白天采用彩色图像模式，sensor 上覆盖 IRCUT，防止红外进入。</p>
+<p>夜晚采用黑白图像模式，sensor 上不在覆盖 IRCUT，红外光可进入 sensor，提高 sensor 感光能力。</p>
+<p>Enable：使能位。 0：不使能 1：使能</p>
+<p>IR_rg：环境光仅有红外光下, 白平衡统计对应 r 值。</p>
+<p>IR_bg：环境光仅有红外光下, 白平衡统计对应 b 值。</p>
+<p>Max_Dis：可见光的几种标准光源的(r/g, b/g)坐标，与仅有红外光白平衡点(r/g,b/g)最大距离。Color2Black_count：彩色切换黑白，连续统计低于彩色切换黑白阈值帧数后，才从彩色模式切换到黑白模式。此值就是连续多少帧设定。</p>
+<p>Color2Black_thresh：当可见光环境亮度较低时，会打开红外灯，撤掉 IRcut 滤光片，捕捉红外图像，并将显示从彩色模式切换黑白模式。此值就是彩色模式切换到黑白模式阈值，与图像亮度和曝光相关，Color2Black_thresh= MeanLuma/(Gain x Time )。</p>
+<p>Black2Color_count：在红外模式下，当可见光亮度大于一定阈值，并且连续帧率超过Black2Color_count 值，则将红外灯关闭，IRcut 滤光片覆盖在 camera 上，只采集可见光图像。并将显示从黑白模式切换到彩色模式。</p>
+<p>Black2Color_thresh：Black2Color_thresh= MeanLuma/(Gain x Time )。当图像亮度和曝光达到一定程度后，会去判断是否要将 IRcut 滤光片重新覆盖上，只采集可见光图像。</p>
+<p>Black2Color_vb_percent：当图像白平衡判断到可见光占全部光源一定比例后，会去判断是否要将 IRcut 滤光片重新覆盖上，只采集可见光图像。</p>
+<p>Color2Black_stable_fps：当环境亮度较低，打开红外灯后，需要稳定一段时间，等待曝光稳定。此值为等待曝光稳定帧数。</p>
+<p>还需配合 DON 夜晚模式切换设定，如下：</p>
+<p>Night_Trigger：必须设置为 2，依赖曝光参数(NO_LIGHT_SENS)</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3258-backlight_config>3.2.5.8 BackLight_Config<a href=#3258-backlight_config class=hash-link aria-label="3.2.5.8 BackLight_Config的直接链接" title="3.2.5.8 BackLight_Config的直接链接" translate=no>​</a></h5>
+<p>BackLight_Config： 背光参数调节。</p>
+<p>&lt;BackLight_Config></p>
+<p>&lt;Enable index="1" type="double" size="[1 1]"></p>
+<p>[0]</p>
+<p>&lt;/Enable></p>
+<p>&lt;LumaLowTh index="1" type="double" size="[1 1]"></p>
+<p>[100]</p>
+<p>&lt;/LumaLowTh></p>
+<p>&lt;LumaHighTh index="1" type="double" size="[1 1]"></p>
+<p>[180]</p>
+<p>&lt;/LumaHighTh></p>
+<p>&lt;WeightMinTh index="1" type="double" size="[1 1]"></p>
+<p>[0.1]</p>
+<p>&lt;/WeightMinTh></p>
+<p>&lt;WeightMaxTh index="1" type="double" size="[1 1]"></p>
+<p>[1.0]</p>
+<p>&lt;/WeightMaxTh></p>
+<p>&lt;/BackLight_Config></p>
+<p>Aec 分区的亮度，当分区的亮度较高时，降低高亮度分区的权重，来提高 aec。</p>
+<p>通过亮度区间线性插值来逐渐降低高亮度的权重。越亮，权重越低。</p>
+<p>Enable：模块使能位，1：使能， 0：关闭。</p>
+<p>LumaLowTh：亮区权重插值区间最低亮度值。</p>
+<p>LumaHighTh：亮区权重插值区间最高亮度值。</p>
+<p>WeightMinTh：亮区权重最低值。</p>
+<p>WeightMaxTh：亮区权重最高值。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=3259-hist_2_hal>3.2.5.9 Hist_2_hal<a href=#3259-hist_2_hal class=hash-link aria-label="3.2.5.9 Hist_2_hal的直接链接" title="3.2.5.9 Hist_2_hal的直接链接" translate=no>​</a></h5>
+<p>&lt;Hist_2_hal></p>
+<p>&lt;Enable index="1" type="double" size="[1 1]"></p>
+<p>[0]</p>
+<p>&lt;/Enable></p>
+<p>&lt;LowHistBinTh index="1" type="double" size="[1 1]"></p>
+<p>[13]</p>
+<p>&lt;/LowHistBinTh></p>
+<p>&lt;/Hist_2_hal></p>
+<p>主要作用是将过曝的几个 hist 的百分比传给应用层。</p>
+<p>Enable：模块使能位，1：使能，0：关闭</p>
+<p>LowHistBinTh：从第几个 bin 开始为过曝 hist，累加计算到最大 bin 的过曝百分比传给上层应用。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32510-lockae>3.2.5.10 LockAE<a href=#32510-lockae class=hash-link aria-label="3.2.5.10 LockAE的直接链接" title="3.2.5.10 LockAE的直接链接" translate=no>​</a></h5>
+<p>&lt;LockAE index="1" type="struct" size="[1 1]"></p>
+<p>&lt;LockAE_enable index="1" type="double" size="[1 1]"></p>
+<p>[0]</p>
+<p>&lt;/LockAE_enable></p>
+<p>&lt;GainValue index="1" type="double" size="[1 3]"></p>
+<p>[9.19 9.69 7.41]</p>
+<p>&lt;/GainValue></p>
+<p>&lt;TimeValue index="1" type="double" size="[1 3]"></p>
+<p>[1710 8]</p>
+<p>&lt;/TimeValue></p>
+<p>&lt;/LockAE></p>
+<p>LockAE 模块，用于手动设置 HDR-AE 的曝光值，供测试使用。</p>
+<p>LockAE_enable:手动设置曝光功能使能开关，0: auto Hdr-AE; 1: manual Hdr-AE。</p>
+<p>GainValue: 设置 HDR 3 帧曝光 gain 值，顺序为 L/M/S，gain 值无大小顺序要求。取值范围在 GainRange 范围内。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=timevalue>TimeValue:<a href=#timevalue class=hash-link aria-label=TimeValue:的直接链接 title=TimeValue:的直接链接 translate=no>​</a></h3>
+<p>大小顺序要求：Tl >=Tm>=Ts;</p>
+<p>结合 sensor 的 HDR 模式，staggered（2/3 帧）模式要求 Tl >=Tm>=Ts，且 3 帧曝光时间之和不得超过 TotalTime=1/hdr_fps; DCG 模式(2 帧)要求 Tl=Tm=Ts;</p>
+<p>当 HDR 合成为 2 帧模式时，中帧曝光依然需要设置，大小需要按上述要求设置。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32511-hdrctrl>3.2.5.11 HdrCtrl<a href=#32511-hdrctrl class=hash-link aria-label="3.2.5.11 HdrCtrl的直接链接" title="3.2.5.11 HdrCtrl的直接链接" translate=no>​</a></h5>
+<table><thead><tr><th><th><th><tbody><tr><td><td><td></table>
+<p>HdrCtrl</p>
+<p>index = 1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>Enable [0]</p>
+<p>Mode DCG</p>
+<p>FrameNum [2]</p>
+<p>DCGRatio [ù]</p>
+<p>LframeCtrl</p>
+<p>index = 1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>LGainLevel [22 30 44</p>
+<p>LExpLevel [0 0.1 0.3 0</p>
+<p>LSetPoint [65 60 55 45</p>
+<p>TargetDarkROILuma [3</p>
+<p>SframeCtrl</p>
+<p>index = 1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>SGainLevel [1 2 4 8 12</p>
+<p>SExpLevel [0 0.1 0.3 0</p>
+<p>TargetOELuma [130 1:</p>
+<p>由SSetPoint [60 55 50 45</p>
+<p>OETolerance [15]</p>
+<p>OELumaDistTh [20]</p>
+<p>M2S_Ratio [5]</p>
+<p>L2M_Ratio [5]</p>
+<p>HdrCtrl 模块，用于控制与 HDRAE 相关的参数。</p>
+<p>该控制位与 1608 使能开关（rkisp 代码中）共同控制 HDR-AE 的开关。</p>
+<p>Mode：设置 sensor 采用的 HDR 模式。</p>
+<p>现支持两种模式：（1）DCG （2）STAGGER，需全大写</p>
+<p>DCG 模式：使用 2 帧 merge，要求 2 帧曝光时间一致，gain值不同</p>
+<p>STAGGER 模式（兼容 DOL 模式）：使用 2/3 帧 merge，每帧曝光时间和 gain 值可分别设置</p>
+<p>FrameNum：设置 HDR merge 使用的帧数，仅支持 2、3 帧 HdrMerge。</p>
+<p>DCGRatio： sensor 采用 HDR-DCG 模式时，需要设置 conversion ratio；</p>
+<p>非 DCG 模式，该位默认值为 1。</p>
+<p>SmaxExposure=SmaxGain*SmaxIntegrationTime(由 ExposreSeperate 决定)</p>
+<p>LframeCtrl：长帧控制子模块</p>
+<p>$$</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">\begin{array} { r l } { { \tt L E x p l e v e l : } } & { \vec { \geq } \vec { \jmath } _ { \vec { \jmath } \vec { \jmath } } ^ { - } \overleftrightarrow { \jmath } _ { \vec { \jmath } } ^ { - } \overleftrightarrow { \jmath } _ { \vec { \imath } \downarrow \downarrow } ^ { \perp } \mathcal { L } _ { \vec { \jmath } \vec { \jmath } } ^ { - } \chi _ { \vec { \imath } \downarrow \downarrow } ^ { \perp } \chi _ { \vec { \jmath } } ^ { - } / \vec { \jmath } _ { \vec { \jmath } } ^ { + } \overleftrightarrow { \jmath } _ { \vec { \jmath } } ^ { - } \ \overbrace { \mathbb { E } \mathbb { E } \times \mathbb { V } ^ { \prime } \mathbb { E } } ^ { \mathbb { E } \times \mathbb { V } / \mathbb { E } } , } \\ & { { \tt L e x p l e v e l - } { \tt L E x p o s u r e } / \mathrm { L m a x E x p o s r e } } \\ & { { \tt L m a x E x p o s u r e - } { \tt L m a x G a i n } ^ { * } { \tt L m a x l n t e g r a t i o n T i m e } ( \mathbb { H } \ \mathrm { E x p o s r e S e p e r a t e ~ \it \hat { W } \cdot \it { \hat { K } \cdot \it { \hat { K } \cdot \it { \hat { K } \cdot \xi } } } } ) } \end{array}</span><br/></div></code></pre></div></div>
+<p>$$</p>
+<p>LSetPoint: 动态长帧全局亮度均值目标值,与 LexpLevel一一对应, 固定 6 个值，5 个区间。</p>
+<p>TargetDarkROILuma: 动态长帧暗区亮度均值目标值，与 LexpLevel 一一对应, 固定 6 个值，5个区间，同区间内的暗区亮度目标值要求低于对应全局亮度目标值</p>
+<p>SframeCtrl 短帧控制子模块</p>
+<p>TargetOELuma：动态短帧亮区均值目标值,与 SExpLevel 一一对应, 固定 6个值，5 个区间。SSetPoint：动态短帧全局亮度均值目标值,与 SExpLevel 一一对应, 固定 6 个值，5 个区间。同区间内的亮区亮度目标值要求低于对应全局亮度目标值</p>
+<p>OETolerance：设置短帧亮区目标容忍百分比，单位为%</p>
+<p>OELumaDistTh：设置短帧区域增长法中种子和候选种子的容忍亮度差值百分比，单位为%if (fabs(种子亮度-候选种子亮度)/种子亮度 &lt; OELumaDistTh/100 )候选种子成为新种子；</p>
+<p>M2S_Ratio: 设置中帧与短帧的最大曝光比值（仅当 3帧合成模式时，使用该项）</p>
+<p>L2M_Ratio：设置长帧与中帧的最大曝光比值（2 帧合成模式时，仅需设置该项，M2S_Ratio不使用）</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=326-bls-参数说明>3.2.6 BLS 参数说明<a href=#326-bls-参数说明 class=hash-link aria-label="3.2.6 BLS 参数说明的直接链接" title="3.2.6 BLS 参数说明的直接链接" translate=no>​</a></h4>
+<p>BLS：isp 中固定减模式，此参数为 12bit 。不同分辨率需对应不同 cell。</p>
+<p>Name: width x height</p>
+<p>Resolution : width x height</p>
+<p>blsData: 12bit，参数依次为 r、gr、gb、b 通道相应的黑电平值。</p>
+<p>白BLS</p>
+<p>index = 1</p>
+<p>size = [1 2]</p>
+<p>type = cell</p>
+<p>曰cell</p>
+<p>a= index = 1</p>
+<p>à= size = [1 1]</p>
+<p>type = struct</p>
+<p>name 1920x1080</p>
+<p>resolution 1920x1080</p>
+<p>blsData [64 64 64 64]</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=327-degamma-参数说明>3.2.7 DEGAMMA 参数说明<a href=#327-degamma-参数说明 class=hash-link aria-label="3.2.7 DEGAMMA 参数说明的直接链接" title="3.2.7 DEGAMMA 参数说明的直接链接" translate=no>​</a></h4>
+<p>该模式尚未支持，不建议使能；</p>
+<p>Name：模式选择</p>
+<p>degamma_dx：degamma 曲线 x 轴点间距。</p>
+<p>degamma_y：degamma 曲线 y 轴点</p>
+<p>DEGAMMA</p>
+<p>a= index = 1</p>
+<p>a= size = [1 1]</p>
+<p>a= type = cell</p>
+<p>白cell</p>
+<p>index =1</p>
+<p>size = [1 1]</p>
+<p>type = struct</p>
+<p>name linear</p>
+<p>degamma_dx [256 512 768 102</p>
+<p>degamma_y [0 256 512 768 10:</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=328-goc-参数说明>3.2.8 GOC 参数说明<a href=#328-goc-参数说明 class=hash-link aria-label="3.2.8 GOC 参数说明的直接链接" title="3.2.8 GOC 参数说明的直接链接" translate=no>​</a></h4>
+<table><thead><tr><th>适用 ISP 版本<th>适用软件及版本<th>支持情况<tbody><tr><td>ISP10ISP11ISP12<td>camera_engine_rkisp: v2.0.0IQ magic code: 635075<td>Normal mode only</table>
+<p>GOC 模块全称：Gamma Out Curve，Gamma out 曲线配置。</p>
+<p>每个模式下设置为：</p>
+<p>enable_mode：gamma out 是否打开， 0 关闭， 1 打开。</p>
+<p>def_cfg_mode：gamma out 模式设置， 0 关闭， 1 为 setting， 2 为 default 即 gamma2.2</p>
+<p>wdron_gamma_y: wdr 打开时，所使用 gamma out 曲线输出对应坐标。</p>
+<p>IQ中 Gamma_Y 必须按照（0-4095）范围填写 34 个点，且第 34 个点必须为 0。</p>
+<p>内部 gamma_x 坐标为 LOG 模式，非均匀等分。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=329-wdr-参数说明>3.2.9 WDR 参数说明<a href=#329-wdr-参数说明 class=hash-link aria-label="3.2.9 WDR 参数说明的直接链接" title="3.2.9 WDR 参数说明的直接链接" translate=no>​</a></h4>
+<p>WDR 模块全称：Wide Dynamic Range</p>
+<table><thead><tr><th>适配 ISP 版本<th>WDR 硬件<th>适用软件及版本<th>功能配置<tbody><tr><td>ISP10<td>无<td>camera_engine_rkisp: v2.0.0IQ magic code: 635075<td>不支持<tr><td>ISP11<td>有<td>支持<td><tr><td>ISP12<td>有<td>支持<td></table>
+<p>日WDR index = 1 size = [1 1] type = cell cell a.= index = 1 size = [1 1] type = struct enabled [1] mode [1] tbd [-1] curve1 curve2 local_curve [00000000O global_curve [0 0 0 0 0 0 0 0 ( wdr_noiseratio 0x00ee wdr_bestlight 0x0ccc wdr_gain_off1 0x000000cd wdr_pym_cc 0x3 wdr_epsilon 0xc wdr_Ivl_en 0xf wdr_flt_sel 0x1 wdr_gain_max_clip_enable 0x wdr_gain_max_value 0x40 wdr_bavg_clip 0x3 wdr_nonl_segm 0x0 wdr_nonl_open 0x1 wdr_nonl_mode1 0x0 wdr_coe0 0x00000036 wdr_coel 0x000000b7 wdr_coe2 0x00000012 wdr_coe_off 0x0</p>
+<p>Enable：模块打开关闭控制，1 为打开， 0 为关闭。</p>
+<p>Mode：模式切换开关，wdr 目前有两种方式，</p>
+<p>0 为：global 模式，根据直方图统计，改变全局 gamma 曲线形状。</p>
+<p>1 为：block 模式，将图像分区，每个区域有自己相应 gamma 曲线调节动态范围。</p>
+<p>curve1：目前无实际意义保留该项目</p>
+<p>Curve2：目前无实际意义保留该项目</p>
+<p>local_curve：block 模式下，非线性转化曲线纵坐标。实际只使用前 16 段，剩余补零。</p>
+<p>全为 0 代表使用代码中的默认值。</p>
+<p>如果对 wdr算法了解，知晓参数实际影响，可从这设置相应的曲线形状。</p>
+<p>非线性转化曲线是将像素值由线性域转化到非线性域的曲线，它的计算公式和曲线形状如</p>
+<p>下：</p>
+<p>$$</p>
+<p>L _ { n o n l i n e a r } = \left&amp;#123; \begin{array} { c } { { L _ { l i n e a r } * 4 . 5 , } } \ { { L _ { l i n e a r } 0 . 4 5 * 1 . 0 9 9 - 0 . 0 } } \end{array} \right.</p>
+<p>$$</p>
+<p>图表 1 非线性转换曲线</p>
+<p>global_curve：global 模式下，wdr 全局算法映射曲线纵坐标设置，共 33 段。</p>
+<p>全为 0 则代表使用代码中的默认值。</p>
+<p>如果对 wdr算法了解，知晓参数实际影响，可从这设置相应的曲线形状。</p>
+<p>全局映射曲线是用于 WDR 全局算法的映射曲线，根据画面平均亮度通过软件生成配置。它的计算公式为：</p>
+<p>$$</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">{ \mathrm { L u t } } = { \frac { 1 + a * { \mathrm { b i n } } s } { { \mathrm { b i n } } s + a } } * { \mathrm { b i n } } s\tag{1}</span><br/></div></code></pre></div></div>
+<p>$$</p>
+<p>（*notice:上述公式只是当前默认的一个计算公式，并非最优）</p>
+<p>其中，a为整图平均亮度值，由平均亮度计算或直方图得到；bins 是将整个亮度空间分成若干段后每一段的取值（即：若整个亮度空间为 1，平均分成 n 段，</p>
+<p>$$</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">\mathrm { b i n s } = \{ 1 / \mathrm { n } , 2 / \mathrm { n } , . . . , ( \mathrm { n } - 2 ) / \mathrm { n } , ( \mathrm { n } - 1 ) / \mathrm { n } , 1 \} _ { \mathrm { ~ \scriptsize ~ o ~ } }</span><br/></div></code></pre></div></div>
+<p>$$</p>
+<p>wdr_bestlight：平均亮度最大值，位宽 16bit。default = 0x0cf0。</p>
+<p>上面两个参数用来限制 wdr后输出图像的平均亮度的取值范围，控制增益。wdr_gain_off1：增益曲线形状控制，包含 off1 和 off2 两个参数，总位宽 32bit。</p>
+<p>off1 增益控制值 1，default = 0x0000。</p>
+<p>off2 增益控制值 2，default = 0x019a。</p>
+<p>调整这两个参数，则可控制增益曲线形状。</p>
+<p>wdr_pym_cc：高斯金字塔 cc 值，位宽 8bit。default =二进制值 0000 0011。</p>
+<p>wdr_epsilon：高斯金字塔层间差值参数，default = 0001 1001(0x19)，位宽 8bit。</p>
+<p>（即 0.1，针对 1080p；若为 0.05，则取值为 0x0c）</p>
+<p>wdr_lvl_en：高斯金字塔选层功能开关，位宽 4bit。</p>
+<div class="language-javascript codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-javascript codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">bit</span><span class="token punctuation" style=color:#393A34>[</span><span class="token number" style=color:#36acaa>3</span><span class="token punctuation" style=color:#393A34>]</span><span class="token operator" style=color:#393A34>:</span><span class="token plain">第四层开关</span><span class="token punctuation" style=color:#393A34>,</span><span class="token keyword module" style=color:#00009f>default</span><span class="token plain"> </span><span class="token operator" style=color:#393A34>=</span><span class="token plain"> </span><span class="token number" style=color:#36acaa>1</span><br/></div></code></pre></div></div>
+<div class="language-javascript codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-javascript codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">bit</span><span class="token punctuation" style=color:#393A34>[</span><span class="token number" style=color:#36acaa>2</span><span class="token punctuation" style=color:#393A34>]</span><span class="token operator" style=color:#393A34>:</span><span class="token plain">第三层开关</span><span class="token punctuation" style=color:#393A34>,</span><span class="token keyword module" style=color:#00009f>default</span><span class="token plain"> </span><span class="token operator" style=color:#393A34>=</span><span class="token plain"> </span><span class="token number" style=color:#36acaa>1</span><br/></div></code></pre></div></div>
+<div class="language-javascript codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-javascript codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">bit</span><span class="token punctuation" style=color:#393A34>[</span><span class="token number" style=color:#36acaa>1</span><span class="token punctuation" style=color:#393A34>]</span><span class="token operator" style=color:#393A34>:</span><span class="token plain">第二层开关</span><span class="token punctuation" style=color:#393A34>,</span><span class="token keyword module" style=color:#00009f>default</span><span class="token plain"> </span><span class="token operator" style=color:#393A34>=</span><span class="token plain"> </span><span class="token number" style=color:#36acaa>1</span><br/></div></code></pre></div></div>
+<div class="language-javascript codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-javascript codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">bit</span><span class="token punctuation" style=color:#393A34>[</span><span class="token number" style=color:#36acaa>0</span><span class="token punctuation" style=color:#393A34>]</span><span class="token operator" style=color:#393A34>:</span><span class="token plain">第一层开关</span><span class="token punctuation" style=color:#393A34>,</span><span class="token keyword module" style=color:#00009f>default</span><span class="token plain"> </span><span class="token operator" style=color:#393A34>=</span><span class="token plain"> </span><span class="token number" style=color:#36acaa>1</span><br/></div></code></pre></div></div>
+<p>wdr_gain_max_clip_enable：最大增益限制开关，位宽 1bit，选 1 开启。</p>
+<p>default = 二进制 1111 0000。</p>
+<p>用于抑制噪声被过度抬升，最大增益倍数限制在 0-15 倍之间；</p>
+<p>wdr_bavg_clip：平均亮度上下限制开关，位宽 2bit。选 1 开启，default =二进制 11。</p>
+<p>wdr_nonl_segm：非线性映射查表模式，位宽 1bit。</p>
+<p>0：非均匀分段 1：均匀分段。default=0。</p>
+<p>wdr_nonl_open：非线性转换功能开关，位宽 1bit。选 1 开启，default = 1。</p>
+<p>wdr_nonl_mode1：平均亮度的非线性转换开关，位宽 1bit。选 0 开启，default = 0</p>
+<p>wdr_coe0：RGB 转 Y 通道系数 1，默认值 0x36, 数据位宽 8bit。</p>
+<p>wdr_coe1：RGB 转 Y 通道系数 2，默认值 0xb7, 数据位宽 8bit。</p>
+<p>wdr_coe2：RGB 转 Y 通道系数 3，默认值 0x12, 数据位宽 8bit。</p>
+<p>上面几个参数均为 wdr相关寄存器设置，请保持目前使用的 xml中的默认值。</p>
+<p>如需修改请参考 wdr的相关文档进行设定。</p>
+<p>这些参数设置均为 16 进制寄存器值，使用 0x 开头。</p>
+<p>&lt;wdr_maxgain_filter index="1" size="[1 2]" type="struct"></p>
+<p>&lt;wdr_maxgain_filter_enable index="1" size="[1 1]" type="double"></p>
+<p>[1]</p>
+<p>&lt;/wdr_maxgain_filter_enable></p>
+<p>&lt;wdr_sensor_gain_level index="1" size="[1 5]" type="double"></p>
+<p>[1 2 4 8 16]</p>
+<p>&lt;/wdr_sensor_gain_level></p>
+<p>&lt;wdr_maxgain_level index="1" size="[1 5]" type="double"></p>
+<p>[43222]</p>
+<p>&lt;/wdr_maxgain_level></p>
+<p>&lt;/wdr_maxgain_filter></p>
+<p>新增 wdrMaxGain 控制，此控制跟随曝光的 gain值进行变化。</p>
+<p>这里参数皆为 double类型，已不是 16 进制寄存器值，无需 0x 开头。</p>
+<p>wdr_maxgain_filter_enable：MaxGain 控制是否打开。0 关闭，1 打开。</p>
+<p>wdr_sensor_gain_level：曝光 gain 档位。目前设定为 5 档，可进行增加或减少，增加或者减少时 size要跟随进行修改。</p>
+<p>wdr_maxgain_level：Maxgain 跟随上面 gain 值进行改变档位数必须和上面的wdr_sensor_gain_level 档位数相同，size 相同。Maxgain 取值范围为[0, 15]</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=3210-cac-参数说明>3.2.10 CAC 参数说明<a href=#3210-cac-参数说明 class=hash-link aria-label="3.2.10 CAC 参数说明的直接链接" title="3.2.10 CAC 参数说明的直接链接" translate=no>​</a></h4>
+<p>CAC 模块全称：Chromatic Aberration Correction。</p>
+<p>目前建议关闭 CAC 校正功能，参数保留原来值。</p>
+<p>CAC</p>
+<p>a= index = 1</p>
+<p>a= size = [1 2]</p>
+<p>a= type = cell</p>
+<p>cell</p>
+<p>a= index = 1</p>
+<p>size = [1 1]</p>
+<p>type = struct</p>
+<p>name 1920×1080</p>
+<p>resolution 1920x1080</p>
+<p>x_normshift [6]</p>
+<p>x_normfactor [29]</p>
+<p>y_normshift [6]</p>
+<p>y_normfactor [29]</p>
+<p>x_offset [0]</p>
+<p>y_offset [o]</p>
+<p>red_parameters [-1.8125 -0.25</p>
+<p>blue_parameters [-0.1875 -1.2</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=3211-dpf-参数说明>3.2.11 DPF 参数说明<a href=#3211-dpf-参数说明 class=hash-link aria-label="3.2.11 DPF 参数说明的直接链接" title="3.2.11 DPF 参数说明的直接链接" translate=no>​</a></h4>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32111-dpf>3.2.11.1 DPF<a href=#32111-dpf class=hash-link aria-label="3.2.11.1 DPF的直接链接" title="3.2.11.1 DPF的直接链接" translate=no>​</a></h5>
+<p>模块全称：denoise pre-filter，作用是在 demosaic 前对 raw 进行一次去噪。</p>
+<p>Name：分辨率名称 width x height。</p>
+<p>resolution：分辨率名称 width x height。</p>
+<p>adpf_enable: 是否打开 adpf 模块，0 为关闭，1 为打开。</p>
+<p>NLL_SEGMENTATION：adpf噪声方差曲线 x 间距模式，0 为等间距，1 为非均匀间距。</p>
+<p>nll_coeff_n：adpf 噪声方差曲线 x 轴点对应 y 轴值。</p>
+<p>SigmaGreen：Gr 和 Gb 通道去噪半径，代码已固定为 4，无需改变此参数。</p>
+<p>SigmaRedBlue：r和 b 通道去噪半径，可选两种，1 种为 4，1 种为 3。</p>
+<p>Gradient 、Offset：与曝光 gain值相关的计算去噪力度的参数。</p>
+<p>公式：fStrength = sqrtf( fGradient * fSensorGain ) + fOffset;</p>
+<p>根据算法部门的研究，Gradient 可根据 IQ tuning Dpf 模块的图进行求取。</p>
+<p>$\begin{array} { l l l } { { \sf G r a d i e n t } } & { { = } } & { { \left( 3 5 5 ^ { * } 3 . 9 ^ { * } 3 / 2 5 5 / 3 2 \right) ^ { 2 } = 0 . 2 5 } } \end{array}$ ，式中除 3 和 355 为变量外，其余为固定值。</p>
+<p>NlGains：代表顺序为 R、GR、GB、B通道其他模块 gain值影响。一般保持 1 不变。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32112-filtersetting>3.2.11.2 FilterSetting<a href=#32112-filtersetting class=hash-link aria-label="3.2.11.2 FilterSetting的直接链接" title="3.2.11.2 FilterSetting的直接链接" translate=no>​</a></h5>
+<table><thead><tr><th>适用 ISP 版本<th>适用软件及版本<th>支持情况<tbody><tr><td>ISP10ISP11ISP12<td>camera_engine_rkisp: v2.0.0IQ magic code: 635075<td>Normal mode only</table>
+<p>FilterSetting</p>
+<p>index =1</p>
+<p>type = cell</p>
+<p>size = [1 2]</p>
+<p>cell</p>
+<p>index =1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>name normal</p>
+<p>FilterEnable [1]</p>
+<p>DeNoiseLevel</p>
+<p>+SharpeningLevel</p>
+<p>FilterLevelRegConf</p>
+<p>+Demosaic_th_conf</p>
+<p>cell</p>
+<p>index = 2</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>name night</p>
+<p>FilterEnable [1]</p>
+<p>DeNoiseLevel</p>
+<p>SharpeningLevel</p>
+<p>FilterLevelRegConf</p>
+<p>+Demosaic_th_conf</p>
+<p>每个模式下设置为：</p>
+<p>FilterEnable：sharp 和 denoise 的控制是否打开。 0：关闭，1：打开。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=denoiselevel>DeNoiseLevel：<a href=#denoiselevel class=hash-link aria-label=DeNoiseLevel：的直接链接 title=DeNoiseLevel：的直接链接 translate=no>​</a></h3>
+<p>&lt;DeNoiseLevel index="1" type="struct" size="[1 2]"></p>
+<p>&lt;gains index="1" type="double" size="[1 6]">[1 1.1 6 8 10 12]&lt;/gains></p>
+<p>&lt;dlevel index="1" type="double" size="[1 6]">[0 11 1 1 1]&lt;/dlevel></p>
+<p>&lt;/DeNoiseLevel></p>
+<p>Gains：曝光 gain等级，去噪跟随曝光 gain 值进行变化。</p>
+<p>Dlevel：去噪力度等级设置。取值范围[0,10]。</p>
+<p>不同 gain之间， $\mathsf { g } &lt; ( \mathsf { g } 1 + \mathsf { g } 2 ) / 2$ , 采用 g1 对应的去噪等级。</p>
+<p>g>(g1+g2)/2, 采用 g2 对应的去噪等级。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=sharpeninglevel>SharpeningLevel：<a href=#sharpeninglevel class=hash-link aria-label=SharpeningLevel：的直接链接 title=SharpeningLevel：的直接链接 translate=no>​</a></h3>
+<p>&lt;SharpeningLevel index="1" type="struct" size="[1 2]"></p>
+<p>&lt;gains index="1" type="double" size="[1 6]">[1 1.1 6 8 10 12]&lt;/gains></p>
+<p>&lt;slevel index="1" type="double" size="[1 6]">[3 2 2 2 2 2]&lt;/slevel></p>
+<p>&lt;/SharpeningLevel></p>
+<p>Slevel：锐化力度等级设置。取值范围[0,10]。</p>
+<p>不同 gain 之间， g &lt;(g1+g2)/2, 采用 g1 对应的锐化等级。</p>
+<p>g>(g1+g2)/2, 采用 g2 对应的锐化等级。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32113-filterlevelregconf>3.2.11.3 FilterLevelRegConf<a href=#32113-filterlevelregconf class=hash-link aria-label="3.2.11.3 FilterLevelRegConf的直接链接" title="3.2.11.3 FilterLevelRegConf的直接链接" translate=no>​</a></h5>
+<p>配置 filter 不同等级对应寄存器设置。</p>
+<p>此参数就是让我们可以设置不同等级对应的寄存器设置。</p>
+<p>&lt;FilterLevelRegConf index="1" type="struct" size="[1 14]"></p>
+<p>&lt;FilterLevelRegConfEnable index="1"type="double" size="[1 1]">[1]&lt;/FilterLevelRegConfEnable></p>
+<p>&lt;FilterLevel index="1" type="double" size="[1 5]">[0 1 2 3 4]&lt;/FilterLevel></p>
+<p>&lt;flt_chr_h_mode index="1" type="double" size="[1 5]">[0 3 3 3 3]&lt;/flt_chr_h_mode></p>
+<p>&lt;flt_chr_v_mode index="1" type="double" size="[1 5]">[1 3 3 3 3]&lt;/flt_chr_v_mode></p>
+<p>&lt;flt_grn_stage1 index="1" type="double" size="[1 5]">[7 66 5 5]&lt;/flt_grn_stage1></p>
+<p>&lt;flt_thresh_bl0 index="1" type="double" size="[1 5]">[0 0 8 13 23]&lt;/flt_thresh_bl0></p>
+<p>&lt;flt_thresh_bl1 index="1"type="double" size="[1 5]">[0 0 2 5 10]&lt;/flt_thresh_bl1></p>
+<p>&lt;flt_fac_bl0 index="1" type="double" size="[1 5]">[0 0 2 4 6]&lt;/flt_fac_bl0></p>
+<p>&lt;flt_fac_bl1 index="1" type="double" size="[1 5]">[0 0 0 0 2]&lt;/flt_fac_bl1></p>
+<p>&lt;flt_thresh_sh0 index="1" type="double" size="[1 5]">[0 20 20 20 20]&lt;/flt_thresh_sh0></p>
+<p>&lt;flt_thresh_sh1 index="1"type="double" size="[1 5]">[0 80 80 80 80]&lt;/flt_thresh_sh1></p>
+<p>&lt;flt_fac_sh0 index="1" type="double" size="[1 5]">[8 8 10 16 15]&lt;/flt_fac_sh0></p>
+<p>&lt;flt_fac_sh1 index="1" type="double" size="[1 5]">[10 10 13 32 15]&lt;/flt_fac_sh1></p>
+<p>&lt;flt_fac_mid index="1" type="double" size="[1 5]">[4 4 4 15 8]&lt;/flt_fac_mid></p>
+<p>&lt;/FilterLevelRegConf></p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=filterlevelregconfenable>FilterLevelRegConfEnable：<a href=#filterlevelregconfenable class=hash-link aria-label=FilterLevelRegConfEnable：的直接链接 title=FilterLevelRegConfEnable：的直接链接 translate=no>​</a></h3>
+<p>是否改变原有等级内部寄存器设置，0：不改变，1：改变并采用下面设置。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=filterlevel>FilterLevel：<a href=#filterlevel class=hash-link aria-label=FilterLevel：的直接链接 title=FilterLevel：的直接链接 translate=no>​</a></h3>
+<p>需要改变的默认等级配置。如上图，会改变 01234 对应等级的内部原本设置的寄存器值。</p>
+<p>等级取值范围[010]。</p>
+<p>flt_grn_stage1：G 通道低通滤波去噪模板等级，取值范围[0 8]。</p>
+<table><thead><tr><th>Filter 1 select<th>Filter matrix<th>Comment / use case<th><tbody><tr><td>0<td>686 888<td>686<td>Max blur filter for very noisy input data or pre filter for down scaling<tr><td>1<td>585 8 12 8<td>585<td>blur filter for noisy input data<tr><td>2<td>484 8 16 8<td>484<td>Maximum line noise rejection (like separate vertical + horizontal filter with [1 2 1]/4 mask)<tr><td>3<td>565 6 20 6<td>565<td>Maximum line noise rejection with balanced symmetry<tr><td>4<td>46 6 24 4 6<td>464<td>Optimum compromise between noise rejection and sharpening<tr><td>5<td>353 5 32 5<td>353<td>Weak low pass for sharpening<tr><td>6<td>343 4 36 4<td>343<td>Weak low pass for sharpening<tr><td>7<td>232 3 44 3<td>232<td>Weakest low pass filter mask for sharpening<tr><td>8<td>000 0 64 0<td>000<td>bypass mask enables 3x3 over all filter modes</table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=filterg-通道的高通锐化原理>FilterG 通道的高通锐化原理<a href=#filterg-通道的高通锐化原理 class=hash-link aria-label="FilterG 通道的高通锐化原理的直接链接" title="FilterG 通道的高通锐化原理的直接链接" translate=no>​</a></h3>
+<p>锐化是以梯度和为衡量，四个阈值划分出 5 个区域，分别对每个区域的锐化强度进行配置。下图为梯度和对应阈值和区间锐化强度参数：</p>
+<p>flt_thresh_bl0，flt_thresh_bl1，flt_thresh_sh0，flt_thresh_sh1：</p>
+<p>梯度和分区间的阈值，这四个阈值，分割出 5 个区间，取值范围[01023]。</p>
+<p>flt_fac_bl0，flt_fac_bl1，flt_fac_sh0，flt_fac_sh1，flt_fac_mid:</p>
+<p>上面 5 个区间对应的锐化强度值，取值范围[063]。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32114-demosaic_th_conf>3.2.11.4 Demosaic_th_conf<a href=#32114-demosaic_th_conf class=hash-link aria-label="3.2.11.4 Demosaic_th_conf的直接链接" title="3.2.11.4 Demosaic_th_conf的直接链接" translate=no>​</a></h5>
+<p>去马赛克阈值设置</p>
+<p>&lt;Demosaic_th_conf index="1" type="struct" size="[1 1]"></p>
+<p>&lt;gains index="1" type="double" size="[1 6]">[1 1.1 6 8 10 12]&lt;/gains></p>
+<p>&lt;demosaic_th_level index="1" type="double" size="[1 6]">[0 0 0 0 0 0]&lt;/demosaic_th_level></p>
+<p>&lt;/Demosaic_th_conf></p>
+<p>Gains：随着 gain 变化，可对 demosaic 阈值进行调整。</p>
+<p>demosaic_th_level：阈值调整参数，与上面 gain 一一对应。取值范围：[0 255]。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32115-demosaic_lp_conf>3.2.11.5 Demosaic_lp_conf<a href=#32115-demosaic_lp_conf class=hash-link aria-label="3.2.11.5 Demosaic_lp_conf的直接链接" title="3.2.11.5 Demosaic_lp_conf的直接链接" translate=no>​</a></h5>
+<p>GIC 模块。</p>
+<table><thead><tr><th>适用 ISP 版本<th>Demosaic_lp 硬件<th>适用软件及版本<th>模块 enable<tbody><tr><td>ISP10<td>无<td>camera_engine_rkisp: v2.0.0IQ magic code: 635075<td>0<tr><td>ISP11<td>无<td>0<td><tr><td>ISP12<td>有<td>0/1<td></table>
+<p>e Demosaic_lp_conf</p>
+<p>index =1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>lp_en [0]</p>
+<p>rb_filter_en [1]</p>
+<p>由hp_filter_en [ü]</p>
+<p>use_old_lp [0]</p>
+<p>lu_divided [240 200 140 80]</p>
+<p>gainsArray [1 2 46816]</p>
+<p>thH_dividedo [20 20 28 28 39 45]</p>
+<p>thH_divided1 [16 16 22 22 31 31]</p>
+<p>thH_divided2 [10 10 14 14 20 25]</p>
+<p>thH_divided3 [9 9 11 11 15 22]</p>
+<p>thH_divided4 [6 6 7 7 10 15]</p>
+<p>thCSC_divided0 [25 25 45 45 48 48]</p>
+<p>thCSC_divided1 [20 20 30 30 36 36]</p>
+<p>thCSC_divided2 [18 18 20 20 29 29]</p>
+<p>thCSC_divided3 [15 15 15 15 14 20]</p>
+<p>thCSC_divided4 [8 8 8 8 12 15]</p>
+<p>diff_dividedo [40 40 56 56 78 78]</p>
+<p>diff_divided1 [28 28 39 39 55 55]</p>
+<p>diff_divided2 [18 18 25 25 35 48]</p>
+<p>diff_divided3 [14 14 20 20 28 43]</p>
+<p>diff_divided4 [8 8 11 11 15 20]</p>
+<p>varTh_dividedo [300 300 300 300 500 700]</p>
+<p>varTh_divided1 [100 100 100 100 200 400]</p>
+<p>varTh_divided2 [80 80 80 80 160 300]</p>
+<p>varTh_divided3 [50 50 70 70 120 250]</p>
+<p>varTh_divided4 [30 30 40 40 70 110]</p>
+<p>thgrad_r_fct [24 24 24 24 24 24]</p>
+<p>thdiff_r_fct [24 24 24 24 24 24]</p>
+<p>ethvar_r_fct [24 24 24 24 24 24]</p>
+<p>thgrad_b_fct [24 24 24 24 24 24]</p>
+<p>由thdiff_b_fct [24 24 24 24 24 24]</p>
+<p>thvar_b_fct [24 24 24 24 24 24]</p>
+<p>similarity_th [776655]</p>
+<p>th_var_en [1] th_csc_en [1] th_diff_en [1] th_grad_en [1] th_grad [13 13 13 13 13 13] th_diff [15 15 15 15 15 15] th_csc [1818 18 18 18 18] th_var [12 12 12 12 12 12] flat_level_sel [655443] pattern_level_sel [876544] edge_level_sel [876654]</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=demosaic-lp-算法说明>Demosaic LP 算法说明：<a href=#demosaic-lp-算法说明 class=hash-link aria-label="Demosaic LP 算法说明：的直接链接" title="Demosaic LP 算法说明：的直接链接" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=区域划分-lp-算法说明>区域划分 lp 算法说明<a href=#区域划分-lp-算法说明 class=hash-link aria-label="区域划分 lp 算法说明的直接链接" title="区域划分 lp 算法说明的直接链接" translate=no>​</a></h3>
+<p>If ( h_v_max_grad &lt;thH & count>= sw_similarity_th & diff_avg &lt;thCSC & var&lt; varTH )</p>
+<p>当前点处于平坦区，强滤波；滤波强度可以配置。</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">else if ( h_v_max_grad >= sw_th_grad | count &lt; sw_similarity_th | diff_avg >= sw_th_csc | var> sw_th_var )</span><br/></div></code></pre></div></div>
+<p>当前点处于边缘区，默认不滤波；滤波强度可以配置。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=else>else<a href=#else class=hash-link aria-label=else的直接链接 title=else的直接链接 translate=no>​</a></h3>
+<p>当前点处于纹理区，弱滤波；滤波强度可配置。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=其中>其中:<a href=#其中 class=hash-link aria-label=其中:的直接链接 title=其中:的直接链接 translate=no>​</a></h3>
+<p>h_v_max_grad：梯度；thH：平坦区 grad 阈值；sw_th_grad：边缘区 grad 阈值。</p>
+<p>count ：3*3 相似点个数；sw_similarity_th：平坦区和边缘区相似点个数阈值。</p>
+<p>diff_avg：gb-gr 差异；thCSC：平坦区 diff 阈值；sw_th_csc：边缘区 diff 阈值。</p>
+<p>Var：方差； varTH：平坦区 var 阈值；sw_th_var：边缘区 var 阈值。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=demosaic-lp-参数说明>Demosaic LP 参数说明：<a href=#demosaic-lp-参数说明 class=hash-link aria-label="Demosaic LP 参数说明：的直接链接" title="Demosaic LP 参数说明：的直接链接" translate=no>​</a></h3>
+<p>lp_en：lp 模块开关，0：关闭，1：开启。</p>
+<p>rb_filter_en：rk demosaic 算法开启，rb 通道 filter 是否开启，0：关闭，1：开启。</p>
+<p>hp_filter_en：rk 算法锐化是否开启，0：关闭，1：开启。</p>
+<p>use_old_lp：是否使用 img 的 lp 算法。0:关闭，1：开启。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=平坦区阈值条件>平坦区阈值条件：<a href=#平坦区阈值条件 class=hash-link aria-label=平坦区阈值条件：的直接链接 title=平坦区阈值条件：的直接链接 translate=no>​</a></h3>
+<p>lu_divided：亮度 0-255 分区。共 4 个点，分成 5 个区间。不同亮度，控制不同阈值。</p>
+<p>gainsArray：不同 gain 下，控制不同的阈值。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=thh_divided0thh_divided1thh_divided2thh_divided3thh_divided4>thH_divided0，thH_divided1，thH_divided2，thH_divided3，thH_divided4：<a href=#thh_divided0thh_divided1thh_divided2thh_divided3thh_divided4 class=hash-link aria-label=thH_divided0，thH_divided1，thH_divided2，thH_divided3，thH_divided4：的直接链接 title=thH_divided0，thH_divided1，thH_divided2，thH_divided3，thH_divided4：的直接链接 translate=no>​</a></h3>
+<p>5 个亮度区间在不同 gain下的 thH 阈值控制。</p>
+<p>后缀 01234 为对应 5 个亮度区间阈值控制。</p>
+<p>thH_dividedx 为每个亮度区间对应上面 gain array 中不同 gain 值时，设置 g 通道对应不同 thH阈值，取值范围[0-255]。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=thcsc_divided0thcsc_divided1thcsc_divided2thcsc_divided3thcsc_divided4>thCSC_divided0，thCSC_divided1，thCSC_divided2，thCSC_divided3，thCSC_divided4：<a href=#thcsc_divided0thcsc_divided1thcsc_divided2thcsc_divided3thcsc_divided4 class=hash-link aria-label=thCSC_divided0，thCSC_divided1，thCSC_divided2，thCSC_divided3，thCSC_divided4：的直接链接 title=thCSC_divided0，thCSC_divided1，thCSC_divided2，thCSC_divided3，thCSC_divided4：的直接链接 translate=no>​</a></h3>
+<p>5 个亮度区间在不同 gain 下的 thcsc 阈值控制。后缀 01234 为对应 5 个亮度区间阈值控制。</p>
+<p>thCSC_dividedx 为每个亮度区间对应上面 gain array 中不同 gain 值时，设置 g 通道对应不同thCSC 阈值，取值范围[0-255]。</p>
+<p>diff_divided0，diff_divided1，diff_divided2，diff_divided3，diff_divided4：</p>
+<p>5 个亮度区间在不同 gain下的 diff阈值控制。</p>
+<p>后缀 01234 为对应 5 个亮度区间阈值控制。</p>
+<p>diff_dividedx 为每个亮度区间对应上面 gain array 中不同 gain 值时，设置 g 通道对应不同 diff阈值，取值范围[0-255]。</p>
+<p>varTh_divided0，varTh_divided1，varTh_divided2，varTh_divided3，varTh_divided4：</p>
+<p>5 个亮度区间在不同 gain下的 var阈值控制。后缀 01234 为对应 5 个亮度区间阈值控制。</p>
+<p>varTh_dividedx 为每个亮度区间对应上面 gain array 中不同 gain 值时，设置 g 通道对应不同varTh 阈值，取值范围[0-65535]。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=thgrad_r_fct>thgrad_r_fct：<a href=#thgrad_r_fct class=hash-link aria-label=thgrad_r_fct：的直接链接 title=thgrad_r_fct：的直接链接 translate=no>​</a></h3>
+<p>gr 通道基于 g 通道 grad 阈值进行倍数调整，取值范围[0-127]，默认值 0x18 为 1x 倍数。</p>
+<p>此值可跟随 gainsArray 的 gain 的变化而变化。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=thdiff_r_fct>thdiff_r_fct：<a href=#thdiff_r_fct class=hash-link aria-label=thdiff_r_fct：的直接链接 title=thdiff_r_fct：的直接链接 translate=no>​</a></h3>
+<p>gr通道基于 g 通道 diff阈值进行倍数调整，取值范围[0-127]，默认值 0x18 为 1x 倍数。</p>
+<p>此值可跟随 gainsArray 的 gain 的变化而变化。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=thvar_r_fct>thvar_r_fct：<a href=#thvar_r_fct class=hash-link aria-label=thvar_r_fct：的直接链接 title=thvar_r_fct：的直接链接 translate=no>​</a></h3>
+<p>gr通道基于 g 通道 var阈值进行倍数调整，取值范围[0-127]，默认值 0x18 为 1x 倍数。</p>
+<p>此值可跟随 gainsArray 的 gain 的变化而变化。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=thgrad_b_fct>thgrad_b_fct：<a href=#thgrad_b_fct class=hash-link aria-label=thgrad_b_fct：的直接链接 title=thgrad_b_fct：的直接链接 translate=no>​</a></h3>
+<p>gb 通道基于 g 通道 grad阈值进行倍数调整，取值范围[0-127]，默认值 0x18 为 1x 倍数。</p>
+<p>此值可跟随 gainsArray 的 gain 的变化而变化。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=thdiff_b_fct>thdiff_b_fct：<a href=#thdiff_b_fct class=hash-link aria-label=thdiff_b_fct：的直接链接 title=thdiff_b_fct：的直接链接 translate=no>​</a></h3>
+<p>gb 通道基于 g 通道 diff阈值进行倍数调整，取值范围[0-127]，默认值 0x18 为 1x 倍数。</p>
+<p>此值可跟随 gainsArray 的 gain 的变化而变化。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=thdiff_b_fct-1>thdiff_b_fct：<a href=#thdiff_b_fct-1 class=hash-link aria-label=thdiff_b_fct：的直接链接 title=thdiff_b_fct：的直接链接 translate=no>​</a></h3>
+<p>gb 通道基于 g 通道 var 阈值进行倍数调整，取值范围[0-127]，默认值 0x18 为 1x 倍数。</p>
+<p>此值可跟随 gainsArray 的 gain 的变化而变化。</p>
+<p>similarity_th：算法判断相似点个数阈值，取值范围[0-8]。</p>
+<p>此值可跟随 gainsArray 的 gain 的变化而变化。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=边缘区阈值条件>边缘区阈值条件：<a href=#边缘区阈值条件 class=hash-link aria-label=边缘区阈值条件：的直接链接 title=边缘区阈值条件：的直接链接 translate=no>​</a></h3>
+<p>th_grad：边缘区 grad 阈值设定，取值范围[0-255]，跟随 gainsArray 的 gain 的变化而变化。</p>
+<p>th_diff：边缘区 diff 阈值设定，取值范围[0-255]，跟随 gainsArray 的 gain 的变化而变化。</p>
+<p>th_csc：边缘区 csc 阈值设定，取值范围[0-255]，跟随 gainsArray 的 gain 的变化而变化。</p>
+<p>th_var：边缘区 var 阈值设定，取值范围[0-65535]，跟随 gainsArray 的 gain 的变化而变化。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=其他寄存器参数说明>其他寄存器参数说明：<a href=#其他寄存器参数说明 class=hash-link aria-label=其他寄存器参数说明：的直接链接 title=其他寄存器参数说明：的直接链接 translate=no>​</a></h3>
+<p>th_grad_en：算法 grad 条件是否使能，0：不使能，1：使能。</p>
+<p>flat_level_sel：平坦区模板选择，模板参考上面 filter 的模板，取值范围[0-8]，跟随 gainsArray的 gain 的变化而变化。</p>
+<p>pattern_level_sel：纹理区模板选择，模板参考上面 filter 的模板，取值范围[0-8]，跟随gainsArray 的 gain 的变化而变化。</p>
+<p>edge_level_sel：边缘区模板选择，模板参考上面 filter 的模板，取值范围[0-8]，跟随 gainsArray的 gain 的变化而变化。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32116-mfduvnr>3.2.11.6 MFD&UVNR<a href=#32116-mfduvnr class=hash-link aria-label="3.2.11.6 MFD&UVNR的直接链接" title="3.2.11.6 MFD&UVNR的直接链接" translate=no>​</a></h5>
+<table><thead><tr><th><th><th><tbody><tr><td><td><td></table>
+<p>&lt;MFD_Support index="1" type="double" size="[1 1]"></p>
+<p>[0]</p>
+<p>&lt;/MFD_Support></p>
+<p>&lt;MFD_Gain index="1" type="double" size="[1 3]"></p>
+<p>[2 4 6]</p>
+<p>&lt;/MFD_Gain></p>
+<p>&lt;MFD_Frames index="1" type="double" size="[1 3]"></p>
+<p>[2 4 6]</p>
+<p>&lt;/MFD_Frames></p>
+<p>&lt;UVNR_Support index="1" type="double" size="[1 1]"></p>
+<p>[0]</p>
+<p>&lt;/UVNR_Support></p>
+<p>&lt;UVNR_Gain index="1" type="double" size="[1 3]"></p>
+<p>[2 48]</p>
+<p>&lt;/UVNR_Gain></p>
+<p>&lt;UVNR_Ratio index="1" type="double" size="[1 3]"></p>
+<p>[2 4 6]</p>
+<p>&lt;/UVNR_Ratio></p>
+<p>&lt;UVNR_Distance index="1" type="double" size="[1 3]"></p>
+<p>[2 4 6]</p>
+<p>&lt;/UVNR_Distance></p>
+<p>MFD_Gain：不同 gain 下，控制使用不同的叠加去噪帧数。</p>
+<p>MFD_Frames：对应上面不同 gain，使用不同的叠加去噪帧数。</p>
+<p>UVNR_Support：是否使能 uv双边滤波，0：不使能，1：使能。</p>
+<p>UVNR_Gain：不同 gain 下，控制使用不同的双边滤波半径和像素相似性的阈值。</p>
+<p>UVNR_Ratio：对应上面不同 gain，使用不同的双边去噪半径。没有上限，推荐[0-20]。</p>
+<p>UVNR_Distance：对应上面不同 gain，使用不同的像素相似性阈值，主要关系到图像边缘区域。没有上限，推荐[0-10]。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32117-dsp_3dnr_setting>3.2.11.7 DSP_3DNR_Setting<a href=#32117-dsp_3dnr_setting class=hash-link aria-label="3.2.11.7 DSP_3DNR_Setting的直接链接" title="3.2.11.7 DSP_3DNR_Setting的直接链接" translate=no>​</a></h5>
+<p>第一版 3DNR功能对应参数配置。</p>
+<table><thead><tr><th><th><th><tbody><tr><td><td><td></table>
+<p>DSP_3DNR_Setting</p>
+<p>index = 1</p>
+<p>type = cell</p>
+<p>size = [1 2]</p>
+<p>cell</p>
+<p>index = 1</p>
+<p>type = struct</p>
+<p>a=</p>
+<p>name normal</p>
+<p>Enable [1]</p>
+<p>gain_level [12 4 816]</p>
+<p>noise_coef_numerator [1 1 111]</p>
+<p>noise_coef_denominator [2 2 2 2 2]</p>
+<p>Level_Setting</p>
+<p>Luma_Setting</p>
+<p>Chrm_Setting</p>
+<p>Shp_Setting</p>
+<p>cell</p>
+<p>index = 2</p>
+<p>type = struct</p>
+<p>a8ri-.</p>
+<p>name night</p>
+<p>由Enabie []</p>
+<p>gain_level [1 24 8 16]</p>
+<p>noise_coef_numerator [11 111]</p>
+<p>noise_coef_denominator [2 2 2 2 2]</p>
+<p>Level_Setting</p>
+<p>Luma_Setting</p>
+<p>Chrm_Setting</p>
+<p>Shp_Setting</p>
+<p>name：模式。目前只支持 2 种，normal 和 night 模式。</p>
+<p>Enable：是否打开 3dnr 功能。</p>
+<p>gain_level：3dnr 参数会随着 gain 值变化而变化。</p>
+<p>noise_coef_numerator：3dnr 噪声估计值调整参数，调整值中分子部分。</p>
+<p>noise_coef_denominator：3dnr 噪声估计值调整参数，调整值中分母部分。</p>
+<p>3dnr会对当前噪声进行估计，调整参数，是对此估计值进行乘以上面系数。</p>
+<p>Level_Setting：不同等级 3dnr 设置</p>
+<p>&lt;/Luma_Setting> &lt;/Luma_Setting></p>
+<p>&lt;Level_Setting index="1" type="struct" size="[1 1]"></p>
+<p>&lt;luma_sp_nr_en index="1" type="unsigned char" size="[1 1]">[1]&lt;/luma_sp_nr_en></p>
+<p>&lt;luma_sp_nr_level index="1" type="unsigned char" size="[1 5]">[3 6 9 12 16]&lt;/luma_sp_nr_level></p>
+<p>&lt;luma_te_nr_en index="1" type="unsigned char" size="[1 1]">[1]&lt;/luma_te_nr_en></p>
+<p>&lt;luma_te_nr_level index="1" type="unsigned char" size="[1 5]">[8 8 12 12 16]&lt;/luma_te_nr_level></p>
+<p>&lt;chrm_sp_nr_en index="1"type="unsigned char" size="[1 1]">[1]&lt;/chrm_sp_nr_en></p>
+<p>&lt;chrm_sp_nr_level index="1" type="unsigned char" size="[1 5]">[16 16 16 16 16]&lt;/chrm_sp_nr_level></p>
+<p>&lt;chrm_te_nr_en index="1" type="unsigned char" size="[1 1]">[1]&lt;/chrm_te_nr_en></p>
+<p>&lt;chrm_te_nr_level index="1" type="unsigned char" size="[1 5]">[16 16 16 16 16]&lt;/chrm_te_nr_level></p>
+<p>&lt;shp_en index="1" type="unsigned char" size="[1 1]">[1]&lt;/shp_en></p>
+<p>&lt;shp_level index="1" type="unsigned char" size="[1 5]">[16 16 16 16 16]&lt;/shp_level></p>
+<p>&lt;/Level_Setting></p>
+<p>luma_sp_nr_en：空间域亮度去噪功能是否打开，0：关闭， 1：打开</p>
+<p>luma_sp_nr_level：空间域亮度去噪配置不同 gain下采用去噪力度等级。</p>
+<p>luma_te_nr_en：te 亮度去噪功能是否打开，0：关闭， 1：打开</p>
+<p>luma_te_nr_level：te 亮度去噪配置不同 gain 下采用去噪力度等级。</p>
+<p>chrm_sp_nr_en：sp 色度去噪功能是否打开，0：关闭， 1：打开</p>
+<p>chrm_sp_nr_level：sp 色度去噪配置不同 gain 下采用去噪力度等级。</p>
+<p>chrm_te_nr_en：te 色度去噪功能是否打开，0：关闭， 1：打开</p>
+<p>chrm_te_nr_level：te 色度去噪配置不同 gain 下采用去噪力度等级。</p>
+<p>shp_en：亮度锐化功能是否打开，0：关闭， 1：打开</p>
+<p>shp_level： 亮度锐化配置不同 gain下采用锐化力度等级。</p>
+<p>Luma_Setting：3dnr 亮度去噪配置 Luma_Setting：3dnr 亮度去噪配置</p>
+<p>&lt;Luma_Setting index="1" type="struct" size="[1 1]"></p>
+<p>&lt;luma_default index="1" type="unsigned char" size="[1 1]">[1]&lt;/luma_default></p>
+<p>&lt;luma_sp_rad index="1" type="unsigned char" size="[1 5]">[3 3 3 3 3]&lt;/luma_sp_rad></p>
+<p>&lt;luma_te_max_bi_num index="1" type="unsigned char" size="[1 5]">[0 0 0 0 0]&lt;/luma_te_max_bi_num></p>
+<p>&lt;luma_w00 index="1" type="unsigned char" size="[1 5]"> [2 2 2 2 2] &lt;/luma_w00></p>
+<p>&lt;luma_w01 index="1" type="unsigned char" size="[1 5]"> [6 6 6 6 6] &lt;/luma_w01></p>
+<p>&lt;luma_w02 index="1" type="unsigned char" size="[1 5]"> [12 12 12 12 12] &lt;/luma_w02></p>
+<p>&lt;luma_w03 index="1" type="unsigned char" size="[1 5]"> [6 6 6 6 6] &lt;/luma_w03></p>
+<p>&lt;luma_w04 index="1" type="unsigned char" size="[1 5]"> [2 2 2 2 2] &lt;/luma_w04></p>
+<p>&lt;luma_w10 index="1" type="unsigned char" size="[1 5]"> [6 6 6 6 6] &lt;/luma_w10></p>
+<p>&lt;luma_w11 index="1" type="unsigned char" size="[1 5]"> [30 30 30 30 30] &lt;/luma_w11></p>
+<p>&lt;luma_w12 index="1" type="unsigned char" size="[1 5]"> [48 48 48 48 48] &lt;/luma_w12></p>
+<p>&lt;luma_w13 index="1" type="unsigned char" size="[1 5]"> [30 30 30 30 30] &lt;/luma_w13></p>
+<p>&lt;luma_w14 index="1" type="unsigned char" size="[1 5]"> [6 6 66 6] &lt;/luma_w14></p>
+<p>&lt;luma_w20 index="1" type="unsigned char" size="[1 5]"> [12 12 12 12 12] &lt;/luma_w20></p>
+<p>&lt;luma_w21 index="1" type="unsigned char" size="[1 5]"> [48 48 48 48 48] &lt;/luma_w21></p>
+<p>&lt;luma_w22 index="1" type="unsigned char" size="[1 5]"> [96 96 96 96 96] &lt;/luma_w22></p>
+<p>&lt;luma_w23 index="1" type="unsigned char" size="[1 5]"> [48 48 48 48 48] &lt;/luma_w23></p>
+<p>&lt;luma_w24 index="1" type="unsigned char" size="[1 5]"> [12 12 12 12 12] &lt;/luma_w24></p>
+<p>&lt;luma_w30 index="1" type="unsigned char" size="[1 5]"> [6 6 6 6 6] &lt;/luma_w30></p>
+<p>&lt;luma_w31 index="1" type="unsigned char" size="[1 5]"> [30 30 30 30 30] &lt;/luma_w31></p>
+<p>&lt;luma_w32 index="1" type="unsigned char" size="[1 5]"> [48 48 48 48 48] &lt;/luma_w32></p>
+<p>&lt;luma_w33 index="1" type="unsigned char" size="[1 5]"> [30 30 30 30 30] &lt;/luma_w33></p>
+<p>&lt;luma_w34 index="1" type="unsigned char" size="[1 5]"> [6 6 6 6 6] &lt;/luma_w34></p>
+<p>&lt;luma_w40 index="1" type="unsigned char" size="[1 5]"> [2 2 2 2 2] &lt;/luma_w40></p>
+<p>&lt;luma_w41 index="1" type="unsigned char" size="[1 5]"> [6 6 6 6 6] &lt;/luma_w41></p>
+<p>&lt;luma_w42 index="1" type="unsigned char" size="[1 5]"> [12 12 12 12 12] &lt;/luma_w42></p>
+<p>&lt;luma_w43 index="1" type="unsigned char" size="[1 5]"> [6 6 6 6 6] &lt;/luma_w43></p>
+<p>&lt;luma_w44 index="1" type="unsigned char" size="[1 5]"> [2 2 2 2 2] &lt;/luma_w44></p>
+<p>luma_default：1：采用代码默认配置， 0：采用底下参数配置。</p>
+<p>luma_sp_rad：亮度 Y通道对应空间双边滤波器模板大小。</p>
+<p>luma_te_max_bi_num：暂时未用。</p>
+<p>luma_w00 - luma_w44：随着 gain 不同，配置亮度去噪 5x5 模板权重。</p>
+<p>最中心一行权重为 8bit 取值范围，其余权重取值范围为 6bit，不带符号位。</p>
+<p>Chrm_Setting：3dnr 色度去噪配置</p>
+<p>&lt;Chrm_Setting index="1" type="struct" size="[1 1]"></p>
+<p>&lt;chrm_default index="1" type="unsigned char" size="[1 1]">[1]&lt;/chrm_default></p>
+<p>&lt;chrm_sp_rad index="1" type="unsigned char" size="[1 5]">[3 3 3 3 3]&lt;/chrm_sp_rad></p>
+<p>&lt;chrm_te_max_bi_num index="1" type="unsigned char" size="[1 5]">[0 0 0 0 0]&lt;/chrm_te_max_bi_num></p>
+<p>&lt;chrm_w00 index="1" type="unsigned char" size="[1 5]"> [2 2 2 2 2] &lt;/chrm_w00></p>
+<p>&lt;chrm_w01 index="1" type="unsigned char" size="[1 5]"> [5 5 5 5 5] &lt;/chrm_w01></p>
+<p>&lt;chrm_w02 index="1" type="unsigned char" size="[1 5]"> [5 5 5 5 5] &lt;/chrm_w02></p>
+<p>&lt;chrm_w03 index="1" type="unsigned char" size="[1 5]"> [5 5 5 5 5] &lt;/chrm_w03></p>
+<p>&lt;chrm_w04 index="1" type="unsigned char" size="[1 5]"> [2 2 2 2 2] &lt;/chrm_w04></p>
+<p>&lt;chrm_w10 index="1" type="unsigned char" size="[1 5]"> [5 5 5 5 5] &lt;/chrm_w10></p>
+<p>&lt;chrm_w11 index="1" type="unsigned char" size="[1 5]">[18 1818 18 18] &lt;/chrm_w11></p>
+<p>&lt;chrm_w12 index="1" type="unsigned char" size="[1 5]"> [25 25 25 25 25] &lt;/chrm_w12></p>
+<p>&lt;chrm_w13 index="1" type="unsigned char" size="[1 5]"> [18 1818 18 18] &lt;/chrm_w13></p>
+<p>&lt;chrm_w14 index="1" type="unsigned char" size="[1 5]"> [5 5 5 5 5] &lt;/chrm_w14></p>
+<p>&lt;chrm_w20 index="1" type="unsigned char" size="[1 5]"> [5 5 5 5 5] &lt;/chrm_w20></p>
+<p>&lt;chrm_w21 index="1" type="unsigned char" size="[1 5]"> [25 25 25 25 25] &lt;/chrm_w21></p>
+<p>&lt;chrm_w22 index="1" type="unsigned char" size="[1 5]"> [80 80 80 80 80] &lt;/chrm_w22></p>
+<p>&lt;chrm_w23 index="1" type="unsigned char" size="[1 5]"> [25 25 25 25 25] &lt;/chrm_w23></p>
+<p>&lt;chrm_w24 index="1" type="unsigned char" size="[1 5]"> [5 5 5 5 5] &lt;/chrm_w24></p>
+<p>&lt;chrm_w30 index="1" type="unsigned char" size="[1 5]"> [5 5 5 5 5] &lt;/chrm_w30></p>
+<p>&lt;chrm_w31 index="1" type="unsigned char" size="[1 5]"> [18 18 18 18 18] &lt;/chrm_w31></p>
+<p>&lt;chrm_w32 index="1" type="unsigned char" size="[1 5]"> [25 25 25 25 25] &lt;/chrm_w32></p>
+<p>&lt;chrm_w33 index="1" type="unsigned char" size="[1 5]">[18 1818 18 18] &lt;/chrm_w33></p>
+<p>&lt;chrm_w34 index="1" type="unsigned char" size="[1 5]"> [5 5 5 5 5] &lt;/chrm_w34></p>
+<p>&lt;chrm_w40 index="1" type="unsigned char" size="[1 5]"> [2 2 2 2 2] &lt;/chrm_w40></p>
+<p>&lt;chrm_w41 index="1" type="unsigned char" size="[1 5]"> [5 5 5 5 5] &lt;/chrm_w41></p>
+<p>&lt;chrm_w42 index="1" type="unsigned char" size="[1 5]"> [5 5 5 5 5] &lt;/chrm_w42></p>
+<p>&lt;chrm_w43 index="1" type="unsigned char" size="[1 5]"> [5 5 5 5 5] &lt;/chrm_w43></p>
+<p>&lt;chrm_w44 index="1" type="unsigned char" size="[1 5]"> [2 2 2 2 2] &lt;/chrm_w44></p>
+<p>&lt;/Chrm_Setting></p>
+<p>chrm_default：1：采用代码默认配置， 0：采用底下参数配置。</p>
+<p>chrm_sp_rad：色度 cr cb 通道对应的空间双边滤波器模板大小。</p>
+<p>chrm_te_max_bi_num：暂时未用。</p>
+<p>chrm_w00 ——chrm_w44：随着 gain 不同，配置色度去噪 5x5 模板权重。</p>
+<p>最中心一行权重为 8bit 取值范围，其余权重取值范围为 6bit，不带符号位。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=shp_setting3dnr-中亮度锐化参数配置>Shp_Setting：3dnr 中亮度锐化参数配置<a href=#shp_setting3dnr-中亮度锐化参数配置 class=hash-link aria-label="Shp_Setting：3dnr 中亮度锐化参数配置的直接链接" title="Shp_Setting：3dnr 中亮度锐化参数配置的直接链接" translate=no>​</a></h3>
+<p>&lt;Shp_Setting index="1" type="struct" size="[1 1]"></p>
+<p>&lt;shp default index="1" type="unsigned char" size="[1 11">[1]&lt;/shp default></p>
+<p>&lt;src_shp_thr index="1" type="double" size="[1 5]">[15 15 1515 15]&lt;/src_shp_thr></p>
+<p>&lt;src_shp_div index="1" type="double" size="[1 5]">[5 5 5 5 5]&lt;/src_shp_div></p>
+<p>&lt;src_shp_lindex="1" type="double" size="[1 5]">[1 1 1 1 1]&lt;/src_shp_i></p>
+<p>&lt;src_shp_c index="1" type="double" size="[1 5]">[0 0 0 0 0]&lt;/src_shp_c></p>
+<p>&lt;src_shp_w00 index="1" type="double" size="[1 5]">[-1 -1 -1 -1 -1]&lt;/src_shp_w00></p>
+<p>&lt;src_shp_w01 index="1" type="double" size="[1 5]">[-1 -1 -1 -1 -1]&lt;/src_shp_w01></p>
+<p>&lt;src_shp_w02 index="1" type="double" size="[1 5]">[-2 -2 -2 -2-2]&lt;/src_shp_w02></p>
+<p>&lt;src_shp_w03 index="1" type="double" size="[1 5]">[-1 -1 -1 -1 -1]&lt;/src_shp_w03></p>
+<p>&lt;src_shp_w04 index="1" type="double" size="[1 5]">[-1 -1 -1 -1 -1]&lt;/src_shp_w04></p>
+<p>&lt;src_shp_w10 index="1" type="double" size="[1 5]">[-1 -1 -1 -1 -1]&lt;/src_shp_w10></p>
+<p>&lt;src_shp_w11 index="1" type="double" size="[1 5]">[2 2 2 2 2] &lt;/src_shp_w11></p>
+<p>&lt;src_shp_w12 index="1" type="double" size="[1 5]">[2 2 2 2 2] &lt;/src_shp_w12></p>
+<p>&lt;src_shp_w13 index="1" type="double" size="[1 5]">[2 2 2 2 2] &lt;/src_shp_w13></p>
+<p>&lt;src_shp_w14 index="1" type="double" size="[1 5]">[-1 -1 -1 -1 -1]&lt;/src_shp_w14></p>
+<p>&lt;src_shp_w20 index="1" type="double" size="[1 5]">[-2 -2 -2 -2 -2] &lt;/src_shp_w20></p>
+<p>&lt;src_shp_w21 index="1" type="double" size="[1 5]">[2 2 2 2 2] &lt;/src_shp_w21></p>
+<p>&lt;src_shp_w22 index="1" type="double" size="[1 5]">[36 36 36 36 36]&lt;/src_shp_w22></p>
+<p>&lt;src_shp_w23 index="1" type="double" size="[1 5]">[2 2 2 2 2] &lt;/src_shp_w23></p>
+<p>&lt;src_shp_w24 index="1" type="double" size="[1 5]">[-2 -2 -2 -2 -2] &lt;/src_shp_w24></p>
+<p>&lt;src_shp_w30 index="1" type="double" size="[1 5]">[-1 -1 -1 -1 -1]&lt;/src_shp_w30></p>
+<p>&lt;src_shp_w31 index="1" type="double" size="[1 5]">[2 2 2 2 2] &lt;/src_shp_w31></p>
+<p>&lt;src_shp_w32 index="1" type="double" size="[1 5]">[2 2 2 2 2] &lt;/src_shp_w32></p>
+<p>&lt;src_shp_w33 index="1" type="double" size="[1 5]">[2 2 2 2 2] &lt;/src_shp_w33></p>
+<p>&lt;src_shp_w34 index="1" type="double" size="[1 5]">[-1 -1 -1-1 -1]&lt;/src_shp_w34></p>
+<p>&lt;src_shp_w40 index="1" type="double" size="[1 5]">[-1 -1 -1 -1 -1]&lt;/src_shp_w40></p>
+<p>&lt;src_shp_w41 index="1" type="double" size="[1 5]">[-1 -1 -1 -1 -1]&lt;/src_shp_w41></p>
+<p>&lt;src_shp_w42 index="1" type="double" size="[1 5]">[-2 -2 -2 -2 -2]&lt;/src_shp_w42></p>
+<p>&lt;src_shp_w43 index="1" type="double" size="[1 5]">[-1 -1 -1 -1 -1]&lt;/src_shp_w43></p>
+<p>&lt;src_shp_w44 index="1" type="double" size="[1 5]">[-1 -1 -1 -1 -1]&lt;/src_shp_w44></p>
+<p>&lt;/Shp_Setting></p>
+<p>shp_default：1：采用代码默认配置， 0：采用底下参数配置。</p>
+<p>src_shp_thr：锐化阈值，取值范围从[0 31]。</p>
+<p>src_shp_div：权重位移位数，取值范围[0 7]。</p>
+<p>src_shp_l: 亮度 y 通道锐化使能标志位 0：不使能 1：使能。</p>
+<p>src_shp_c: 色度 crcb 通道锐化使能标志位 0：不使能 1：使能。</p>
+<p>src_shp _w00 ——src_shp _w44：随着 gain 不同，配置亮度锐化 5x5 模板权重。</p>
+<p>最中心一行权重为 8bit 取值范围，其余权重取值范围为 6bit，带符号位。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32118-new_dsp_3dnr_setting>3.2.11.8 NEW_DSP_3DNR_Setting<a href=#32118-new_dsp_3dnr_setting class=hash-link aria-label="3.2.11.8 NEW_DSP_3DNR_Setting的直接链接" title="3.2.11.8 NEW_DSP_3DNR_Setting的直接链接" translate=no>​</a></h5>
+<p>NEW_DSP_3DNR_Setting 是第二版 3dnr 对应的参数设置地方。</p>
+<table><thead><tr><th><th><th><tbody><tr><td><td><td></table>
+<p>&lt;NEW_DSP_3DNR_Setting index="1" type="cell" size="[1 1]"></p>
+<p>&lt;cell index="1" type="struct" size="[1 1]"></p>
+<p>&lt;name index="1" type="char" size="[1 6]">normal&lt;/name></p>
+<p>&lt;Enable index="1" type="double" size="[1 1]">[0]&lt;/Enable></p>
+<p>&lt;dpc_enable index="1" type="double" size="[1 1]">[1]&lt;/dpc_enable></p>
+<p>&lt;gain_level index="1" type="double" size="[1 5]">[1 2 4 816]&lt;/gain_level></p>
+<p>&lt;ynr_Setting index="1" type="struct" size="[1 1]"></p>
+<p>&lt;ynr_enable index="1" type="double" size="[1 1]">[1]&lt;/ynr_enable></p>
+<p>&lt;tnr_enable index="1" type="double" size="[1 1]">[1]&lt;/tnr_enable></p>
+<p>&lt;iir_enable index="1" type="double" size="[1 1]">[1]&lt;/iir_enable></p>
+<p>&lt;ynr_level index="1" type="double" size="[1 5]">[1 2 3 4 5]&lt;/ynr_level></p>
+<p>&lt;/ynr_Setting></p>
+<p>&lt;uvnr_Setting index="1" type="struct" size="[1 1]"></p>
+<p>&lt;uvnr_enable index="1"type="double" size="[1 1]">[1]&lt;/uvnr_enable></p>
+<p>&lt;uvnr_level index="1" type="double" size="[1 5]">[4 6 8 10 12]&lt;/uvnr_level></p>
+<p>&lt;/uvnr_Setting></p>
+<p>&lt;sharp_Setting index="1" type="struct" size="[1 1]"></p>
+<p>&lt;sharp_enable index="1" type="double" size="[1 1]">[1]&lt;/sharp_enable></p>
+<p>&lt;sharp_level index="1" type="double" size="[1 5]">[0 1 2 3 4]&lt;/sharp_level></p>
+<p>&lt;/sharp_Setting></p>
+<p>&lt;/cell></p>
+<p>Name：模式名称 现在支持白天(normal)和夜晚(night)两个模式.</p>
+<p>Enable：3dnr 整个模块开关。0：关闭，1：打开</p>
+<p>dpc_enable：3dnr 中去坏点模块，一些色彩经过 3dnr可能变成坏点。0：关闭，1：打开。gain_level：3ndr 的力度随着 gain 值变化而变化。这个是不同 gain 下，对应下面不同设置ynr_Setting：3dnr 针对亮度去噪的设置。</p>
+<p>iir_enable: 亮度噪声某个去噪功能使能参数，0:关闭，1：打开，默认值 0。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=3212-dpcc-参数说明>3.2.12 DPCC 参数说明<a href=#3212-dpcc-参数说明 class=hash-link aria-label="3.2.12 DPCC 参数说明的直接链接" title="3.2.12 DPCC 参数说明的直接链接" translate=no>​</a></h4>
+<p>DPCC 模块全称：Defect Pixel Cluster Correction。</p>
+<p>DPCC 去坏点参数，此模块为设置相应寄存器为相应的值。</p>
+<p>DPCC 模块硬件上有 V1 和 V2 两个版本，V2 版本是在 V1 基础上进行修改，包含 V1 功能，并新增一些功能。两个版本共用相同的参数，但是参数配置内容有些区别。DPCC V2 版本如果只用 V1 版本功能，需将 dpcc_mode 寄存器第 4bit 置为 1。DPCC V2 版本如果 dpcc_mode 第 4bit 为 0，则使用带 rk mode 条件的新 dpcc 算法。</p>
+<table><thead><tr><th>适用 ISP 版本<th>Dpcc 硬件版本<th>适用软件及版本<th>DPCC mode bit[4]<tbody><tr><td>ISP10<td>V1<td>camera_engine_rkisp: v2.0.0IQ magic code: 635075<td>0<tr><td>ISP11<td>V1<td>0<td><tr><td>ISP12<td>V2<td>0/1<td></table>
+<p>下面文档先对 V1 参数进行说明，再对有修改 V2 参数进行补充。</p>
+<p>此模块参数均为相应寄存器对应寄存器值设置。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32121-dpcc-硬件-v1-寄存器>3.2.12.1 dpcc 硬件 V1 寄存器<a href=#32121-dpcc-硬件-v1-寄存器 class=hash-link aria-label="3.2.12.1 dpcc 硬件 V1 寄存器的直接链接" title="3.2.12.1 dpcc 硬件 V1 寄存器的直接链接" translate=no>​</a></h5>
+<p>ISP_DPCC_MODE:</p>
+<table><thead><tr><th>Bits<th>Name<th>Description<tbody><tr><td>31:3<td>---<td>unused<tr><td>2<td>STAGE1_ENABLE<td>1: enable stage1 *Default0: bypass stage1</table>
+<table><thead><tr><th><th><th><tbody><tr><td><td><td><tr><td><td><td></table>
+<p>ISP_DPCC_OUT_MODE:</p>
+<table><thead><tr><th>Bits<th>Name<th>Description<tbody><tr><td>31:4<td>---<td>unused<tr><td>3<td>STAGE1_RB_3x3<td>1: stage1 red/blue 9 pixel (3x3) output median0: stage1 red/blue 4 or 5 pixel output median <em>Default</em><tr><td>2<td>STAGE1_G_3x3<td>1: stage1 green 9 pixel (3x3) output median0: stage1 green 4 or 5 pixel output median <em>Default</em><tr><td>1<td>STAGE1_INCL_RB_CENTER<td>1: stage1 include center pixel for red/blue output median2x2+1<em>Default</em> 0: stage1 do not include center pixel for red/blueoutput median 2x2<tr><td>0<td>STAGE1_INCL_GREEN_CENTER<td>1: stage1 include center pixel for green output median2x2+1 <em>Default</em>0: stage1 do not include center pixel for green outputmedian 2x2</table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=isp_dpcc_set_use>ISP_DPCC_SET_USE:<a href=#isp_dpcc_set_use class=hash-link aria-label=ISP_DPCC_SET_USE:的直接链接 title=ISP_DPCC_SET_USE:的直接链接 translate=no>​</a></h3>
+<table><thead><tr><th>Bits<th>Name<th>Description<tbody><tr><td>31:4<td>一<td>unused<tr><td>3<td>STAGE1_USE_FIX_SET<td>1: stage1 use hard coded methods set <em>Default</em>0: stage1 do not use hard coded methods set</table>
+<table><thead><tr><th>Bits<th>Name<th>Description<tbody><tr><td>2<td>STAGE1_USE_SET_3<td>1: stage1 use methods set 30: stage1 do not use methods set 3 <em>Default</em><tr><td>1<td>STAGE1_USE_SET_2<td>1: stage1 use methods set 20: stage1 do not use methods set 2 <em>Default</em><tr><td>0<td>STAGE1_USE_SET_1<td>1: stage1 use methods set 1 <em>Default</em>0: stage1 do not use methods set 1</table>
+<p>ISP_DPCC_METHODS_SET1:</p>
+<table><thead><tr><th>Bits<th>Name<th>Description<tbody><tr><td>31:13<td><td>unused<tr><td>12<td>RG_RED_BLUE1_ENABLE<td>1: enable Rank Gradient check for red_blue <em>Default</em>0: bypass Rank Gradient check for red_blue<tr><td>11<td>RND_RED_BLUE1_ENABLE<td>1: enable Rank Neighbor Difference check for red_blue<em>Default</em>0: bypass Rank Neighbor Difference check for red_blue<tr><td>10<td>RO_RED_BLUE1_ENABLE<td>1: enable Rank Order check for red_blue <em>Default</em>0: bypass Rank Order check for red_blue<tr><td>9<td>LC_RED_BLUE1_ENABLE<td>1: enable Line check for red_blue <em>Default</em>0: bypass Line check for red_blue<tr><td>8<td>PG_RED_BLUE1_ENABLE<td>1: enable Peak Gradient check for red_blue <em>Default</em>0: bypass Peak Gradient check for red_blue<tr><td>7:5<td>1<td>unused<tr><td>4<td>RG_GREEN1_ENABLE<td>1: enable Rank Gradient check for green <em>Default</em>0: bypass Rank Gradient check for green<tr><td>3<td>RND_GREEN1_ENABLE<td>1: enable Rank Neighbor Difference check for green <em>Default</em>0: bypass Rank Neighbor Difference check for green<tr><td>2<td>RO_GREEN1_ENABLE<td>1: enable Rank Order check for green <em>Default</em>0: bypass Rank Order check for green<tr><td>1<td>LC_GREEN1_ENABLE<td>1: enable Line check for green *Default0: bypass Line check for green<tr><td>0<td>PG_GREEN1_ENABLE<td>1: enable Peak Gradient check for green <em>Default</em>0: bypass Peak Gradient check for green</table>
+<p>ISP_DPCC_METHODS_SET2: 同上 set1</p>
+<p>ISP_DPCC_METHODS_SET3: 同上 set1</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=set1-对应阈值参数>SET1 对应阈值参数：<a href=#set1-对应阈值参数 class=hash-link aria-label="SET1 对应阈值参数：的直接链接" title="SET1 对应阈值参数：的直接链接" translate=no>​</a></h3>
+<p>ISP_DPCC_LINE_THRESH_1：</p>
+<table><thead><tr><th><th><th><tbody><tr><td><td><td><tr><td><td><td><tr><td><td><td><tr><td><td><td></table>
+<p>ISP_DPCC_LINE_MAD_FAC_1：</p>
+<table><thead><tr><th>Bits<th>Name<th>Description<tbody><tr><td>31:14<td>---<td>unused<tr><td>13:8<td>LINE_MAD_FAC_1_RB<td>line MAD factor for set 1 red/blue<tr><td>7:6<td>---<td>unused<tr><td>5:0<td>LINE_MAD_FAC_1_G<td>line MAD factor for set 1 green<tr><td>Note: all values are unsigned integer<td><td></table>
+<p>ISP_DPCC_PG_FAC_1：</p>
+<table><thead><tr><th>Bits<th>Name<th>Description<tbody><tr><td>31:14<td>一<td>unused<tr><td>13:8<td>PG_FAC_1_RB<td>Peak gradient factor for set 1 red/blue<tr><td>7:6<td>一<td>unused<tr><td>5:0<td>PG_FAC_1_G<td>Peak gradient factor for set 1 green<tr><td>Note: all values are unsigned integer<td><td></table>
+<p>ISP_DPCC_RND_THRESH_1：</p>
+<table><thead><tr><th><th><th><tbody><tr><td><td><td><tr><td><td><td><tr><td><td><td><tr><td><td><td></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=isp_dpcc_rg_fac_1>ISP_DPCC_RG_FAC_1：<a href=#isp_dpcc_rg_fac_1 class=hash-link aria-label=ISP_DPCC_RG_FAC_1：的直接链接 title=ISP_DPCC_RG_FAC_1：的直接链接 translate=no>​</a></h3>
+<table><thead><tr><th>Bits<th>Name<th>Description<tbody><tr><td>31:14<td>一<td>unused<tr><td>13:8<td>RG_FAC_1_RB<td>Rank gradient factor for set 1 red/blue<tr><td>7:6<td>一<td>unused<tr><td>5:0<td>RG_FAC_1_G<td>Rank gradient factor for set 1 green<tr><td>Note: all values are unsigned integer<td><td></table>
+<p>ISP_DPCC_RO_LIMITS：</p>
+<table><thead><tr><th>Bits<th>Name<th>Description<tbody><tr><td>31:12<td>---<td>unused<tr><td>11:10<td>RO_LIM_3_RB<td>Rank order limit for set 3 red/blue<tr><td>9:8<td>RO_LIM_3_G<td>Rank order limit for set 3 green<tr><td>7:6<td>RO_LIM_2_RB<td>Rank order limit for set 2 red/blue<tr><td>5:4<td>RO_LIM_2_G<td>Rank order limit for set 2 green<tr><td>3:2<td>RO_LIM_1_RB<td>Rank order limit for set 1 red/blue<tr><td>1:0<td>RO_LIM_1_G<td>Rank order limit for set 1 green<tr><td>Note: all values are unsigned integer<td><td></table>
+<p>ISP_DPCC_RND_OFFS：</p>
+<table><thead><tr><th>Bits<th>Name<th>Description<tbody><tr><td>31:12<td>一<td>unused<tr><td>11:10<td>RND_OFFS_3_RB<td>Rank Offset to Neighbor for set 3 red/blue<tr><td>9:8<td>RND_OFFS_3_G<td>Rank Offset to Neighbor for set 3 green</table>
+<table><thead><tr><th>Bits<th>Name<th>Description<tbody><tr><td>7:6<td>RND_OFFS_2_RB<td>Rank Offset to Neighbor for set 2 red/blue<tr><td>5:4<td>RND_OFFS_2_G<td>Rank Offset to Neighbor for set 2 green<tr><td>3:2<td>RND_OFFS_1_RB<td>Rank Offset to Neighbor for set 1 red/blue<tr><td>1:0<td>RND_OFFS_1_G<td>Rank Offset to Neighbor for set 1 green<tr><td>Note: all values are unsigned integer<td><td></table>
+<p>剩余参数为 set2 和 set3 可调参数，与 set1 相同意思，在此不再复述。</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32123-dpcc-硬件-v1-推荐设置>3.2.12.3 dpcc 硬件 V1 推荐设置<a href=#32123-dpcc-硬件-v1-推荐设置 class=hash-link aria-label="3.2.12.3 dpcc 硬件 V1 推荐设置的直接链接" title="3.2.12.3 dpcc 硬件 V1 推荐设置的直接链接" translate=no>​</a></h5>
+<p>Datasheet 中推荐 6 组参数设置，根据不同坏点数量和坏点大小进行设置，如下图：</p>
+<table><thead><tr><th>Case<th>2. singlepixels<th>3. smallclusters<th>4. bigclusters<tbody><tr><td>a) few defects<td>par1<td>par2<td>par3<tr><td>b) many defects<td>par4<td>par5<td>par6</table>
+<p>isp dpcc 2900 ISP DPCC MODE</p>
+<table><thead><tr><th>register<th>par1<th>par2<th>par3<th>par4<th>par5<th>par6<tbody><tr><td>ISP DPCC MODE<td>0x0005<td>0x0005<td>0x0005<td>0x0005<td>0x0005<td>0x0005<tr><td>ISP DPCC OUT MODE<td>0x0003<td>0x0003<td>0x0003<td>0x0003<td>0x0003<td>0x0003<tr><td>ISP_DPCC_SET_USE<td>0x0003<td>0x0003<td>0x0007<td>0x0003<td>0x000F<td>0x000F<tr><td>ISP_DPCC_METHODS_SET1<td>0x1F1F<td>0x1F1F<td>0x1D1D<td>0x1D1D<td>0x1D1D<td>0x1D1D<tr><td>ISP_DPCC_METHODS_SET2<td>0x0707<td>0x0707<td>0x0707<td>0x0707<td>0x0707<td>0x0707<tr><td>ISP_DPCC_METHODS_SET3<td>0x1F1F<td>0x1F1F<td>0x1F1F<td>0x1F1F<td>0x1F1F<td>0x1F1F<tr><td>ISP_DPCC_LINE_THRESH_1<td>0x0808<td>0x0808<td>0x0808<td>0x0808<td>0x0808<td>0x0808<tr><td>ISP DPCC_LINE_MAD FAC_1<td>0x0404<td>0x0404<td>0x0404<td>0x0404<td>0x0404<td>0x0404<tr><td>ISP DPCC PG FAC 1<td>0x0808<td>0x0808<td>0x0806<td>0x0806<td>0x0606<td>0x0404<tr><td>ISP_DPCC_RND_THRESH_1<td>0x0A0A<td>0x0A0A<td>0x0A0A<td>0x0A0A<td>0x0808<td>0x0804<tr><td>ISP DPCC RG FAC 1<td>0x2020<td>0x2020<td>0x2020<td>0x2020<td>0x1010<td>0x0802<tr><td>ISP_DPCC_LINE_THRESH_2<td>0x2018<td>0x1010<td>0x100C<td>0x100C<td>0x100C<td>0x100C<tr><td>ISP DPCC LINE MAD FAC 2<td>0x1810<td>0x1810<td>0x1810<td>0x1810<td>0x0808<td>0x0404<tr><td>ISP DPCC_PG_FAC_2<td>0x0806<td>0x0806<td>0x0806<td>0x0806<td>0x0606<td>0x0404<tr><td>ISP_DPCC_RND_THRESH_2<td>0x0808<td>0x0808<td>0x0808<td>0x0808<td>0x0808<td>0x0808<tr><td>ISP_DPCC_RG_FAC_2<td>0x0808<td>0x0808<td>0x0808<td>0x0808<td>0x0808<td>0x0808<tr><td>ISP_DPCC_LINE_THRESH_3<td>0x2020<td>0x2020<td>0x2020<td>0x2020<td>0x0808<td>0x0000<tr><td>ISP DPCC LINE MAD FAC 3<td>0x0404<td>0x0404<td>0x0404<td>0x0404<td>0x0404<td>0x0404<tr><td>ISP DPCC PG FAC 3<td>0x0A0A<td>0x0A0A<td>0x0A0A<td>0x0A0A<td>0x0606<td>0x0404<tr><td>ISP DPCC RND THRESH_ 3<td>0x0806<td>0x0806<td>0x0806<td>0x0806<td>0x0806<td>0x0804<tr><td>ISP_DPCC_RG_FAC_3<td>0x0404<td>0x0404<td>0x0404<td>0x0404<td>0x0404<td>0x0400</table>
+<table><thead><tr><th>ISP DPCC RO LIMITS<th>0x09A5<th>0x09FA<th>0x0AFA<th>0x09FA<th>0x0FFF<th>0x0FFF<tbody><tr><td>ISP DPCC RND_OFFS<td>0x0AAA<td>0x0FFF<td>0x0FFF<td>0x0FFF<td>0x0FFF<td>0x0FFF</table>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=32124-dpcc-硬件-v2-寄存器>3.2.12.4 dpcc 硬件 V2 寄存器<a href=#32124-dpcc-硬件-v2-寄存器 class=hash-link aria-label="3.2.12.4 dpcc 硬件 V2 寄存器的直接链接" title="3.2.12.4 dpcc 硬件 V2 寄存器的直接链接" translate=no>​</a></h5>
+<p>寄存器上，DPCCV2 寄存器大部分和 V1 版本相同。新增 rkmethod 变量是在原来 V1 寄存器上空余位增加对应的变量。</p>
+<p>如下图：</p>
+<table><thead><tr><th>Bit<th>Attr<th>Reset Value<th>Description<tbody><tr><td>31:5<td>RO<td>0x0<td>reserved<tr><td>4<td>RW<td>0x1<td>sw_mem_update_mode1'b0: select uncorreted data to update mem(rk mode)1'b1: select updated data to update mem(img mode default)</table>
+<p>isp dpCC 2900 ISP DPCC QUTPUT MODE</p>
+<table><thead><tr><th>Bit<th>Attr<th>Reset Value<th>Description<tbody><tr><td>31:7<td>RO<td>0x0<td>reserved<tr><td>6:5<td>RW<td>0x0<td>sw_rk_out_sel2'b00<!-- -->:RK<!-- --> method12'b01<!-- -->:RK<!-- --> method22'b10<!-- -->:RK<!-- --> method32'b11<!-- -->:reserved<tr><td>4<td>RW<td>0x0<td>sw_dpcc_output_sel1'b0: select median mode1'b1: select rk output mode</table>
+<p>isp dpcc 2900 ISP DPCC METHODS SET 1</p>
+<table><thead><tr><th>Bit<th>Attr<th>Reset Value<th>Description<tbody><tr><td>31:14<td>RO<td>0x0<td>reserved</table>
+<p>Copyrig6ht 2015 @FuZhou Rockchip Electranics Co., Ltd. 298</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=px30-trm>PX30 TRM<a href=#px30-trm class=hash-link aria-label="PX30 TRM的直接链接" title="PX30 TRM的直接链接" translate=no>​</a></h3>
+<table><thead><tr><th><th><th><th>sw_rk_red_blue1_en<tbody><tr><td>13<td>RW<td>0×0<td>1: enable RK method check for green <em>Default</em> 0: bypass RK method check for green</table>
+<table><thead><tr><th><th><th><th><tbody><tr><td>5<td>RW<td>0x0<td>sw_rk_green1_en 1: enable RK method check for green <em>Default</em><tr><td><td><td><td>0: bypass RK method check for green</table>
+<p>Address: Operational Base + offset (0x0018)</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=isp-dpcc-2900-isp-dpcc-line-thresh-1>isp dpcc 2900 ISP DPCC LINE THRESH 1<a href=#isp-dpcc-2900-isp-dpcc-line-thresh-1 class=hash-link aria-label="isp dpcc 2900 ISP DPCC LINE THRESH 1的直接链接" title="isp dpcc 2900 ISP DPCC LINE THRESH 1的直接链接" translate=no>​</a></h3>
+<table><thead><tr><th>Bit<th>Attr<th>Reset Value<th>Description<tbody><tr><td>31:24<td>RW<td>0×00<td>sw_mindis1_rbmin distance for set 1 red /blue</table>
+<p>Copyrig6ht 2015 @FuZhou Rockchip Electranics Co., Ltd. 303</p>
+<p>PX30 TRM</p>
+<table><thead><tr><th>23:16RW<th><th>0×00<th>sw_mindis1_g min distance for set 1 green<tbody><tr><td><td><td><td></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=isp_dpcc_2900_isp_-dpcc_line_mad_fac_1>isp_dpcc_2900_ISP_ DPCC_LINE_MAD_FAC_1<a href=#isp_dpcc_2900_isp_-dpcc_line_mad_fac_1 class=hash-link aria-label="isp_dpcc_2900_ISP_ DPCC_LINE_MAD_FAC_1的直接链接" title="isp_dpcc_2900_ISP_ DPCC_LINE_MAD_FAC_1的直接链接" translate=no>​</a></h3>
+<p>Address: Operational Base + offset (0x001c)</p>
+<table><thead><tr><th>Bit<th>Attr<th>Reset Value<th>Description<tbody><tr><td>31:30<td>RO<td>0x0<td>reserved<tr><td>29:24<td>RW<td>0x00<td>sw_dis_scale_min1<tr><td>23:22<td>RO<td>0x0<td>reserved<tr><td>21:16<td>RW<td>0x00<td>sw_dis_scale_max1</table>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=3213-cproc-参数说明>3.2.13 CPROC 参数说明<a href=#3213-cproc-参数说明 class=hash-link aria-label="3.2.13 CPROC 参数说明的直接链接" title="3.2.13 CPROC 参数说明的直接链接" translate=no>​</a></h4>
+<p>CPROC 模块全称：color process</p>
+<p>Cproc 设置图像明度，对比度，饱和度，色调参数</p>
+<p>目前支持 3 个模式的设置，分别为 preview, capture,video 模式Name：模式名称</p>
+<p>Saturation：饱和度设置，取值范围[0-1.992]</p>
+<p>Contrast：对比度设置，取值范围[0-1.992]</p>
+<p>Brightness：明度设置，取值范围[-255 +255]</p>
+<p>Hue: 色调设置，取值范围[-90 87.188]</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=3214-iesharpen-参数说明>3.2.14 IESHARPEN 参数说明<a href=#3214-iesharpen-参数说明 class=hash-link aria-label="3.2.14 IESHARPEN 参数说明的直接链接" title="3.2.14 IESHARPEN 参数说明的直接链接" translate=no>​</a></h4>
+<table><thead><tr><th>适用 ISP 版本<th>IESharp 硬件版本<th>适用软件及版本<th>IQ参数配置<tbody><tr><td>ISP10<td>V1<td>camera_engine_rkisp: v2.0.0IQ magic code: 635075<td>不支持<tr><td>ISP11<td>V1<td>car<td>不支持<tr><td>ISP12<td>V2<td>支持<td></table>
+<p>IESHARPEN</p>
+<p>index =1</p>
+<p>type = cell</p>
+<p>size = [1 2]</p>
+<p>cell</p>
+<p>index =1</p>
+<p>type = struct</p>
+<p>size = [1 1]</p>
+<p>name 2096x1560</p>
+<p>resolution 2096x1560</p>
+<p>IEsharpenEnable [0]</p>
+<p>coring_thr [0]</p>
+<p>full_range [0]</p>
+<p>switch_avg [1]</p>
+<p>yavg_thr [32 64 128 170]</p>
+<p>p_deltal [44568]</p>
+<p>p_delta2 [44568]</p>
+<p>+pmaxnumber [55666]</p>
+<p>pminnumber [11000]</p>
+<p>gauss_flat_coe [24 32 24 32 32 32 24 32 24]</p>
+<p>gauss_noise_coe [24 32 24 32 32 32 24 32 24]</p>
+<p>gauss_other_coe [8 12 8 12 176 12 8 12 8]</p>
+<p>gain_dvide [4]</p>
+<p>l_p_grad [32 64 128 256]</p>
+<p>+I_sharp_factor [2 8 16 32 24]</p>
+<p>I_line1_filter_coe [6366565]</p>
+<p>L_line2_filter_coe [3 4 3 4 36 4 3 4 3]</p>
+<p>_line3_filter_coe [5656366]</p>
+<p>l_lap_mat_coe [12 12 12 12 11 12 12 12 12]</p>
+<p>h_p_grad [32 64 128 256]</p>
+<p>+h_sharp_factor [0 4 8 32 32]</p>
+<p>h_line1_filter_coe [11 13 11 9 11 9]</p>
+<p>h_line2_filter_coe [5 7 5 7 16 7 5 7 5]</p>
+<p>h_line3_filter_coe [9 11 9 11 13 11]</p>
+<p>h_lap_mat_coe [12 12 12 12 11 12 12 12 12]</p>
+<p>uv_gauss_flat_coe [15 17 19 17 15 15 19 22 19 15 15 17 19 17 15]</p>
+<p>uv_gauss_noise_coe [15 17 19 17 15 15 19 22 19 15 15 17 19 17 15]</p>
+<p>uv_gauss_other_coe [3 4 5 4 33 5 202 53 3 45 4 3]</p>
+<p>IEsharpenEnable：IE 模块的 rk 设计锐化是否使能：0：不使能，1：使能。</p>
+<p>coring_thr：y 通道拉普拉斯锐化结果，如果小于此阈值，则不锐化。</p>
+<p>full_range：yuv 是否采用 full range, 0:不是，1：是。</p>
+<p>switch_avg：</p>
+<p>中心点与周围 3x3 均值的绝对差值比较条件是否使能，0：不使能，1：使能。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=yavg_thr>yavg_thr：<a href=#yavg_thr class=hash-link aria-label=yavg_thr：的直接链接 title=yavg_thr：的直接链接 translate=no>​</a></h3>
+<p>判断中心点周围 3x3 均值，用 4 个阈值划分出 5 个区域，对每个区域采用不同参数进行锐化控制。取值范围[0-255]。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=p_delta1>p_delta1：<a href=#p_delta1 class=hash-link aria-label=p_delta1：的直接链接 title=p_delta1：的直接链接 translate=no>​</a></h3>
+<p>上面所说 5 个区域中，每个区域对应中心点和周围 3x3 均值的绝对差值的阈值设定，用来判断是否是平坦区和噪声区的条件之一。取值范围[0-255]。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=p_delta2>p_delta2：<a href=#p_delta2 class=hash-link aria-label=p_delta2：的直接链接 title=p_delta2：的直接链接 translate=no>​</a></h3>
+<p>上面所说 5 个区域中，每个区域周围 3x3 像素点和均值的绝对差值的阈值设定，用来判断是否是平坦区和噪声区的条件之二。取值范围[0-255]。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=pmaxnumber>Pmaxnumber：<a href=#pmaxnumber class=hash-link aria-label=Pmaxnumber：的直接链接 title=Pmaxnumber：的直接链接 translate=no>​</a></h3>
+<p>上面所说 5 个区域中，每个区域周围 3x3 像素点与均值绝对差值小于 p_delta2 的最少个数的阈值设定，用来判断是否是平坦区的条件之三。取值范围[0-8]。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=pminnumber>Pminnumber：<a href=#pminnumber class=hash-link aria-label=Pminnumber：的直接链接 title=Pminnumber：的直接链接 translate=no>​</a></h3>
+<p>上面所说 5 个区域中，每个区域周围 3x3 像素点与均值绝对差值小于 p_delta2 的最多个数的阈值设定，用来判断是否是噪声区的条件之三。取值范围[0-8]。</p>
+<p>gauss_flat_coe：</p>
+<p>平坦区 y 通道对应的 3x3 高斯滤波系数。取值范围[0-255]。</p>
+<p>gauss_noise_coe：</p>
+<p>噪声区 y 通道对应的 3x3 高斯滤波系数。取值范围[0-255]。</p>
+<p>gauss_other_coe：</p>
+<p>其他区 y 通道对应的 3x3 高斯滤波系数。取值范围[0-255]。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=gain_dvide>gain_dvide:<a href=#gain_dvide class=hash-link aria-label=gain_dvide:的直接链接 title=gain_dvide:的直接链接 translate=no>​</a></h3>
+<p>以此 gain为分界，将参数划分成 2 组，一组低 gain 对应，一组用于高 gain 下参数。</p>
+<p>低 gain 对应滤波参数和锐化参数, 此 gain 为上面小于上面 gain_devide.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=l_p_grad>l_p_grad：<a href=#l_p_grad class=hash-link aria-label=l_p_grad：的直接链接 title=l_p_grad：的直接链接 translate=no>​</a></h3>
+<p>y通道 3x3 像素点进行滤波后，h 和 v 方向总梯度差作为判断，用 4 个阈值将梯度差范围划分出 5 个区域，用来控制不同的锐化系数。取值范围[0-2047]。</p>
+<p>l_sharp_factor：上面 5 个梯度差区域，对应的不同的锐化系数。取值范围[0-63]。</p>
+<p>l_line1_filter_coe：</p>
+<p>y通道 3x3 像素点进行滤波，第一行数据对应滤波系数。取值范围[0-63]。</p>
+<p>l_line2_filter_coe：</p>
+<p>y通道 3x3 像素点进行滤波，第二行数据对应滤波系数。取值范围[0-63]。</p>
+<p>l_line3_filter_coe：</p>
+<p>y通道 3x3 像素点进行滤波，第三行数据对应滤波系数。取值范围[0-63]。</p>
+<p>高 gain 对应滤波参数和锐化参数，此 gain 为上面大于等于 gain_devide.</p>
+<p>h_p_grad： 同上，高 gain 对应系数。</p>
+<p>h_sharp_factor：同上，高 gain 对应系数。</p>
+<p>h_line1_filter_coe：同上，高 gain 对应系数。</p>
+<p>h_line2_filter_coe：同上，高 gain 对应系数。</p>
+<p>h_line3_filter_coe：同上，高 gain 对应系数。</p>
+<p>uv_gauss_flat_coe：平坦区 uv 通道对应的 3x5 高斯滤波系数。取值范围[0-255]。</p>
+<p>uv_gauss_noise_coe：噪声区 uv 通道对应的 3x5 高斯滤波系数。取值范围[0-255]。</p>
+<p>uv_gauss_other_coe：其他区 uv 通道对应的 3x5 高斯滤波系数。取值范围[0-255]。</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=3215-otp-参数说明>3.2.15 OTP 参数说明<a href=#3215-otp-参数说明 class=hash-link aria-label="3.2.15 OTP 参数说明的直接链接" title="3.2.15 OTP 参数说明的直接链接" translate=no>​</a></h4>
+<p>otp_awb_enable：awb otp 是否要打开，0：关闭，1：打开。</p>
+<p>awb_golden_r_value：golden 模组对应读出来的 otp awb 的 r 通道值。</p>
+<p>awb_golden_gr_value: golden 模组对应读出来的 otp awb 的 gr 通道值。</p>
+<p>awb_golden_gb_value: golden 模组对应读出来的 otp awb 的 gb 通道值。</p>
+<p>awb_golden_b_value: golden 模组对应读出来的 otp awb 的 b 通道值。</p>
+<p>otp_lsc_enable: lsc otp 是否打开，0：关闭，1：打开。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=33-system-参数说明>3.3 system 参数说明<a href=#33-system-参数说明 class=hash-link aria-label="3.3 system 参数说明的直接链接" title="3.3 system 参数说明的直接链接" translate=no>​</a></h3>
+<p>System 里的 afps 参数，目前软件上已按照曝光分解方式自动去变帧率了，这里保持原样即可。</p>
+<p>白system</p>
+<p>a= size = [1 1]</p>
+<p>a= type = struct</p>
+<p>AFPS</p>
+<p>a= index = 1</p>
+<p>a= size = [1 1]</p>
+<p>a= type = struct</p>
+<p>aFpsDefault on</div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href=https://github.com/100askTeam/zephyr-docs/tree/master/docs/DshanPi-A1/9-原厂在线文档/Common/ISP/RKISP1-IQ-Parameters-User-Guide-v1.0-20190606.md target=_blank rel="noopener noreferrer" class=theme-edit-this-page><svg fill=currentColor height=20 width=20 viewBox="0 0 40 40" class=iconEdit_Z9Sw aria-hidden=true><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"/></g></svg>编辑此页</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label=文件选项卡><a class="pagination-nav__link pagination-nav__link--prev" href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP-Driver-User-Manual-v1.3-20190919><div class=pagination-nav__sublabel>上一页</div><div class=pagination-nav__label>RKISP\_Driver\_User\_Manual</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/docs/DshanPi-A1/原厂在线文档/Common/ISP/Rockchip Camera Module OTP Calibration Guide-CN"><div class=pagination-nav__sublabel>下一页</div><div class=pagination-nav__label>Rockchip Camera Module OTP Calibration Guide</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href=#31-header-参数说明 class="table-of-contents__link toc-highlight">3.1 header 参数说明</a><li><a href=#32-sensor-模块参数说明 class="table-of-contents__link toc-highlight">3.2 sensor 模块参数说明</a><li><a href=#两者的区别仅在白点参数条件和光源判断条件不同其他参数都是相同的 class="table-of-contents__link toc-highlight">两者的区别仅在白点参数条件和光源判断条件不同，其他参数都是相同的：</a><li><a href=#1-awb-version_10-光源判断参数 class="table-of-contents__link toc-highlight">1: AWB VERSION_10 光源判断参数</a><li><a href=#2-awb-version_11-光源判断参数 class="table-of-contents__link toc-highlight">2: AWB VERSION_11 光源判断参数</a><li><a href=#1awb-version_10-白点条件参数说明 class="table-of-contents__link toc-highlight">1：AWB VERSION_10 白点条件参数说明</a><li><a href=#k_factor class="table-of-contents__link toc-highlight">K_Factor：</a><li><a href=#2awb-version_11-白点条件参数说明 class="table-of-contents__link toc-highlight">2：AWB VERSION_11 白点条件参数说明</a><li><a href=#gmm-包含-invcovmatrixgaussianscalingfactortau class="table-of-contents__link toc-highlight">GMM 包含 invCovMatrix，GaussianScalingFactor，tau</a><li><a href=#2awb-version_11-光源判断参数 class="table-of-contents__link toc-highlight">2：AWB VERSION_11 光源判断参数</a><li><a href=#manualwb class="table-of-contents__link toc-highlight">manualWB：</a><li><a href=#aec-antiflicker-的方式 class="table-of-contents__link toc-highlight">Aec Antiflicker 的方式：</a><li><a href=#timevalue class="table-of-contents__link toc-highlight">TimeValue:</a><li><a href=#denoiselevel class="table-of-contents__link toc-highlight">DeNoiseLevel：</a><li><a href=#sharpeninglevel class="table-of-contents__link toc-highlight">SharpeningLevel：</a><li><a href=#filterlevelregconfenable class="table-of-contents__link toc-highlight">FilterLevelRegConfEnable：</a><li><a href=#filterlevel class="table-of-contents__link toc-highlight">FilterLevel：</a><li><a href=#filterg-通道的高通锐化原理 class="table-of-contents__link toc-highlight">FilterG 通道的高通锐化原理</a><li><a href=#demosaic-lp-算法说明 class="table-of-contents__link toc-highlight">Demosaic LP 算法说明：</a><li><a href=#区域划分-lp-算法说明 class="table-of-contents__link toc-highlight">区域划分 lp 算法说明</a><li><a href=#else class="table-of-contents__link toc-highlight">else</a><li><a href=#其中 class="table-of-contents__link toc-highlight">其中:</a><li><a href=#demosaic-lp-参数说明 class="table-of-contents__link toc-highlight">Demosaic LP 参数说明：</a><li><a href=#平坦区阈值条件 class="table-of-contents__link toc-highlight">平坦区阈值条件：</a><li><a href=#thh_divided0thh_divided1thh_divided2thh_divided3thh_divided4 class="table-of-contents__link toc-highlight">thH_divided0，thH_divided1，thH_divided2，thH_divided3，thH_divided4：</a><li><a href=#thcsc_divided0thcsc_divided1thcsc_divided2thcsc_divided3thcsc_divided4 class="table-of-contents__link toc-highlight">thCSC_divided0，thCSC_divided1，thCSC_divided2，thCSC_divided3，thCSC_divided4：</a><li><a href=#thgrad_r_fct class="table-of-contents__link toc-highlight">thgrad_r_fct：</a><li><a href=#thdiff_r_fct class="table-of-contents__link toc-highlight">thdiff_r_fct：</a><li><a href=#thvar_r_fct class="table-of-contents__link toc-highlight">thvar_r_fct：</a><li><a href=#thgrad_b_fct class="table-of-contents__link toc-highlight">thgrad_b_fct：</a><li><a href=#thdiff_b_fct class="table-of-contents__link toc-highlight">thdiff_b_fct：</a><li><a href=#thdiff_b_fct-1 class="table-of-contents__link toc-highlight">thdiff_b_fct：</a><li><a href=#边缘区阈值条件 class="table-of-contents__link toc-highlight">边缘区阈值条件：</a><li><a href=#其他寄存器参数说明 class="table-of-contents__link toc-highlight">其他寄存器参数说明：</a><li><a href=#shp_setting3dnr-中亮度锐化参数配置 class="table-of-contents__link toc-highlight">Shp_Setting：3dnr 中亮度锐化参数配置</a><li><a href=#isp_dpcc_set_use class="table-of-contents__link toc-highlight">ISP_DPCC_SET_USE:</a><li><a href=#set1-对应阈值参数 class="table-of-contents__link toc-highlight">SET1 对应阈值参数：</a><li><a href=#isp_dpcc_rg_fac_1 class="table-of-contents__link toc-highlight">ISP_DPCC_RG_FAC_1：</a><li><a href=#px30-trm class="table-of-contents__link toc-highlight">PX30 TRM</a><li><a href=#isp-dpcc-2900-isp-dpcc-line-thresh-1 class="table-of-contents__link toc-highlight">isp dpcc 2900 ISP DPCC LINE THRESH 1</a><li><a href=#isp_dpcc_2900_isp_-dpcc_line_mad_fac_1 class="table-of-contents__link toc-highlight">isp_dpcc_2900_ISP_ DPCC_LINE_MAD_FAC_1</a><li><a href=#yavg_thr class="table-of-contents__link toc-highlight">yavg_thr：</a><li><a href=#p_delta1 class="table-of-contents__link toc-highlight">p_delta1：</a><li><a href=#p_delta2 class="table-of-contents__link toc-highlight">p_delta2：</a><li><a href=#pmaxnumber class="table-of-contents__link toc-highlight">Pmaxnumber：</a><li><a href=#pminnumber class="table-of-contents__link toc-highlight">Pminnumber：</a><li><a href=#gain_dvide class="table-of-contents__link toc-highlight">gain_dvide:</a><li><a href=#l_p_grad class="table-of-contents__link toc-highlight">l_p_grad：</a><li><a href=#33-system-参数说明 class="table-of-contents__link toc-highlight">3.3 system 参数说明</a></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class=footer__copyright>Copyright © 2026 100askTeam, Inc. Built with Docusaurus.</div></div></div></footer></div></body>

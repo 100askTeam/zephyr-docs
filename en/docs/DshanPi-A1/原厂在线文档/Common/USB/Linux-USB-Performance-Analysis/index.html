@@ -1,0 +1,555 @@
+<!doctype html><html lang=en dir=ltr class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-Performance-Analysis" data-has-hydrated=false><head><meta charset=UTF-8><meta name=generator content="Docusaurus v3.10.2"><title data-rh=true>Rockchip USB Performance Analysis Guide | 东山Π</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"/><meta data-rh=true name=twitter:card content=summary_large_image /><meta data-rh=true property=og:image content=https://zephyr.100ask.org/en/img/docusaurus-social-card.jpg /><meta data-rh=true name=twitter:image content=https://zephyr.100ask.org/en/img/docusaurus-social-card.jpg /><meta data-rh=true property=og:url content=https://zephyr.100ask.org/en/docs/DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-Performance-Analysis /><meta data-rh=true property=og:locale content=en /><meta data-rh=true property=og:locale:alternate content=zh_Hans /><meta data-rh=true name=docusaurus_locale content=en /><meta data-rh=true name=docsearch:language content=en /><meta data-rh=true name=docusaurus_version content=current /><meta data-rh=true name=docusaurus_tag content=docs-default-current /><meta data-rh=true name=docsearch:version content=current /><meta data-rh=true name=docsearch:docusaurus_tag content=docs-default-current /><meta data-rh=true property=og:title content="Rockchip USB Performance Analysis Guide | 东山Π"/><meta data-rh=true name=description content=前言 /><meta data-rh=true property=og:description content=前言 /><link data-rh=true rel=icon href=/en/img/favicon.ico /><link data-rh=true rel=canonical href=https://zephyr.100ask.org/en/docs/DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-Performance-Analysis /><link data-rh=true rel=alternate href=https://zephyr.100ask.org/docs/DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-Performance-Analysis hreflang=zh-Hans /><link data-rh=true rel=alternate href=https://zephyr.100ask.org/en/docs/DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-Performance-Analysis hreflang=en /><link data-rh=true rel=alternate href=https://zephyr.100ask.org/docs/DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-Performance-Analysis hreflang=x-default /><script data-rh=true type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://zephyr.100ask.org/en/docs/category/原厂在线文档","name":"原厂在线文档","position":1},{"@type":"ListItem","item":"https://zephyr.100ask.org/en/docs/DshanPi-A1/原厂在线文档/Common/USB/","name":"Rockchip Linux USB 开发指南","position":2},{"@type":"ListItem","item":"https://zephyr.100ask.org/en/docs/DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-Performance-Analysis","name":"Rockchip USB Performance Analysis Guide","position":3}]}</script><link rel=alternate type=application/rss+xml href=/en/blog/rss.xml title="东山Π RSS Feed"><link rel=alternate type=application/atom+xml href=/en/blog/atom.xml title="东山Π Atom Feed"><link rel=stylesheet href=/en/assets/css/styles.6e3daa0f.css /><script src=/en/assets/js/runtime~main.7368cb74.js defer></script><script src=/en/assets/js/main.673ec9c1.js defer></script></head><body><svg style="display: none;"><defs>
+<symbol id=theme-svg-external-link viewBox="0 0 24 24"><path fill=currentColor d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme-388")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id=__docusaurus><link rel=preload as=image href=/en/img/logo.svg /><div role=region aria-label="Skip to main content"><a class=skipToContent_fXgn href=#__docusaurus_skipToContent_fallback>Skip to main content</a></div><nav aria-label=Main class="theme-layout-navbar navbar navbar--fixed-top"><div class=navbar__inner><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"/></svg></button><a class=navbar__brand href=/en/><div class=navbar__logo><img src=/en/img/logo.svg alt=东山PI class="themedComponent_mlkZ themedComponent--light_NVdE"/><img src=/en/img/logo.svg alt=东山PI class="themedComponent_mlkZ themedComponent--dark_xIcU"/></div><b class="navbar__title text--truncate">东山Π</b></a><div class="navbar__item dropdown dropdown--hoverable"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link>DshanPi-A1</a><ul class=dropdown__menu><li><a aria-current=page class="dropdown__link dropdown__link--active" href=/en/docs/DshanPi-A1/intro>DshanPi-A1</a><li><a class=dropdown__link href=/en/docs/DshanPi-A1_CM5/intro>DshanPi-A1(CM5)</a></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link>RK3568系列</a><ul class=dropdown__menu><li><a class=dropdown__link href=/en/docs/DshanPi-R1/intro>DshanPi-R1+</a><li><a class=dropdown__link href=/en/docs/100ASK_RK3568/BoardIntroduction>100ASK-RK3568</a></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a class="navbar__item navbar__link" href=/en/blog>Blog</a><a href=https://github.com/dshanpi/Docs target=_blank rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link><svg viewBox="0 0 24 24" width=20 height=20 aria-hidden=true class=iconLanguage_nlXk><path fill=currentColor d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>English</a><ul class=dropdown__menu><li><a href=/docs/DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-Performance-Analysis target=_self rel="noopener noreferrer" class=dropdown__link lang=zh-Hans>简体中文</a><li><a href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-Performance-Analysis target=_self rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang=en>English</a></ul></div><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type=button disabled title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill=currentColor d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"/></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill=currentColor d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill=currentColor d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"/></svg></button></div><div class=navbarSearchContainer_Bca1><div class="navbar__search searchBarContainer_NW3z" dir=ltr><input placeholder=Search aria-label=Search class="navbar__search-input searchInput_YFbd" value="" /><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class=docsWrapper_hBAB><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type=button></button><div class=docRoot_UBD9><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class=sidebarViewport_aRkj><div class=sidebar_njMd><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/en/docs/DshanPi-A1/intro><span class=linkLabel_WmDU>DshanPi-A1 Education</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/快速使用><span class=categoryLinkLabel_W154>快速使用</span></a><button aria-label="Expand sidebar category '快速使用'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/系统配置><span class=categoryLinkLabel_W154>系统配置</span></a><button aria-label="Expand sidebar category '系统配置'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/应用基础><span class=categoryLinkLabel_W154>应用基础</span></a><button aria-label="Expand sidebar category '应用基础'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/应用开发><span class=categoryLinkLabel_W154>应用开发</span></a><button aria-label="Expand sidebar category '应用开发'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/驱动基础><span class=categoryLinkLabel_W154>驱动基础</span></a><button aria-label="Expand sidebar category '驱动基础'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/系统开发><span class=categoryLinkLabel_W154>系统开发</span></a><button aria-label="Expand sidebar category '系统开发'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/项目案例><span class=categoryLinkLabel_W154>项目案例</span></a><button aria-label="Expand sidebar category '项目案例'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/其他系统><span class=categoryLinkLabel_W154>其他系统</span></a><button aria-label="Expand sidebar category '其他系统'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href=/en/docs/category/原厂在线文档><span class=categoryLinkLabel_W154>原厂在线文档</span></a><button aria-label="Collapse sidebar category '原厂在线文档'" aria-expanded=true type=button class="clean-btn menu__caret"></button></div><ul class=menu__list><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role=button aria-expanded=true tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/AMP/><span class=categoryLinkLabel_W154>Common</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/AMP/><span class=linkLabel_WmDU>瑞芯微多核异构系统开发指南</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/AUDIO/><span class=categoryLinkLabel_W154>Rockchip Audio 开发指南</span></a><button aria-label="Expand sidebar category 'Rockchip Audio 开发指南'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/CAN/><span class=categoryLinkLabel_W154>Rockchip Can 开发文档</span></a><button aria-label="Expand sidebar category 'Rockchip Can 开发文档'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/DDR/><span class=linkLabel_WmDU>DDR</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/DSMC/><span class=categoryLinkLabel_W154>Rockchip DSMC 开发文档</span></a><button aria-label="Expand sidebar category 'Rockchip DSMC 开发文档'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/I2C/><span class=linkLabel_WmDU>ROCKCHIP I2C 开发指南</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/MPP/><span class=linkLabel_WmDU>MPP</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/PCIe/><span class=categoryLinkLabel_W154>Rockchip Linux PCIe 开发指南</span></a><button aria-label="Expand sidebar category 'Rockchip Linux PCIe 开发指南'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/RGA/><span class=categoryLinkLabel_W154>RGA IM2D API 开发指南</span></a><button aria-label="Expand sidebar category 'RGA IM2D API 开发指南'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/THERMAL/><span class=linkLabel_WmDU>Thermal 开发指南</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/TRUST/><span class=categoryLinkLabel_W154>Trust</span></a><button aria-label="Expand sidebar category 'Trust'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/UART/><span class=categoryLinkLabel_W154>UART</span></a><button aria-label="Expand sidebar category 'UART'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/><span class=categoryLinkLabel_W154>Rockchip Linux USB 开发指南</span></a><button aria-label="Collapse sidebar category 'Rockchip Linux USB 开发指南'" aria-expanded=true type=button class="clean-btn menu__caret"></button></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/Introduction-USB-SQ-Tool><span class=linkLabel_WmDU>Introduction-USB-SQ-Tool</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-Initialization-Log-Analysis><span class=linkLabel_WmDU>Rockchip USB Initialization Log Analysis</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-PHY><span class=linkLabel_WmDU>Linux-USB-PHY</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link menu__link--active" aria-current=page tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-Performance-Analysis><span class=linkLabel_WmDU>Rockchip USB Performance Analysis Guide</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/RK3399-Developer-Guide-USB-DTS><span class=linkLabel_WmDU>RK3399 USB DTS 配置说明</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/RK3399-Developer-Guide-USB><span class=linkLabel_WmDU>RK3399-Developer-Guide-USB</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/RK356x-Developer-Guide-USB><span class=linkLabel_WmDU>RK356x-Developer-Guide-USB</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/RK3576-Developer-Guide-USB><span class=linkLabel_WmDU>RK3576-Developer-Guide-USB</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/RK3588-Developer-Guide-USB><span class=linkLabel_WmDU>RK3588-Developer-Guide-USB</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/Trouble-Shooting-Linux-USB-Host-UVC><span class=linkLabel_WmDU>Rockchip Linux USB Host UVC 问题排查</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/Trouble-Shooting-Linux4.19-USB-Gadget-UVC><span class=linkLabel_WmDU>Rockchip Linux4.19 USB Gadget UVC 问题排查</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/USB-FFS-Test-Demo><span class=linkLabel_WmDU>Rockchip USB FFS Test Demo 使用说明</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/USB-Gadget-UAC><span class=linkLabel_WmDU>USB-Gadget-UAC</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/USB-SQ-Test><span class=linkLabel_WmDU>Rockchip USB SQ 测试指南</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/USB2-Compliance-Test><span class=linkLabel_WmDU>Rockchip USB 2.0 一致性测试指南</span></a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/AVL/RK-SpiNor-and-SLC-Nand-SupportList-V1.50-20240901><span class=categoryLinkLabel_W154>AVL</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/CLK/Clock><span class=categoryLinkLabel_W154>CLK</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/CRYPTO/Crypto-HWRNG><span class=categoryLinkLabel_W154>CRYPTO</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/DEBUG/DS5><span class=categoryLinkLabel_W154>DEBUG</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/DISPLAY/BT656-TX-AND-BT1120-TX-Developer-Guide><span class=categoryLinkLabel_W154>DISPLAY</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/DVFS/CPUFreq><span class=categoryLinkLabel_W154>DVFS</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/FLEXBUS/Linux-FLEXBUS-ADC-and-DAC-MODE><span class=categoryLinkLabel_W154>FLEXBUS</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/FS/Developer-FAQ-FileSystem><span class=categoryLinkLabel_W154>FS</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/GMAC/Linux-GMAC-DPDK><span class=categoryLinkLabel_W154>GMAC</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/HDMI-IN/HDMI-IN-Based-On-CameraHal3><span class=categoryLinkLabel_W154>HDMI-IN</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/IO-DOMAIN/Linux-IO-DOMAIN><span class=categoryLinkLabel_W154>IO-DOMAIN</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/IOMMU/Linux-IOMMU><span class=categoryLinkLabel_W154>IOMMU</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Camera-Module-OTP-Calibration-Guide><span class=categoryLinkLabel_W154>ISP</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/MCU/RK3399-Developer-Guide-MCU><span class=categoryLinkLabel_W154>MCU</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/MEMORY/Introduction-Internal-SRAM-Memory-Layout><span class=categoryLinkLabel_W154>MEMORY</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/MMC/SD-Boot><span class=categoryLinkLabel_W154>MMC</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/NPU/RKNN-Compiler-Support-Operator-List><span class=categoryLinkLabel_W154>NPU</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/NVM/Application-Notes-Storage><span class=categoryLinkLabel_W154>NVM</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/PERF/Linux-RealTime-Performance-Test-Report><span class=categoryLinkLabel_W154>PERF</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/PINCTRL/Linux-Pinctrl><span class=categoryLinkLabel_W154>PINCTRL</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/PMIC/RK805-Developer-Guide><span class=categoryLinkLabel_W154>PMIC</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/POWER/Power-Analysis><span class=categoryLinkLabel_W154>POWER</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/PWM/Linux-PWM><span class=categoryLinkLabel_W154>PWM</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/RTT/RT-Thread-CAN-CANFD><span class=categoryLinkLabel_W154>RTT</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/SARADC/Linux-SARADC><span class=categoryLinkLabel_W154>SARADC</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/SECURITY/Anti-Copy-Board><span class=categoryLinkLabel_W154>SECURITY</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/SPI/Linux-SPI><span class=categoryLinkLabel_W154>SPI</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/TOOL/Introduction-Partition><span class=categoryLinkLabel_W154>TOOL</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/UBOOT/Introduction-UBoot-rkdevelop-vs-nextdev><span class=categoryLinkLabel_W154>UBOOT</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/WATCHDOG/Linux-WDT><span class=categoryLinkLabel_W154>WATCHDOG</span></a></div></ul></ul></ul></nav><button type=button title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width=20 height=20 aria-hidden=true class=collapseSidebarButtonIcon_kv0_><g fill=#7a7a7a><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"/><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"/></g></svg></button></div></div></aside><main class=docMainContainer_TBSr><div class="container padding-top--md padding-bottom--lg"><div class=row><div class="col docItemCol_VOVn"><div class=docItemContainer_Djhp><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label=Breadcrumbs><ul class=breadcrumbs><li class=breadcrumbs__item><a aria-label="Home page" class=breadcrumbs__link href=/en/><svg viewBox="0 0 24 24" class=breadcrumbHomeIcon_YNFT><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill=currentColor /></svg></a><li class=breadcrumbs__item><a class=breadcrumbs__link href=/en/docs/category/原厂在线文档><span>原厂在线文档</span></a><li class=breadcrumbs__item><span class=breadcrumbs__link>Common</span><li class=breadcrumbs__item><a class=breadcrumbs__link href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/><span>Rockchip Linux USB 开发指南</span></a><li class="breadcrumbs__item breadcrumbs__item--active"><span class=breadcrumbs__link>Rockchip USB Performance Analysis Guide</span></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type=button class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Rockchip USB Performance Analysis Guide</h1></header>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=前言>前言<a href=#前言 class=hash-link aria-label="Direct link to 前言" title="Direct link to 前言" translate=no>​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=概述>概述<a href=#概述 class=hash-link aria-label="Direct link to 概述" title="Direct link to 概述" translate=no>​</a></h2>
+<p>本文档提供 Rockchip 平台 USB 2.0/3.0 模块传输性能分析的方法以及支持的最大传输速率。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=产品版本>产品版本<a href=#产品版本 class=hash-link aria-label="Direct link to 产品版本" title="Direct link to 产品版本" translate=no>​</a></h2>
+<table><thead><tr><th>芯片名称<th>内核版本<tbody><tr><td>30系列、31系列、32系列、33系列、PX系列、Sofia、RV1108<td>Linux3.10 和 Linux4.4</table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=读者对象>读者对象<a href=#读者对象 class=hash-link aria-label="Direct link to 读者对象" title="Direct link to 读者对象" translate=no>​</a></h2>
+<p>本文档（本指南）主要适用于以下工程师：</p>
+<p>硬件工程师</p>
+<p>软件工程师</p>
+<p>技术支持工程师</p>
+<p>修订记录</p>
+<table><thead><tr><th>日期<th>版本<th>作者<th>修改说明<tbody><tr><td>2017-12-25<td>V1.0<td>吴良峰<td>初始版本<tr><td>2019-01-09<td>V1.1<td>吴良峰<td>使用 markdownlint 修订格式<tr><td>2020-02-19<td>V1.1.1<td>吴良峰<td>增加免责声明，商标声明以及版权声明</table>
+<p>Rockchip USB Performance Analysis Guide1. USB 理论传输速率分析1.1 USB Communication Flow1.2 USB 物理层传输速率1.3 USB 协议层传输速率1.4 影响 USB 传输速率的主要因素2. USB Host 传输性能分析2.1 USB Disk 传输速率分析2.2 USB Ethernet 传输速率分析2.3 USB Camera 传输速率分析3. USB Device 传输性能分析3.1 USB MTP 传输速率分析3.2 USB MSC 传输速率分析3.3 USB Gadget Webcam 传输速率分析3.4 USB Rndis 传输速率分析3.5 USB Gadget HID 传输速率分析</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=1-usb-理论传输速率分析>1. USB 理论传输速率分析<a href=#1-usb-理论传输速率分析 class=hash-link aria-label="Direct link to 1. USB 理论传输速率分析" title="Direct link to 1. USB 理论传输速率分析" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=11-usb-communication-flow>1.1 USB Communication Flow<a href=#11-usb-communication-flow class=hash-link aria-label="Direct link to 1.1 USB Communication Flow" title="Direct link to 1.1 USB Communication Flow" translate=no>​</a></h3>
+<p>USB 的通信流模型如图 1-1 所示，采用分层的结构，一台主机与一个 USB 设备间的连接是由许多层上的连接组成 。USB 总线接口层提供了主机和设备之间的物理连接、发送和接收数据。USB 设备层对 USB系统软件是可见的，系统软件基于它所见的设备层来完成对设备的一般的 USB 操作。USB 应用层可以通过与之相配合的客户软件向主机提供一些额外的功能。USB 设备层和应用层的通信是逻辑上的，对应于这些逻辑通信的实际物理通信由 USB 总线接口层来完成。</p>
+<p>图 1-1 USB Communication Flow</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=12-usb-物理层传输速率>1.2 USB 物理层传输速率<a href=#12-usb-物理层传输速率 class=hash-link aria-label="Direct link to 1.2 USB 物理层传输速率" title="Direct link to 1.2 USB 物理层传输速率" translate=no>​</a></h3>
+<p>USB 物理层的传输速率是指 USB 物理总线的传输速率。USB 总线目前支持 USB1.0、USB1.1、USB2.0、USB3.0（USB3.1 Gen1）、USB 3.1 Gen2 五种标准传输速率，如下表 1-1 所示。</p>
+<p>表 1-1 USB 物理层最大传输速率</p>
+<table><thead><tr><th>USB版本<th>最大传输速率<th>速率称号<tbody><tr><td>USB 1.0<td>1.5Mbps<td>低速（Low-Speed）<tr><td>USB 1.1<td>12Mbps<td>全速（Full-Speed）<tr><td>USB 2.0<td>480Mbps<td>高速（High-Speed）<tr><td>USB 3.0(USB 3.1 Gen1)<td>5Gbps<td>超速（Super-Speed）<tr><td>USB 3.1 Gen2<td>10Gbps<td>暂未定义（Super-Speed+）</table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=13-usb-协议层传输速率>1.3 USB 协议层传输速率<a href=#13-usb-协议层传输速率 class=hash-link aria-label="Direct link to 1.3 USB 协议层传输速率" title="Direct link to 1.3 USB 协议层传输速率" translate=no>​</a></h3>
+<p>不同的 USB 设备类型，采用不同的 USB 设备类协议，比如：USB Disk 采用的是 USB Mass Storage Class规范的子类规范（USB Mass Storage Class Bulk-Only Transport），USB Camera 采用的是 USB Video Class规范，USB HID 采用的是 USB Human Interface Devices Class 规范，更多的规范，请在USB-IF 官网查看。</p>
+<p>不同的 USB 设备类协议，定义了不同的数据包格式，有些设备类协议还需要命令包和握手包，并且，不同的 USB 设备类协议采用了不同的 USB 传输类型，比如：USB Disk 采用批量传输类型（BulkTransfers），USB Camera 采用同步传输类型（Isochronous Transfers），USB HID 采用中断传输类型（Interrupt Transfers）。</p>
+<p>USB 体系支持四种传输类型：</p>
+<p>控制传输（Control Transfers）</p>
+<p>主要用于在设备连接时对设备进行枚举以及其他因设备而异的特定操作；</p>
+<p>中断传输（Interrupt Transfers）</p>
+<p>用于对延迟要求严格、小量数据的可靠传输，如键盘、游戏手柄等 HID 设备；</p>
+<p>批量传输（Bulk Transfers）</p>
+<p>用于对延迟要求宽松，大量数据的可靠传输，如 U 盘、USB 以太网卡等；</p>
+<p>同步传输（Isochronous Transfers）</p>
+<p>用于对可靠性要求不高的实时数据传输，如 USB Camera、USB Audio；</p>
+<p>不同的 USB 传输类型，在 USB 物理总线上并没有太大的区别，只是在传输机制、主机安排传输任务、可占用 USB 带宽的限制以及最大包长度有一定的差异，如下表 1-2 所示。</p>
+<p>表 1-2 USB 的四种传输类型</p>
+<table><thead><tr><th>传输类型<th>USB 2.0<th>USB 3.0<tbody><tr><td>控制传输<td>Max Packet: 64BytesBurst：不支持仅支持 OUT的流控制（PING）<td>Max Packet: 512BytesBurst: 1支持流控制（ERDY）<tr><td>中断传输<td>Max Packet: 0～ 1024 ×3 BytesMax Transfer Speed: 23.44MBpsBurst：不支持不支持流控制<td>Max Packet: 0～1024 ×3 BytesMax Transfer Speed: 23.44MBpsBurst: 1~3支持流控制（ERDY）<tr><td>批量传输<td>Max Packet: 512BytesMax Transfer Speed: 53.25MBpsBurst：不支持仅支持 OUT的流控制（PING）<td>Max Packet: 1024BytesMax Transfer Speed: 400MBps?Burst:1～16支持流控制（ERDY））<tr><td>同步传输<td>Max Packet: 0～ 1024 ×3 BytesMax Transfer Speed: 23.44MBpsBurst：不支持不支持流控制<td>Max Packet:0～1024 ×16× 3BytesMax Transfer Speed: 375.04MBpsBurst:1~16支持流控制（PING -> PING_RESPONSE）</table>
+<ol>
+<li class="">4影响 USB 传输速率的主要因素</li>
+</ol>
+<p>USB 的传输速率主要受如下几方面的影响：</p>
+<ol>
+<li class="">USB 信号质量</li>
+</ol>
+<p>USB 信号质量可以通过测试 USB 眼图来评估，如果 USB 信号质量差，容易导致 USB 物理总线丢包、重传，影响 USB 传输的速率。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=2-usb-控制器的-ahb-clk-和-dma-burst-length>2. USB 控制器的 AHB CLK 和 DMA Burst Length<a href=#2-usb-控制器的-ahb-clk-和-dma-burst-length class=hash-link aria-label="Direct link to 2. USB 控制器的 AHB CLK 和 DMA Burst Length" title="Direct link to 2. USB 控制器的 AHB CLK 和 DMA Burst Length" translate=no>​</a></h2>
+<p>更高的 AHB CLK 和更大的 DMA Burst Length，可以提高 USB 控制器的 DMA 传输效率。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=3-cpu-运行频率的影响>3. CPU 运行频率的影响<a href=#3-cpu-运行频率的影响 class=hash-link aria-label="Direct link to 3. CPU 运行频率的影响" title="Direct link to 3. CPU 运行频率的影响" translate=no>​</a></h2>
+<p>CPU 运行频率会影响代码的执行效率和数据拷贝 memcpy 的效率，所以提高 CPU 频率，可以提高USB 驱动和应用层的执行效率，从而提高 USB 传输速率。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=4-usb-设备类驱动提交的-urb-usb-request-block的-buffer-大小>4. USB 设备类驱动提交的 URB (USB Request Block)的 buffer 大小<a href=#4-usb-设备类驱动提交的-urb-usb-request-block的-buffer-大小 class=hash-link aria-label="Direct link to 4. USB 设备类驱动提交的 URB (USB Request Block)的 buffer 大小" title="Direct link to 4. USB 设备类驱动提交的 URB (USB Request Block)的 buffer 大小" translate=no>​</a></h2>
+<p>提交的 URB buffer 大小，也即请求 USB 控制器一次传输的数据块大小。对于 USB MSC（MassStorage Class）类设备，如 USB Disk，USB MTP，如果不考虑数据块大小对存储颗粒（EMMC 或NAND）的读写性能的影响，可以尽量增加 buffer 的大小，以降低 USB 控制器传输的中断数量。Rockchip 的 USB DWC2 控制器支持一次最大传输 512KB，USB DWC3 控制器支持一次最大传输16MB - 1 Bytes。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=5-存储介质读写性能的影响>5. 存储介质读写性能的影响<a href=#5-存储介质读写性能的影响 class=hash-link aria-label="Direct link to 5. 存储介质读写性能的影响" title="Direct link to 5. 存储介质读写性能的影响" translate=no>​</a></h2>
+<p>如果是 USB MSC（Mass Storage Class）类设备，如 USB Disk 的读写速率，受 USB Host 端存储介质以及 U 盘本身存储介质的读写性能影响.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=6-文件系统格式的影响>6. 文件系统格式的影响<a href=#6-文件系统格式的影响 class=hash-link aria-label="Direct link to 6. 文件系统格式的影响" title="Direct link to 6. 文件系统格式的影响" translate=no>​</a></h2>
+<p>U 盘拷贝速率容易受文件系统的影响，常见的文件系统格式包括：VFAT、EXT4 和 NTFS。对于VFAT/EXT4 两种文件系统格式的传输机制，kernel 的 block 层会自动将小的数据块 merge 为120K，再写入磁盘。而 NTFS 的写入磁盘操作是在用户空间，数据块不会由 block 层 merge。所以，如果应用层每次请求的数据块太小（如 4KB），NTFS 文件系统格式的 U 盘，拷贝速率一般会明显慢于 VFAT/EXT4 的文件系统格式。详细的分析，请参考2.1 USB Disk 传输速率分析</p>
+<ol start=2>
+<li class="">USB Host 传输性能分析</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=21-usb-disk-传输速率分析>2.1 USB Disk 传输速率分析<a href=#21-usb-disk-传输速率分析 class=hash-link aria-label="Direct link to 2.1 USB Disk 传输速率分析" title="Direct link to 2.1 USB Disk 传输速率分析" translate=no>​</a></h3>
+<p>测试方法：</p>
+<p>假设 USB Disk 插入 USB Host 接口后，枚举的信息如下：</p>
+<p>磁盘分区为：</p>
+<p>/dev/block/sda1</p>
+<p>挂载路径为：</p>
+<p>/mnt/media_rw/0E64-5F76/</p>
+<p>USB Host EMMC 文件存储路径： /sdcard/.</p>
+<p>下面的方法，是基于上述的假设进行说明。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=note>Note:<a href=#note class=hash-link aria-label="Direct link to Note:" title="Direct link to Note:" translate=no>​</a></h3>
+<p>test 文件，应该足够大。比如，在 3399 EVB 4G DDR 上测试，建议 test 文件为 2G，这样才能保证数据从缓存中刷入到磁盘，实测如果使用 1024MB 文件，速率是不准确的。原因是</p>
+<p>proc/sys/vm/dirty_background_ratio 一般为 5%，也即 4G 内存，文件系统缓存脏页数量要达到 4G×5% = 204.8MB，系统才会将缓存的脏页异步地刷入存储介质。</p>
+<p>dd 命令，可以加conv=fsync，表示将缓存中的数据写入磁盘。</p>
+<p>USB Disk 的传输速率测试，通常有以下两种方法：</p>
+<p>方法 1：手动或者使用 cp 命令拷贝大文件（如电影），然后计时，统计速率；</p>
+<p>step1. 使用 dd 命令创建一个 test 文件，用于 step2 的拷贝测试使用</p>
+<p>busybox dd if=/dev/zero of=/mnt/media_rw/0E64-5F76/test bs=64K count=16K</p>
+<p>step2. 使用 cp 命令统计拷贝时间</p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">time cp /mnt/media_rw/0E64-5F76/test /sdcard/.</span><br/></div></code></pre></div></div>
+<p>上述方法，是测试 USB Disk 的读速率，如果需要测试 USB Disk 的写速率，只要修改读写路径即可。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=方法-2使用-dd-命令测试>方法 2：使用 dd 命令测试<a href=#方法-2使用-dd-命令测试 class=hash-link aria-label="Direct link to 方法 2：使用 dd 命令测试" title="Direct link to 方法 2：使用 dd 命令测试" translate=no>​</a></h3>
+<p>测试 USB Disk 的读速率方法：</p>
+<p>step1. 使用 dd 命令创建一个 test 文件，用于后续的拷贝测试使用</p>
+<p>busybox dd if=/dev/zero of=/mnt/media_rw/0E64-5F76/test bs=64K count=16K</p>
+<p>step2.</p>
+<p>每次执行 dd 命令前，先清缓存</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 4K 数据块的读速率</p>
+<p>busybox dd if=/mnt/media_rw/0E64-5F76/test of=/dev/null bs=4K count=256K</p>
+<p>step3.</p>
+<p>每次执行 dd 命令前，先清缓存</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 64K 数据块的读速率</p>
+<p>busybox dd if=/mnt/media_rw/0E64-5F76/test of=/dev/null bs=64K count=16K</p>
+<p>step4.</p>
+<p>每次执行 dd 命令前，先清缓存</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 128K 数据块的读速率</p>
+<p>busybox dd if=/mnt/media_rw/0E64-5F76/test of=/dev/null bs=128K count=8K</p>
+<p>step5.</p>
+<p>每次执行 dd 命令前，先清缓存</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 512K 数据块的读速率</p>
+<p>busybox dd if=/mnt/media_rw/0E64-5F76/test of=/dev/null bs=512K count=2K</p>
+<p>测试 USB Disk 的写速率方法：</p>
+<p>step1.</p>
+<p>每次执行 dd 命令前，先清缓存</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 4K 数据块的写速率</p>
+<p>busybox dd if=/dev/zero of=/mnt/media_rw/0E64-5F76/test bs=4K count=256K</p>
+<p>step2.</p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">rm of=/mnt/media_rw/0E64-5F76/test</span><br/></div></code></pre></div></div>
+<p>sync</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 64K 数据块的写速率</p>
+<p>busybox dd if=/dev/zero of=/mnt/media_rw/0E64-5F76/test bs=64K count=16K</p>
+<p>step3.</p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">rm of=/mnt/media_rw/0E64-5F76/test</span><br/></div></code></pre></div></div>
+<p>sync</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 128K 数据块的写速率</p>
+<p>busybox dd if=/dev/zero of=/mnt/media_rw/0E64-5F76/test bs=128K count=8K</p>
+<p>step4.</p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">rm of=/mnt/media_rw/0E64-5F76/test</span><br/></div></code></pre></div></div>
+<p>sync</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 512K 数据块的写速率</p>
+<p>busybox dd if=/dev/zero of=/mnt/media_rw/0E64-5F76/test bs=512K count=2K</p>
+<p>Note：</p>
+<p>方法 1 可以统计 USB Disk 的实际数据读写速率，但测试结果同时受 Host 端存储介质、文件系统性能和 USB 控制器传输速率的影响，无法准确说明 USB 控制器的传输性能。</p>
+<p>方法 2 可以排除 Host 端存储介质和文件系统的影响，准确统计 USB 控制器的读写 U 盘的传输性能。但需要注意的是，USB Disk（Device 端）的文件系统仍然会影响拷贝，如果要排除 USB Disk文件系统的影响，需要直接读写/dev/路径下的 sd*分区节点，但同时会破坏 USB Disk 原有的数据，所以要慎用。</p>
+<p>dd 命令，可以加conv=fsync，表示将缓存中的数据写入磁盘，这样可以完全排除缓存的影响。当然，如果测试的文件足够大，缓存的影响也是比较小的。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=测试结果>测试结果：<a href=#测试结果 class=hash-link aria-label="Direct link to 测试结果：" title="Direct link to 测试结果：" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=usb-20-host>USB 2.0 Host<a href=#usb-20-host class=hash-link aria-label="Direct link to USB 2.0 Host" title="Direct link to USB 2.0 Host" translate=no>​</a></h3>
+<p>使用 dd 命令测试，Rockchip USB 2.0 Host 接口的 USB Disk 读写速率通常在 25MBps ～ 35MBps。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=usb-30-host>USB 3.0 Host<a href=#usb-30-host class=hash-link aria-label="Direct link to USB 3.0 Host" title="Direct link to USB 3.0 Host" translate=no>​</a></h3>
+<p>使用 dd 命令测试，Rockchip USB 3.0 Host 接口的 USB3 Disk（不支持 UAS）读写速率通常在60MBps ～ 100MBps。 支持UAS的 USB3 Disk，最大读写速率约为350MBps。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=note-1>Note：<a href=#note-1 class=hash-link aria-label="Direct link to Note：" title="Direct link to Note：" translate=no>​</a></h3>
+<p>UAS 的支持：RK3399/RK3328 USB3 控制器支持 UASP（USB Attached SCSI PROTOCOL），该功能可以大大提高 USB Disk 的读写速率。如果要使用 UAS 功能，首先，内核需要 enableCONFIG_USB_UAS（kernel3.10 和 kernel4.4 默认都已经 enable），其次，USB3 Disk 需要支持UAS 功能。</p>
+<p>可以从枚举的 log 中，确认是否使用 UAS 协议</p>
+<p>[80373.513866] usb 4-1: new SuperSpeed USB device number 2 using xhci_hcd</p>
+<p>[80373.534854] usb 4-1: New USB device found, idVendor=174c, idProduct=55aa</p>
+<p>[80373.534871] usb 4-1: New USB device strings: Mfr=2, Product=3, SerialNumber=1</p>
+<p>[80373.534873] usb 4-1: Product: CHIPFANCIER</p>
+<p>[80373.534874] usb 4-1: Manufacturer: WINTOGO</p>
+<p>[80373.534876] usb 4-1: SerialNumber: 000001485761816</p>
+<p>[80373.537036] scsi host6: uas （说明将以UAS协议进行通信）</p>
+<p>[80373.537648] scsi 6:0:0:0: Direct-Access WINTOGO CHIPFANCIER 0 PQ:</p>
+<p>0 ANSI: 6</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=测试结果分析与性能优化方向>测试结果分析与性能优化方向：<a href=#测试结果分析与性能优化方向 class=hash-link aria-label="Direct link to 测试结果分析与性能优化方向：" title="Direct link to 测试结果分析与性能优化方向：" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=实例>实例：<a href=#实例 class=hash-link aria-label="Direct link to 实例：" title="Direct link to 实例：" translate=no>​</a></h3>
+<p>本文档以 RK3399 EVB 读写 USB3 Disk 的典型应用场景作分析，其他应用场景可以参考下面的方法。</p>
+<p>测试环境：RK3399 EVB （2G DDR + 16G EMMC）</p>
+<p>USB3 Disk 型号为 SanDisk Type-C USB3.0 32G （NTFS 文件系统）</p>
+<p>测试场景：测试从 USB3 Disk 拷贝大文件到 3399 EMMC 的速率</p>
+<p>测试命令： cp，dd</p>
+<p>假设 USB3 Disk 挂载路径：/mnt/media_rw/0E64-5F76/</p>
+<p>EMMC 文件存储路径：/sdcard/.</p>
+<p>Note：</p>
+<p>step1. 使用 dd 命令创建一个 test 文件（1GB 大小），用于后续的拷贝测试使用</p>
+<p>busybox dd if=/dev/zero of=/mnt/media_rw/0E64-5F76/test bs=64K count=16K</p>
+<p>step2. 使用 cp 命令测试测试从 USB3 Disk 拷贝大文件到 3399 EMMC 的速率</p>
+<p>time cp /mnt/media_rw/0E64-5F76/test /sdcard/. (test 为 1GB 文件)</p>
+<p>测试结果：</p>
+<p>0m48.42s real 0m00.29s user 0m18.17s system</p>
+<p>拷贝速率为：1024M/48 = 21MBps 该速率明显慢于 USB3 的正常拷贝速率</p>
+<p>step3. 直接从/dev/block/U 盘分区 拷贝到 EMMC，以排查 3399 文件系统的影响</p>
+<p>time cp /dev/block/sda1 /sdcard/test （该命令可以绕过文件系统直接拷贝）</p>
+<p>拷贝速率约为： 20MBps</p>
+<p>说明拷贝速率慢与 3399 文件系统本身没有关系。</p>
+<p>step4. 分别使用 dd 命令测试 U 盘和 3399 EMMC 的读写性能</p>
+<p>测试 USB3 Disk 读性能</p>
+<p>每次执行 dd 命令前，先清缓存</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 4K 数据块的读速率</p>
+<p>busybox dd if=/mnt/media_rw/0E64-5F76/test of=/dev/null bs=4K count=256K</p>
+<p>结果：1073741824 bytes (1.0GB) copied, 14.183164 seconds, 72.2MB/s</p>
+<p>每次执行 dd 命令前，先清缓存</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 64K 数据块的读速率</p>
+<p>busybox dd if=/mnt/media_rw/0E64-5F76/test of=/dev/null bs=64K count=16K</p>
+<p>结果：1073741824 bytes (1.0GB) copied, 12.546069 seconds, 81.6MB/s</p>
+<p>每次执行 dd 命令前，先清缓存</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 128K 数据块的读速率</p>
+<p>busybox dd if=/mnt/media_rw/0E64-5F76/test of=/dev/null bs=128K count=8K</p>
+<p>结果：1073741824 bytes (1.0GB) copied, 12.601817 seconds, 81.3MB/s</p>
+<p>每次执行 dd 命令前，先清缓存</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 512K 数据块的读速率</p>
+<p>busybox dd if=/mnt/media_rw/0E64-5F76/test of=/dev/null bs=512K count=2K</p>
+<p>结果：1073741824 bytes (1.0GB) copied, 12.402147 seconds, 82.6MB/s</p>
+<p>max_hw_sectors_kb</p>
+<p>max_sectors_kb</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=测试-3399-emmc-写性能>测试 3399 EMMC 写性能<a href=#测试-3399-emmc-写性能 class=hash-link aria-label="Direct link to 测试 3399 EMMC 写性能" title="Direct link to 测试 3399 EMMC 写性能" translate=no>​</a></h3>
+<p>每次执行 dd 命令前，先清缓存</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 4K 数据块的写速率</p>
+<p>busybox dd if=/dev/zero of=/sdcard/test bs=4K count=256K</p>
+<p>结果：1073741824 bytes (1.0GB) copied, 39.525297 seconds, 25.9MB/s</p>
+<p>rm of=/sdcard/test</p>
+<p>sync</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 64K 数据块的写速率</p>
+<p>busybox dd if=/dev/zero of=/sdcard/test bs=64K count=16K</p>
+<p>结果： 1073741824 bytes (1.0GB) copied, 37.505206 seconds, 27.3MB/s</p>
+<p>rm of=/sdcard/test</p>
+<p>sync</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 128K 数据块的写速率</p>
+<p>busybox dd if=/dev/zero of=/sdcard/test bs=128K count=8K</p>
+<p>结果： 1073741824 bytes (1.0GB) copied, 37.461603 seconds, 27.3MB/s</p>
+<p>rm of=/sdcard/test</p>
+<p>sync</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 3 > /proc/sys/vm/drop_caches</span><br/></div></code></pre></div></div>
+<p>测试 512K 数据块的写速率</p>
+<p>busybox dd if=/dev/zero of=/sdcard/test bs=512K count=2K</p>
+<p>结果：1073741824 bytes (1.0GB) copied, 37.086531 seconds, 27.6MB/s</p>
+<p>从上述的测试结果看，USB3 Disk 的读性能很好，小块和大块读性能都基本一致。而 EMMC 的写性能明显都很差。从 USB3 Disk 拷贝大文件到 3399 EMMC 的传输速率瓶颈在 3399 的 EMMC 颗粒。</p>
+<p>step5. 分析 cp 命令的行为和 block 层的行为</p>
+<p>分析工具： strace，blktrace</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=使用-strace-命令跟踪-cp-行为>使用 strace 命令跟踪 cp 行为<a href=#使用-strace-命令跟踪-cp-行为 class=hash-link aria-label="Direct link to 使用 strace 命令跟踪 cp 行为" title="Direct link to 使用 strace 命令跟踪 cp 行为" translate=no>​</a></h3>
+<p>strace cp /mnt/media_rw/0E64-5F76/test /sdcard/.</p>
+<p>结果表明：RK3399 平台的 cp 命令，读写的数据块都是 4KB</p>
+<p>使用 blktrace 命令分析 block 层的 merge 行为</p>
+<p>几个与拷贝相关的重要参数：</p>
+<p>max_hw_sectors_kb 和 max_sectors_kb 控制的是 block 层执行 merge 操作后写入存储介质的数据块大小，U 盘一般是 120KB，EMMC 一般是 512KB。</p>
+<p>EMMC：</p>
+<p>/sys/block/mmcblk1/queue/max_hw_sectors_kb</p>
+<p>/sys/block/mmcblk1/queue/max_sectors_kb</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=usb-disk>USB Disk：<a href=#usb-disk class=hash-link aria-label="Direct link to USB Disk：" title="Direct link to USB Disk：" translate=no>​</a></h3>
+<p>/sys/block/sda/queue/max_hw_sectors_kb</p>
+<p>/sys/block/sda/queue/max_sectors_kb</p>
+<p>其中，USB Disk 的 max_hw_sectors_kb 设置在代码：</p>
+<p>drivers/usb/storage/scsiglue.c</p>
+<p>/*limit the total size of a transfer to 120 KB */</p>
+<p>.max_sectors = 240, （单位为block512 bytes）</p>
+<p>该参数可以由上层配置，如 RK3399 Type-C1 口：</p>
+<p>/sys/devices/platform/usb@fe900000/fe900000.dwc3/xhci-hcd.9.auto/usb4/4-1/4-</p>
+<p>1:1.0/host0/target0:0:0/0:0:0:0/max_sectors</p>
+<p>查看 io 调度器：</p>
+<p>rk3399:/data# cat /sys/block/mmcblk1/queue/scheduler</p>
+<p>noop [cfq] （使用 cfq，表明理论上会执行 merge 行为，将小数据块进行 merge）</p>
+<p>blktrace 为 Android 自带的工具，但默认可能没有支持，需要先修改 blktrace 文件夹下的 mk 文件，并编译该工具，然后使用 adb push 到/system/bin。</p>
+<p>修改Android.mk文件：</p>
+<p>将文件第一行的 BUILD_BLKTRACE:= false 改为</p>
+<div class="language-makefile codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-makefile codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">BUILD_BLKTRACE:= true</span><br/></div></code></pre></div></div>
+<p>要使用 blktrace，内核需要增加 CONFIG_BLK_DEV_IO_TRACE，如下：</p>
+<div class="language-markdown codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-markdown codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">Kernel hacking ---></span><br/></div><div class=token-line style=color:#393A34><span class="token plain">[</span><span class="token italic punctuation" style=color:#393A34>*</span><span class="token italic content">]Tracers ---></span><br/></div><div class=token-line style=color:#393A34><span class="token italic content">[</span><span class="token italic punctuation" style=color:#393A34>*</span><span class="token plain">] Support for tracing block IO actions</span><br/></div></code></pre></div></div>
+<p>blktrace 的使用方法参考：</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=抓-blktrace-的数据>抓 blktrace 的数据：<a href=#抓-blktrace-的数据 class=hash-link aria-label="Direct link to 抓 blktrace 的数据：" title="Direct link to 抓 blktrace 的数据：" translate=no>​</a></h3>
+<ol>
+<li class="">创建文件夹用于保存数据</li>
+</ol>
+<p>mkdir /dev/blktrace</p>
+<ol start=2>
+<li class="">启动 blktrace，开始抓数据</li>
+</ol>
+<div class="language-batch codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-batch codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">blktrace -d /dev/block/mmcxxx -o /dev/blktrace/blktrace &</span><br/></div></code></pre></div></div>
+<p>(其中，/dev/block/mmcxxx 为要分析的 block，如 3399 的 mmcblk1)</p>
+<ol start=3>
+<li class="">执行拷贝命令</li>
+</ol>
+<p>busybox dd if=/dev/zero of=/data/test bs=4K count=256K （执行拷贝）</p>
+<ol start=4>
+<li class="">停止 blktrace</li>
+</ol>
+<p>拷贝完成后，kill blktrace 的线程，blktrace 的数据就会自动保存在/dev/blktrace 路径下，也可以在 blktrace 后面加-w 参数，表示 trace 多少秒后，自动关闭 blktrace</p>
+<p>分析 blktrace 的数据：</p>
+<p>blkparse –i /dev/blktrace/ blktrace.blktrace.0 –o /dev/blktrace/blkparse.txt</p>
+<p>根据 blktrace 的统计结果，cfq 会将 4k 的小块数据合并为 1024 个扇区，即 512K，才写到 EMMC，</p>
+<p>如下图 2-1 所示。</p>
+<p>11 J1 U ↓ U 1021 [AWLCL/ ⊥ ]</p>
+<p>179,0 1 7832 4.947706748 6 G W 18996840 1024 [kworker/u12:0]</p>
+<p>179,0 0 2410 4.952877415 168 C W 18977384 + 1024 [0]</p>
+<p>179,0 0 0 4.953095582 0 m N cfq6A complete rqnoidle 0</p>
+<p>179,0 0 0 4.953101415 0 m N cfq6A set_slice=12</p>
+<p>179,0 0 0 4.953115707 0 m N cfq6A dispatch_insert</p>
+<p>179,0 0 0 4.953121540 0 m N cfq6A dispatched a request</p>
+<p>179,0 0 0 4.953124165 0 m N cfq6A activate rq, drv=2</p>
+<p>179,0 0 2411 4.953125€23 168 D W 18979432 1024 [mmcqd/1]</p>
+<p>179,0 1 7833 4.955261498 6 A W 18997864 + 1024 &lt;− (179,15) 15064616</p>
+<p>179,0 1 7834 4.955263832 6 Q W 18997864 1024 [kworker/u12:0]</p>
+<p>179,0 1 7835 4.955299415 6 G W 18997864 + 1024 [kworker/u12:0]</p>
+<p>179 0 7022 4 956069123 c n 1 o a a o o o 0 1179151150€5640</p>
+<p>图 2-1 blktrace data</p>
+<p>说明 3399 的 block 层的 merge 行为是没有问题的。</p>
+<p>更详细的 blktrace 使用方法，请参考blktrace 分析 IO</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=step5-分析-usb-disk-文件系统格式的影响>step5. 分析 USB Disk 文件系统格式的影响<a href=#step5-分析-usb-disk-文件系统格式的影响 class=hash-link aria-label="Direct link to step5. 分析 USB Disk 文件系统格式的影响" title="Direct link to step5. 分析 USB Disk 文件系统格式的影响" translate=no>​</a></h3>
+<p>USB Disk 常用的文件系统格式包括：VFAT、EXT4 和 NTFS。对于 VFAT/EXT4 两种文件系统格式的传输机制，kernel 的 block 层会自动将小的数据块 merge 为大数据块，再写入磁盘。而 NTFS 是基于 fuse，写入磁盘操作是在用户空间，并且会多了拷贝操作，所以，如果应用层每次请求的数据块太小（如4KB），对于 NTFS 文件系统格式的 USB Disk，在 CPU 变频的情况下，拷贝速率可能会低于VFAT/EXT4 文件系统格式。比如，在 RK3399 Android 平台，cp 命令每次请求的数据块就只有 4KB，所以，在 RK3399 Android 平台，NTFS 格式的 USB3 Disk 读写速率往往会比较差。</p>
+<p>优化方向：</p>
+<p>根据上面的分析，影响 USB Disk 拷贝的主要因素，有如下几个：</p>
+<p>USB Disk 的读写性能；</p>
+<p>USB Host 端的存储颗粒读写性能；</p>
+<p>USB Host 控制器传输性能；</p>
+<p>文件系统格式；</p>
+<p>应用层一次请求的数据块大小；</p>
+<p>CPU 运行频率；</p>
+<p>可以参考本文档提供的方法，先定位传输瓶颈，再进行优化。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=22-usb-ethernet-传输速率分析>2.2 USB Ethernet 传输速率分析<a href=#22-usb-ethernet-传输速率分析 class=hash-link aria-label="Direct link to 2.2 USB Ethernet 传输速率分析" title="Direct link to 2.2 USB Ethernet 传输速率分析" translate=no>​</a></h3>
+<p>测试方法：</p>
+<p>测试工具：iperf</p>
+<p>iperf 命令是一个网络性能测试工具。iperf 可以测试 TCP 和 UDP 带宽质量。iperf 可以测量最大 TCP 带宽，具有多种参数和 UDP 特性。iperf 可以报告带宽，延迟抖动和数据包丢失。</p>
+<p>iperf 的官方网址：</p>
+<p><a href=https://iperf.fr/ target=_blank rel="noopener noreferrer" class="">https://iperf.fr/</a></p>
+<p>iperf 下载地址：</p>
+<p>支持 Windows /Android/Ubuntu/macOS 等系统，下载地址</p>
+<p><a href=https://iperf.fr/iperf-download.php target=_blank rel="noopener noreferrer" class="">https://iperf.fr/iperf-download.php</a></p>
+<p>此外，Ubuntu 系统可以直接使用如下命令安装 iperf</p>
+<div class="language-batch codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-batch codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">sudo apt install iperf</span><br/></div></code></pre></div></div>
+<p>Andorid 系统可以安装 iperf.apk</p>
+<p>iperf 的使用方法：</p>
+<p><a href=https://iperf.fr/iperf-doc.php target=_blank rel="noopener noreferrer" class="">https://iperf.fr/iperf-doc.php</a></p>
+<p><a href=http://man.linuxde.net/iperf target=_blank rel="noopener noreferrer" class="">http://man.linuxde.net/iperf</a></p>
+<p>带宽测试通常采用UDP 模式，因为能测出极限带宽、时延抖动、丢包率。在进行测试时，首先以链路理论带宽作为数据发送速率进行测试，例如，从客户端到服务器之间的链路的理论带宽为 100Mbps，先用-b 100M进行测试，然后根据测试结果（包括实际带宽，时延抖动和丢包率），再以实际带宽作为数据发送速率进行测试，会发现时延抖动和丢包率比第一次好很多，重复测试几次，就能得出稳定的实际带宽。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=实例-1>实例<a href=#实例-1 class=hash-link aria-label="Direct link to 实例" title="Direct link to 实例" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=udp-模式>UDP 模式<a href=#udp-模式 class=hash-link aria-label="Direct link to UDP 模式" title="Direct link to UDP 模式" translate=no>​</a></h3>
+<p>PCUbuntu 作服务器端，RK3399 的 USB2/USB3 Host 接口连接 UGREEN USB3 Ethernet，然后通过以太网线连接到 PC 的以太网口，形成完整的测试链路。</p>
+<p>PC Ubuntu 服务器端：</p>
+<p>首先，配置 ipv4 地址、子网掩码和网关，如下图 2-2</p>
+<p>图 2-2 PC Ubuntu ip 地址配置</p>
+<p>然后，执行如下命令：</p>
+<p>wlf@wlf-ubuntu:~$ iperf -u -s</p>
+<p>Server listening on UDP port 5001</p>
+<p>Receiving 1470 byte datagrams</p>
+<p>UDP buffer size: 208 KByte (default)</p>
+<p>3399 客户端：</p>
+<p>首先，查看 USB 以太网卡的信息</p>
+<p>eth1 Link encap<!-- -->:Ethernet<!-- --> HWaddr 60:38:E0:E3:20:96</p>
+<p>inet6 addr: fe80::6238:e0ff:fee3:2096/64 Scope: Link</p>
+<p>UP BROADCAST MULTICAST MTU:1500 Metric:1</p>
+<p>RX packets:0 errors:0 dropped:0 overruns:0 frame:0</p>
+<p>TX packets:2 errors:0 dropped:0 overruns:0 carrier:0</p>
+<p>collisions:0 txqueuelen:1000</p>
+<p>RX bytes:0 TX bytes:168</p>
+<p>然后，配置 ip 地址</p>
+<p>ifconfig eth1 192.168.1.2 up</p>
+<p>再执行如下命令，开始测试带宽</p>
+<div class="language-batch codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-batch codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">iperf -u -c 192.168.1.1 -b 1000M -t 60</span><br/></div></code></pre></div></div>
+<p>Note： -b 表示 UDP 模式使用的带宽，单位 bits/sec。如果是 USB2.0 网卡，建议设置为-b 100M，如果是USB3.0 网卡，建议设置为-b 1000M。</p>
+<p>测试结果：</p>
+<p>使用 UGREEN USB3.0 Ethernet，实际的测试带宽如下：</p>
+<p>Client connecting to 192.168.1.2, UDP port 5001</p>
+<p>Sending 1470 byte datagrams</p>
+<p>UDP buffer size: 208 KByte (default)</p>
+<p>[ 3] local 192.168.1.2 port 40116 connected with 192.168.1.1 port 5001</p>
+<p>[ ID] Interval Transfer Bandwidth</p>
+<p>[ 3] 0.0-60.0 sec 5.61 GBytes 803 Mbits/sec</p>
+<p>[ 3] Sent 4096616 datagrams</p>
+<p>使用同样的测试方法，测试 CISCO USB2.0 Ethernet 的带宽约为 95Mbits/sec</p>
+<p>测试结果分析：</p>
+<p>Rockchip 平台 USB Ethernet 的正常传输速率如下：</p>
+<p>USB2.0 Host：上行和下行均为95 ～ 100 Mbits/sec</p>
+<p>USB3.0 Host：上行和下行均为750 ～ 800 Mbits/sec</p>
+<p>如果实际产品测试无法达到上述速率，请先使用 ifconfig 和 tcpdump 工具，排查是否误码率太高，如果误码率太高，请测试 USB 眼图，确认 USB 的信号质量是否符合要求。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=23-usb-camera-传输速率分析>2.3 USB Camera 传输速率分析<a href=#23-usb-camera-传输速率分析 class=hash-link aria-label="Direct link to 2.3 USB Camera 传输速率分析" title="Direct link to 2.3 USB Camera 传输速率分析" translate=no>​</a></h3>
+<p>测试方法：</p>
+<p>使用系统自带的 Camera APK 进行图像预览，并通过串口执行 logcat，查看打印的实时帧率，如下：</p>
+<p>CameraHal: debugShowFPS(622): Camera 1312 Frames, 30.000 FPS</p>
+<p>uvc 驱动调试方法：</p>
+<p>打印 uvc trace 信息</p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 0xffff > /sys/module/uvcvideo/parameters/trace</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">echo 8 > /proc/sysrq-trigger</span><br/></div></code></pre></div></div>
+<p>关闭 uvc trace</p>
+<p>ehco 0 > /sys/module/uvcvideo/parameters/trace</p>
+<p>查看 uvc decode 统计信息</p>
+<p>cat /d/usb/uvcvideo/*/stats</p>
+<p>测试结果：</p>
+<p>Rockchip 平台 USB Camera 支持的最大帧率如下：</p>
+<p>表 2-1 Rockchip 平台 USB Camera 最大帧率</p>
+<table><thead><tr><th><th>YUYV 格式<th>MJPEG 格式<th>H264 格式<tbody><tr><td>USB 2.0<td>640×480 @30fps<td>1280×720 @30fps<td>1920×1080 @30fps<tr><td>USB 3.0<td>640×480 @60fps<td>1280×720 @60fps<td>1920×1080 @60fps</table>
+<p>Note：上述帧率的测试前提条件是每个 USB 控制器只连接一个 USB Camera ，如果同时连接两个或多个USB Camera，要以实测为准。</p>
+<p>测试结果分析与性能优化：</p>
+<p>a). USB Camera 实际能够输出的最大帧率；</p>
+<p>b). USB Host 驱动的同步传输性能；</p>
+<p>对于因素 a)，可以在 PC 上验证 USB Camera 的性能。对于因素 b)，可以考虑提高 USB QOS 的优先级、提高 USB 中断的响应速度、提高 USB 控制器的 AHB CLK 以及 DMA burst length。</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=3-usb-device-传输性能分析>3. USB Device 传输性能分析<a href=#3-usb-device-传输性能分析 class=hash-link aria-label="Direct link to 3. USB Device 传输性能分析" title="Direct link to 3. USB Device 传输性能分析" translate=no>​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=31-usb-mtp-传输速率分析>3.1 USB MTP 传输速率分析<a href=#31-usb-mtp-传输速率分析 class=hash-link aria-label="Direct link to 3.1 USB MTP 传输速率分析" title="Direct link to 3.1 USB MTP 传输速率分析" translate=no>​</a></h3>
+<p>测试方法：</p>
+<p>将待测设备连接到 PC，设置 USB 为 MTP 模式，然后手动拷贝大文件（如 1GB 以上的电影），用秒表计时，再计算平均传输速率。</p>
+<p>测试时注意以下几点：</p>
+<p>待测设备应保持在静态桌面，避免进休眠；</p>
+<p>待测设备连接到 PC 后，需要等待媒体库扫描完成（可以观察 logcat 打印），再执行拷贝操作；</p>
+<p>测试结果：</p>
+<p>实例</p>
+<p>测试平台：RK3399 BOX SDK Android N + Kernel 4.4</p>
+<p>测试说明：</p>
+<p>Read：RK3399 -> PC</p>
+<p>Write: PC -> RK3399</p>
+<p>16K，64K，1M 表示 MTP 驱动的 Tx 和 Rx Buffer Length</p>
+<p>测试时，RK3399 大核和小核都定为最高频率</p>
+<p>表 3-1 RK3399 BOX SDK USB MTP 传输速率</p>
+<table><thead><tr><th><th>Read 16K<th>Write 16K<th>Read 64K<th>Write 64K<th>Read 1M<th>Write 1M<tbody><tr><td>USB2.0<td>24.7MBps<td>22.8 MBps<td>22.8MBps<td>21.5 MBps<td>24.7MBps<td>25.6 MBps<tr><td>USB3.0<td>65.6MBps<td>109.0MBps<td>71.3MBps<td>107.5MBps<td>87.3MBps<td>110.0 MBps</table>
+<p>测试平台：RK3126C 样机 Android O + Kernel4.4</p>
+<p>表 3-2 RK3126C 样机 USB MTP 传输速率</p>
+<table><thead><tr><th><th>Read 16K<th>Write 16K<th>Read 64K<th>Write 64K<tbody><tr><td>USB 2.0<td>14.85 MBps<td>7.1 MBps<td>15.15 MBps<td>7.8 MBps</table>
+<p>测试结果分析与性能优化方向：</p>
+<p>CPU 的运行频率</p>
+<p>CPU 定为高频，MTP 的拷贝速率会明显高于 CPU 变频时的拷贝速率。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=存储颗粒的读写性能>存储颗粒的读写性能<a href=#存储颗粒的读写性能 class=hash-link aria-label="Direct link to 存储颗粒的读写性能" title="Direct link to 存储颗粒的读写性能" translate=no>​</a></h3>
+<p>如果存储颗粒的读写性能差，会严重影响 MTP 传输速率。评估存储颗粒的读写性能的方法，请参考2.1 USB Disk 传输速率分析</p>
+<p>Kernel4.4 提供了调试接口，打印 MTP 传输过程中，每次读写存储颗粒(vfs_read/vfs_write)的耗时，使用方法如下：</p>
+<p>查询命令：</p>
+<p>cat /sys/kernel/debug/usb_mtp/status</p>
+<p>reset 统计状态的命令：</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">echo 0 > /sys/kernel/debug/usb_mtp/status</span><br/></div></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=usb-控制器的传输性能>USB 控制器的传输性能<a href=#usb-控制器的传输性能 class=hash-link aria-label="Direct link to USB 控制器的传输性能" title="Direct link to USB 控制器的传输性能" translate=no>​</a></h3>
+<p>提高 USB2 控制器的 AHB CLK 至 150MHz，并且 DMA Burst 设置为最大，可以提高 USB 控制器的DMA 传输性能，从而提高 USB 控制器的传输速率。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=mtp-驱动的-txrx-buffer-大小>MTP 驱动的 Tx/Rx buffer 大小<a href=#mtp-驱动的-txrx-buffer-大小 class=hash-link aria-label="Direct link to MTP 驱动的 Tx/Rx buffer 大小" title="Direct link to MTP 驱动的 Tx/Rx buffer 大小" translate=no>​</a></h3>
+<p>USB2 控制器（DWC2）支持一次最大传输 512KB 的数据，USB3 控制器（DWC3）支持一次最大传输 16MB - 1B，所以，可以尽可能地提高 MTP 驱动的 Tx/Rx buffer 大小（当前 MTP 驱动默认设置为 64KB），以减少 USB 传输的中断数量。建议 USB2 控制器 Tx/Rx buffer 设置为 64KB，USB3控制器 Tx/Rx buffer 设置为 1MB。</p>
+<p>Kernel4.4 的 MTP 驱动支持通过 module parameter 配置 Tx/Rx buffer，接口如下：</p>
+<p>/sys/module/usb_f_mtp/parameters/mtp_tx_req_len （Tx Buffer Length 单位：byte）</p>
+<p>/sys/module/usb_f_mtp/parameters/mtp_tx_reqs （Tx Buffer 数量）</p>
+<p>/sys/module/usb_f_mtp/parameters/mtp_rx_req_len （Rx Buffer Length 单位：byte）</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=32-usb-msc-传输速率分析>3.2 USB MSC 传输速率分析<a href=#32-usb-msc-传输速率分析 class=hash-link aria-label="Direct link to 3.2 USB MSC 传输速率分析" title="Direct link to 3.2 USB MSC 传输速率分析" translate=no>​</a></h3>
+<p>测试方法：</p>
+<p>以 Linux-4.4 RK3399 EVB USB3.0 MSC 为分析实例</p>
+<p>将 Mass storage 配置为 module</p>
+<p>&lt;*> USB Gadget Support ---></p>
+<p>&lt;M> USB Gadget Drivers</p>
+<p>&lt;M> Mass Storage Gadget</p>
+<p>Kernel 增加如下补丁：</p>
+<div class="language-diff codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-diff codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">index f3c7f15..5418d06 100644</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">--- a/arch/arm64/boot/dts/rockchip/rk3399.dtsi</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+++ b/arch/arm64/boot/dts/rockchip/rk3399.dtsi</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">@@ -404,7 +404,7 @@</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">compatible = "snps,dwc3";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">reg = &lt;0x0 0xfe800000 0x0 0x100000>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">interrupts = &lt;GIC_SPI 105 IRQ_TYPE_LEVEL_HIGH 0>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">dr_mode = "otg";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ dr_mode = "peripheral";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">phys = &lt;&u2phy0_otg>, &lt;&tcphy0_usb3>;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">phy-names = "usb2-phy", "usb3-phy";</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">phy_type = "utmi_wide";</span><br/></div></code></pre></div></div>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=编译内核>编译内核<a href=#编译内核 class=hash-link aria-label="Direct link to 编译内核" title="Direct link to 编译内核" translate=no>​</a></h3>
+<p>编译 Mass storage module</p>
+<p>make ARCH=arm64 modules SUBDIRS=drivers/usb/gadget</p>
+<p>生成如下 ko</p>
+<p>libcomposite.ko</p>
+<p>usb_f_mass_storage.ko</p>
+<p>g_mass_storage.ko</p>
+<p>在系统起来后，先使用 dd 命令在 data 目录下创建一个 lun0.img，然后加载 ko</p>
+<div class="language-ini codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-ini codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">insmod libcomposite.ko</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">insmod usb_f_mass_storage.ko</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">insmod g_mass_storage.ko file=/data/lun0.img removable=1</span><br/></div></code></pre></div></div>
+<p>连接 PC Ubuntu，格式化 lun0，然后在 PC 端就可以正常访问 Mass storage</p>
+<p>使用如下脚本测试读速率</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">while true;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">do time dd iflag=direct,nonblock if=/media/wlf/4625f014-95f3-419c-96c9-</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">a38f91186eb2/test0 of=/dev/null bs=1024k count=400;</span><br/></div></code></pre></div></div>
+<p>done</p>
+<p>也可以使用 USB3.0 Agilent 分析仪测试传输速率，如下图 3-1 所示</p>
+<p>File Edit View Run Window Help</p>
+<table><thead><tr><th>&lt;<th><th><th><th><th><tbody><tr><td>Series<td><td>Maximum Value<td>Average Value<td>Minimum Value<td>Current Value<tr><td><td>DP Count(Host)<td>2176.58 DPCount/Sec<td>1977.14 DPCount/Sec<td>1858.44 DPCount/Sec<td>2149.76 DPCount/Sec<tr><td><td>DP Count(Device)<td>307609.88 DPCount/Sec<td>298307.58 DPCount/Sec<td>288365.38 DPCount/Sec<td>307165.22 DPCount/Sec<tr><td><td>Link Utilization(Host)<td>5.97 %<td>4.95 %<td>4.3 %<td>4.89 %<tr><td><td>Link Utilization(Device)<td>65.05 %<td>63.17 %<td>61.06 %<td>64.97 %<tr><td><td>Data Throughput(Host)<td>9.88 MB/Sec<td>4.53 MB/Sec<td>1.17 MB/Sec<td>3.91 MB/Sec<tr><td><td>Data Throughput(Device)<td>298.2 MB/Sec<td>289.2 MB/Sec<td>279.4 MB/Sec<td>297.94 MB/Sec</table>
+<p>图 3-1 USB3 Agilent 分析仪测试传输速率</p>
+<p>测试结果及分析：</p>
+<p>RK3399 变频：读速率 250MBps</p>
+<p>RK3399 关闭小核，大核定频 1.8：读速率 300MBps</p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">3399 关闭小核</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">echo 0 > /sys/devices/system/cpu/cpu0/online</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">echo 0 > /sys/devices/system/cpu/cpu1/online</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">echo 0 > /sys/devices/system/cpu/cpu2/online</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">echo 0 > /sys/devices/system/cpu/cpu3/online</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">3399 定频大核</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">echo userspace > /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">echo 1800000 > /sys/devices/system/cpu/cpu4/cpufreq/scaling_setspeed</span><br/></div></code></pre></div></div>
+<p>结论：USB MSC 的传输速率受 CPU 运行的频率影响比较明显，CPU 频率越高，读速率也越高。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=33-usb-gadget-webcam-传输速率分析>3.3 USB Gadget Webcam 传输速率分析<a href=#33-usb-gadget-webcam-传输速率分析 class=hash-link aria-label="Direct link to 3.3 USB Gadget Webcam 传输速率分析" title="Direct link to 3.3 USB Gadget Webcam 传输速率分析" translate=no>​</a></h3>
+<p>测试方法：</p>
+<p>测试工具：</p>
+<p>PC Windows： AMCAP 软件</p>
+<p>PC Ubuntu： guvcview 软件 （安装方法：sudo apt install guvcview）</p>
+<p>AMCAP 和 guvcview 两款软件都支持实时统计并显示帧率。</p>
+<p>测试结果及分析：</p>
+<p>如果要支持 USB Gadget Webcam，除了内核需要 enable UVC gadget 驱动，应用层也需要增加 UVC 的处理。目前，Rockchip 平台 Kernel-3.10 和 Kernel-4.4 均已经支持 usb gadget 驱动，应用层只有 RV1108SDK 支持 UVC gadget，其他芯片平台，可以参考 RV1108 SDK 或者 GitHub 的usb gadget uvc driver testapplication进行修改。</p>
+<p>Kernel-3.10 UVC Gadget 驱动支持同步传输（Isochronous Transfer）和批量传输（Bulk Transfers）两种传输类型，默认使用同步传输方式，并且默认每个微帧（125 微秒）传输 1KB。</p>
+<p>因此，Kernel-3.10 的 UVC Gadget 可以有 4 种不同的传输配置方式，不同的配置方式，USB 支持的最大带宽和帧率有所不同。</p>
+<p>UVC Gadget 传输配置方式 1：</p>
+<p>同步传输方式，每个微帧（125 微秒）传 1KB（默认配置方式）</p>
+<p>USB 支持最大带宽：8000 KB，即 7.8MB</p>
+<p>支持的最大帧率如下表 3-3：</p>
+<p>表 3-3 RV1108 USB Gadget Webcam 支持的最大帧率[配置 1]</p>
+<table><thead><tr><th><th>YUYV 格式<th>MJPG 格式<th>H264 格式<tbody><tr><td>USB 2.0<td>648×480 @12fps<td>1920×1080 @30fps<td>1920×1080 @30fps</table>
+<p>UVC Gadget 传输配置方式 2：</p>
+<p>同步传输方式，每个微帧（125 微秒）传 2KB。</p>
+<div class="language-diff codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-diff codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">diff --git a/drivers/usb/gadget/f_uvc.c b/drivers/usb/gadget/f_uvc.c</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">index 382536d..17eac12 100644</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">--- a/drivers/usb/gadget/f_uvc.c</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+++ b/drivers/usb/gadget/f_uvc.c</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">@@ -37,7 +37,7 @@ static unsigned int streaming_interval = 1;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">module_param(streaming_interval, uint, S_IRUGO|S_IWUSR);</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">MODULE_PARM_DESC(streaming_interval, "1 - 16");</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">-static unsigned int streaming_maxpacket = 1024;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+static unsigned int streaming_maxpacket = 2048;</span><br/></div></code></pre></div></div>
+<p>USB 支持最大带宽：16000 KB，即 15.62MB</p>
+<p>支持的最大帧率如下表 3-4：</p>
+<p>表 3-4 RV1108 USB Gadget Webcam 支持的最大帧率[配置 2]</p>
+<table><thead><tr><th><th>YUYV 格式<th>MJPG 格式<th>H264 格式<tbody><tr><td>USB 2.0<td>648×480 @24fps<td>1920×1080 @30fps<td>1920×1080 @30fps</table>
+<p>UVC Gadget 传输配置方式 3：</p>
+<p>同步传输方式，每个微帧（125 微秒）传 3KB</p>
+<div class="language-diff codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-diff codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">diff --git a/drivers/usb/gadget/f_uvc.c b/drivers/usb/gadget/f_uvc.c</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">index 382536d..17eac12 100644</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">--- a/drivers/usb/gadget/f_uvc.c</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+++ b/drivers/usb/gadget/f_uvc.c</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">@@ -37,7 +37,7 @@ static unsigned int streaming_interval = 1;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">module_param(streaming_interval, uint, S_IRUGO|S_IWUSR);</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">MODULE_PARM_DESC(streaming_interval, "1 - 16");</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">-static unsigned int streaming_maxpacket = 1024;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+static unsigned int streaming_maxpacket = 3072;</span><br/></div></code></pre></div></div>
+<p>USB 支持最大带宽：24000 KB，即 23.43MB</p>
+<p>支持的最大帧率如下表 3-5：</p>
+<p>表 3-5 RV1108 USB Gadget Webcam 支持的最大帧率[配置 3]</p>
+<p>UVC Gadget 传输配置方式 4：</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=批量传输方式>批量传输方式<a href=#批量传输方式 class=hash-link aria-label="Direct link to 批量传输方式" title="Direct link to 批量传输方式" translate=no>​</a></h3>
+<p>Note：需要更新如下补丁。此外，批量传输方式，不支持分辨率的切换，如果要支持多种分辨率，不建议使用批量传输方式。</p>
+<div class="language-diff codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-diff codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">diff --git a/drivers/usb/gadget/f_uvc.c b/drivers/usb/gadget/f_uvc.c</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">index d146ce7..9eb7aad 100644</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">--- a/drivers/usb/gadget/f_uvc.c</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+++ b/drivers/usb/gadget/f_uvc.c</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">@@ -45,7 +45,7 @@ static unsigned int streaming_maxburst;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">module_param(streaming_maxburst, uint, S_IRUGO|S_IWUSR);</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">MODULE_PARM_DESC(streaming_maxburst, "0 - 15 (ss only)");</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">-static bool bulk_streaming_ep;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+static bool bulk_streaming_ep = true;</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">module_param(bulk_streaming_ep, bool, S_IRUGO | S_IWUSR);</span><br/></div></code></pre></div></div>
+<p>USB 支持最大带宽：35MB</p>
+<p>支持的最大帧率如下表 3-6：</p>
+<p>表 3-6 RV1108 USB Gadget Webcam 支持的最大帧率[配置 4]</p>
+<table><thead><tr><th><th>UYV格式<th>MJPG 格式<th>H264 格式<tbody><tr><td>USB 2.0<td>648×480 > 30fps<td>1920×1080 > 30fps<td>1920×1080 > 30fps</table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=34-usb-rndis-传输速率分析>3.4 USB Rndis 传输速率分析<a href=#34-usb-rndis-传输速率分析 class=hash-link aria-label="Direct link to 3.4 USB Rndis 传输速率分析" title="Direct link to 3.4 USB Rndis 传输速率分析" translate=no>​</a></h3>
+<p>USB Rndis 实际上就是 TCP/IPover USB，就是在 USB 设备上跑 TCP/IP，让 USB 设备看上去像一块网卡。</p>
+<p>测试方法：</p>
+<p>测试工具：iperf</p>
+<p>iperf 工具的详细说明，请参考2.2 USB Ethernet 传输速率分析</p>
+<p>USB Rndis 的 kernel config 设置如下：</p>
+<p>Linux-3.10 Android Gadget USB Rndis 配置方法：</p>
+<p>Device Drivers ---></p>
+<p>[*] USB support ---></p>
+<p>&lt;*> USB Gadget Support ---></p>
+<p>&lt;*> USB Gadget Drivers (Android Composite Gadget) ---></p>
+<p>Android Composite Gadget</p>
+<p>对应设备节点：</p>
+<p>/sys/class/android_usb/android0/f_rndis 目录下有一些节点可以用来配置网卡的方法和命令</p>
+<p>Linux-3.10 Ethernet Gadget USB Rndis 配置方法：</p>
+<p>Device Drivers ---></p>
+<p>[*] USB support ---></p>
+<p>&lt;*> USB Gadget Support ---></p>
+<p>&lt;*> USB Gadget Drivers (Ethernet Gadget (with CDC Ethernet support))</p>
+<p>---></p>
+<p>Ethernet Gadget (with CDC Ethernet support)</p>
+<p>Linux-4.4 Configfs USB Rndis 配置方法：</p>
+<p>Device Drivers ---></p>
+<p>[*] USB support ---></p>
+<p>&lt;*> USB Gadget Support ---></p>
+<p>&lt;*> USB Gadget Drivers (USB functions configurable through configfs)</p>
+<p>---></p>
+<p>[*] RNDIS</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=实例-2>实例：<a href=#实例-2 class=hash-link aria-label="Direct link to 实例：" title="Direct link to 实例：" translate=no>​</a></h3>
+<p>以 Linux-3.10 Android Gadget USB Rndis 为实例进行分析</p>
+<p>USB Rndis 的枚举 log 如下：</p>
+<p>shell@android:/ # setprop sys.usb.config rndis</p>
+<p>[ 2445.809337] rndis_function_bind_config MAC: 36:C8:78:69:C5<!-- -->:D3</p>
+<p>[ 2445.809532] android_usb gadget: using random self ethernet address</p>
+<p>[ 2445.809666] android_usb gadget: using random host ethernet address</p>
+<p>[ 2445.812255] rndis0: MAC 0a:d4:f2:e3:c5<!-- -->:c7</p>
+<p>[ 2445.812330] rndis0: HOST MAC ea:88:5c:93:9d<!-- -->:b5<!-- --> 如连接window，则对应windows以太</p>
+<p>网卡MAC</p>
+<p>[ 2446.208233] DWC_OTG: ********soft</p>
+<p>connect!!!*****************************************</p>
+<p>[ 2446.541253] android_usb gadget: high speed config #1: android</p>
+<p>[ 2446.542681] android_work: sent uevent USB_STATE=CONFIGURED</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=设置-ip-并启动-rndis>设置 IP 并启动 rndis：<a href=#设置-ip-并启动-rndis class=hash-link aria-label="Direct link to 设置 IP 并启动 rndis：" title="Direct link to 设置 IP 并启动 rndis：" translate=no>​</a></h3>
+<p>ifconfig rndis0 192.168.1.2 up</p>
+<p>其中， IP 地址 192.168.1.2 要与 PC 的 IP 在同一个网段， 也即都在 192.168.XX.XX 网段。</p>
+<p>更详细的配置和测试方法，请参考2.2 USB Ethernet 传输速率分析</p>
+<p>Note：测试前，需要关闭 Windows 防火墙，否则可能导致 Rockchip 平台无法 pingWindows。</p>
+<p>测试结果：</p>
+<p>以下均为 High-speed 的测试结果，Super-Speed 暂时没有测试过。</p>
+<p>Linux-3.10 Android Gadget USB Rndis：上行 20Mbps，下行 40Mbps</p>
+<p>Linux-3.10 Ethernet Gadget USB Rndis：上行和下行均为 100Mbps</p>
+<p>Linux-4.4 Configfs USB Rndis：上行和下行均为 100Mbps</p>
+<p>测试结果分析及优化方向：</p>
+<p>目前，已知的一个问题是 Linux-3.10 Android Gadget USB Rndis 上行和下行速率都偏低，需要进一步优化。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=35-usb-gadget-hid-传输速率分析>3.5 USB Gadget HID 传输速率分析<a href=#35-usb-gadget-hid-传输速率分析 class=hash-link aria-label="Direct link to 3.5 USB Gadget HID 传输速率分析" title="Direct link to 3.5 USB Gadget HID 传输速率分析" translate=no>​</a></h3>
+<p>测试方法：</p>
+<p>测试工具：</p>
+<p>PC Windows：HidTest.exe，PortHelper1.7.exe，或者下载HID API</p>
+<p>PC Ubuntu：Linux-3.10 Documentation/usb/gadget_hid.txt 中的 hid_gadget_test 测试脚本</p>
+<p>或者下载HID API</p>
+<p>测试结果：</p>
+<p>测试 rk3188 Gadget HID 传输速率，结果如下：</p>
+<p>case1. 设置 report_length 为 512 bytes，间隔为 1ms，传输文件大小 10768KB，HID 为 high speed 设备</p>
+<p>PC -> 3188 速率：249 KBps</p>
+<p>case2. 设置 report_length 为 512 bytes，间隔为 125us，传输文件大小 10768KB，HID 为 high speed 设备</p>
+<p>PC -> 3188 速率：872 KBps</p>
+<p>3188 -> PC 速率：2659 KBps</p>
+<p>测试结果分析：</p>
+<p>USB Gadget HID 的传输速率主要由 HID 描述符的report_length的长度和中断传输间隔决定。Linux USBGadget HID 驱动源文件（drivers/usb/gadget/hid.c）中，没有提供 HID 描述符，需要开发者参考 Linux 文档 Documentation/usb/gadget_hid.txt 进行开发。如下给出 HID report_length 设置为 512bytes 的 HID 描述符参考代码。</p>
+<div class="language-diff codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-diff codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">index 79afa82..a05ad79 100644</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">--- a/drivers/usb/gadget/hid.c</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+++ b/drivers/usb/gadget/hid.c</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">@@ -271,10 +272,93 @@ MODULE_DESCRIPTION(DRIVER_DESC);</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">MODULE_AUTHOR("Fabien Chouteau, Peter Korsgaard");</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">MODULE_LICENSE("GPL");</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+static struct hidg_func_descriptor rk_hidg_desc = {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ .subclass = 0, /* No subclass */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ .protocol = 2, /* Keyboard */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ .report_length = 512,</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ .report_desc_length = 38,</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ .report_desc = {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x06, 0x00, 0xFF, /*USAGE_PAGE (Vendor Defined Page 1)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x09, 0x01, /*USAGE (Vendor Usage 1)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0xA1, 0x01, /*COLLECTION (Application)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x09, 0x02, /* USAGE (Vendor Usage 2)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x09, 0x03, /*USAGE (Vendor Usage 3)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x15, 0x00, /*LOGICAL_MINIMUM (0)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x26, 0xFF, 0x00, /*LOGICAL_MAXIMUM (255)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x75, 0x10, /*REPORT_SIZE (16)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x96, 0x00, 0x01, /* REPORT_COUNT (256) */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x81, 0x02, /*INPUT (Data,Var,Abs) */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x09, 0x04, /*USAGE (Vendor Usage 4)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x15, 0x00, /*LOGICAL_MINIMUM (0) */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x26, 0xFF, 0x00, /*LOGICAL_MAXIMUM (255) */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x75, 0x10, /*REPORT_SIZE (16)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x96, 0x00, 0x01, /*REPORT_COUNT (256)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x91, 0x02, /*OUTPUT (Data,Var,Abs) */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0xC0 /*END_COLLECTION*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ }</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+};</span><br/></div></code></pre></div></div>
+<p>如果要支持 report_length 为 1024bytes，可以改为而 HID 的中断传输间隔，可以修改 drivers/usb/gadget/f_hid.c 文件里面的 hidg_hs_in_ep_desc 和hidg_hs_out_ep_desc 结构体的成员 bInterval，原生是 4（1ms），最小可以改为 1（125us）。</p>
+<div class="language-diff codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-diff codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">@@ -275,7 +275,7 @@ MODULE_LICENSE("GPL");</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">static struct hidg_func_descriptor rk_hidg_desc = {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">.subclass = 0, /* No subclass */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">.protocol = 2, /* Keyboard */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">.report_length = 512,</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ .report_length = 1024,</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">.report_desc_length = 38,</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">.report_desc = {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">0x06, 0x00, 0xFF, /*USAGE_PAGE (Vendor Defined Page 1)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">@@ -285,13 +285,13 @@ static struct hidg_func_descriptor rk_hidg_desc = {</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">0x09, 0x03, /*USAGE (Vendor Usage 3)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">0x15, 0x00, /*LOGICAL_MINIMUM (0)*/</span><br/></div></code></pre></div></div>
+<div class="language-csv codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-csv codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">0x26, 0xFF, 0x00, /*LOGICAL_MAXIMUM (255)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">- 0x75, 0x10, /*REPORT_SIZE (16)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x75, 0x20, /*REPORT_SIZE (32)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">0x96, 0x00, 0x01, /* REPORT_COUNT (256) */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">0x81, 0x02, /*INPUT (Data,Var,Abs) */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">0x09, 0x04, /*USAGE (Vendor Usage 4)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">0x15, 0x00, /*LOGICAL_MINIMUM (0) */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">0x26, 0xFF, 0x00, /*LOGICAL_MAXIMUM (255) */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">- 0x75, 0x10, /*REPORT_SIZE (16)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">+ 0x75, 0x20, /*REPORT_SIZE (32)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">0x96, 0x00, 0x01, /*REPORT_COUNT (256)*/</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">0x91, 0x02, /*OUTPUT (Data,Var,Abs) */</span><br/></div><div class=token-line style=color:#393A34><span class="token plain">0xC0 /*END_COLLECTION*/</span><br/></div></code></pre></div></div></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href=https://github.com/100askTeam/zephyr-docs/tree/master/docs/DshanPi-A1/9-原厂在线文档/Common/USB/Linux-USB-Performance-Analysis.md target=_blank rel="noopener noreferrer" class=theme-edit-this-page><svg fill=currentColor height=20 width=20 viewBox="0 0 40 40" class=iconEdit_Z9Sw aria-hidden=true><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"/></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/Linux-USB-PHY><div class=pagination-nav__sublabel>Previous</div><div class=pagination-nav__label>Linux-USB-PHY</div></a><a class="pagination-nav__link pagination-nav__link--next" href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/RK3399-Developer-Guide-USB-DTS><div class=pagination-nav__sublabel>Next</div><div class=pagination-nav__label>RK3399 USB DTS 配置说明</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href=#前言 class="table-of-contents__link toc-highlight">前言</a><li><a href=#概述 class="table-of-contents__link toc-highlight">概述</a><li><a href=#产品版本 class="table-of-contents__link toc-highlight">产品版本</a><li><a href=#读者对象 class="table-of-contents__link toc-highlight">读者对象</a><li><a href=#1-usb-理论传输速率分析 class="table-of-contents__link toc-highlight">1. USB 理论传输速率分析</a><ul><li><a href=#11-usb-communication-flow class="table-of-contents__link toc-highlight">1.1 USB Communication Flow</a><li><a href=#12-usb-物理层传输速率 class="table-of-contents__link toc-highlight">1.2 USB 物理层传输速率</a><li><a href=#13-usb-协议层传输速率 class="table-of-contents__link toc-highlight">1.3 USB 协议层传输速率</a></ul><li><a href=#2-usb-控制器的-ahb-clk-和-dma-burst-length class="table-of-contents__link toc-highlight">2. USB 控制器的 AHB CLK 和 DMA Burst Length</a><li><a href=#3-cpu-运行频率的影响 class="table-of-contents__link toc-highlight">3. CPU 运行频率的影响</a><li><a href=#4-usb-设备类驱动提交的-urb-usb-request-block的-buffer-大小 class="table-of-contents__link toc-highlight">4. USB 设备类驱动提交的 URB (USB Request Block)的 buffer 大小</a><li><a href=#5-存储介质读写性能的影响 class="table-of-contents__link toc-highlight">5. 存储介质读写性能的影响</a><li><a href=#6-文件系统格式的影响 class="table-of-contents__link toc-highlight">6. 文件系统格式的影响</a><ul><li><a href=#21-usb-disk-传输速率分析 class="table-of-contents__link toc-highlight">2.1 USB Disk 传输速率分析</a><li><a href=#note class="table-of-contents__link toc-highlight">Note:</a><li><a href=#方法-2使用-dd-命令测试 class="table-of-contents__link toc-highlight">方法 2：使用 dd 命令测试</a><li><a href=#测试结果 class="table-of-contents__link toc-highlight">测试结果：</a><li><a href=#usb-20-host class="table-of-contents__link toc-highlight">USB 2.0 Host</a><li><a href=#usb-30-host class="table-of-contents__link toc-highlight">USB 3.0 Host</a><li><a href=#note-1 class="table-of-contents__link toc-highlight">Note：</a><li><a href=#测试结果分析与性能优化方向 class="table-of-contents__link toc-highlight">测试结果分析与性能优化方向：</a><li><a href=#实例 class="table-of-contents__link toc-highlight">实例：</a><li><a href=#测试-3399-emmc-写性能 class="table-of-contents__link toc-highlight">测试 3399 EMMC 写性能</a><li><a href=#使用-strace-命令跟踪-cp-行为 class="table-of-contents__link toc-highlight">使用 strace 命令跟踪 cp 行为</a><li><a href=#usb-disk class="table-of-contents__link toc-highlight">USB Disk：</a><li><a href=#抓-blktrace-的数据 class="table-of-contents__link toc-highlight">抓 blktrace 的数据：</a><li><a href=#step5-分析-usb-disk-文件系统格式的影响 class="table-of-contents__link toc-highlight">step5. 分析 USB Disk 文件系统格式的影响</a><li><a href=#22-usb-ethernet-传输速率分析 class="table-of-contents__link toc-highlight">2.2 USB Ethernet 传输速率分析</a><li><a href=#实例-1 class="table-of-contents__link toc-highlight">实例</a><li><a href=#udp-模式 class="table-of-contents__link toc-highlight">UDP 模式</a><li><a href=#23-usb-camera-传输速率分析 class="table-of-contents__link toc-highlight">2.3 USB Camera 传输速率分析</a></ul><li><a href=#3-usb-device-传输性能分析 class="table-of-contents__link toc-highlight">3. USB Device 传输性能分析</a><ul><li><a href=#31-usb-mtp-传输速率分析 class="table-of-contents__link toc-highlight">3.1 USB MTP 传输速率分析</a><li><a href=#存储颗粒的读写性能 class="table-of-contents__link toc-highlight">存储颗粒的读写性能</a><li><a href=#usb-控制器的传输性能 class="table-of-contents__link toc-highlight">USB 控制器的传输性能</a><li><a href=#mtp-驱动的-txrx-buffer-大小 class="table-of-contents__link toc-highlight">MTP 驱动的 Tx/Rx buffer 大小</a><li><a href=#32-usb-msc-传输速率分析 class="table-of-contents__link toc-highlight">3.2 USB MSC 传输速率分析</a><li><a href=#编译内核 class="table-of-contents__link toc-highlight">编译内核</a><li><a href=#33-usb-gadget-webcam-传输速率分析 class="table-of-contents__link toc-highlight">3.3 USB Gadget Webcam 传输速率分析</a><li><a href=#批量传输方式 class="table-of-contents__link toc-highlight">批量传输方式</a><li><a href=#34-usb-rndis-传输速率分析 class="table-of-contents__link toc-highlight">3.4 USB Rndis 传输速率分析</a><li><a href=#实例-2 class="table-of-contents__link toc-highlight">实例：</a><li><a href=#设置-ip-并启动-rndis class="table-of-contents__link toc-highlight">设置 IP 并启动 rndis：</a><li><a href=#35-usb-gadget-hid-传输速率分析 class="table-of-contents__link toc-highlight">3.5 USB Gadget HID 传输速率分析</a></ul></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class=footer__copyright>Copyright © 2026 100askTeam, Inc. Built with Docusaurus.</div></div></div></footer></div></body>

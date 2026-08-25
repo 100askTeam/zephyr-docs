@@ -1,0 +1,2056 @@
+<!doctype html><html lang=en dir=ltr class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP39-CN-v1.0" data-has-hydrated=false><head><meta charset=UTF-8><meta name=generator content="Docusaurus v3.10.2"><title data-rh=true>Rockchip Tunning Guide ISP39 | 东山Π</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"/><meta data-rh=true name=twitter:card content=summary_large_image /><meta data-rh=true property=og:image content=https://zephyr.100ask.org/en/img/docusaurus-social-card.jpg /><meta data-rh=true name=twitter:image content=https://zephyr.100ask.org/en/img/docusaurus-social-card.jpg /><meta data-rh=true property=og:url content=https://zephyr.100ask.org/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP39-CN-v1.0 /><meta data-rh=true property=og:locale content=en /><meta data-rh=true property=og:locale:alternate content=zh_Hans /><meta data-rh=true name=docusaurus_locale content=en /><meta data-rh=true name=docsearch:language content=en /><meta data-rh=true name=docusaurus_version content=current /><meta data-rh=true name=docusaurus_tag content=docs-default-current /><meta data-rh=true name=docsearch:version content=current /><meta data-rh=true name=docsearch:docusaurus_tag content=docs-default-current /><meta data-rh=true property=og:title content="Rockchip Tunning Guide ISP39 | 东山Π"/><meta data-rh=true name=description content=前⾔ /><meta data-rh=true property=og:description content=前⾔ /><link data-rh=true rel=icon href=/en/img/favicon.ico /><link data-rh=true rel=canonical href=https://zephyr.100ask.org/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP39-CN-v1.0 /><link data-rh=true rel=alternate href=https://zephyr.100ask.org/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP39-CN-v1.0 hreflang=zh-Hans /><link data-rh=true rel=alternate href=https://zephyr.100ask.org/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP39-CN-v1.0 hreflang=en /><link data-rh=true rel=alternate href=https://zephyr.100ask.org/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP39-CN-v1.0 hreflang=x-default /><script data-rh=true type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://zephyr.100ask.org/en/docs/category/原厂在线文档","name":"原厂在线文档","position":1},{"@type":"ListItem","item":"https://zephyr.100ask.org/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP39-CN-v1.0","name":"Rockchip Tunning Guide ISP39","position":2}]}</script><link rel=alternate type=application/rss+xml href=/en/blog/rss.xml title="东山Π RSS Feed"><link rel=alternate type=application/atom+xml href=/en/blog/atom.xml title="东山Π Atom Feed"><link rel=stylesheet href=/en/assets/css/styles.6e3daa0f.css /><script src=/en/assets/js/runtime~main.7368cb74.js defer></script><script src=/en/assets/js/main.673ec9c1.js defer></script></head><body><svg style="display: none;"><defs>
+<symbol id=theme-svg-external-link viewBox="0 0 24 24"><path fill=currentColor d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme-388")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id=__docusaurus><link rel=preload as=image href=/en/img/logo.svg /><div role=region aria-label="Skip to main content"><a class=skipToContent_fXgn href=#__docusaurus_skipToContent_fallback>Skip to main content</a></div><nav aria-label=Main class="theme-layout-navbar navbar navbar--fixed-top"><div class=navbar__inner><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"/></svg></button><a class=navbar__brand href=/en/><div class=navbar__logo><img src=/en/img/logo.svg alt=东山PI class="themedComponent_mlkZ themedComponent--light_NVdE"/><img src=/en/img/logo.svg alt=东山PI class="themedComponent_mlkZ themedComponent--dark_xIcU"/></div><b class="navbar__title text--truncate">东山Π</b></a><div class="navbar__item dropdown dropdown--hoverable"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link>DshanPi-A1</a><ul class=dropdown__menu><li><a aria-current=page class="dropdown__link dropdown__link--active" href=/en/docs/DshanPi-A1/intro>DshanPi-A1</a><li><a class=dropdown__link href=/en/docs/DshanPi-A1_CM5/intro>DshanPi-A1(CM5)</a></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link>RK3568系列</a><ul class=dropdown__menu><li><a class=dropdown__link href=/en/docs/DshanPi-R1/intro>DshanPi-R1+</a><li><a class=dropdown__link href=/en/docs/100ASK_RK3568/BoardIntroduction>100ASK-RK3568</a></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a class="navbar__item navbar__link" href=/en/blog>Blog</a><a href=https://github.com/dshanpi/Docs target=_blank rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href=# aria-haspopup=true aria-expanded=false role=button class=navbar__link><svg viewBox="0 0 24 24" width=20 height=20 aria-hidden=true class=iconLanguage_nlXk><path fill=currentColor d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>English</a><ul class=dropdown__menu><li><a href=/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP39-CN-v1.0 target=_self rel="noopener noreferrer" class=dropdown__link lang=zh-Hans>简体中文</a><li><a href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP39-CN-v1.0 target=_self rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang=en>English</a></ul></div><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type=button disabled title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill=currentColor d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"/></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill=currentColor d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill=currentColor d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"/></svg></button></div><div class=navbarSearchContainer_Bca1><div class="navbar__search searchBarContainer_NW3z" dir=ltr><input placeholder=Search aria-label=Search class="navbar__search-input searchInput_YFbd" value="" /><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class=docsWrapper_hBAB><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type=button></button><div class=docRoot_UBD9><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class=sidebarViewport_aRkj><div class=sidebar_njMd><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class=menu__link href=/en/docs/DshanPi-A1/intro><span class=linkLabel_WmDU>DshanPi-A1 Education</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/快速使用><span class=categoryLinkLabel_W154>快速使用</span></a><button aria-label="Expand sidebar category '快速使用'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/系统配置><span class=categoryLinkLabel_W154>系统配置</span></a><button aria-label="Expand sidebar category '系统配置'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/应用基础><span class=categoryLinkLabel_W154>应用基础</span></a><button aria-label="Expand sidebar category '应用基础'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/应用开发><span class=categoryLinkLabel_W154>应用开发</span></a><button aria-label="Expand sidebar category '应用开发'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/驱动基础><span class=categoryLinkLabel_W154>驱动基础</span></a><button aria-label="Expand sidebar category '驱动基础'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/系统开发><span class=categoryLinkLabel_W154>系统开发</span></a><button aria-label="Expand sidebar category '系统开发'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/项目案例><span class=categoryLinkLabel_W154>项目案例</span></a><button aria-label="Expand sidebar category '项目案例'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/en/docs/category/其他系统><span class=categoryLinkLabel_W154>其他系统</span></a><button aria-label="Expand sidebar category '其他系统'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href=/en/docs/category/原厂在线文档><span class=categoryLinkLabel_W154>原厂在线文档</span></a><button aria-label="Collapse sidebar category '原厂在线文档'" aria-expanded=true type=button class="clean-btn menu__caret"></button></div><ul class=menu__list><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role=button aria-expanded=true tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/AMP/><span class=categoryLinkLabel_W154>Common</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/AMP/><span class=linkLabel_WmDU>瑞芯微多核异构系统开发指南</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/AUDIO/><span class=categoryLinkLabel_W154>Rockchip Audio 开发指南</span></a><button aria-label="Expand sidebar category 'Rockchip Audio 开发指南'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/CAN/><span class=categoryLinkLabel_W154>Rockchip Can 开发文档</span></a><button aria-label="Expand sidebar category 'Rockchip Can 开发文档'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/DDR/><span class=linkLabel_WmDU>DDR</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/DSMC/><span class=categoryLinkLabel_W154>Rockchip DSMC 开发文档</span></a><button aria-label="Expand sidebar category 'Rockchip DSMC 开发文档'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/I2C/><span class=linkLabel_WmDU>ROCKCHIP I2C 开发指南</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/MPP/><span class=linkLabel_WmDU>MPP</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/PCIe/><span class=categoryLinkLabel_W154>Rockchip Linux PCIe 开发指南</span></a><button aria-label="Expand sidebar category 'Rockchip Linux PCIe 开发指南'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/RGA/><span class=categoryLinkLabel_W154>RGA IM2D API 开发指南</span></a><button aria-label="Expand sidebar category 'RGA IM2D API 开发指南'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/THERMAL/><span class=linkLabel_WmDU>Thermal 开发指南</span></a><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/TRUST/><span class=categoryLinkLabel_W154>Trust</span></a><button aria-label="Expand sidebar category 'Trust'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/UART/><span class=categoryLinkLabel_W154>UART</span></a><button aria-label="Expand sidebar category 'UART'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/USB/><span class=categoryLinkLabel_W154>Rockchip Linux USB 开发指南</span></a><button aria-label="Expand sidebar category 'Rockchip Linux USB 开发指南'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/AVL/RK-SpiNor-and-SLC-Nand-SupportList-V1.50-20240901><span class=categoryLinkLabel_W154>AVL</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/CLK/Clock><span class=categoryLinkLabel_W154>CLK</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/CRYPTO/Crypto-HWRNG><span class=categoryLinkLabel_W154>CRYPTO</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/DEBUG/DS5><span class=categoryLinkLabel_W154>DEBUG</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/DISPLAY/BT656-TX-AND-BT1120-TX-Developer-Guide><span class=categoryLinkLabel_W154>DISPLAY</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/DVFS/CPUFreq><span class=categoryLinkLabel_W154>DVFS</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/FLEXBUS/Linux-FLEXBUS-ADC-and-DAC-MODE><span class=categoryLinkLabel_W154>FLEXBUS</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/FS/Developer-FAQ-FileSystem><span class=categoryLinkLabel_W154>FS</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/GMAC/Linux-GMAC-DPDK><span class=categoryLinkLabel_W154>GMAC</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/HDMI-IN/HDMI-IN-Based-On-CameraHal3><span class=categoryLinkLabel_W154>HDMI-IN</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/IO-DOMAIN/Linux-IO-DOMAIN><span class=categoryLinkLabel_W154>IO-DOMAIN</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/IOMMU/Linux-IOMMU><span class=categoryLinkLabel_W154>IOMMU</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role=button aria-expanded=true tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Camera-Module-OTP-Calibration-Guide><span class=categoryLinkLabel_W154>ISP</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Camera-Module-OTP-Calibration-Guide><span class=linkLabel_WmDU>Rockchip Camera Module OTP Calibration Guide</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Color-Optimization-Guide-ISP21-CN><span class=linkLabel_WmDU>Rockchip\_Color\_Optimization\_Guide\_ISP 21\_CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Color-Optimization-Guide-ISP30-CN><span class=linkLabel_WmDU>Rockchip\_Color\_Optimization\_Guide\_ISP 30\_CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Color-Optimization-Guide-ISP32-Lite-CN><span class=linkLabel_WmDU>Rockchip\_Color\_Optimization\_Guide\_ISP 32\_Lite\_CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Color-Optimization-Guide-ISP39-CN><span class=linkLabel_WmDU>Color-Optimization-Guide-ISP39-CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Development-Guide-3A-ISP30-CN><span class=linkLabel_WmDU>Rockchip Developement Guide 3A ISP30</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Development-Guide-3A-ISP39><span class=linkLabel_WmDU>Rockchip Developement Guide 3A ISP39</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Development-Guide-ISP21-CN><span class=linkLabel_WmDU>Rockchip Developement Guide ISP21</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Development-Guide-ISP30-CN><span class=linkLabel_WmDU>Rockchip Developement Guide ISP30</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Development-Guide-ISP32-Lite-CN><span class=linkLabel_WmDU>Development-Guide-ISP32-Lite-CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Development-Guide-ISP39-CN-alpha><span class=linkLabel_WmDU>Rockchip Developement Guide ISP39</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Driver-Guide-VI-CN><span class=linkLabel_WmDU>Driver-Guide-VI-CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/IQ-Tools-Guide-CN><span class=linkLabel_WmDU>IQ-Tools-Guide-CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/IQ-Tools-Guide><span class=linkLabel_WmDU>IQ-Tools-Guide</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP-Driver-User-Manual-v1.3-20190919><span class=linkLabel_WmDU>RKISP\_Driver\_User\_Manual</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/RKISP1-IQ-Parameters-User-Guide-v1.0-20190606><span class=linkLabel_WmDU>RKISP1\_IQ\_Parameters\_User\_Guide</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href="/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Rockchip Camera Module OTP Calibration Guide-CN"><span class=linkLabel_WmDU>Rockchip Camera Module OTP Calibration Guide</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP21-CN><span class=linkLabel_WmDU>Tuning-Guide-ISP21-CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP30-CN><span class=linkLabel_WmDU>Tuning-Guide-ISP30-CN</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP32-lite-CN><span class=linkLabel_WmDU>Rockchip Tunning Guide ISP32-lite</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link menu__link--active" aria-current=page tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP39-CN-v1.0><span class=linkLabel_WmDU>Rockchip Tunning Guide ISP39</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class=menu__link tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/camera-engine-rkisp-user-manual-v2.0><span class=linkLabel_WmDU>Camera\_Engine\_Rkisp\_User\_Manual（ISP 部）</span></a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/MCU/RK3399-Developer-Guide-MCU><span class=categoryLinkLabel_W154>MCU</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/MEMORY/Introduction-Internal-SRAM-Memory-Layout><span class=categoryLinkLabel_W154>MEMORY</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/MMC/SD-Boot><span class=categoryLinkLabel_W154>MMC</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/NPU/RKNN-Compiler-Support-Operator-List><span class=categoryLinkLabel_W154>NPU</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/NVM/Application-Notes-Storage><span class=categoryLinkLabel_W154>NVM</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/PERF/Linux-RealTime-Performance-Test-Report><span class=categoryLinkLabel_W154>PERF</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/PINCTRL/Linux-Pinctrl><span class=categoryLinkLabel_W154>PINCTRL</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/PMIC/RK805-Developer-Guide><span class=categoryLinkLabel_W154>PMIC</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/POWER/Power-Analysis><span class=categoryLinkLabel_W154>POWER</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/PWM/Linux-PWM><span class=categoryLinkLabel_W154>PWM</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/RTT/RT-Thread-CAN-CANFD><span class=categoryLinkLabel_W154>RTT</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/SARADC/Linux-SARADC><span class=categoryLinkLabel_W154>SARADC</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/SECURITY/Anti-Copy-Board><span class=categoryLinkLabel_W154>SECURITY</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/SPI/Linux-SPI><span class=categoryLinkLabel_W154>SPI</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/TOOL/Introduction-Partition><span class=categoryLinkLabel_W154>TOOL</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/UBOOT/Introduction-UBoot-rkdevelop-vs-nextdev><span class=categoryLinkLabel_W154>UBOOT</span></a></div><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role=button aria-expanded=false tabindex=0 href=/en/docs/DshanPi-A1/原厂在线文档/Common/WATCHDOG/Linux-WDT><span class=categoryLinkLabel_W154>WATCHDOG</span></a></div></ul></ul></ul></nav><button type=button title="Collapse sidebar" aria-label="Collapse sidebar" class="button button--secondary button--outline collapseSidebarButton_PEFL"><svg width=20 height=20 aria-hidden=true class=collapseSidebarButtonIcon_kv0_><g fill=#7a7a7a><path d="M9.992 10.023c0 .2-.062.399-.172.547l-4.996 7.492a.982.982 0 01-.828.454H1c-.55 0-1-.453-1-1 0-.2.059-.403.168-.551l4.629-6.942L.168 3.078A.939.939 0 010 2.528c0-.548.45-.997 1-.997h2.996c.352 0 .649.18.828.45L9.82 9.472c.11.148.172.347.172.55zm0 0"/><path d="M19.98 10.023c0 .2-.058.399-.168.547l-4.996 7.492a.987.987 0 01-.828.454h-3c-.547 0-.996-.453-.996-1 0-.2.059-.403.168-.551l4.625-6.942-4.625-6.945a.939.939 0 01-.168-.55 1 1 0 01.996-.997h3c.348 0 .649.18.828.45l4.996 7.492c.11.148.168.347.168.55zm0 0"/></g></svg></button></div></div></aside><main class=docMainContainer_TBSr><div class="container padding-top--md padding-bottom--lg"><div class=row><div class="col docItemCol_VOVn"><div class=docItemContainer_Djhp><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label=Breadcrumbs><ul class=breadcrumbs><li class=breadcrumbs__item><a aria-label="Home page" class=breadcrumbs__link href=/en/><svg viewBox="0 0 24 24" class=breadcrumbHomeIcon_YNFT><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill=currentColor /></svg></a><li class=breadcrumbs__item><a class=breadcrumbs__link href=/en/docs/category/原厂在线文档><span>原厂在线文档</span></a><li class=breadcrumbs__item><span class=breadcrumbs__link>Common</span><li class=breadcrumbs__item><span class=breadcrumbs__link>ISP</span><li class="breadcrumbs__item breadcrumbs__item--active"><span class=breadcrumbs__link>Rockchip Tunning Guide ISP39</span></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type=button class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Rockchip Tunning Guide ISP39</h1></header>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=前>前⾔<a href=#前 class=hash-link aria-label="Direct link to 前⾔" title="Direct link to 前⾔" translate=no>​</a></h3>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=概述>概述<a href=#概述 class=hash-link aria-label="Direct link to 概述" title="Direct link to 概述" translate=no>​</a></h2>
+<p>本⽂旨在指导⽤⼾进⾏图像调优的⽂档。</p>
+<p>产品版本</p>
+<table><thead><tr><th>芯片名称<th>ISP版本<tbody><tr><td>RK3576<td>ISP3.9</table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=读者对象>读者对象<a href=#读者对象 class=hash-link aria-label="Direct link to 读者对象" title="Direct link to 读者对象" translate=no>​</a></h2>
+<p>本⽂档（本指南）主要适⽤于以下⼯程师：</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=isp图像效果调试程师>ISP图像效果调试⼯程师<a href=#isp图像效果调试程师 class=hash-link aria-label="Direct link to ISP图像效果调试⼯程师" title="Direct link to ISP图像效果调试⼯程师" translate=no>​</a></h3>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=修订记录>修订记录<a href=#修订记录 class=hash-link aria-label="Direct link to 修订记录" title="Direct link to 修订记录" translate=no>​</a></h2>
+<table><thead><tr><th>版本号<th>修改记录<th>修改日期<th>作者<tbody><tr><td>alpha<td>初版<td>2024-4-8<td>ALL<tr><td>v1.0<td>btnr、ynr、cnr、sharp模块<td>2024-5-28<td>ALL</table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=录>⽬录<a href=#录 class=hash-link aria-label="Direct link to ⽬录" title="Direct link to ⽬录" translate=no>​</a></h3>
+<p>Rockchip Tunning Guide ISP39ISP39 IntroductionISP39 框图ISP39模块迭代列表ISP39 约束模块介绍前置说明模块控制模式参数规则参数名称结构参数类型域说明模块简称域说明参数描述域简称说明曲线类参数说明参数属性域说明参数分类特殊说明BLC模块说明模块约束模块框图参数说明DPC模块说明模块约束模块框图参数说明BTNR模块说明模块约束模块框图模块概念前置说明参数说明hw_btnrCfg_pixDomain_modeStatic<!-- -->:hw<!-- -->_btnrCfg_pixDomain_modetransCfgStatic: hw_btnr_trans_modeStatic: hw_btnr_trans_offsetStatic: hw_btnr_transData_maxLimitsigmaEnvStatic: sw_btnrCfg_sigma_modedebugStatic: sw_btnrT_dbgOut_en</p>
+<p>Static: hw_btnrT_dbgOut_mode hw_btnrT_md_en mdDynamic: hw_btnrT_md_en mdSigma mdDynamic: hw_btnrT_sigma_scale mdDynamic: hw_btnrT_sigmaHdrS_scale mdDynamic: hw_btnrT_sigmaCurve_mode subLoMd0_diffCh mdDynamic: hw_btnrT_vFilt_en mdDynamic: hw_btnrT_hFilt_en mdDynamic: hw_btnrT_vIIRFstLn_scale mdDynamic: hw_btnrT_vIIRFilt_strg subLoMd0_sgmCh mdDynamic: hw_btnrT_hFilt_en mdDynamic: hw_btnrT_vIIRFstLn_scale mdDynamic: hw_btnrT_vIIRFilt_strg subLoMd0_wgtOpt mdDynamic: hw_btnrT_mdWgt_negOff mdDynamic: hw_btnrT_mdWgt_scale subLoMd1 mdDynamic<!-- -->:hw<!-- -->_btnrT_lpf_en mdDynamic<!-- -->:sw<!-- -->_btnrT_lpfCfg_mode mdDynamic<!-- -->:hw<!-- -->_btnrT_lpfSpatial_wgt mdDynamic<!-- -->:sw<!-- -->_btnrT_lpf_strg mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgt_maxLimit mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgt_negOff mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgtFstLnNegOff_en mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgtFstLn_negOff mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgt_scale mdDynamic<!-- -->:hw<!-- -->_btnrT_hFilt_en mdDynamic<!-- -->:hw<!-- -->_btnrT_vIIRFilt_strg loMd mdDynamic<!-- -->:hw<!-- -->_btnrT_loMd_en mdDynamic<!-- -->:hw<!-- -->_btnrT_loMd_mode mdDynamic<!-- -->:hw<!-- -->_btnr_preWgtMge_scale mdDynamic<!-- -->:hw<!-- -->_btnr_preWgtMge_offset hw_btnrT_md_mode mdDynamic<!-- -->:hw<!-- -->_btnrT_md_mode loAsHiRatioMd mdDynamic<!-- -->:hw<!-- -->_btnrT_hfLpf_en mdDynamic<!-- -->:sw<!-- -->_btnrT_hfLpfCfg_mode mdDynamic<!-- -->:hw<!-- -->_btnrT_hfLpfSpatial_wgt mdDynamic<!-- -->:sw<!-- -->_btnrT_hfLpf_strg mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStat_scale mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStatHdrS_scale mdDynamic<!-- -->:hw<!-- -->_btnrT_hiMdWgt_scale mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStat_negOff mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStatHdrS_negOff mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStat_scale mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStatHdrS_scale mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStat_offset mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStatHdrS_offset mdDynamic<!-- -->:hw<!-- -->_btnr_loWgtStat_minLimit mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgt_scale mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgtHdrS_scale mdWgtPost mdDynamic<!-- -->:hw<!-- -->_btnr_lpfSpatial_wgt sigmaEnv</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_statsPixAlpha_thred Dynamic<!-- -->:hw<!-- -->_btnrCfg_statsPixCnt_thred Dynamic<!-- -->:sw<!-- -->_btnrT_autoSgmIIR_alpha Dynamic<!-- -->:hw<!-- -->_btnrC_curSpNrSgm_curve Dynamic<!-- -->:hw<!-- -->_btnrC_preSpNrSgm_curve Dynamic<!-- -->:hw<!-- -->_btnrC_mdSigma_curve curFrmSpNr Dynamic<!-- -->:hw<!-- -->_btnrT_spNr_en Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaIdxLpf_en Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaCurve_mode Dynamic<!-- -->:hw<!-- -->_btnrT_sigma_scale Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaHdrS_scale Dynamic<!-- -->:hw<!-- -->_btnrT_sigma_offset Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaHdrS_offset Dynamic<!-- -->:sw<!-- -->_btnrT_filtSpatial_strg Dynamic<!-- -->:hw<!-- -->_btnrT_pixDiff_maxLimit Dynamic<!-- -->:hw<!-- -->_btnrT_pixDiff_negOff Dynamic<!-- -->:hw<!-- -->_btnrT_pixDiff_scale Dynamic<!-- -->:hw<!-- -->_btnrT_spNrOut_alpha preFrmSpNr Dynamic<!-- -->:hw<!-- -->_btnrT_spNr_en Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaIdxLpf_en Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaCurve_mode Dynamic<!-- -->:hw<!-- -->_btnrT_sigma_scale Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaHdrS_scale Dynamic<!-- -->:hw<!-- -->_btnrT_sigma_offset Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaHdrS_offset Dynamic<!-- -->:hw<!-- -->_btnrT_sigma_mode Dynamic<!-- -->:sw<!-- -->_btnrT_filtSpatial_strg Dynamic<!-- -->:hw<!-- -->_btnrT_pixDiff_maxLimit Dynamic<!-- -->:hw<!-- -->_btnrT_pixDiff_negOff Dynamic<!-- -->:hw<!-- -->_btnrT_pixDiff_scale Dynamic<!-- -->:hw<!-- -->_btnrT_spNrOut_alpha frmAlpha Dynamic<!-- -->:hw<!-- -->_btnrT_loAlpha_minLimit Dynamic<!-- -->:hw<!-- -->_btnrT_loAlphaHdrS_minLimit Dynamic<!-- -->:hw<!-- -->_btnrT_loAlpha_maxLimit Dynamic<!-- -->:hw<!-- -->_btnrT_loAlphaHdrS_maxLimit Dynamic<!-- -->:hw<!-- -->_btnrT_hiAlpha_minLimit Dynamic<!-- -->:hw<!-- -->_btnrT_hiAlphaHdrS_minLimit Dynamic<!-- -->:hw<!-- -->_btnrT_hiAlpha_maxLimit Dynamic<!-- -->:hw<!-- -->_btnrT_hiAlphaHdrS_maxLimit hw_btnrT_noiseBal_mode Dynamic<!-- -->:hw<!-- -->_btnrT_noiseBal_mode noiseBal_byHiAlpha Dynamic<!-- -->:hw<!-- -->_btnrT_curHiOrg_alpha Dynamic<!-- -->:hw<!-- -->_btnrT_iirHiOrg_alpha noiseBal_byLoAlpha Dynamic<!-- -->:hw<!-- -->_btnrT_hiMotionNr_strg localSgmStrg Dynamic<!-- -->:hw<!-- -->_bnrT_localSgmStrg_maxLimit</p>
+<p>模块说明 模块约束 模块框图</p>
+<p>数说明 ynrScl_radi Static: hw_ynrCfg_opticCenter_x Static: hw_ynrCfg_opticCenter_y Dynamic: hw_ynrT_radiDist2YnrScl_val ynrScl_locSgmStrg Dynamic<!-- -->:hw<!-- -->_ynrT_glbSgmStrg_val Dynamic<!-- -->:hw<!-- -->_ynrT_glbSgmStrg_alpha Dynamic<!-- -->:hw<!-- -->_ynrT_locSgmStrg2YnrScl_val hw_ynrC_luma2Sigma_curve Dynamic<!-- -->:hw<!-- -->_ynrC_luma2Sigma_curve hw_ynrC_luma3Sigma_curve Dynamic<!-- -->:hw<!-- -->_ynrC_luma3Sigma_curve hw_ynrT_loNr_en Dynamic<!-- -->:hw<!-- -->_ynrT_loNr_en loNr_preProc Dynamic<!-- -->:sw<!-- -->_ynrT_preLpfCfg_mode Dynamic<!-- -->:hw<!-- -->_ynrT_preLpfSpatial_wgt Dynamic<!-- -->:sw<!-- -->_ynrT_preLpf_strg Dynamic<!-- -->:sw<!-- -->_ynrT_edgeDctConf_scale loNr_iirGuide Dynamic<!-- -->:hw<!-- -->_ynrT_localYnrScl_alpha Dynamic<!-- -->:sw<!-- -->_ynrT_iirFilt_strg Dynamic<!-- -->:hw<!-- -->_ynrT_pixDiffEge_thred Dynamic<!-- -->:hw<!-- -->_ynrT_centerPix_wgt Dynamic<!-- -->:hw<!-- -->_ynrT_iirInitWgt_scale Dynamic<!-- -->:hw<!-- -->_ynrT_softThd_scale loNr_bifilt Dynamic<!-- -->:hw<!-- -->_ynrT_rgeSgm_scale Dynamic<!-- -->:hw<!-- -->_ynrT_filtSpatialV_strg Dynamic<!-- -->:hw<!-- -->_ynrT_filtSpatialH_strg Dynamic<!-- -->:hw<!-- -->_ynrT_centerPix_wgt Dynamic<!-- -->:hw<!-- -->_ynrT_bifiltOut_alpha hiNr_filtProc Dynamic<!-- -->:hw<!-- -->_ynrT_nlmFilt_en Dynamic<!-- -->:hw<!-- -->_ynrT_localYnrScl_alpha Dynamic<!-- -->:hw<!-- -->_ynrT_nlmSgm_minLimit Dynamic<!-- -->:hw<!-- -->_ynrT_nlmSgm_scale Dynamic<!-- -->:hw<!-- -->_ynrT_nlmRgeWgt_negOff Dynamic<!-- -->:hw<!-- -->_ynrT_centerPix_wgt Dynamic<!-- -->:hw<!-- -->_ynrT_nlmSpatial_wgt hiNr_alphaProc Dynamic<!-- -->:hw<!-- -->_ynrT_nlmOut_alpha Dynamic<!-- -->:hw<!-- -->_ynrT_edgAlphaUp_thred Dynamic<!-- -->:hw<!-- -->_ynrT_locSgmStrgAlphaUp_thred</p>
+<p>试步骤</p>
+<p>块说明 模块约束 模块框图</p>
+<p>数说明 localSgmStrg Dynamic: hw_cnrT_glbSgmStrg_val Dynamic: hw_cnrT_glbSgmStrg_alpha Dynamic: hw_cnrT_localSgmStrg_scale loNr_preProc Dynamic: hw_cnrT_ds_mode Dynamic: hw_cnrT_uvEdg_strg loNr_bifilt Dynamic: hw_cnrT_ds_mode Dynamic: sw_cnrT_filtSpatial_strg Dynamic: hw_cnrT_filtSpatial_wgt Dynamic: sw_cnrT_rgeSgm_val Dynamic: hw_cnrT_bifiltOut_alpha loNr_iirFilt Dynamic: hw_cnrT_filtSpatial_wgt Dynamic<!-- -->:sw<!-- -->_cnrT_rgeSgm_val Dynamic: sw_cnrT_rgeSgmRatio_mode Dynamic: hw_cnrT_glbSgm_ratio Dynamic: hw_cnrT_glbSgmRatio_alpha Dynamic: hw_cnrT_sgm2NhoodWgt_slope Dynamic: hw_cnrT_nhoodWgtZero_thred Dynamic: hw_cnrT_iirFiltStrg_maxLimit hiNr_preLpf Dynamic: sw_cnrT_filtCfg_mode Dynamic: sw_cnrT_filtSpatial_strg Dynamic: hw_cnrT_filtSpatial_wgt Dynamic: hw_cnrT_lpfOut_alpha hw_cnrC_luma2HiNrSgm_curve Dynamic: hw_cnrC_luma2HiNrSgm_curve Dynamic: hw_cnrC_luma2HiNrSgm_curve hiNr_bifilt Dynamic: hw_cnrT_uvEdg_strg Dynamic: hw_cnrT_filtWgtZero_mode Dynamic: hw_cnrT_locSgmStrg2SgmRat_val Dynamic: hw_cnrT_locSgmStrg2CtrWgt_scale Dynamic: hw_cnrT_centerPix_wgt Dynamic<!-- -->:hw<!-- -->_cnrT_nhoodWgt_minLimit Dynamic: hw_cnrT_satAdj_negOff Dynamic: hw_cnrT_satAdj_scale Dynamic: hw_cnrT_bifiltOut_alpha</p>
+<p>调试步骤</p>
+<p>P</p>
+<p>模块说明 模块框图</p>
+<p>参数说明 shpScl_radiDist Static: hw_sharpCfg_opticCenter_x Static: hw_sharpCfg_opticCenter_y hfExtra_sgmEnv Dynamic: sw_sharpC_luma2Sigma_curve hfExtra_preBifilt Dynamic: sw_sharpT_filtCfg_mode Dynamic: sw_sharpT_filtSpatial_strg Dynamic: hw_sharpT_filtSpatial_wgt[3] Dynamic: sw_sharpT_rgeSgm_scale Dynamic: sw_sharpT_rgeSgm_offset Dynamic: hw_sharpT_bifiltOut_alpha hfExtra_lpf Dynamic: sw_sharpT_filtCfg_mode Dynamic<!-- -->:sw<!-- -->_sharpT_hfHi_strg Dynamic<!-- -->:sw<!-- -->_sharpT_hfMid_strg Dynamic<!-- -->:hw<!-- -->_sharpT_lpf_wgt Dynamic<!-- -->:hw<!-- -->_sharpT_lpfOut_alpha hfExtra_hfBifilt Dynamic<!-- -->:sw<!-- -->_sharpT_filtCfg_mode Dynamic<!-- -->:sw<!-- -->_sharpT_filtSpatial_strg Dynamic<!-- -->:hw<!-- -->_sharpT_filtSpatial_wgt Dynamic<!-- -->:sw<!-- -->_sharpT_rgeSgm_scale</p>
+<p>Dynamic<!-- -->:sw<!-- -->_sharpT_rgeSgm_offset Dynamic<!-- -->:hw<!-- -->_sharpT_biFiltOut_alpha shpScl_hf Dynamic<!-- -->:hw<!-- -->_sharpT_luma2hfScl_val Dynamic<!-- -->:hw<!-- -->_sharpT_hf2ShpScl_val shpScl_locSgmStrg Dynamic<!-- -->:hw<!-- -->_sharpT_locSgmStrg_mode Dynamic<!-- -->:hw<!-- -->_sharpT_glbSgmStrg_val Dynamic<!-- -->:hw<!-- -->_sharpT_glbSgmStrg_alpha Dynamic<!-- -->:hw<!-- -->_sharpT_locSgmStrg_scale shpScl_textDetect Dynamic<!-- -->:hw<!-- -->_sharpT_estNsFilt_mode Dynamic<!-- -->:hw<!-- -->_sharpT_estNsClip_mode Dynamic<!-- -->:hw<!-- -->_sharpT_estNsManual_maxLimit Dynamic<!-- -->:hw<!-- -->_sharpT_estNs_scale sharpOpt Dynamic<!-- -->:hw<!-- -->_sharpT_shpSrc_mode Dynamic<!-- -->:hw<!-- -->_sharpT_shpOpt_mode Dynamic<!-- -->:hw<!-- -->_sharpT_hfHiGlbShpScl_val Dynamic<!-- -->:hw<!-- -->_sharpT_hfMidGlbShpScl_val Dynamic<!-- -->:hw<!-- -->_sharpT_locSgmStrg2ShpScl_val Dynamic<!-- -->:hw<!-- -->_sharpT_radiDist2ShpScl_val Dynamic<!-- -->:hw<!-- -->_sharpT_tex2ShpScl_scale Dynamic<!-- -->:hw<!-- -->_sharpT_texShpSclRemap_en Dynamic<!-- -->:hw<!-- -->_sharpT_texShpSclRemap_val Dynamic<!-- -->:sw<!-- -->_sharpT_bwEdgClipIdx_mode Dynamic<!-- -->:hw<!-- -->_sharpT_luma2WhtEdg_maxLimit Dynamic<!-- -->:hw<!-- -->_sharpT_luma2BkEdg_maxLimit 调试步骤</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=isp39-introduction>ISP39 Introduction<a href=#isp39-introduction class=hash-link aria-label="Direct link to ISP39 Introduction" title="Direct link to ISP39 Introduction" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=isp39-框图>ISP39 框图<a href=#isp39-框图 class=hash-link aria-label="Direct link to ISP39 框图" title="Direct link to ISP39 框图" translate=no>​</a></h3>
+<p>图2-1 ISP39 Block Diagram</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=isp39模块迭代列表>ISP39模块迭代列表<a href=#isp39模块迭代列表 class=hash-link aria-label="Direct link to ISP39模块迭代列表" title="Direct link to ISP39模块迭代列表" translate=no>​</a></h3>
+<p>模块版本规则：ModuleNameXY</p>
+<p>ModuleName：模块名称简写</p>
+<p>X：模块主版本号，算法整体更新主版本号升级，不同主版本号之间的调试参数基本认为⽆参考性。</p>
+<p>Y：模块⼦版本号，算法迭代升级⼦版本号升级，仅⼦版本号差异的调试参数基本可作参考。</p>
+<table><thead><tr><th>Module<th>ISP39<th>ISP32<tbody><tr><td>awbStats<td>awbStats33feature未做升级，内部实现更新<td>awbStats32<tr><td>aeStats<td>aeStats25新增统计数据源btnrOut_mode，支持HDR build-in CIS<td>aeStats23<tr><td>afStats<td>afStats33feature未做升级，内部实现更新，减少硬件约束<td>afStats31<tr><td>blc<td>blc30<td>blc30<tr><td>btnr<td>btnr40算法更新，详见btnr章节<td>btnr32<tr><td>cac<td>cac21<td>cac21<tr><td>ccm<td>ccm22新增支持局部饱和度调整曲线sat2Alpha<td>ccm21<tr><td>cSm<td>csm21<td>csm21<tr><td>cnr<td>cnr34新增根据locSgmStrg进行局部滤波力度调整的调试曲线<td>cnr32<tr><td>degm<td>degm20<td>degm20<tr><td>dm<td>dm23新增根据图像亮度进行局部方向插值力度调整的调试曲线<td>dm21<tr><td>dpc<td>dpc20<td>dpc20<tr><td>drc<td>drc401. 解决drc32的高动态场景下运动物体的亮度闪烁2. 优化融合区域低频的锯齿<td>drc32<tr><td>dehaze<td>dehze23局部对比度提升<td>dehaze22<tr><td>enhance<td>enha nce23局部对比度提升<td><tr><td>gamma<td>gamma21<td>gamma21<tr><td>gic<td>gic21<td>gic21<tr><td>histeq<td>histeq23局部对比度提升<td>hisreq21<tr><td>hdrmge<td>hdrmge22<td>hdrmge22<tr><td>Isc<td>Isc21<td>1sc21<tr><td>ldc<td>ldc23新增支持垂直方向畸变校正<td>ldc22<tr><td>rgb-ir<td>rgbir10新增featrue<td>no<tr><td>sharp<td>sharp34升级强弱边缘局部锐化力度调整曲线<td>sharp32<tr><td>ynr<td>ynr34升级为低频//R降噪，解决帧间低频残影<td>ynr32<tr><td>yuvme<td>yuvme10新增feature<td>no</table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=isp39-约束>ISP39 约束<a href=#isp39-约束 class=hash-link aria-label="Direct link to ISP39 约束" title="Direct link to ISP39 约束" translate=no>​</a></h3>
+<p>该章节说明的约束是ISP39 各模块之间硬件约束，以及ISP pipeline的规格、性能约束。模块内部的功能约束请直接参考各模块的"模块说明" "模块约束"章节。</p>
+<ol>
+<li class="">cnr、ynr、sharp 3个模块都不⽀持单独的模块使能操作，这3个模块的使能操作必须保持⼀致，即3个模块都使能或者是都关闭。</li>
+</ol>
+<p>IQ Tool：</p>
+<p>鉴于该约束，界⾯上仅提供统⼀的Enable按钮来同步开关这3个模块 。</p>
+<p>AIQ：</p>
+<p>APP 通过这3个模块的setAttrib API单独控制模块的使能时，AIQ HWI层会采⽤模块效果旁路功能来代替实现。⽤⼾需要关注API的LOG信息。</p>
+<ol start=2>
+<li class="">drc模块⼯作时依赖cac、gic的资源，所以drc使能时，cac、gic模块也必须处于使能⼯作状态。</li>
+</ol>
+<p>IQ Tool、AIQ：</p>
+<p>鉴于该约束，界⾯上操作drc、cac、gic模块的使能按钮触发该约束时，或是APP通过这3个模块的setAttrib API单独控制模块的使能触发该约束时， AIQ HWI层都会进⾏的相关的操作来近似实现⽤⼾需求，主要分为以下3种情况，同时IQ Tool LOG区以及AIQ 都会提供相关提醒信息。</p>
+<table><thead><tr><th>源状态<th>用户需求目标状态<th>AIQ 实际目标状态<tbody><tr><td>gic: disablecac: disabledrc : disable<td>gic: disablecac: disabledrc : enable, no bypass<td>gic: enable, bypassscac: enable, bypasssdrc : enable, no bypass<tr><td>gic: enablecac: enabledrc: enable<td>gic: disablecac: enable, no bypassdrc : enable, no bypass<td>gic: enable, bypasscac: enable, no bypassdrc : enable, no bypass<tr><td>gic: enablecac: enabledrc : enable<td>gic: enable, no bypasscac: disabledrc : enable, no bypass<td>gic: enable, no bypasscac: enable, bypassdrc : enable, no bypass</table>
+<ol start=3>
+<li class="">expand模块与hdr mge模块不⽀持同时使⽤。</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=模块介绍>模块介绍<a href=#模块介绍 class=hash-link aria-label="Direct link to 模块介绍" title="Direct link to 模块介绍" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=前置说明>前置说明<a href=#前置说明 class=hash-link aria-label="Direct link to 前置说明" title="Direct link to 前置说明" translate=no>​</a></h3>
+<p>SW_Package_ISP39 为RK 针对ISP39开发的软件包，该软件包由3部分软件组成：IQ Tool、AIQ、ISPDriver</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=模块控制模式>模块控制模式<a href=#模块控制模式 class=hash-link aria-label="Direct link to 模块控制模式" title="Direct link to 模块控制模式" translate=no>​</a></h3>
+<p>SW_Package_ISP39 软件包中，针对ISP39模块控制模式具备以下3种控制操作：</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=使能控制enable>使能控制(Enable)<a href=#使能控制enable class=hash-link aria-label="Direct link to 使能控制(Enable)" title="Direct link to 使能控制(Enable)" translate=no>​</a></h3>
+<p>ISP模块硬件在使能(Enable)状态下才能⼯作。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=效果旁路控制bypass>效果旁路控制(Bypass)<a href=#效果旁路控制bypass class=hash-link aria-label="Direct link to 效果旁路控制(Bypass)" title="Direct link to 效果旁路控制(Bypass)" translate=no>​</a></h3>
+<p>ISP模块硬件在使能状态下，模块内部数据处理被旁路，即该模块输⼊直接旁路为输出，效果等效于⽆处理。</p>
+<p>注意：此时ISP模块硬件依旧在⼯作，所以功耗、带宽、内存等与未旁路没有区别。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=aiq模块运模式控制mode>AIQ模块运⾏模式控制(Mode)<a href=#aiq模块运模式控制mode class=hash-link aria-label="Direct link to AIQ模块运⾏模式控制(Mode)" title="Direct link to AIQ模块运⾏模式控制(Mode)" translate=no>​</a></h3>
+<p>⾃动模式(Auto)下，RK AIQ软件在3A驱动下，依照RK的控制策略⽣成ISP各模块的参数，下发⾄ISPDriver配置给ISP硬件。</p>
+<p>⼿动模式(Manual)下，⽤⼾通过AIQ API直接下发⼿动模式下的各模块参数，AIQ直接将参数下发⾄ISP Driver。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数规则>参数规则<a href=#参数规则 class=hash-link aria-label="Direct link to 参数规则" title="Direct link to 参数规则" translate=no>​</a></h3>
+<table><thead><tr><th>软件组件名称<th>运行环境<th>用户<th>参数命名规则<tbody><tr><td>IQ Tool<td>IQ效果调试工具(PC端)<td>效果调试工程师<td>界面参数符合该参数规则<tr><td>AIQ<td>ISP控制软件(板端系统用户层)<td>应用软件工程师<td>模块级用户API形参符合该参数规则<tr><td>ISPDriver<td>内核ISP驱动软件(板端系统内核层)<td>应用软件工程师<td>直接采用硬件级寄存器相关名称，不符合该参数规则</table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数名称结构>参数名称结构<a href=#参数名称结构 class=hash-link aria-label="Direct link to 参数名称结构" title="Direct link to 参数名称结构" translate=no>​</a></h3>
+<p>The API parameters of the board end ISP software and the IQ debugging tool parameters are unified. The parameter name structure is as follows:</p>
+<p>Parameter type_ISP module and parameter classification_Parameter description_Parameter attribute</p>
+<p>Example:</p>
+<p>"hw_bnrCfg_logTrans_mode"</p>
+<p>*Parameter type is 'hw'.*</p>
+<p>*ISP module and parameter classification is 'bnrCfg'.*</p>
+<p>*Parameter description is 'logTrans'.*</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数类型域说明>参数类型域说明<a href=#参数类型域说明 class=hash-link aria-label="Direct link to 参数类型域说明" title="Direct link to 参数类型域说明" translate=no>​</a></h3>
+<p>Parameter type is the first part of parameter name. The parameter types are as follows:</p>
+<p>HW identifies that the parameter is used to directly control some functions of a module in the ISP pipeline hardware.</p>
+<p>SW identifies the parameter controls the ISP pipeline by using some software strategy of the board software.</p>
+<p>The software strategy may contain multiple hardware parameter combinations.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=模块简称域说明>模块简称域说明<a href=#模块简称域说明 class=hash-link aria-label="Direct link to 模块简称域说明" title="Direct link to 模块简称域说明" translate=no>​</a></h3>
+<p>This is the second part of parameter name. It is the isp module that controlled by the parameter.</p>
+<p>Parameter classification is mainly based on the use and generation method of parameters.</p>
+<p>The list of isp module abbreviations is as follows:</p>
+<p>---a---</p>
+<p>awb: auto white balance</p>
+<p>ae: auto exposure</p>
+<p>af: auto focus</p>
+<p>---b---</p>
+<p>blc: black level correction</p>
+<p>btnr: temporal noise remove in bayer domain</p>
+<p>bnr: spatial noise remove in bayer domain</p>
+<p>---c---</p>
+<p>cac: chromatic aberration correction</p>
+<p>ccm: color correction matrix</p>
+<p>csm: color space matrix</p>
+<p>cnr: color noise remove</p>
+<p>---d---</p>
+<p>degm: degamma correction</p>
+<p>dm: debayer / demosaic</p>
+<p>dpcc: defect pixel cluster correction</p>
+<p>drc: dynamic range compression</p>
+<p>dehaze: dehaze</p>
+<p>dehaze & ehz: dehaze and enhance //3576</p>
+<p>---e---</p>
+<p>enhance: enhance</p>
+<p>---f---</p>
+<p>fpn: fixed point noise correction</p>
+<p>---g---</p>
+<p>gamma: gamma correction</p>
+<p>gic: green imbalance correction</p>
+<p>---h---</p>
+<p>histeq: historgram equalization</p>
+<p>hdrmge: hdr merge</p>
+<p>---l---</p>
+<p>lsc: lens shading corretcion</p>
+<p>ldch: lens distortion correction only in horizontal direction</p>
+<p>---s---</p>
+<p>sharp: sharp</p>
+<p>---y---</p>
+<p>ytnr: temporal noise remove in yuv domain</p>
+<p>ynr: spatial noise remove in yuv domain</p>
+<p>---3---</p>
+<p>3dlut: color 3D lookup table</p>
+<p>The list of parameter classification is as follows:</p>
+<p>T: Tunning parameter</p>
+<p>C: Calibration parameter</p>
+<p>Cfg: Isp hardware configuration parameters. It can only be set through software API. It can't be set through IQ tool.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数描述域简称说明>参数描述域简称说明<a href=#参数描述域简称说明 class=hash-link aria-label="Direct link to 参数描述域简称说明" title="Direct link to 参数描述域简称说明" translate=no>​</a></h3>
+<p>Parameter description is the third part of parameter name. It describes the function, characteristic or position of</p>
+<p>the parameter. This part often uses word abbreviations.</p>
+<p>The list of abbreviations is as follows:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--a--->--a---<a href=#--a--- class=hash-link aria-label="Direct link to --a---" title="Direct link to --a---" translate=no>​</a></h3>
+<p>*alpha: refers to the weighted operation between two data.</p>
+<p>Ex ： alpha_valdata_a + (1 - alpha_val)data_b</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--b--->--b---<a href=#--b--- class=hash-link aria-label="Direct link to --b---" title="Direct link to --b---" translate=no>​</a></h3>
+<p>* bifilt:</p>
+<p>*bnd:</p>
+<p>bilateral filter</p>
+<p>boundary</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--c---->--c----<a href=#--c---- class=hash-link aria-label="Direct link to --c----" title="Direct link to --c----" translate=no>​</a></h3>
+<p>* cfg</p>
+<p>configuration</p>
+<p>* chroma:</p>
+<p>chrominance</p>
+<p>* clip:</p>
+<p>clip</p>
+<p>* coord:</p>
+<p>coordinate</p>
+<p>*cnt</p>
+<p>count</p>
+<p>*conf:</p>
+<p>confidence</p>
+<p>*comb ： combination</p>
+<p>*ctr / center: center</p>
+<h2></h2>
+<p>down scale</p>
+<p>$^ { * } d i f f { \mathrm { : } }$</p>
+<p>difference</p>
+<p>$\star _ { d r c t : }$</p>
+<p>direction</p>
+<p>$^ { * } d s t / d i s t :$</p>
+<p>distance</p>
+<p>$^ { * } d y n ;$</p>
+<p>dynamic</p>
+<p>$\ast d c t i$</p>
+<p>detection</p>
+<p>$\ast _ { d n } .$</p>
+<p>$^ { * } d r \colon$</p>
+<p>down</p>
+<p>*dp:</p>
+<p>dynamic range</p>
+<p>defect pixel</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--e---->--e----<a href=#--e---- class=hash-link aria-label="Direct link to --e----" title="Direct link to --e----" translate=no>​</a></h3>
+<p>*extra:</p>
+<p>$\star _ { e d g : }$</p>
+<p>extraction</p>
+<p>*edp ：</p>
+<p>edge</p>
+<p>$^ { \ast } e s t .$</p>
+<p>endpoint</p>
+<p>estimate</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=-1><a href=#-1 class=hash-link aria-label="Direct link to -1" title="Direct link to -1" translate=no>​</a></h2>
+<p>* filt / flt:</p>
+<p>* frm:</p>
+<p>filter</p>
+<p>* sfrm:</p>
+<p>frame</p>
+<p>hdr short exposure frame</p>
+<p>* mfrm:</p>
+<p>hdr middle exposure frame</p>
+<p>$\star _ { I f r m : }$</p>
+<p>*fst:</p>
+<p>hdr long exposure frame</p>
+<p>*fbk:</p>
+<p>first</p>
+<p>$^ { * } F / R \mathrm { : }$</p>
+<p>feedback</p>
+<p>$\ast _ { f a c : }$</p>
+<p>Finite Impulse Response filter</p>
+<p>factor</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--g------>--g------<a href=#--g------ class=hash-link aria-label="Direct link to --g------" title="Direct link to --g------" translate=no>​</a></h3>
+<p>* gaus:</p>
+<p>* glb / global</p>
+<p>gaussian</p>
+<p>* guide:</p>
+<p>global</p>
+<p>* grad:</p>
+<p>guide</p>
+<p>* grp:</p>
+<p>gradient</p>
+<p>group</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--h---->--h----<a href=#--h---- class=hash-link aria-label="Direct link to --h----" title="Direct link to --h----" translate=no>​</a></h3>
+<p>* hi/hf:</p>
+<p>* hpf:</p>
+<p>high frequence</p>
+<p>high pass filter</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--i---->--i----<a href=#--i---- class=hash-link aria-label="Direct link to --i----" title="Direct link to --i----" translate=no>​</a></h3>
+<p>* inv:</p>
+<p>* interp:</p>
+<p>invert</p>
+<p>*IIR:</p>
+<p>interpolate</p>
+<p>Infinite Impulse Response filter</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--l---->--l----<a href=#--l---- class=hash-link aria-label="Direct link to --l----" title="Direct link to --l----" translate=no>​</a></h3>
+<p>$^ { * } I o / / f .$</p>
+<p>* loc / local:</p>
+<p>low frequence</p>
+<p>local</p>
+<p>$^ { * } I u m a ;$</p>
+<p>luminance or raw pixel value</p>
+<p>$\boldsymbol { * } \ I p f { : }$</p>
+<p>low pass filter</p>
+<p>$^ { * } I o g \mathrm { : }$</p>
+<p>$* \rvert n \colon$</p>
+<p>logarithm</p>
+<p>line</p>
+<p>$\star _  I e n : $</p>
+<p>length</p>
+<p>$\star _ { L } / e f t { : }$</p>
+<p>$\star _ { I t } .$</p>
+<p>left</p>
+<p>left top</p>
+<p>$^ { * } L 1 / L 2 \mathrm { : }$</p>
+<p>level 1 / level 2</p>
+<p>$^ { * } L V !$</p>
+<p>level</p>
+<p>$\ast _ { L S : }$</p>
+<p>light source</p>
+<p>*LUT：</p>
+<p>look-up table</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--n---->--n----<a href=#--n---- class=hash-link aria-label="Direct link to --n----" title="Direct link to --n----" translate=no>​</a></h3>
+<p>$^ { * } n o i s e { : }$</p>
+<p>* norize</p>
+<p>noise</p>
+<p>normalizate</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--m---->--m----<a href=#--m---- class=hash-link aria-label="Direct link to --m----" title="Direct link to --m----" translate=no>​</a></h3>
+<p>* mfilt:</p>
+<p>*mtn:</p>
+<p>median filter</p>
+<p>* md:</p>
+<p>motion</p>
+<p>motion detection</p>
+<p>*mech:</p>
+<p>$^ { * } m a g \cdot$</p>
+<p>Mechanism</p>
+<p>$^ { * } m i d !$</p>
+<p>magnitude</p>
+<p>middle</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=-2><a href=#-2 class=hash-link aria-label="Direct link to -2" title="Direct link to -2" translate=no>​</a></h2>
+<p>* neg:</p>
+<p>negative</p>
+<p>*ns / noise:</p>
+<p>$^ * n r \colon$</p>
+<p>noise</p>
+<p>noise remove</p>
+<p>* nhood</p>
+<p>neighborhood</p>
+<p>*norm / nor:</p>
+<p>$^ { * } n u m$</p>
+<p>normal</p>
+<p>$^ { * } n r s t { : }$</p>
+<p>number</p>
+<p>Nearest</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--o---->--o----<a href=#--o---- class=hash-link aria-label="Direct link to --o----" title="Direct link to --o----" translate=no>​</a></h3>
+<p>* opt:</p>
+<p>* outlr:</p>
+<p>operation</p>
+<p>$^ { * } o r i \cdot$</p>
+<p>outlier</p>
+<p>original</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--p--->--p---<a href=#--p--- class=hash-link aria-label="Direct link to --p---" title="Direct link to --p---" translate=no>​</a></h3>
+<p>${ } ^ { * } p i x ;$</p>
+<p>$* _ { p r o c : }$</p>
+<p>pixel</p>
+<p>*peak ：</p>
+<p>process</p>
+<p>$\star P G \dot { . }$</p>
+<p>peak</p>
+<p>*pred:</p>
+<p>pixel gain</p>
+<p>Predicted</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--r---->--r----<a href=#--r---- class=hash-link aria-label="Direct link to --r----" title="Direct link to --r----" translate=no>​</a></h3>
+<p>* rge / range:</p>
+<p>* radi</p>
+<p>range</p>
+<p>radial / radius</p>
+<p>*R / right</p>
+<p>$\ast _ { r b : }$</p>
+<p>right</p>
+<p>${ } ^ { * } r o t$</p>
+<p>right bottom</p>
+<p>*rat / ratio:</p>
+<p>rotate</p>
+<p>ratio</p>
+<p>*ord / order:</p>
+<p>order</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--s--->--s---<a href=#--s--- class=hash-link aria-label="Direct link to --s---" title="Direct link to --s---" translate=no>​</a></h3>
+<p>*sat ：</p>
+<p>saturation</p>
+<p>* softThd:</p>
+<p>soft threshold</p>
+<p>* spatial:</p>
+<p>*stats:</p>
+<p>spatial</p>
+<p>statistics</p>
+<table><thead><tr><th>* · *<em>wp: white point</em></thead></table>
+<p>*stat ： static</p>
+<p>*shp / sharp: sharp</p>
+<p>*sel: selected</p>
+<p>*squ: square</p>
+<p>*s1/s2: step 1/2/3</p>
+<p>*simp / smp: simplified</p>
+<p>*space / spc space</p>
+<p>* trans: transform</p>
+<p>* thred: threshold</p>
+<p>* texture: texture</p>
+<p>*vtx: vertex</p>
+<p>*vect ： vector</p>
+<p>* 2: to.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=曲线类参数说明>曲线类参数说明<a href=#曲线类参数说明 class=hash-link aria-label="Direct link to 曲线类参数说明" title="Direct link to 曲线类参数说明" translate=no>​</a></h3>
+<p>The parameter description domain of curve parameters needs to reflect the mapping relationship. Example:</p>
+<p>hw_bnrC_luma2Sigma_curve</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数属性域说明>参数属性域说明<a href=#参数属性域说明 class=hash-link aria-label="Direct link to 参数属性域说明" title="Direct link to 参数属性域说明" translate=no>​</a></h3>
+<p>Parameter description mainly refer to the basic functions and characteristics of the parameter. This part often uses word abbreviations. The list of abbreviations is as follows:</p>
+<p>*alpha: Ex：</p>
+<p>$$</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">a l p h a * d a t a _ { a } + ( 1 - a l p h a ) * d a t a _ { b }</span><br/></div></code></pre></div></div>
+<p>$$</p>
+<p>--b------</p>
+<p>* bit: Genetally indicates the enable bit for bitwise control.</p>
+<p>coeff: coefficient: It is used for weight coefficient of filter.</p>
+<p>count/cnt: count: It is statistical count.</p>
+<p>en: enable: It is enable bit of function.</p>
+<p>1: enable</p>
+<p>0: disable</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--f---------------->--f----------------<a href=#--f---------------- class=hash-link aria-label="Direct link to --f----------------" title="Direct link to --f----------------" translate=no>​</a></h3>
+<p>*fmt: data format. Generally, enumeration types are used to represent the definitions of data formats</p>
+<p>**facX: factor. It is a factor. *</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=-3><a href=#-3 class=hash-link aria-label="Direct link to -3" title="Direct link to -3" translate=no>​</a></h2>
+<p>height: height. It is height of the rectangular area in the image coordinate system.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=-4><a href=#-4 class=hash-link aria-label="Direct link to -4" title="Direct link to -4" translate=no>​</a></h2>
+<p>*idx: index: It is index value of lookup table</p>
+<p>● *inv: multiplicative inverse</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id=-5><a href=#-5 class=hash-link aria-label="Direct link to -5" title="Direct link to -5" translate=no>​</a></h2>
+<p>*limit: It is used to limit the value range of data that pixel or parameter.</p>
+<p>*minLimit: minimum limit</p>
+<p>*maxLimit: maximum limit</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--n----->--n-----<a href=#--n----- class=hash-link aria-label="Direct link to --n-----" title="Direct link to --n-----" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=negoff-negative-offset>*negOff: negative offset<a href=#negoff-negative-offset class=hash-link aria-label="Direct link to *negOff: negative offset" title="Direct link to *negOff: negative offset" translate=no>​</a></h3>
+<p>As the negOff coefficient increases, its corresponding parameter value decreases.</p>
+<p>Example<!-- -->:parameter<!-- -->_a = xxxx - xxxx_negOffset；</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=negscl-negative-scale>*negScl: negative scale<a href=#negscl-negative-scale class=hash-link aria-label="Direct link to *negScl: negative scale" title="Direct link to *negScl: negative scale" translate=no>​</a></h3>
+<p>As the negScl coefficient increases, its corresponding parameter value decreases.</p>
+<p>Example：parameter_a = 1 - (xxxx * negScl)；</p>
+<p>*num: number.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=--m---------------->--m----------------<a href=#--m---------------- class=hash-link aria-label="Direct link to --m----------------" title="Direct link to --m----------------" translate=no>​</a></h3>
+<p>mode: mode. It is used to identify multiple functions composed of single or multiple parameters.</p>
+<p>Only a mode can be selected at the same time. It is generally implemented with enumeration</p>
+<p>--o----</p>
+<p>*offset: offset. It is used for offset adjustment of parameter. As the offset coefficient increases, its corresponding parameter value increases.* Example: parameter_a = xxx + xxxx_offset</p>
+<p>*radius / radi: radius: It is spatial radius of filter.</p>
+<p>*rat / ratio: ratio.</p>
+<p>*sigma: sigma rsigma: range sigma ssigma: spatial sigma</p>
+<p>*strg: strength: It is used to identify a function strength value. For example filter strength.</p>
+<p>*scale / scl: scale factor. Represents the scaling operation of the parameter. As the Scl coefficient increases, its corresponding parameter value increases. Example：parameter_a = xxxx * Scl;</p>
+<p>*step: step</p>
+<p>*thred: threshold: It is used for logical judgement.</p>
+<table><thead><tr><th>minThred</thead></table>
+<p>maxThred</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-text codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">Example: if (parameter_a &lt; xxxx_minThred) { } if (parameter_a > xxxx_maxThred) { }</span><br/></div></code></pre></div></div>
+<p>*val: value: It is result value of lookup table.</p>
+<p>*wgt: weight. It is used for weighting between multiple data.It is the normalized weight value.</p>
+<p>*width: width. It is width of the rectangular area in the image coordinate system.</p>
+<p>*x: x. It is horizontal coordinate in image coordinate system.</p>
+<p>*y: y. It is vertical coordinate in image coordinate system.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数分类>参数分类<a href=#参数分类 class=hash-link aria-label="Direct link to 参数分类" title="Direct link to 参数分类" translate=no>​</a></h3>
+<p>该⽂档中将模块参数分为2类：固定配置参数、动态调试参数。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=固定配置参数>固定配置参数<a href=#固定配置参数 class=hash-link aria-label="Direct link to 固定配置参数" title="Direct link to 固定配置参数" translate=no>​</a></h3>
+<p>该类参数仅⽀持通过API⽅式在初始化阶段配置，不建议根据场景或是 CIS ISO进⾏切换配置。</p>
+<p>参数名称标题前缀 Static，例如：Static: hw_btnrCfg_trans_offset</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=动态调试参数>动态调试参数<a href=#动态调试参数 class=hash-link aria-label="Direct link to 动态调试参数" title="Direct link to 动态调试参数" translate=no>​</a></h3>
+<p>该类参数建议根据场景或是CIS ISO进⾏切换调试.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=特殊说明>特殊说明<a href=#特殊说明 class=hash-link aria-label="Direct link to 特殊说明" title="Direct link to 特殊说明" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=blc>BLC<a href=#blc class=hash-link aria-label="Direct link to BLC" title="Direct link to BLC" translate=no>​</a></h3>
+<p>模块说明</p>
+<p>模块约束</p>
+<ol>
+<li class="">ISP 线性模式下可以使⽤blc模块的obcPostTnr功能来提升⾼ISO场景下的暗光纹理，HDR模式下不⽀持该功能。</li>
+</ol>
+<p>IQ Tool：</p>
+<p>blc模块的单ISO编辑区界⾯中，⼦功能显⽰为obcPostTnr(LinearOnly) 以作提醒。</p>
+<p>ISP HDR模式下，使能该功能，⽤⼾需要关注IQ Tool LOG区的提醒信息。</p>
+<p>AIQ：</p>
+<p>ISP HDR模式下，通过BLC setAttrib API使能该功能，API返回出错，同时会提供相应提⽰信息。⽤⼾需要关注。</p>
+<p>模块框图</p>
+<p>参数说明</p>
+<p>DPC</p>
+<p>模块说明</p>
+<p>模块约束</p>
+<ol>
+<li class="">spc⽀持16x16 pattern中最多8对Shield pixel 校正</li>
+</ol>
+<p>模块框图</p>
+<p>参数说明</p>
+<p>BTNR</p>
+<p>模块说明</p>
+<p>模块约束</p>
+<ol>
+<li class="">btnr模块运⾏的像素值域空间hw_btnrCfg_pixDomain_mode仅⽀持在初始化阶段配置，在运⾏过程中切换配置会引⼊不必要的效果异常问题。</li>
+</ol>
+<p>IQ Tool、 AIQ：</p>
+<p>鉴于该约束, 运⾏过程中配置hw_btnrCfg_pixDomain_mode，IQ Tool LOG区 与 AIQ都会进⾏相应的信息提醒，⽤⼾需要关注。</p>
+<ol start=2>
+<li class="">ISP HDR模式下，以下3条sigma曲线建议采⽤btnr_midSegmInterpOff_mode。</li>
+</ol>
+<p>mdSigma.hw_btnrT_sigmaCurve_mode</p>
+<p>curFrmSpNr.hw_btnrT_sigmaCurve_mode</p>
+<p>preFrmSpNr.hw_btnrT_sigmaCurve_mode</p>
+<p>IQ Tool、 AIQ：</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=模块框图>模块框图<a href=#模块框图 class=hash-link aria-label="Direct link to 模块框图" title="Direct link to 模块框图" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=模块概念前置说明>模块概念前置说明<a href=#模块概念前置说明 class=hash-link aria-label="Direct link to 模块概念前置说明" title="Direct link to 模块概念前置说明" translate=no>​</a></h3>
+<table><thead><tr><th>概念<th>说明<tbody><tr><td>静止权重(statWgt,wgtStat)<td>动静判决模块判断当前帧该区域为静止的概率大小静止权重 = 1 - 运动权重<tr><td>运动权重(mdWgt)<td>动静判决模块判断当前帧该区域为运动的概率大小运动权重 = 1 - 静止权重<tr><td>当前帧叠加权重<td>时域叠加模块把当前帧该区域与IIR时域叠加帧进行叠加，当前帧该区域的叠加权重，该权重由运动判决和时域叠加滤波2者共同决定。当前帧运动权重越大，当前帧叠加权重也越大。当前帧叠加权重= 1 - IIR帧叠加权重<tr><td>IIR帧叠加权重<td>时域叠加模块把当前帧该区域与IIR时域叠加帧进行叠加，IIR帧该区域的叠加权重，该权重由运动判决和时域叠加滤波2者共同决定。当前帧静止权重越大，IIR帧叠加权重也越大。IR帧叠加权重 = 1 - 当前帧叠加权重</table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数说明>参数说明<a href=#参数说明 class=hash-link aria-label="Direct link to 参数说明" title="Direct link to 参数说明" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=hw_btnrcfg_pixdomain_mode>hw_btnrCfg_pixDomain_mode<a href=#hw_btnrcfg_pixdomain_mode class=hash-link aria-label="Direct link to hw_btnrCfg_pixDomain_mode" title="Direct link to hw_btnrCfg_pixDomain_mode" translate=no>​</a></h3>
+<p>Static<!-- -->:hw<!-- -->_btnrCfg_pixDomain_mode</p>
+<p>【参数功能描述】</p>
+<p>配置btnr模块运⾏的像素值域空间</p>
+<p>btnr_pixLog2Domain_mode：</p>
+<p>btnr运⾏在log域模式。</p>
+<p>btnr_pixSqrtDomain_mode：</p>
+<p>btnr运⾏在平⽅根域模式。</p>
+<p>btnr_pixLinearDomain_mode：</p>
+<p>btnr运⾏在线性域。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数法>【参数⽤法】：<a href=#参数法 class=hash-link aria-label="Direct link to 【参数⽤法】：" title="Direct link to 【参数⽤法】：" translate=no>​</a></h3>
+<p>sensor线性模式，建议优先选择线性域处理。</p>
+<p>sensor hdr模式, 默认选择log域进⾏处理。</p>
+<p>平⽅根域，暂不使⽤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=transcfg>transCfg<a href=#transcfg class=hash-link aria-label="Direct link to transCfg" title="Direct link to transCfg" translate=no>​</a></h3>
+<p>Static: hw_btnr_trans_mode</p>
+<p>【参数功能描述】</p>
+<p>线性域转换log域或平⽅根域的模式选择。</p>
+<p>在满⾜输⼊线性域范围的前提下，可以选择更⾼定点化精度模式。</p>
+<p>btnr_pixInBw15b_mode：</p>
+<p>btnr输⼊像素⽀持的最⼤位宽是15bit。ISP线性模式、⻓短帧曝光⽐⼩于等于8x的ISP HDR模式。</p>
+<p>btnr_pixInBw20b_mode：</p>
+<p>btnr输⼊像素⽀持的最⼤位宽是20bit。⻓短帧曝光⽐⼤于8x⼩于256x的ISP HDR模式。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为btnr_pixInBw20b_mode。</p>
+<p>Static: hw_btnr_trans_offset</p>
+<p>【参数功能描述】</p>
+<p>线性域转换前的正向偏置参数</p>
+<p>【参数⽤法】：</p>
+<p>默认值是256. 不建议修改。</p>
+<p>Static: hw_btnr_transData_maxLimit</p>
+<p>【参数功能描述】</p>
+<p>待转换的线性域像素数值的最⼤值</p>
+<p>【参数⽤法】：</p>
+<p>默认值1,048,575，即 2^20 - 1.</p>
+<p>HDR ⻓短帧的曝光⽐是16x，配置为 2^16 - 1即可，相对配置2^20 - 1 转换精度更⾼，转换精度带来的误差更⼩。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=sigmaenv>sigmaEnv<a href=#sigmaenv class=hash-link aria-label="Direct link to sigmaEnv" title="Direct link to sigmaEnv" translate=no>​</a></h3>
+<p>Static: sw_btnrCfg_sigma_mode</p>
+<p>【参数功能描述】</p>
+<p>噪声标定曲线⽀持以下2种⽅式：</p>
+<p>btnr_autoSigma_mode：</p>
+<p>btnr内部基于图像进⾏统计。基于实时图像统计能够与实际噪声更匹配。例如温度差异导致的噪声差异。</p>
+<p>btnr_manualSigma_mode：</p>
+<p>直接配置标定⼯具标定输出的曲线</p>
+<p>【参数⽤法】：</p>
+<p>默认btnr_autoSigma_mode。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=debug>debug<a href=#debug class=hash-link aria-label="Direct link to debug" title="Direct link to debug" translate=no>​</a></h3>
+<p>Static: sw_btnrT_dbgOut_en</p>
+<p>【参数功能描述】</p>
+<p>tnr debug模式开关。</p>
+<p>debug模式ISP输出的数据为调试数据，与正常输出存在差异，仅作调试⽤。</p>
+<p>【参数⽤法】：</p>
+<p>默认0.</p>
+<p>1表⽰打开debug模式，具体输出数据参考dbgOut_mode的设置。</p>
+<p>Static: hw_btnrT_dbgOut_mode</p>
+<p>【参数功能描述】</p>
+<p>btnr debug模式：btnr_dbgOut_iirSpNr_mode：IIR时域叠加帧空域降噪结果直接作为btnr输出btnr_dbgOut_curSpNr_mode：当前帧空域降噪结果直接作为btnr输出。btnr_dbgOut_mdWgt_mode：动静判决模块静⽌权重以灰度图的⽅式直接作为btnr输出。--> 静⽌权重越⼤，灰度值越⼤即越⽩越亮，越趋向于静⽌区域。--> 静⽌权重越⼩，灰度值越⼩即越⿊越暗，越趋向于运动区域。</p>
+<p>【参数⽤法】：</p>
+<p>debug模式对对应的效果进⾏观察，便于调试观察。</p>
+<p>hw_btnrT_md_en</p>
+<p>mdDynamic: hw_btnrT_md_en</p>
+<p>【参数功能描述】</p>
+<p>动静判决使能开关。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，打开动静判决。</p>
+<p>关闭动静判决，动静判决静⽌权重为1，即全帧为静⽌区域，效果上运动物体拖影很⻓。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=mdsigma>mdSigma<a href=#mdsigma class=hash-link aria-label="Direct link to mdSigma" title="Direct link to mdSigma" translate=no>​</a></h3>
+<p>mdDynamic: hw_btnrT_sigma_scale</p>
+<p>【参数功能描述】</p>
+<p>动静判决采⽤的噪声sigma的倍率调整系数。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤，</p>
+<p>---> 动静判决越容易判断成静⽌，</p>
+<p>---> 时域降噪⼒度越⼤</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=mddynamic-hw_btnrt_sigmahdrs_scale>mdDynamic: hw_btnrT_sigmaHdrS_scale<a href=#mddynamic-hw_btnrt_sigmahdrs_scale class=hash-link aria-label="Direct link to mdDynamic: hw_btnrT_sigmaHdrS_scale" title="Direct link to mdDynamic: hw_btnrT_sigmaHdrS_scale" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>短帧噪声sigma的倍率调整系数。</p>
+<p>HDR模式时，融合短帧的区域，噪声sigma由⻓短帧噪声sigma根据⻓短帧融合权重加权获得。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤，融合短帧的区域</p>
+<p>---> 动静判决越容易判断成静⽌，</p>
+<p>---> 时域降噪⼒度越⼤</p>
+<p>mdDynamic: hw_btnrT_sigmaCurve_mode</p>
+<p>【参数功能描述】</p>
+<p>动静判决采⽤的噪声sigma曲线模式：</p>
+<p>btnr_midSegmInterpOn_mode：</p>
+<p>曲线各个节点间的线性插值功能都使能，</p>
+<p>btnr_midSegmInterpOff_mode：</p>
+<p>【参数⽤法】：</p>
+<p>线性模式：</p>
+<p>默认btnr_midSegmInterpOn_mode</p>
+<p>hdr模式：</p>
+<p>默认btnr_midSegmInterpOff_mode。⻓帧噪声sigma曲线配置⾄curSpNrSgm_curve的0〜7节点，短帧对应配置⾄8〜15节点。⻓短帧信噪⽐差异较⼤时，建议优先该模式。</p>
+<p>subLoMd0_diffCh</p>
+<p>mdDynamic: hw_btnrT_vFilt_en</p>
+<p>【参数功能描述】</p>
+<p>subLoMd0的帧间差异值通道，垂直⽅向FIR滤波使能。</p>
+<p>差异值为当前帧与IIR时域叠加帧的帧间⾼频差异</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，打开垂直⽅向FIR滤波。</p>
+<p>mdDynamic: hw_btnrT_hFilt_en</p>
+<p>【参数功能描述】</p>
+<p>subLoMd0的帧间差异值通道，⽔平⽅向滤波使能。</p>
+<p>差异值为当前帧与IIR时域叠加帧的帧间⾼频差异</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，打开⽔平⽅向滤波。</p>
+<p>mdDynamic: hw_btnrT_vIIRFstLn_scale</p>
+<p>【参数功能描述】</p>
+<p>subLoMd0的帧间差异值通道，垂直⽅向IIR滤波⾸⾏初始权重的倍率调整系数。</p>
+<p>该滤波器为subLoMd0 ⾼频帧间差异值的垂直⽅向低通滤波器，由此获得垂直⽅向的低频帧间差异值。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤， ⾸⾏帧间差异值的IIR滤波初始权重越⼤。</p>
+<p>mdDynamic: hw_btnrT_vIIRFilt_strg</p>
+<p>【参数功能描述】</p>
+<p>subLoMd0的帧间差异值通道，垂直⽅向IIR滤波的IIR权重.</p>
+<p>该滤波器为subLoMd0 ⾼频帧间差异值的垂直⽅向低通滤波器，由此获得垂直⽅向的低频帧间差异值。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤， IIR滤波权重越⼤，滤波强度越强，subLoMd0的低频运动权重越低频。</p>
+<p>subLoMd0_sgmCh</p>
+<p>mdDynamic: hw_btnrT_hFilt_en</p>
+<p>【参数功能描述】</p>
+<p>subLoMd0的mdSigma通道，⽔平⽅向滤波使能。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，打开⽔平⽅向滤波。</p>
+<p>mdDynamic: hw_btnrT_vIIRFstLn_scale</p>
+<p>【参数功能描述】</p>
+<p>subLoMd0的mdSigma通道，垂直⽅向IIR滤波⾸⾏初始权重的倍率调整系数。</p>
+<p>该滤波器为subLoMd0 mdSigma的垂直⽅向低通滤波器，由此获得垂直⽅向的低频运动判决噪声mdSigma值。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤， ⾸⾏帧间差异值的IIR滤波初始权重越⼤。</p>
+<p>mdDynamic: hw_btnrT_vIIRFilt_strg</p>
+<p>【参数功能描述】</p>
+<p>subLoMd0的mdSigma通道，垂直⽅向IIR滤波的IIR权重.</p>
+<p>该滤波器为subLoMd0 mdSigma的垂直⽅向低通滤波器，由此获得垂直⽅向的低频运动判决噪声mdSigma值。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤， IIR滤波权重越⼤，滤波强度越强，subLoMd0的低频运动权重越低频。</p>
+<p>subLoMd0_wgtOpt</p>
+<p>mdDynamic: hw_btnrT_mdWgt_negOff</p>
+<p>【参数功能描述】</p>
+<p>subLoMd0的低频运动权重的负向偏置调整参数。</p>
+<p>根据帧间差异值通道（diffCh）的低频差异值与mdSigma通道（sgmCh）的低频mdSigma，计算低频静⽌权重。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤， IIR滤波权重越⼤，滤波强度越强，滤波频段越低频。</p>
+<p>mdDynamic: hw_btnrT_mdWgt_scale</p>
+<p>【参数功能描述】</p>
+<p>subLoMd0的低频运动权重的倍率调整参数</p>
+<p>根据帧间差异值通道（diffCh）的低频差异值与mdSigma通道（sgmCh）的低频mdSigma，计算低频静⽌权重。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤，</p>
+<p>---> subLoMd0低频运动权重越⼤，</p>
+<p>---> subLoMd0低频静⽌权重越⼩，</p>
+<p>---> btnr最终的时域降噪⼒度越⼩。</p>
+<p>subLoMd1</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_lpf_en</p>
+<p>【参数功能描述】</p>
+<p>subLoMd1⾼频差异值的低通预滤波器的使能开关位。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，打开低通预滤波器。</p>
+<p>mdDynamic<!-- -->:sw<!-- -->_btnrT_lpfCfg_mode</p>
+<p>【参数功能描述】</p>
+<p>低通预滤波器算⼦配置模式。</p>
+<p>btnr_cfgByFiltStrg_mode：</p>
+<p>直接⽤滤波⼒度值控制该滤波器。</p>
+<p>btnr_cfgByFiltCoeff_mode：</p>
+<p>直接配置算⼦系数来控制该滤波器。</p>
+<p>【参数⽤法】：</p>
+<p>默认btnr_cfgByFiltStrg_mode。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_lpfSpatial_wgt</p>
+<p>【参数功能描述】</p>
+<p>当lpfCfg_mode = btnr_cfgByFiltCoeff_mode时，通过该参数直接配置低通预滤波器的算⼦系数。</p>
+<p>【参数⽤法】：</p>
+<p>mdDynamic<!-- -->:sw<!-- -->_btnrT_lpf_strg</p>
+<p>【参数功能描述】</p>
+<p>当lpfCfg_mode = btnr_cfgByFiltStrg_mode时，低通预滤波器的⼒度值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1.</p>
+<p>值越⼤，该滤波器滤波⼒度越⼤。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgt_maxLimit</p>
+<p>【参数功能描述】</p>
+<p>subLoMd1 ⾼频运动权重最⼤限制值。</p>
+<p>subLoMd1 低频权重由⾼频权重经过低通滤波⽽得。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤，</p>
+<p>---> subLoMd1的最⼤⾼频运动权重值越⼤。</p>
+<p>---> subLoMd1的最⼤低频运动权重值越⼤。</p>
+<p>---> subLoMd1的最⼩低频静⽌权重值越⼩。</p>
+<p>---> btnr 最终的最⼩时域降噪⼒度越⼩。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=mddynamic_btnrt_mdwgt_negoff>mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgt_negOff<a href=#mddynamic_btnrt_mdwgt_negoff class=hash-link aria-label="Direct link to mddynamic_btnrt_mdwgt_negoff" title="Direct link to mddynamic_btnrt_mdwgt_negoff" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述>【参数功能描述】<a href=#参数功能描述 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>subLoMd1 ⾼频运动权重的负向偏置调整参数。</p>
+<p>subLoMd1 低频权重由⾼频权重经过低通滤波⽽得。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数法-1>【参数⽤法】：<a href=#参数法-1 class=hash-link aria-label="Direct link to 【参数⽤法】：" title="Direct link to 【参数⽤法】：" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=值越>值越⼤，<a href=#值越 class=hash-link aria-label="Direct link to 值越⼤，" title="Direct link to 值越⼤，" translate=no>​</a></h3>
+<p>---> subLoMd1的⾼频运动权重越⼩，</p>
+<p>---> subLoMd1的低频运动权重越⼩，</p>
+<p>---> subLoMd1的低频静⽌权重越⼤，</p>
+<p>---> btnr 最终的时域降噪⼒度越⼤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=mddynamic_btnrt_mdwgtfstlnnegoff_en>mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgtFstLnNegOff_en<a href=#mddynamic_btnrt_mdwgtfstlnnegoff_en class=hash-link aria-label="Direct link to mddynamic_btnrt_mdwgtfstlnnegoff_en" title="Direct link to mddynamic_btnrt_mdwgtfstlnnegoff_en" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-1>【参数功能描述】<a href=#参数功能描述-1 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>subLoMd1⾸⾏⾼频运动权重的单独负向偏置调整（mdWgtFstLn_negOff）使能。</p>
+<p>subLoMd1 低频权重由⾼频权重经过低通滤波⽽得。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数法-2>【参数⽤法】：<a href=#参数法-2 class=hash-link aria-label="Direct link to 【参数⽤法】：" title="Direct link to 【参数⽤法】：" translate=no>​</a></h3>
+<p>默认值为1。</p>
+<p>关闭情况下，⾸⾏与其他⾏⼀样采⽤（mdWgt_negOff）。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgtFstLn_negOff</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-2>【参数功能描述】<a href=#参数功能描述-2 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>subLoMd1⾸⾏⾼频运动权重的负向偏置调整参数。</p>
+<p>⾸⾏的单独负向偏置是作为后级IIR垂直滤波器（vIIRFilt）的初始权重调整。</p>
+<p>subLoMd1 低频权重由⾼频权重经过低通滤波⽽得。</p>
+<p>【参数⽤法】：</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=mddynamic_btnrt_mdwgt_scale>mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgt_scale<a href=#mddynamic_btnrt_mdwgt_scale class=hash-link aria-label="Direct link to mddynamic_btnrt_mdwgt_scale" title="Direct link to mddynamic_btnrt_mdwgt_scale" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-3>【参数功能描述】<a href=#参数功能描述-3 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>subLoMd1 ⾼频运动权重最⼤限制值。</p>
+<p>subLoMd1 低频权重由⾼频权重经过低通滤波⽽得。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数法-3>【参数⽤法】：<a href=#参数法-3 class=hash-link aria-label="Direct link to 【参数⽤法】：" title="Direct link to 【参数⽤法】：" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=值越-1>值越⼤，<a href=#值越-1 class=hash-link aria-label="Direct link to 值越⼤，" title="Direct link to 值越⼤，" translate=no>​</a></h3>
+<p>---> subLoMd1的⾼频运动权重越⼤，</p>
+<p>---> subLoMd1的低频运动权重越⼤，</p>
+<p>---> subLoMd1的低频静⽌权重越⼩，</p>
+<p>---> btnr 最终的最终时域降噪⼒度越⼩。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_hFilt_en</p>
+<p>【参数功能描述】</p>
+<p>subLoMd1 ⾼频静⽌权重值，⽔平⽅向滤波使能。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，打开⽔平⽅向滤波。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_vIIRFilt_strg</p>
+<p>【参数功能描述】</p>
+<p>垂直⽅向IIR滤波的IIR权重.</p>
+<p>该滤波器为subLoMd1 ⾼频静⽌权重的垂直⽅向低通滤波器，由此获得垂直⽅向的低频静⽌权重。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤， IIR滤波权重越⼤，滤波强度越强，subLoMd1的低频运动权重越低频。</p>
+<p>loMd</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_loMd_en</p>
+<p>【参数功能描述】</p>
+<p>低频动静判决使能开关。</p>
+<p>subLoMd0 与 subLoMd1 都属于低频动静判决的⼦模块。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，使能低频动静判决。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_loMd_mode</p>
+<p>【参数功能描述】</p>
+<p>低频动静判决模式选择。</p>
+<p>【参数⽤法】：</p>
+<p>btnr_subLoMd01Mix_mode：subLoMd0, subLoMd1混合模式</p>
+<p>btnr_subLoMd0Only_mode：单独subLoMd0模式</p>
+<p>btnr_subLoMd1Only_mode：单独subLoMd1模式</p>
+<p>默认btnr_subLoMd01Mix_mode。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnr_preWgtMge_scale</p>
+<p>【参数功能描述】</p>
+<p>前1帧IIR帧的叠加权重的倍率调整系数。</p>
+<p>前1帧IIR帧的叠加权重与当前帧静⽌权重中，优选其⼀作为输出的当前帧静⽌权重</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤，</p>
+<p>---> 叠加模块更容易选择当前帧静⽌权重</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnr_preWgtMge_offset</p>
+<p>【参数功能描述】</p>
+<p>前1帧IIR帧的叠加权重的正向偏置调整系数。</p>
+<p>前1帧IIR帧的叠加权重与当前帧静⽌权重中，优选其⼀作为输出的当前帧静⽌权重</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤，</p>
+<p>---> 叠加模块更容易选择当前帧静⽌权重</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=hw_btnrt_md_mode>hw_btnrT_md_mode<a href=#hw_btnrt_md_mode class=hash-link aria-label="Direct link to hw_btnrT_md_mode" title="Direct link to hw_btnrT_md_mode" translate=no>​</a></h3>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_md_mode</p>
+<p>【参数功能描述】</p>
+<p>动静判决模式选择。</p>
+<p>btnr_loAsRatioForHi_mode:</p>
+<p>⾼低频联合，对低频运动权重与⾼频运动权重的⽐例关系进⾏调整，得到最终运动权重。btnr_loAsBiasForHi_mode：</p>
+<p>⾼低频联合，低频运动权重作为⾼频运动权重的偏置调整，得到最终运动权重。</p>
+<p>btnr_loMdOnly_mode：</p>
+<p>仅低频运动判决，debug模式，低频运动权重作为最终动静判决权重结果输出。</p>
+<p>【参数⽤法】：</p>
+<p>默认btnr_loAsBiasForHi_mode。</p>
+<p>loAsHiRatioMd</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_hfLpf_en</p>
+<p>【参数功能描述】</p>
+<p>⾼频帧间差异值的低通预滤波器的使能位。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，开启低通预低通滤波器。</p>
+<p>mdDynamic<!-- -->:sw<!-- -->_btnrT_hfLpfCfg_mode</p>
+<p>【参数功能描述】</p>
+<p>⾼频帧间差异值的低通预滤波器算⼦系数配置⽅式。</p>
+<p>btnr_cfgByFiltStrg_mode：</p>
+<p>通过⼒度参数⽣成滤波器算⼦系数。</p>
+<p>btnr_cfgByFiltCoeff_mode：</p>
+<p>直接配置滤波器算⼦系数值。</p>
+<p>【参数⽤法】：</p>
+<p>默认参数选择btnr_cfgByFiltStrg_mode。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_hfLpfSpatial_wgt</p>
+<p>【参数功能描述】</p>
+<p>使⽤btnr_cfgByFiltCoeff_mode模式时，低通预滤波器算⼦系数值配置。</p>
+<p>【参数⽤法】：</p>
+<p>默认值：[178, 99, 60, 22, 13, 3, 0, 1, 1]</p>
+<p>mdDynamic<!-- -->:sw<!-- -->_btnrT_hfLpf_strg</p>
+<p>【参数功能描述】</p>
+<p>使⽤btnr_cfgByFiltStrg_mode模式时，通过此⼒度参数⽣成最终低通预滤波器算⼦系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值1。</p>
+<p>值越⼤，</p>
+<p>---> ⾼频帧间差异值的低通预滤波⼒度越强。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStat_scale</p>
+<p>【参数功能描述】</p>
+<p>低频静⽌权重（loStatWgt）倍率调整参数。</p>
+<p>md_mode == btnr_loAsRatioForHi_mode时，动静判决的当前帧静⽌权重（statWgt ）由以下关系式获得：</p>
+<p>loDiff 、hiDiff： 低频、⾼频的帧间像素差异</p>
+<p>(1 - loStatWgt)：当前帧低频运动权重。</p>
+<p>hiMdWgt_scale： 即⾼频运动权重倍率调整参数</p>
+<p>【参数⽤法】：</p>
+<p>默认值为2。</p>
+<p>值越⼤，</p>
+<p>---> 低频运动权重 (1 - loStatWgt)越⼩，</p>
+<p>---> 动静判决越容易判断为静⽌。</p>
+<p>---> 最终时域降噪⼒度越⼤。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStatHdrS_scale</p>
+<p>【参数功能描述】</p>
+<p>短帧低频静⽌权重倍率调整参数。</p>
+<p>HDR模式，短帧融合区域由短帧和⻓帧融合⽽成，该区域的低频静⽌权重也是由⻓帧</p>
+<p>md_mode == btnr_loAsRatioForHi_mode时，动静判决的当前帧静⽌权重（statWgt ）由以下关系式获得：</p>
+<p>loDiff 、hiDiff： 低频、⾼频的帧间像素差异</p>
+<p>(1 - loStatWgt)：当前帧低频运动权重。</p>
+<p>hiMdWgt_scale： 即⾼频运动权重倍率调整参数</p>
+<p>【参数⽤法】：</p>
+<p>默认值为2。</p>
+<p>值越⼤，</p>
+<p>---> 低频运动权重 (1 - loStatWgt)越⼩，</p>
+<p>---> 动静判决越容易判断为静⽌。</p>
+<p>---> HDR模式，短帧融合区域最终时域降噪⼒度越⼤。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_hiMdWgt_scale</p>
+<p>【参数功能描述】</p>
+<p>⾼频静⽌权重倍率调整参数</p>
+<p>wgtCal_mode = btnr_loAsRatioForHi_mode，动静判决的当前帧静⽌权重（statWgt ）由以下关系式获得：</p>
+<p>loDiff 、hiDiff： 低频、⾼频的帧间像素差异</p>
+<p>(1 - loStatWgt)：当前帧低频运动权重。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为3.3。</p>
+<p>值越⼤，</p>
+<p>---> 动静判决越难判断为静⽌。</p>
+<p>---> 最终时域降噪⼒度越⼩。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStat_negOff</p>
+<p>【参数功能描述】</p>
+<p>md_mode = btnr_loAsBiasForHi_mode时</p>
+<p>低频静⽌权重的负向偏置调整参数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.5，</p>
+<p>值越⼤，</p>
+<p>---> 低频静⽌权重越⼩。</p>
+<p>---> 低频静⽌权重作为⾼频运动权重的负向偏置作⽤越⼩</p>
+<p>---> 动静判决运动权重越⼤</p>
+<p>---> 时域降噪⼒度越⼩。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-4>【参数功能描述】<a href=#参数功能描述-4 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>md_mode = btnr_loAsBiasForHi_mode时</p>
+<p>短帧低频静⽌权重的负向偏置调整参数。</p>
+<p>HDR模式，短帧融合区域由短帧和⻓帧融合⽽成，该区域的低频静⽌权重负向偏置调整参数也是由⻓帧（loWgtStat_negOff）和短帧（loWgtStatHdrS_negOff）融合⽽成。</p>
+<p>【参数⽤法】：</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=默认值为05>默认值为0.5，<a href=#默认值为05 class=hash-link aria-label="Direct link to 默认值为0.5，" title="Direct link to 默认值为0.5，" translate=no>​</a></h3>
+<p>值越⼤，HDR模式，短帧融合区域</p>
+<p>---> 低频静⽌权重越⼩。</p>
+<p>---> 低频静⽌权重作为⾼频运动权重的负向偏置作⽤越⼩</p>
+<p>---> 动静判决运动权重越⼤</p>
+<p>---> 时域降噪⼒度越⼩。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=mddynamic_btnrt_lowgtstat_scale>mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStat_scale<a href=#mddynamic_btnrt_lowgtstat_scale class=hash-link aria-label="Direct link to mddynamic_btnrt_lowgtstat_scale" title="Direct link to mddynamic_btnrt_lowgtstat_scale" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-5>【参数功能描述】<a href=#参数功能描述-5 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>md_mode = btnr_loAsBiasForHi_mode时，</p>
+<p>低频静⽌权重的倍率调整系数。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数法-4>【参数⽤法】：<a href=#参数法-4 class=hash-link aria-label="Direct link to 【参数⽤法】：" title="Direct link to 【参数⽤法】：" translate=no>​</a></h3>
+<p>默认值为1，</p>
+<p>值越⼤，</p>
+<p>---> 低频静⽌权重越⼤。</p>
+<p>---> 低频静⽌权重作为⾼频运动权重的负向偏置作⽤越⼤</p>
+<p>---> 动静判决运动权重越⼩</p>
+<p>---> 时域降噪⼒度越⼤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=mddynamic_btnrt_lowgtstathdrs_scale>mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStatHdrS_scale<a href=#mddynamic_btnrt_lowgtstathdrs_scale class=hash-link aria-label="Direct link to mddynamic_btnrt_lowgtstathdrs_scale" title="Direct link to mddynamic_btnrt_lowgtstathdrs_scale" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-6>【参数功能描述】<a href=#参数功能描述-6 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>md_mode = btnr_loAsBiasForHi_mode时，</p>
+<p>短帧低频静⽌权重的倍率调整参数。</p>
+<p>HDR模式，短帧融合区域由短帧和⻓帧融合⽽成，该区域的低频静⽌权重倍率调整参数也是由⻓帧（loWgtStat_scale）和短帧（loWgtStatHdrS_scale）融合⽽成。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，HDR模式，短帧融合区域</p>
+<p>---> 低频静⽌权重越⼤。</p>
+<p>---> 低频静⽌权重作为⾼频运动权重的负向偏置作⽤越⼤</p>
+<p>---> 动静判决运动权重越⼩</p>
+<p>---> 时域降噪⼒度越⼤。</p>
+<p>md_mode = btnr_loAsBiasForHi_mode时</p>
+<p>低频静⽌权重的正向偏置调整参数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.5，</p>
+<p>值越⼤，</p>
+<p>---> 低频静⽌权重越⼤。</p>
+<p>---> 低频静⽌权重作为⾼频运动权重的负向偏置作⽤越⼤</p>
+<p>---> 动静判决运动权重越⼩</p>
+<p>---> 时域降噪⼒度越⼤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=mddynamic_btnrt_lowgtstathdrs_offset>mdDynamic<!-- -->:hw<!-- -->_btnrT_loWgtStatHdrS_offset<a href=#mddynamic_btnrt_lowgtstathdrs_offset class=hash-link aria-label="Direct link to mddynamic_btnrt_lowgtstathdrs_offset" title="Direct link to mddynamic_btnrt_lowgtstathdrs_offset" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-7>【参数功能描述】<a href=#参数功能描述-7 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>md_mode = btnr_loAsBiasForHi_mode时</p>
+<p>短帧低频静⽌权重的正向偏置调整参数。</p>
+<p>HDR模式，短帧融合区域由短帧和⻓帧融合⽽成，该区域的低频静⽌权重正向偏置调整参数也是由⻓帧（loWgtStat_offset）和短帧（loWgtStatHdrS_offset）融合⽽成。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.5，</p>
+<p>值越⼤，HDR模式，短帧融合区域</p>
+<p>---> 低频静⽌权重越⼤。</p>
+<p>---> 低频静⽌权重作为⾼频运动权重的负向偏置作⽤越⼤</p>
+<p>---> 动静判决运动权重越⼩</p>
+<p>---> 时域降噪⼒度越⼤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=mddynamic_btnr_lowgtstat_minlimit>mdDynamic<!-- -->:hw<!-- -->_btnr_loWgtStat_minLimit<a href=#mddynamic_btnr_lowgtstat_minlimit class=hash-link aria-label="Direct link to mddynamic_btnr_lowgtstat_minlimit" title="Direct link to mddynamic_btnr_lowgtstat_minlimit" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-8>【参数功能描述】<a href=#参数功能描述-8 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>md_mode = btnr_loAsBiasForHi_mode时</p>
+<p>低频静⽌权重的最⼩限制值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值0.05，</p>
+<p>值越⼤，</p>
+<p>---> 最⼩低频静⽌权重越⼤。</p>
+<p>---> 低频静⽌权重作为⾼频运动权重的最⼩负向偏置作⽤越⼤</p>
+<p>---> 最⼤动静判决运动权重越⼩</p>
+<p>---> 最⼩时域降噪⼒度越⼤。</p>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgt_scale</p>
+<p>【参数功能描述】</p>
+<p>md_mode = btnr_loAsBiasForHi_mode时，</p>
+<p>动静判决运动权重的倍率调整系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值2，</p>
+<p>值越⼤，</p>
+<p>---> 动静判决运动权重越⼤</p>
+<p>---> 时域降噪⼒度越⼩。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=mddynamic_btnrt_mdwgthdrs_scale>mdDynamic<!-- -->:hw<!-- -->_btnrT_mdWgtHdrS_scale<a href=#mddynamic_btnrt_mdwgthdrs_scale class=hash-link aria-label="Direct link to mddynamic_btnrt_mdwgthdrs_scale" title="Direct link to mddynamic_btnrt_mdwgthdrs_scale" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-9>【参数功能描述】<a href=#参数功能描述-9 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>md_mode = btnr_loAsBiasForHi_mode时，</p>
+<p>短帧动静判决运动权重的倍率调整参数。</p>
+<p>HDR模式，短帧融合区域由短帧和⻓帧融合⽽成，该区域的动静判决运动权重的倍率调整参数也是由⻓帧（mdWgt_scale）和短帧（mdWgtHdrS_scale）融合⽽成。</p>
+<p>【参数⽤法】：</p>
+<p>默认值2，</p>
+<p>值越⼤，HDR模式，短帧融合区域</p>
+<p>---> 动静判决运动权重越⼤</p>
+<p>---> 时域降噪⼒度越⼩。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=mdwgtpost>mdWgtPost<a href=#mdwgtpost class=hash-link aria-label="Direct link to mdWgtPost" title="Direct link to mdWgtPost" translate=no>​</a></h3>
+<p>mdDynamic<!-- -->:hw<!-- -->_btnr_lpfSpatial_wgt</p>
+<p>【参数功能描述】</p>
+<p>动静判决静⽌权重的低通滤波器算⼦系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为[4,2,1]。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=sigmaenv-1>sigmaEnv<a href=#sigmaenv-1 class=hash-link aria-label="Direct link to sigmaEnv" title="Direct link to sigmaEnv" translate=no>​</a></h3>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_statsPixAlpha_thred</p>
+<p>【参数功能描述】</p>
+<p>进⼊硬件噪声sigma统计的点的叠加权重最低阈值。</p>
+<p>叠加权重⾜够⼤，即该像素点叠加的帧数⾜够，作为统计均值才更可靠，进⽽统计的噪声sigma可靠性也更⼤。</p>
+<p>【参数⽤法】：</p>
+<p>默认值0.8。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrCfg_statsPixCnt_thred</p>
+<p>【参数功能描述】</p>
+<p>统计噪声sigma曲线时，每个亮度阶上满⾜(statsPixAlpha_thred)统计条件的有效像素点数量的阈值。</p>
+<p>即每个亮度阶上需要有⾜够多的有效像素点，该亮度阶的sigma统计才⾜够可靠。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.</p>
+<p>值越⼤，每个亮度阶需要的最少有效像素数越⼤，统计得到的sigma越可靠。</p>
+<p>Dynamic<!-- -->:sw<!-- -->_btnrT_autoSgmIIR_alpha</p>
+<p>【参数功能描述】</p>
+<p>当前帧噪声sigma统计曲线的权重值， 当与历史噪声sigma统计曲线IIR滤波加权操作时。加权后的曲线作为当前帧应⽤的噪声sigma曲线经由AIQ配置⾄ curSpNrSgm_curve、preSpNrSgm_curve、</p>
+<p>【参数⽤法】：</p>
+<p>默认值0.7。</p>
+<p>值越⼤，当前帧统计sigma曲线的权重越⼤，场景变化带来的噪声曲线变化，进⽽导致降噪⽔平差异引⼊的噪声⽔平差异过渡越平滑。当然场景突变带来的降噪⽔平收敛时间也随之变⼤。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrC_curSpNrSgm_curve</p>
+<p>【参数功能描述】</p>
+<p>对当前帧进⾏空域降噪时，其双边滤波采⽤的噪声sigma曲线。</p>
+<p>【参数⽤法】：</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrC_preSpNrSgm_curve</p>
+<p>【参数功能描述】</p>
+<p>对IIR时域叠加帧进⾏空域降噪时，其双边滤波采⽤的噪声sigma曲线。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤，该滤波器值域权重越⼤，IIR叠加帧的空域降噪⼒度越⼤。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrC_mdSigma_curve</p>
+<p>【参数功能描述】</p>
+<p>动静判决模块采⽤的噪声sigma曲线。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤，图像越不容易被动静判决模块判断为运动，时域叠加权重越⼤，时域降噪⼒度越⼤。</p>
+<p>curFrmSpNr</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_spNr_en</p>
+<p>【参数功能描述】</p>
+<p>对当前帧进⾏空域降噪的使能开关。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，打开当前帧的空域去噪使能。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaIdxLpf_en</p>
+<p>【参数功能描述】</p>
+<p>采⽤低通滤波后的像素亮度值进⾏查表的使能。</p>
+<p>对当前帧进⾏空域降噪时，根据像素亮度值对噪声sigma曲线进⾏查表插值获取噪声sigma。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，采⽤低通滤波后的像素亮度值进⾏噪声sigma曲线进⾏查表。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_sigmacurve_mode>Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaCurve_mode<a href=#dynamic_btnrt_sigmacurve_mode class=hash-link aria-label="Direct link to dynamic_btnrt_sigmacurve_mode" title="Direct link to dynamic_btnrt_sigmacurve_mode" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>当前帧空域降噪采⽤的噪声sigma曲线模式：</p>
+<p>btnr_midSegmInterpOn_mode：</p>
+<p>曲线各个节点间的线性插值功能都使能，</p>
+<p>btnr_midSegmInterpOff_mode：</p>
+<p>【参数⽤法】：</p>
+<p>线性模式：</p>
+<p>默认btnr_midSegmInterpOn_mode</p>
+<p>hdr模式：</p>
+<p>默认btnr_midSegmInterpOff_mode。⻓帧噪声sigma曲线配置⾄curSpNrSgm_curve的0〜7节点，短帧对应配置⾄8〜15节点。⻓短帧信噪⽐差异较⼤时，建议优先该模式。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_sigma_scale</p>
+<p>【参数功能描述】</p>
+<p>当前帧空域降噪双边滤波值域sigma倍率调整系数。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤，该双边预滤波的值域权重越⼤，保边效果越低，降噪⼒度越接近空域权重确定的最⼤滤波强度。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaHdrS_scale</p>
+<p>【参数功能描述】</p>
+<p>短帧数据该双边滤波值域sigma倍率调整系数。</p>
+<p>HDR模式，短帧融合区域由短帧和⻓帧融合⽽成，该区域的sigma_scale调整参数也是由⻓帧（sigma_scale）和短帧（sigmaHdrS_scale）融合⽽成。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1。</p>
+<p>值越⼤，当前帧中融合短帧的区域，该双边滤波器的值域权重越⼤，保边效果越低，降噪⼒度越接近空域权重确定的最⼤滤波强度。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_sigma_offset>Dynamic<!-- -->:hw<!-- -->_btnrT_sigma_offset<a href=#dynamic_btnrt_sigma_offset class=hash-link aria-label="Direct link to dynamic_btnrt_sigma_offset" title="Direct link to dynamic_btnrt_sigma_offset" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>当前帧空域降噪双边滤波值域sigma的正向偏置调整参数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0。</p>
+<p>值越⼤，该双边预滤波的值域权重越⼤，降噪⼒度越接近空域权重确定的最⼤⼒度。</p>
+<p>⼀般在值域sigma较⼩区域降噪⼒度不⾜的时候，通过调整正向偏移值来进⾏单独调整，相对于调整sigma_scale参数减少对sigma较⼤区域的降噪⽔平影响。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_sigmahdrs_offset>Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaHdrS_offset<a href=#dynamic_btnrt_sigmahdrs_offset class=hash-link aria-label="Direct link to dynamic_btnrt_sigmahdrs_offset" title="Direct link to dynamic_btnrt_sigmahdrs_offset" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>短帧数据该双边滤波值域sigma正向偏置调整系数。</p>
+<p>HDR模式，短帧融合区域由短帧和⻓帧融合⽽成，该区域的sigma_offset调整参数也是由⻓帧（sigma_offset）和短帧（sigmaHdrS_offset）融合⽽成。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0。</p>
+<p>值越⼤，当前帧中融合短帧的区域，该双边滤波器的值域权重越⼤，保边效果越低，降噪⼒度越接近空域权重确定的最⼤滤波强度。</p>
+<p>⼀般在值域sigma较⼩区域降噪⼒度不⾜的时候，通过调整正向偏移值来进⾏单独调整，相对于调整sigma_scale参数减少对sigma较⼤区域的降噪⽔平影响。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_filtspatial_strg>Dynamic<!-- -->:sw<!-- -->_btnrT_filtSpatial_strg<a href=#dynamic_btnrt_filtspatial_strg class=hash-link aria-label="Direct link to dynamic_btnrt_filtspatial_strg" title="Direct link to dynamic_btnrt_filtspatial_strg" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>当前帧空域降噪双边滤波的空域⼒度系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为25。</p>
+<p>值越⼤，该双边预滤波空域滤波强度越⼤。即该双边滤波器的最⼤滤波强度越⼤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_pixdiff_maxlimit>Dynamic<!-- -->:hw<!-- -->_btnrT_pixDiff_maxLimit<a href=#dynamic_btnrt_pixdiff_maxlimit class=hash-link aria-label="Direct link to dynamic_btnrt_pixdiff_maxlimit" title="Direct link to dynamic_btnrt_pixdiff_maxlimit" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>当前帧空域降噪双边滤波，邻域像素与中⼼像素差异值最⼤限制值。</p>
+<p>邻域像素与中⼼像素差异值⼀般由边缘纹理和噪声⼀起导致。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为4095.</p>
+<p>值越⼤，值域权重的最⼩值越⼤，该双边滤波器保边⼒度的最⼤值越⼤，边缘区降噪的最⼩⼒度越⼤。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_pixDiff_negOff</p>
+<p>【参数功能描述】</p>
+<p>当前帧空域降噪双边滤波，邻域像素与中⼼像素差异值的负向偏置调整参数。</p>
+<p>邻域像素与中⼼像素差异值⼀般由边缘纹理和噪声⼀起导致。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0，</p>
+<p>值越⼤，值域权重越⼤，该滤波器滤波⼒度越⼤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_pixdiff_scale>Dynamic<!-- -->:hw<!-- -->_btnrT_pixDiff_scale<a href=#dynamic_btnrt_pixdiff_scale class=hash-link aria-label="Direct link to dynamic_btnrt_pixdiff_scale" title="Direct link to dynamic_btnrt_pixdiff_scale" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>当前帧空域降噪双边滤波，邻域像素与中⼼像素差异值的倍率调整系数。</p>
+<p>邻域像素与中⼼像素差异值⼀般由边缘纹理和噪声⼀起导致。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.15，</p>
+<ol>
+<li class="">
+<p>值越⼤，值域权重越⼩，该双边滤波器保边⼒度越⼤，边缘区降噪的⼒度越⼩。</p>
+</li>
+<li class="">
+<p>值越⼤，边缘强弱差异导致的值域权重越⼤，强边缘保边⼒度增加更明显。</p>
+</li>
+</ol>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_spNrOut_alpha</p>
+<p>【参数功能描述】</p>
+<p>通过双边滤波前后数据的加权进⾏细节的回填，该参数为滤波后数据的权重。</p>
+<p>【参数⽤法】：</p>
+<p>默认值1.0，</p>
+<p>值越⼤，滤波后数据的权重越⼤，细节被回填的越少，同时噪声也会同步被回填。但是由于回填的是滤波前原始的数据，所以被回填最⼤的噪声是原始噪声。</p>
+<p>preFrmSpNr</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_spNr_en</p>
+<p>【参数功能描述】</p>
+<p>对IIR时域叠加帧进⾏空域降噪的使能开关。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，打开IIR时域叠加帧的空域去噪使能。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaIdxLpf_en</p>
+<p>【参数功能描述】</p>
+<p>采⽤低通滤波后的像素亮度值进⾏查表的使能开关。</p>
+<p>对当前帧进⾏空域降噪时，根据像素亮度值对噪声sigma曲线进⾏查表插值获取噪声sigma。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，采⽤低通滤波后的像素亮度值从噪声sigma曲线索引获取到噪声sigma。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaCurve_mode</p>
+<p>【参数功能描述】</p>
+<p>IIR时域叠加帧空域降噪采⽤的噪声sigma曲线模式：</p>
+<p>btnr_midSegmInterpOn_mode：</p>
+<p>曲线各个节点间的线性插值功能都使能。</p>
+<p>btnr_midSegmInterpOff_mode：</p>
+<p>【参数⽤法】：</p>
+<p>线性模式：</p>
+<p>默认btnr_midSegmInterpOn_mode</p>
+<p>hdr模式：</p>
+<p>默认btnr_midSegmInterpOff_mode。⻓帧噪声sigma曲线配置⾄curSpNrSgm_curve的0〜7节点，短帧对应配置⾄8〜15节点。⻓短帧信噪⽐差异较⼤时，建议优先该模式。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_sigma_scale</p>
+<p>【参数功能描述】</p>
+<p>IIR时域叠加帧空域降噪双边滤波值域sigma倍率调整系数。</p>
+<p>【参数⽤法】：</p>
+<p>值越⼤，该双边预滤波的值域权重越⼤，保边效果越低，降噪⼒度越接近空域权重确定的最⼤滤波强度。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaHdrS_scale</p>
+<p>【参数功能描述】</p>
+<p>IIR时域叠加帧中，短帧数据该双边滤波值域sigma倍率调整系数。</p>
+<p>HDR模式IIR时域叠加帧中，短帧融合区域由短帧和⻓帧融合⽽成，该区域的sigma_scale调整参数也是由⻓帧（sigma_scale）和短帧（sigmaHdrS_scale）融合⽽成。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1。</p>
+<p>值越⼤，IIR时域叠加帧中融合短帧的区域，该双边滤波器的值域权重越⼤，保边效果越低，降噪⼒度越接近空域权重确定的最⼤滤波强度。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_sigma_offset</p>
+<p>【参数功能描述】</p>
+<p>IIR时域叠加帧空域降噪双边滤波值域sigma的正向偏置调整参数。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数法-5>【参数⽤法】：<a href=#参数法-5 class=hash-link aria-label="Direct link to 【参数⽤法】：" title="Direct link to 【参数⽤法】：" translate=no>​</a></h3>
+<p>默认值为0。</p>
+<p>值越⼤，该双边预滤波的值域权重越⼤，降噪⼒度越接近空域权重确定的最⼤⼒度。</p>
+<p>⼀般在值域sigma较⼩区域降噪⼒度不⾜的时候，通过调整正向偏移值来进⾏单独调整，相对于调整sigma_scale参数减少对sigma较⼤区域的降噪⽔平影响。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_sigmahdrs_offset-1>Dynamic<!-- -->:hw<!-- -->_btnrT_sigmaHdrS_offset<a href=#dynamic_btnrt_sigmahdrs_offset-1 class=hash-link aria-label="Direct link to dynamic_btnrt_sigmahdrs_offset-1" title="Direct link to dynamic_btnrt_sigmahdrs_offset-1" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-10>【参数功能描述】<a href=#参数功能描述-10 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>IIR时域叠加帧中，短帧数据该双边滤波值域sigma正向偏置调整系数。</p>
+<p>HDR模式IIR时域叠加帧中，短帧融合区域由短帧和⻓帧融合⽽成，该区域的sigma_offset调整参数也是由⻓帧（sigma_offset）和短帧（sigmaHdrS_offset）融合⽽成。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数法-6>【参数⽤法】：<a href=#参数法-6 class=hash-link aria-label="Direct link to 【参数⽤法】：" title="Direct link to 【参数⽤法】：" translate=no>​</a></h3>
+<p>默认值为0。</p>
+<p>值越⼤，IIR时域叠加帧中融合短帧的区域，该双边滤波器的值域权重越⼤，保边效果越低，降噪⼒度越接近空域权重确定的最⼤滤波强度。</p>
+<p>⼀般在值域sigma较⼩区域降噪⼒度不⾜的时候，通过调整正向偏移值来进⾏单独调整，相对于调整sigma_scale参数减少对sigma较⼤区域的降噪⽔平影响。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_sigma_mode>Dynamic<!-- -->:hw<!-- -->_btnrT_sigma_mode<a href=#dynamic_btnrt_sigma_mode class=hash-link aria-label="Direct link to dynamic_btnrt_sigma_mode" title="Direct link to dynamic_btnrt_sigma_mode" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>IIR时域叠加帧空域降噪的噪声sigma来源选择。</p>
+<p>btnr_lutSgmOnly_mode：</p>
+<p>基于preSpNrSgm_curve曲线内部查表插值⽣成。</p>
+<p>btnr_kalPkSgm_mode：</p>
+<p>基于卡尔曼滤波内部计算⽣成</p>
+<p>【参数⽤法】：</p>
+<p>默认值btnr_kalPkSgm_mode。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_filtspatial_strg-1>Dynamic<!-- -->:sw<!-- -->_btnrT_filtSpatial_strg<a href=#dynamic_btnrt_filtspatial_strg-1 class=hash-link aria-label="Direct link to dynamic_btnrt_filtspatial_strg-1" title="Direct link to dynamic_btnrt_filtspatial_strg-1" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>IIR时域叠加帧空域降噪双边滤波的空域⼒度系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为25。</p>
+<p>值越⼤，该双边预滤波空域滤波强度越⼤。即该双边滤波器的最⼤滤波强度越⼤。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_pixDiff_maxLimit</p>
+<p>【参数功能描述】</p>
+<p>IIR时域叠加帧空域降噪双边滤波，邻域像素与中⼼像素差异值最⼤限制值。</p>
+<p>邻域像素与中⼼像素差异值⼀般由边缘纹理和噪声⼀起导致。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数法-7>【参数⽤法】：<a href=#参数法-7 class=hash-link aria-label="Direct link to 【参数⽤法】：" title="Direct link to 【参数⽤法】：" translate=no>​</a></h3>
+<p>默认值为4095.</p>
+<p>值越⼤，值域权重的最⼩值越⼤，该双边滤波器保边⼒度的最⼤值越⼤，边缘区降噪的最⼩⼒度越⼤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_pixdiff_negoff>Dynamic<!-- -->:hw<!-- -->_btnrT_pixDiff_negOff<a href=#dynamic_btnrt_pixdiff_negoff class=hash-link aria-label="Direct link to dynamic_btnrt_pixdiff_negoff" title="Direct link to dynamic_btnrt_pixdiff_negoff" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>IIR时域叠加帧空域降噪双边滤波，邻域像素与中⼼像素差异值的负向偏置调整参数。</p>
+<p>邻域像素与中⼼像素差异值⼀般由边缘纹理和噪声⼀起导致。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0，</p>
+<p>值越⼤，值域权重越⼤，该滤波器滤波⼒度越⼤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_pixdiff_scale-1>Dynamic<!-- -->:hw<!-- -->_btnrT_pixDiff_scale<a href=#dynamic_btnrt_pixdiff_scale-1 class=hash-link aria-label="Direct link to dynamic_btnrt_pixdiff_scale-1" title="Direct link to dynamic_btnrt_pixdiff_scale-1" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>IIR时域叠加帧空域降噪双边滤波，邻域像素与中⼼像素差异值的倍率调整系数。</p>
+<p>邻域像素与中⼼像素差异值⼀般由边缘纹理和噪声⼀起导致。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.15，</p>
+<ol>
+<li class="">
+<p>值越⼤，值域权重越⼩，该双边滤波器保边⼒度越⼤，边缘区降噪的⼒度越⼩。</p>
+</li>
+<li class="">
+<p>值越⼤，边缘强弱差异导致的值域权重越⼤，强边缘保边⼒度增加更明显。</p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_spnrout_alpha>Dynamic<!-- -->:hw<!-- -->_btnrT_spNrOut_alpha<a href=#dynamic_btnrt_spnrout_alpha class=hash-link aria-label="Direct link to dynamic_btnrt_spnrout_alpha" title="Direct link to dynamic_btnrt_spnrout_alpha" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>通过双边滤波前后数据的加权进⾏细节的回填，该参数为滤波后数据的权重。</p>
+<p>由于时域叠加导致的拖影，通过IIR时域叠加帧的空域滤波⼒度调节来减少拖影问题的影响。</p>
+<p>【参数⽤法】：</p>
+<p>默认值1.0，</p>
+<ol>
+<li class="">
+<p>值越⼤，滤波后数据的权重越⼤，细节被回填的越少，同时噪声也会同步被回填。</p>
+</li>
+<li class="">
+<p>值越⼤，滤波⼒度越⼤，时域叠加的拖影越短。</p>
+</li>
+</ol>
+<p>frmAlpha</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_loAlpha_minLimit</p>
+<p>【参数功能描述】</p>
+<p>时域低频叠加的最⼩帧数限制值，即IIR时域叠加帧低频叠加权重的最⼩限制值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0，</p>
+<p>值越⼤，</p>
+<p>---> IIR时域叠加帧最⼩低频叠加权重越⼤，</p>
+<p>---> 时域低频叠加的最⼩帧数越⼤，</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_loalphahdrs_minlimit>Dynamic<!-- -->:hw<!-- -->_btnrT_loAlphaHdrS_minLimit<a href=#dynamic_btnrt_loalphahdrs_minlimit class=hash-link aria-label="Direct link to dynamic_btnrt_loalphahdrs_minlimit" title="Direct link to dynamic_btnrt_loalphahdrs_minlimit" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>短帧时域低频叠加的最⼩帧数限制值，即短帧低频叠加权重的最⼩限制值。</p>
+<p>HDR模式IIR时域叠加帧中，短帧融合区域由短帧和⻓帧融合⽽成，该区域的时域低频叠加的最⼩帧数限制值（loAlpha_minLimit）调整参数也是由⻓帧（loAlpha_minLimit）和短帧</p>
+<p>（loAlphaHdrS_minLimit）融合⽽成。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0，</p>
+<p>值越⼤，IIR时域叠加帧中融合短帧区域，</p>
+<p>---> 最⼩低频叠加权重越⼤，</p>
+<p>---> 时域低频叠加的最⼩帧数越⼤，</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_loalpha_maxlimit>Dynamic<!-- -->:hw<!-- -->_btnrT_loAlpha_maxLimit<a href=#dynamic_btnrt_loalpha_maxlimit class=hash-link aria-label="Direct link to dynamic_btnrt_loalpha_maxlimit" title="Direct link to dynamic_btnrt_loalpha_maxlimit" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>时域低频叠加的最⼤帧数限制值，即IIR时域叠加帧低频叠加权重的最⼤限制值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为16，</p>
+<p>值越⼤</p>
+<p>---> IIR时域叠加帧最⼤低频叠加权重越⼤，</p>
+<p>---> 时域低频叠加的最⼤帧数越⼤，</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_loAlphaHdrS_maxLimit</p>
+<p>【参数功能描述】</p>
+<p>短帧时域低频叠加的最⼤帧数限制值，即短帧低频叠加权重的最⼤限制值。</p>
+<p>HDR模式IIR时域叠加帧中，短帧融合区域由短帧和⻓帧融合⽽成，该区域的时域低频叠加的最⼤帧数限制值（loAlpha_maxLimit）调整参数也是由⻓帧（loAlpha_maxLimit）和短帧</p>
+<p>（loAlphaHdrS_maxLimit）融合⽽成。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为16，</p>
+<p>值越⼤，IIR时域叠加帧中融合短帧区域，</p>
+<p>---> 最⼤低频叠加权重越⼤，</p>
+<p>---> 时域低频叠加的最⼤帧数越⼤，</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_hiAlpha_minLimit</p>
+<p>frmAlpha_mode == btnr_hiAlphaByHi_mode时，</p>
+<p>时域⾼频叠加的最⼩帧数限制值，即IIR时域叠加帧⾼频叠加权重的最⼩限制值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0，</p>
+<p>值越⼤，</p>
+<p>---> IIR时域叠加帧最⼩⾼频叠加权重越⼤，</p>
+<p>---> 时域⾼频叠加的最⼩帧数越⼤，</p>
+<p>---> 时域降噪⾼频最⼩⼒度越⼤（即运动区⾼频时域降噪⼒度）。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_btnrt_hialphahdrs_minlimit>Dynamic<!-- -->:hw<!-- -->_btnrT_hiAlphaHdrS_minLimit<a href=#dynamic_btnrt_hialphahdrs_minlimit class=hash-link aria-label="Direct link to dynamic_btnrt_hialphahdrs_minlimit" title="Direct link to dynamic_btnrt_hialphahdrs_minlimit" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>frmAlpha_mode == btnr_hiAlphaByHi_mode时，</p>
+<p>短帧时域⾼频叠加的最⼩帧数限制值，即短帧⾼频叠加权重的最⼩限制值。</p>
+<p>HDR模式IIR时域叠加帧中，短帧融合区域由短帧和⻓帧融合⽽成，该区域的时域⾼频叠加的最⼩帧数限</p>
+<p>制值（hiAlpha_minLimit）调整参数也是由⻓帧（hiAlpha_minLimit）和短帧</p>
+<p>（hiAlphaHdrS_minLimit）融合⽽成。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0，</p>
+<p>值越⼤，IIR时域叠加帧中融合短帧区域，</p>
+<p>---> 最⼩⾼频叠加权重越⼤，</p>
+<p>---> 时域⾼频叠加的最⼩帧数越⼤，</p>
+<p>---> 时域降噪⾼频最⼩⼒度越⼤（即运动区低频时域降噪⼒度）。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_hiAlpha_maxLimit</p>
+<p>【参数功能描述】</p>
+<p>frmAlpha_mode == btnr_hiAlphaByHi_mode时，</p>
+<p>短帧时域⾼频叠加的最⼤帧数限制值，即短帧⾼频叠加权重的最⼤限制值。</p>
+<p>HDR模式IIR时域叠加帧中，短帧融合区域由短帧和⻓帧融合⽽成，该区域的时域⾼频叠加的最⼤帧数限</p>
+<p>制值（hiAlpha_maxLimit）调整参数也是由⻓帧（hiAlpha_maxLimit）和短帧</p>
+<p>（hiAlphaHdrS_maxLimit）融合⽽成</p>
+<p>【参数⽤法】：</p>
+<p>默认值为16，</p>
+<p>值越⼤，IIR时域叠加帧中融合短帧区域，</p>
+<p>---> 最⼤⾼频叠加权重越⼤，</p>
+<p>---> 时域⾼频叠加的最⼤帧数越⼤，</p>
+<p>---> 时域降噪低频最⼤⼒度越⼤（即静⽌区低频时域降噪⼒度）。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_hiAlphaHdrS_maxLimit</p>
+<p>【参数功能描述】</p>
+<p>frmAlpha_mode == btnr_hiAlphaByHi_mode时，</p>
+<p>短帧时域⾼频叠加的最⼤帧数限制值，即短帧⾼频叠加权重的最⼤限制值。</p>
+<p>HDR模式IIR时域叠加帧中，短帧融合区域由短帧和⻓帧融合⽽成，该区域的时域⾼频叠加的最⼤帧数限制值（hiAlpha_maxLimit）调整参数也是由⻓帧（hiAlpha_maxLimit）和短帧</p>
+<p>（hiAlphaHdrS_maxLimit）融合⽽成</p>
+<p>【参数⽤法】：</p>
+<p>默认值为16，</p>
+<p>值越⼤，IIR时域叠加帧中融合短帧区域，</p>
+<p>---> 最⼤⾼频叠加权重越⼤，</p>
+<p>---> 时域⾼频叠加的最⼤帧数越⼤，</p>
+<p>---> 时域降噪低频最⼤⼒度越⼤（即静⽌区低频时域降噪⼒度）。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=hw_btnrt_noisebal_mode>hw_btnrT_noiseBal_mode<a href=#hw_btnrt_noisebal_mode class=hash-link aria-label="Direct link to hw_btnrT_noiseBal_mode" title="Direct link to hw_btnrT_noiseBal_mode" translate=no>​</a></h3>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_noiseBal_mode</p>
+<p>【参数功能描述】</p>
+<p>运动区与静⽌区噪声平衡模式配置</p>
+<p>noiseBal_byHiAlpha:</p>
+<p>作为噪声平衡的⾼频噪声来源于当前帧滤波插值插值⾼频和iir帧滤波插值的⾼频按iir帧⾼频插值⽐例系数的插值结果。</p>
+<p>noiseBal_byLoAlpha：</p>
+<p>作为噪声平衡的⾼频噪声来源于当前帧滤波⾼频和iir帧的滤波⾼频按iir帧低频插值⽐例系数的插值结果。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为noiseBal_byLoAlpha。</p>
+<p>noiseBal_byHiAlpha</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_curHiOrg_alpha</p>
+<p>【参数功能描述】</p>
+<p>frmAlpha_mode == btnr_hiAlphaByHi_mode时，</p>
+<p>在与卡尔曼滤波预测⾼频进⾏加权时，空域降噪后的当前帧⾼频的加权权重。加权后的⾼频作为时域叠加的当前帧⾼频。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0,</p>
+<p>值越⼤,</p>
+<p>---> 空域降噪后的当前帧⾼频的加权权重越⼤，当前帧的⾼频细节以及噪声更多被叠加后输出。</p>
+<p>---> 静⽌区时域⾼频降噪⼒度越低。</p>
+<p>---> 运动区运动物体虚化感越弱，运动边缘更清晰。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_iirHiOrg_alpha</p>
+<p>【参数功能描述】</p>
+<p>frmAlpha_mode == btnr_hiAlphaByHi_mode时，</p>
+<p>在与卡尔曼滤波预测⾼频进⾏加权时，空域降噪后的IIR时域叠加帧⾼频的加权权重。加权后的⾼频作为时域叠加的IIR时域叠加帧⾼频。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0,</p>
+<p>值越⼤,</p>
+<p>---> 空域降噪后的IIR时域叠加帧⾼频的加权权重越⼤</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=noisebal_byloalpha>noiseBal_byLoAlpha<a href=#noisebal_byloalpha class=hash-link aria-label="Direct link to noiseBal_byLoAlpha" title="Direct link to noiseBal_byLoAlpha" translate=no>​</a></h3>
+<p>Dynamic<!-- -->:hw<!-- -->_btnrT_hiMotionNr_strg</p>
+<p>【参数功能描述】</p>
+<p>hw_btnrT_frmAlpha_mode = btnr_hiAlphaByLo_mode时，</p>
+<p>低频叠加⼒度指导时域⾼频叠加，时域叠加后的⾼频经过缩放后与低频融合作为最终的输出，该参数为⾼频倍率调整系数。</p>
+<p>该模式下，由于采⽤低频叠加⼒度指导时域⾼频叠加，frmAlpha_lo相关参数的作⽤域包含⾼频和低频。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，⾼频回填更多，时域降噪⼒度越⼩，⼀般⽤于运动区与静⽌区的⾼频过渡平滑性。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=localsgmstrg>localSgmStrg<a href=#localsgmstrg class=hash-link aria-label="Direct link to localSgmStrg" title="Direct link to localSgmStrg" translate=no>​</a></h3>
+<p>Dynamic<!-- -->:hw<!-- -->_bnrT_localSgmStrg_maxLimit</p>
+<p>【参数功能描述】</p>
+<p>局部噪声强度表征值（locSgmStrg）的最⼤限制值。</p>
+<p>由于叠加权重的不同，时域叠加后图像的局部噪声是不同的。⽣成局部噪声强度表征值（locSgmStrg）传递⾄后级使⽤。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，传递给后⾯模块的最⼤局部噪声强度表征值越⼤，后级模块例如YNR/Sharp等局部噪声强度表征值相关的局部最⼤⼒度越⼤。</p>
+<p>YNR</p>
+<p>模块说明</p>
+<p>模块约束</p>
+<ol>
+<li class="">ynr模块不⽀持模块级别的效果旁路功能</li>
+</ol>
+<p>IQ Tool、 AIQ：</p>
+<p>鉴于该约束，AIQ HWI层会采⽤ ynr.dyn.loNr_en 、ynr.dyn.hiNr_filtProc.nlmFilt_en 分别关闭模块内部的低频降噪和⾼频降噪功能来实现。</p>
+<p>IQ Tool界⾯查询 ynr.dyn.loNr_en 、ynr.dyn.hiNr_filtProc.nlmFilt_en的2个参数会是关闭状态。同时IQ Tool LOG窗⼝以及AIQ 内部都有相应的提⽰信息。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=模块框图-1>模块框图<a href=#模块框图-1 class=hash-link aria-label="Direct link to 模块框图" title="Direct link to 模块框图" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数说明-1>参数说明<a href=#参数说明-1 class=hash-link aria-label="Direct link to 参数说明" title="Direct link to 参数说明" translate=no>​</a></h3>
+<p>ynrScl_radi</p>
+<p>Static: hw_ynrCfg_opticCenter_x</p>
+<p>【参数功能描述】</p>
+<p>镜头光学中⼼在图像中的横坐标。</p>
+<p>【参数⽤法】：</p>
+<p>默认镜头光学中⼼与图像中⼼重合，即横坐标==图像宽的1/2。</p>
+<p>Static: hw_ynrCfg_opticCenter_y</p>
+<p>【参数功能描述】</p>
+<p>镜头光学中⼼在图像中的纵坐标。</p>
+<p>【参数⽤法】：</p>
+<p>默认镜头光学中⼼与图像中⼼重合，即纵坐标==图像⾼的1/2。</p>
+<p>Dynamic: hw_ynrT_radiDist2YnrScl_val</p>
+<p>【参数功能描述】</p>
+<p>径向距离的降噪⼒度倍率系数。</p>
+<p>由于镜头阴影的存在，距离镜头光学中⼼的不同距离ISP在图像上使⽤的增益往往不同导致噪声信噪⽐不同。该参数⽀持根据图像像素点的径向距离配置不同降噪⼒度。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数法-8>【参数⽤法】：<a href=#参数法-8 class=hash-link aria-label="Direct link to 【参数⽤法】：" title="Direct link to 【参数⽤法】：" translate=no>​</a></h3>
+<p>径向距离的降噪⼒度倍率系数越⼤，降噪⼒度越⼤。1.0表⽰该倍率系数为1，即径向距离对YNR⼒度没有影响。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=ynrscl_locsgmstrg>ynrScl_locSgmStrg<a href=#ynrscl_locsgmstrg class=hash-link aria-label="Direct link to ynrScl_locSgmStrg" title="Direct link to ynrScl_locSgmStrg" translate=no>​</a></h3>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_glbSgmStrg_val</p>
+<p>【参数功能描述】</p>
+<p>全局的图像噪声强度表征值（glbSgmStrg）设置参数。</p>
+<p>全局噪声强度表征值（glbSgmStrg）与前级输⼊的局部噪声强度表征值（locSgmStrg）进⾏加权作为该区域的局部噪声强度表征值（locSgmStrg）。</p>
+<p>【参数⽤法】：</p>
+<p>该参数越⼤，通过glbSgmStrg_alpha参数加权后的最终局部噪声强度值（locSgmStrg）也越⼤。</p>
+<p>局部噪声强度值（locSgmStrg）越⼤，YNR模块内部会认为噪声更⼤。从曲线</p>
+<p>（locSgmStrg2YnrScl_val）中映射得到的是更⼤局部图像噪声强度表征值（locSgmStrg）对应的YNR降噪⼒度倍率调整系数（YnrScl），进⽽影响图像的局部YNR降噪⼒度。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_ynrt_glbsgmstrg_alpha>Dynamic<!-- -->:hw<!-- -->_ynrT_glbSgmStrg_alpha<a href=#dynamic_ynrt_glbsgmstrg_alpha class=hash-link aria-label="Direct link to dynamic_ynrt_glbsgmstrg_alpha" title="Direct link to dynamic_ynrt_glbsgmstrg_alpha" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>全局噪声强度表征值加权的权重值。</p>
+<p>全局噪声强度表征值（glbSgmStrg）与前级输⼊的局部噪声强度表征值（locSgmStrg）进⾏加权作为该区域的局部噪声强度表征值（locSgmStrg）。</p>
+<p>【参数⽤法】：</p>
+<p>参数值越⼤，全局的图像噪声强度表征值权重越⼤。1.0表⽰最终的局部噪声强度值（locSgmStrg）等效于全局图像噪声强度表针值（glbSgmStrg）。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_locSgmStrg2YnrScl_val</p>
+<p>【参数功能描述】</p>
+<p>该曲线以局部图像噪声强度表征值（locSgmStrg）索引，映射得到局部YNR降噪⼒度倍率调整系数（YnrScl）。</p>
+<p>来⾃前级的局部噪声强度表征值在图像的不同区域是不同的，通过该参数等效实现不同区域的局部去噪⼒度。例如：经过btnr之后，静⽌区locSgmStrg 相对运动区域会⼩很多。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为全1. 1.0表⽰该倍率系数为1，即局部噪声强度表征值（locSgmStrg）对YNR降噪⼒度没有影响。</p>
+<p>值越⼩，</p>
+<ol>
+<li class="">
+<p>局部噪声强度表征值（locSgmStrg）导致的局部YNR降噪⼒度差异越⼩。</p>
+</li>
+<li class="">
+<p>YNR降噪⼒度越⼩</p>
+</li>
+</ol>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrC_luma2Sigma_curve</p>
+<p>【参数功能描述】</p>
+<p>ynr噪声sigma标定曲线的像素亮度索引值。</p>
+<p>【参数⽤法】：</p>
+<p>直接参考标定⼯具输出值。</p>
+<p>hw_ynrC_luma3Sigma_curve</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrC_luma3Sigma_curve</p>
+<p>【参数功能描述】</p>
+<p>ynr噪声sigma标定曲线的噪声sigma值</p>
+<p>【参数⽤法】：</p>
+<p>直接参考标定⼯具输出值。</p>
+<p>hw_ynrT_loNr_en</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_loNr_en</p>
+<p>【参数功能描述】</p>
+<p>低频降噪使能位。</p>
+<p>【参数⽤法】：</p>
+<p>默认值1</p>
+<p>1表⽰使能低频降噪。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=lonr_preproc>loNr_preProc<a href=#lonr_preproc class=hash-link aria-label="Direct link to loNr_preProc" title="Direct link to loNr_preProc" translate=no>​</a></h3>
+<p>Dynamic<!-- -->:sw<!-- -->_ynrT_preLpfCfg_mode</p>
+<p>【参数功能描述】</p>
+<p>预滤波低通滤波器的配置模式</p>
+<p>cnr_cfgByFiltStrg_mode：</p>
+<p>直接⽤滤波⼒度值控制该滤波器。</p>
+<p>cnr_cfgByFiltCoeff_mode：</p>
+<p>直接配置算⼦系数来控制该滤波器。</p>
+<p>【参数⽤法】：</p>
+<p>默认⽤cnr_cfgByFiltStrg_mode。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_preLpfSpatial_wgt</p>
+<p>【参数功能描述】</p>
+<p>当preLpfCfg_mode = ynr_cfgByFiltCoeff_mode时，通过该参数直接配置预滤波低通滤波器的算⼦系数。</p>
+<p>【参数⽤法】：</p>
+<p>4wgt[1] + 4wgt[2] + wgt[0] = 128</p>
+<p>Dynamic<!-- -->:sw<!-- -->_ynrT_preLpf_strg</p>
+<p>【参数功能描述】</p>
+<p>当sw_ynrT_preLpfCfg_mode = cnr_cfgByFiltStrg_mode时，预滤波低通滤波器的⼒度值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1.</p>
+<p>值越⼤，⾼斯算⼦越趋向于均值，⾼斯滤波⼒度越⼤。</p>
+<p>Dynamic<!-- -->:sw<!-- -->_ynrT_edgeDctConf_scale</p>
+<p>【参数功能描述】</p>
+<p>该参数为纹理表征值的放⼤倍率系数。</p>
+<p>基于预滤波输出进⾏纹理检测⽣成纹理表征值。纹理表征值越⼤表⽰该区域纹理越强。loNr会根据纹理表征值进⾏⾃适应的低频去噪⼒度调整。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为6.</p>
+<p>值越⼤，纹理保护越强，纹理区域的降噪⼒度越弱。</p>
+<p>loNr_iirGuide</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_localYnrScl_alpha</p>
+<p>【参数功能描述】</p>
+<p>ynr低频降噪时局部降噪⼒度（局部噪声强度表征值与径向距离）权重值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.3</p>
+<p>0表⽰局部去噪⼒度值失效。1表⽰完全使⽤局部降噪⼒度值。值越⼤，图像局部的降噪⼒度差异越⼤。由于运动区和静⽌区在前级的噪声强度表征值上会有明显差异，所以静⽌和运动区域的降噪⼒度的差异也越⼤。</p>
+<p>Dynamic<!-- -->:sw<!-- -->_ynrT_iirFilt_strg</p>
+<p>【参数功能描述】</p>
+<p>低频IIR滤波的⼒度系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.8。</p>
+<p>值越⼤，降噪⼒度越⼤。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_pixDiffEge_thred</p>
+<p>【参数功能描述】</p>
+<p>低频IIR滤波窗⼝内边缘区判断阈值。中⼼点与邻域点差异值⼤于该阈值被认为是边缘。低频IIR滤波在边缘区降低⼒度。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.25。</p>
+<p>值越⼤，越不容易被被判断为边缘区域点。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_centerPix_wgt</p>
+<p>【参数功能描述】</p>
+<p>低频IIR滤波时中⼼点（原图点）的权重。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.01。</p>
+<p>值越⼤，则降噪⼒度越弱。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_iirInitWgt_scale</p>
+<p>【参数功能描述】</p>
+<p>低频IIR滤波的初始权重的调整倍率系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.0625.</p>
+<p>值越⼤，降噪⼒度越弱。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_softThd_scale</p>
+<p>【参数功能描述】</p>
+<p>低频IIR滤波输出前的软阈值处理。软阈值的调整倍率系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.3</p>
+<p>1.0为1倍的内部噪声sigam值。值越⼤，越容易被判断为噪声被滤波。</p>
+<p>loNr_bifilt</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_rgeSgm_scale</p>
+<p>【参数功能描述】</p>
+<p>低频双边滤波的值域⼒度系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.5.</p>
+<p>值越⼤，降噪⼒度越⼤。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_filtSpatialV_strg</p>
+<p>【参数功能描述】</p>
+<p>低频双边滤波空域权重计算中，邻域像素与中⼼像素在垂直⽅向距离的调整倍率系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值0.0625。</p>
+<p>该值越⼤，邻域像素的空域权重越⼩。该双边滤波的最⼤滤波强度越低。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_filtSpatialH_strg</p>
+<p>【参数功能描述】</p>
+<p>低频双边滤波空域权重计算中，邻域像素与中⼼像素在垂直⽅向距离的调整倍率系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值0.0625。</p>
+<p>该值越⼤，邻域像素的空域权重越⼩。该双边滤波的最⼤滤波强度越低。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_centerPix_wgt</p>
+<p>【参数功能描述】</p>
+<p>低频双边滤波空域权重计算中，邻域像素与中⼼像素在垂直⽅向距离的调整倍率系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值0.0625。</p>
+<p>该值越⼤，邻域像素的空域权重越⼩。该双边滤波的最⼤滤波强度越低。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_bifiltOut_alpha</p>
+<p>【参数功能描述】</p>
+<p>低频双边滤波空域权重计算中，邻域像素与中⼼像素在垂直⽅向距离的调整倍率系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值0.0625。</p>
+<p>该值越⼤，邻域像素的空域权重越⼩。该双边滤波的最⼤滤波强度越低。</p>
+<p>hiNr_filtProc</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_nlmFilt_en</p>
+<p>【参数功能描述】</p>
+<p>⾼频滤波使能位。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，打开⾼频降噪。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_localYnrScl_alpha</p>
+<p>【参数功能描述】</p>
+<p>ynr⾼频降噪时局部降噪⼒度（局部噪声强度表征值与径向距离）权重值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.3</p>
+<p>0表⽰局部降噪⼒度值失效。1表⽰完全使⽤局部降噪⼒度值。值越⼤，图像局部的降噪⼒度差异越⼤。由于运动区和静⽌区在前级的噪声强度表征值上会有明显差异，所以静⽌和运动区域的降噪⼒度的差异也越⼤。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_nlmSgm_minLimit</p>
+<p>【参数功能描述】</p>
+<p>⾼频降噪使⽤的图像噪声值的最⼩阈值，该参数决定了⾼频降噪的最⼩⼒度值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.0068。</p>
+<p>值越⼤，⾼频降噪的最⼩⼒度值越⼤。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_nlmSgm_scale</p>
+<p>【参数功能描述】</p>
+<p>⾼频滤波的整体⼒度控制。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.5,</p>
+<p>值越⼤则降噪⼒度越强。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_nlmRgeWgt_negOff</p>
+<p>【参数功能描述】</p>
+<p>⾼频降噪时邻域点权重减去的偏移调整值，⽤于修正像素点差异很⼤时仍然存在权重的情况。</p>
+<p>【参数⽤法】：</p>
+<p>默认值0.01。</p>
+<p>值越⼤，则降噪⼒度越弱。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_centerPix_wgt</p>
+<p>【参数功能描述】</p>
+<p>⾼频降噪时的中⼼点权重（原图点）。</p>
+<p>【参数⽤法】：</p>
+<p>默认值1，</p>
+<p>值越⼤，则降噪⼒度越弱。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_nlmSpatial_wgt</p>
+<p>【参数功能描述】</p>
+<p>⾼频降噪的空域权重系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为{7,6,3,6,5,3}。</p>
+<p>hiNr_alphaProc</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_nlmOut_alpha</p>
+<p>【参数功能描述】</p>
+<p>通过⾼频降噪前后数据的加权进⾏细节的回填，该参数为降噪后数据的权重。</p>
+<p>【参数⽤法】：</p>
+<p>默认值0.5，</p>
+<p>值越⼤，滤波后数据的权重越⼤，细节被回填的越少，同时噪声也会同步被回填。但是由于回填的是滤波前原始的数据，所以被回填最⼤的噪声是原始噪声。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_edgAlphaUp_thred</p>
+<p>【参数功能描述】</p>
+<p>⾼频降噪的细节回处理过程中，该阈值⽤于判断是否为强边缘区域。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为2。</p>
+<p>值越⼤，越不容易被判断为强边缘区域。强边缘区域置信度越⾼，回填的细节和噪声越少。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_ynrT_locSgmStrgAlphaUp_thred</p>
+<p>【参数功能描述】</p>
+<p>局部噪声强度表征值越⼤的区域，噪声越⼤，回填的更多的属于噪声。⾼频降噪的细节回处理过程中，局部噪声强度表征值⼤于该阈值的区域，回填的细节和噪声降低。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.3。</p>
+<p>值越⼤，越难进⼊该降低回填⼒度的机制中。⼀般⽤于控制运动区域噪声回填的控制。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=调试步骤>调试步骤<a href=#调试步骤 class=hash-link aria-label="Direct link to 调试步骤" title="Direct link to 调试步骤" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=cnr>CNR<a href=#cnr class=hash-link aria-label="Direct link to CNR" title="Direct link to CNR" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=模块说明>模块说明<a href=#模块说明 class=hash-link aria-label="Direct link to 模块说明" title="Direct link to 模块说明" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=模块约束>模块约束<a href=#模块约束 class=hash-link aria-label="Direct link to 模块约束" title="Direct link to 模块约束" translate=no>​</a></h3>
+<ol>
+<li class="">cnr模块不⽀持模块级别的效果旁路功能</li>
+</ol>
+<p>IQ Tool、 AIQ：</p>
+<p>鉴于该约束，建议⽤⼾采⽤ cnr.hiNr_bifilt.bifiltOut_alpha 参数设置为0来实现该功能。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=模块框图-2>模块框图<a href=#模块框图-2 class=hash-link aria-label="Direct link to 模块框图" title="Direct link to 模块框图" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数说明-2>参数说明<a href=#参数说明-2 class=hash-link aria-label="Direct link to 参数说明" title="Direct link to 参数说明" translate=no>​</a></h3>
+<p>localSgmStrg</p>
+<p>Dynamic: hw_cnrT_glbSgmStrg_val</p>
+<p>【参数功能描述】</p>
+<p>全局的图像噪声强度表征值。图像噪声强度表征值越⼤，表⽰噪声也越⼤。</p>
+<p>【参数⽤法】：</p>
+<p>图像噪声强度表征值越⼤，CNR内部的去噪⼒度越⼤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic-hw_cnrt_glbsgmstrg_alpha>Dynamic: hw_cnrT_glbSgmStrg_alpha<a href=#dynamic-hw_cnrt_glbsgmstrg_alpha class=hash-link aria-label="Direct link to Dynamic: hw_cnrT_glbSgmStrg_alpha" title="Direct link to Dynamic: hw_cnrT_glbSgmStrg_alpha" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>全局噪声强度表征值加权的权重值。</p>
+<p>全局噪声强度表征值与前级输⼊的局部噪声强度表征值进⾏加权作为该区域的局部噪声强度表征值。</p>
+<p>【参数⽤法】：</p>
+<p>参数值越⼤，全局的图像噪声强度表征值权重越⼤。1.0表⽰最终的局部噪声强度值等效于全局图像噪声强度表针值。</p>
+<p>Dynamic: hw_cnrT_localSgmStrg_scale</p>
+<p>【参数功能描述】</p>
+<p>对前级输⼊的局部噪声强度表征值进⾏调整的倍率系数。</p>
+<p>【参数⽤法】：</p>
+<p>1.0表⽰保持前级输⼊噪声强度表征值不变。>1.0 表⽰局部噪声强度表征值变⼤。</p>
+<p>loNr_preProc</p>
+<p>Dynamic: hw_cnrT_ds_mode</p>
+<p>【参数功能描述】</p>
+<p>低频缩略图的下采样⽐例选择。</p>
+<p>cnr_ds_4x4_mode：4x4的下采样。</p>
+<p>cnr_ds_8x4_mode ：8x4的下采样。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为cnr_ds_4x4_mode。</p>
+<p>下采样⽐率越⼤，缩略图越低频，⾊噪降噪更低频，边缘颜⾊会溢出程度越⼤。</p>
+<p>Dynamic: hw_cnrT_uvEdg_strg</p>
+<p>【参数功能描述】</p>
+<p>缩略图滤波，邻域像素与中⼼像素差异值计算中UV通道的占⽐。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.333。</p>
+<p>值越⼤，UV通道差异在计算像素差异值的权重越⼤，对于颜⾊边缘的保护更强。</p>
+<p>loNr_bifilt</p>
+<p>Dynamic: hw_cnrT_ds_mode</p>
+<p>【参数功能描述】</p>
+<p>低频缩略图双边滤波器空域权重系数的配置模式</p>
+<p>cnr_cfgByFiltStrg_mode：</p>
+<p>直接⽤滤波⼒度值控制该滤波器空域权重系数。</p>
+<p>cnr_cfgByFiltCoeff_mode：</p>
+<p>直接配置空域权重系数来控制该滤波器。</p>
+<p>【参数⽤法】：</p>
+<p>默认⽤cnr_cfgByFiltStrg_mode。</p>
+<p>Dynamic: sw_cnrT_filtSpatial_strg</p>
+<p>【参数功能描述】</p>
+<p>当filtCfg_mode = cnr_cfgByFiltStrg_mode时，低频缩略图双边滤波器的⼒度值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，双边空域权重越⼤，即该双边滤波器的最⼤滤波强度越⼤。</p>
+<p>Dynamic: hw_cnrT_filtSpatial_wgt</p>
+<p>【参数功能描述】</p>
+<p>当filtCfg_mode = cnr_cfgByFiltCoeff_mode时，通过该参数直接配置低频缩略图双边滤波器空域权重系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为[1,1,1,1].</p>
+<p>Dynamic: sw_cnrT_rgeSgm_val</p>
+<p>【参数功能描述】</p>
+<p>低频缩略图双边滤波的值域⼒度。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.00333，</p>
+<p>值越⼤，双边值域权重越⼤，降噪⼒度越⼤。</p>
+<p>Dynamic: hw_cnrT_bifiltOut_alpha</p>
+<p>【参数功能描述】</p>
+<p>通过低频缩略图双边降噪前后数据的加权进⾏细节的回填，该参数为降噪后数据的权重</p>
+<p>【参数⽤法】：</p>
+<p>默认值1.0，</p>
+<p>值越⼤，滤波后数据的权重越⼤，细节被回填的越少，同时噪声也会同步被回填。但是由于回填的是滤波前原始的数据，所以被回填最⼤的噪声是原始噪声。</p>
+<p>loNr_iirFilt</p>
+<p>Dynamic: hw_cnrT_filtSpatial_wgt</p>
+<p>【参数功能描述】</p>
+<p>低频缩略图IIR滤波的空域权重系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为[1,1,1]</p>
+<p>Dynamic<!-- -->:sw<!-- -->_cnrT_rgeSgm_val</p>
+<p>【参数功能描述】</p>
+<p>低频缩略图IIR滤波值域噪声sigma。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.0078，</p>
+<p>值越⼤，降噪⼒度越⼤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic-sw_cnrt_rgesgmratio_mode>Dynamic: sw_cnrT_rgeSgmRatio_mode<a href=#dynamic-sw_cnrt_rgesgmratio_mode class=hash-link aria-label="Direct link to Dynamic: sw_cnrT_rgeSgmRatio_mode" title="Direct link to Dynamic: sw_cnrT_rgeSgmRatio_mode" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>低频缩略图IIR滤波值域sigma，可以通过sigma⽐率⼒度调整参数来调整sima值来控制该滤波器的降噪⼒度。⽐率⼒度调整⽀持全局和局部调整，可以通过以下模式进⾏选择：</p>
+<p>cnr_glbSgmRat_only_mode：仅⽤全局⽐率⼒度调整模式。</p>
+<p>cnr_glbSgmRat_locSgmStrgMix_mode：全局和局部全局⽐率⼒度调整混合加权模式。</p>
+<p>cnr_locSgmStrg2SgmRat_only_mode：仅⽤局部⽐率⼒度调整。</p>
+<p>【参数⽤法】：</p>
+<p>默认值cnr_locSgmStrg2SgmRat_only_mode。</p>
+<p>Dynamic: hw_cnrT_glbSgm_ratio</p>
+<p>【参数功能描述】</p>
+<p>低频缩略图IIR滤波值域sigma全局⽐率⼒度调整参数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，低频缩略图IIR滤波值域噪声sigma越⼩，去噪⼒度越⼩。</p>
+<p>Dynamic: hw_cnrT_glbSgmRatio_alpha</p>
+<p>【参数功能描述】</p>
+<p>低频缩略图IIR滤波值域sigma全局⽐率⼒度调整(glbSgm_ratio)与局部⽐率⼒度调整(localSgmStrg)的加 权，此参数为全局⽐率⼒度调整的权重。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0，0表⽰完全由全局⽐率⼒度调整参数决定。</p>
+<p>值越⼤，全局⽐率⼒度调整权重越⼤，局部⽐率⼒度调整权重越⼩，图像的局部降噪⼒度差异越⼩，例如：运动区域和⾮运动区域噪声差值越⼩。</p>
+<p>Dynamic: hw_cnrT_sgm2NhoodWgt_slope</p>
+<p>【参数功能描述】</p>
+<p>低频缩略图IIR滤波值域权重计算的指数曲线斜率。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，值域sigma转换的邻域值域权重越⼤，降噪⼒度变弱。</p>
+<p>Dynamic: hw_cnrT_nhoodWgtZero_thred</p>
+<p>【参数功能描述】</p>
+<p>低频缩略图IIR滤波邻域权重截⽌的阈值，限制滤波器的最低频段，达到抑制拖影阈值的效果。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.0313，</p>
+<p>值越⼤，限制滤波器的最低频段越⼤，⾊度拖影越⼩。</p>
+<p>Dynamic: hw_cnrT_iirFiltStrg_maxLimit</p>
+<p>【参数功能描述】</p>
+<p>低频缩略图IIR滤波IIR反馈权重最⼤值限制。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，最⼤滤波⼒度越⼤。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=hinr_prelpf>hiNr_preLpf<a href=#hinr_prelpf class=hash-link aria-label="Direct link to hiNr_preLpf" title="Direct link to hiNr_preLpf" translate=no>​</a></h3>
+<p>Dynamic: sw_cnrT_filtCfg_mode</p>
+<p>【参数功能描述】</p>
+<p>⾼频降噪的预低通滤波器空域权重系数的配置模式。</p>
+<p>cnr_cfgByFiltStrg_mode：</p>
+<p>直接⽤滤波⼒度值控制该滤波器空域权重系数。</p>
+<p>cnr_cfgByFiltCoeff_mode：</p>
+<p>直接配置空域权重系数来控制该滤波器。</p>
+<p>【参数⽤法】：</p>
+<p>默认⽤cnr_cfgByFiltStrg_mode。</p>
+<p>Dynamic: sw_cnrT_filtSpatial_strg</p>
+<p>【参数功能描述】</p>
+<p>当filtCfg_mode = cnr_cfgByFiltStrg_mode时，⾼频降噪的预低通滤波器的⼒度值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，双边空域权重越⼤，降噪⼒度越⼤。</p>
+<p>Dynamic: hw_cnrT_filtSpatial_wgt</p>
+<p>【参数功能描述】</p>
+<p>当filtCfg_mode = cnr_cfgByFiltCoeff_mode时，通过该参数直接配置⾼频降噪的预低通滤波器的空域权重系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为[0.1758, 0.1094, 0.0234, 0.1094, 0.0664, 0.0156]</p>
+<p>Dynamic: hw_cnrT_lpfOut_alpha</p>
+<p>【参数功能描述】</p>
+<p>通过⾼频降噪预低通滤波降噪前后数据的加权进⾏细节的回填，该参数为降噪后数据的权重</p>
+<p>【参数⽤法】：</p>
+<p>默认值1.0，</p>
+<p>值越⼤，滤波后数据的权重越⼤，细节被回填的越少，同时噪声也会同步被回填。但是由于回填的是滤波前原始的数据，所以被回填最⼤的噪声是原始噪声。</p>
+<p>hw_cnrC_luma2HiNrSgm_curve</p>
+<p>Dynamic: hw_cnrC_luma2HiNrSgm_curve</p>
+<p>【参数功能描述】</p>
+<p>cnr⾼频噪声sigma标定曲线的像素亮度索引值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为：[0,64,128,256,384,640,896,1024]。</p>
+<p>直接参考标定⼯具输出值。</p>
+<p>Dynamic: hw_cnrC_luma2HiNrSgm_curve</p>
+<p>【参数功能描述】</p>
+<p>⾼频噪声sigma标定曲线的噪声sigma值</p>
+<p>【参数⽤法】：</p>
+<p>默认值全为0.03。</p>
+<p>直接参考标定⼯具输出值。</p>
+<p>hiNr_bifilt</p>
+<p>Dynamic: hw_cnrT_uvEdg_strg</p>
+<p>【参数功能描述】</p>
+<p>⾼频双边滤波，邻域像素与中⼼像素差异值计算中UV通道的占⽐。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为3，</p>
+<p>值越⼤，UV通道差异在计算像素差异值的权重越⼤，对于颜⾊边缘的保护更强。</p>
+<p>Dynamic: hw_cnrT_filtWgtZero_mode</p>
+<p>【参数功能描述】</p>
+<p>⾼频双边滤波的权重为0时，使⽤不同源作为此点滤波输出。</p>
+<p>cnr_wgtIsZero_preLpfOut_mode：使⽤⾼斯预滤波结果输出。</p>
+<p>cnr_wgtIsZero_orgOut_mode：使⽤原始图像点输出。</p>
+<p>【参数⽤法】：</p>
+<p>默认选cnr_wgtIsZero_preLpfOut_mode。</p>
+<p>Dynamic: hw_cnrT_locSgmStrg2SgmRat_val</p>
+<p>【参数功能描述】</p>
+<p>该曲线以局部图像噪声强度表征值（locSgmStrg）索引，映射得到局部⾼频降噪双边滤波器的值域sigma⽐率⼒度调整参数（locSgmStrgSgmRat）。</p>
+<p>来⾃前级的局部噪声强度表征值在图像的不同区域是不同的，例如：经过btnr之后，静⽌区locSgmStrg相对运动区域会⼩很多。通过该不同的局部噪声强度表征值映射得到的不同的值域sigma⽐率⼒度调整参数（locSgmStrgSgmRat），等效实现不同区域的局部去噪⼒度。</p>
+<p>【参数⽤法】：</p>
+<p>默认值[1, 0.8, 0.65, 0.5, 0.25, 0.25, 0.25, 0.25, 0.25, 0.125, 0.0625, 0.02, 0.02]。</p>
+<p>值越⼩，</p>
+<ol>
+<li class="">
+<p>局部噪声强度表征值（locSgmStrg）导致的局部降噪⼒度差异越⼩。</p>
+</li>
+<li class="">
+<p>降噪⼒度越⼩</p>
+</li>
+</ol>
+<p>Dynamic: hw_cnrT_locSgmStrg2CtrWgt_scale</p>
+<p>【参数功能描述】</p>
+<p>该曲线以局部图像噪声强度表征值（locSgmStrg）索引，映射得到⾼频降噪双边滤波器的滤波中⼼点权重的倍率调整参数（centerWgt）。</p>
+<p>来⾃前级的局部噪声强度表征值在图像的不同区域是不同的，例如：经过btnr之后，静⽌区locSgmStrg相对运动区域会⼩很多。通过该不同的局部噪声强度表征值映射得到的不同的中⼼点权重，等效实现不同区域的局部去噪⼒度。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为[1, 0.8, 0.6, 0.4, 0.4, 0, 0, 0, 0, 0, 0, 0, 0]。1.0表⽰不做调整。</p>
+<p>值越⼩，当前点权重越⼩，降噪⼒度越⼤。</p>
+<p>Dynamic: hw_cnrT_centerPix_wgt</p>
+<p>【参数功能描述】</p>
+<p>⾼频降噪双边滤波器的滤波中⼼点权重。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为[1, 0.8, 0.6, 0.4, 0.4, 0, 0, 0, 0, 0, 0, 0, 0]。</p>
+<p>值越⼩，当前点权重越⼩，降噪⼒度越⼤。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_cnrT_nhoodWgt_minLimit</p>
+<p>【参数功能描述】</p>
+<p>⾼频降噪双边滤波的权重的最⼩值限制，保证平坦区有⼀定的去噪⼒度。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0，</p>
+<p>值越⼤，⾼频降噪双边滤波的最⼩⼒度值越⼤。</p>
+<p>Dynamic: hw_cnrT_satAdj_negOff</p>
+<p>【参数功能描述】</p>
+<p>⾊彩饱和度回填阈值的负向偏置参数，降噪后⾊彩饱和度损失⼤于阈值的部分进⾏饱和度回填。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0。</p>
+<p>值越⼩，降噪后饱和度损失越⼩的区域也能够被回填饱和度。</p>
+<p>Dynamic: hw_cnrT_satAdj_scale</p>
+<p>【参数功能描述】</p>
+<p>⾊彩饱和度回填⼒度的⼤⼩。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0，</p>
+<p>值越⼤，⾊彩饱和度回填⼒度越⼤。</p>
+<p>Dynamic: hw_cnrT_bifiltOut_alpha</p>
+<p>【参数功能描述】</p>
+<p>通过⾼频双边降噪前后数据的加权进⾏细节的回填，该参数为降噪后数据的权重</p>
+<p>【参数⽤法】：</p>
+<p>默认值1.0，</p>
+<p>值越⼤，滤波后数据的权重越⼤，细节被回填的越少，同时噪声也会同步被回填。但是由于回填的是滤波前原始的数据，所以被回填最⼤的噪声是原始噪声。</p>
+<p>调试步骤</p>
+<p>SHARP</p>
+<p>模块说明</p>
+<p>⽆</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=模块框图-3>模块框图<a href=#模块框图-3 class=hash-link aria-label="Direct link to 模块框图" title="Direct link to 模块框图" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数说明-3>参数说明<a href=#参数说明-3 class=hash-link aria-label="Direct link to 参数说明" title="Direct link to 参数说明" translate=no>​</a></h3>
+<p>shpScl_radiDist</p>
+<p>Static: hw_sharpCfg_opticCenter_x</p>
+<p>【参数功能描述】</p>
+<p>镜头光学中⼼在图像中的横坐标。</p>
+<p>【参数⽤法】：</p>
+<p>默认镜头光学中⼼与图像中⼼重合，即横坐标==图像宽的1/2。</p>
+<p>Static: hw_sharpCfg_opticCenter_y</p>
+<p>【参数功能描述】</p>
+<p>镜头光学中⼼在图像中的纵坐标。</p>
+<p>【参数⽤法】：</p>
+<p>默认镜头光学中⼼与图像中⼼重合，即纵坐标==图像⾼的1/2。</p>
+<p>hfExtra_sgmEnv</p>
+<p>Dynamic: sw_sharpC_luma2Sigma_curve</p>
+<p>【参数功能描述】</p>
+<p>镜头光学中⼼在图像中的横坐标。</p>
+<p>【参数⽤法】：</p>
+<p>默认镜头光学中⼼与图像中⼼重合，即横坐标==图像宽的1/2。</p>
+<p>hfExtra_preBifilt</p>
+<p>Dynamic: sw_sharpT_filtCfg_mode</p>
+<p>【参数功能描述】</p>
+<p>⾼频提取的双边预滤波空域权重系数的配置模式。通过该双边预滤波器和⾼频提取的低通滤波器</p>
+<p>（hfExtra_lpf）的输出提取待锐化的⾼频细节信息（hf）。</p>
+<p>sharp_cfgByFiltStrg_mode：</p>
+<p>直接⽤滤波⼒度值⽣成该滤波器的空域权重系数。</p>
+<p>sharp_cfgByFiltCoeff_mode：</p>
+<p>直接配置该滤波器的空域权重系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认⽤sharp_cfgByFiltStrg_mode。</p>
+<p>Dynamic: sw_sharpT_filtSpatial_strg</p>
+<p>【参数功能描述】</p>
+<p>当filtCfg_mode = sharp_cfgByFiltStrg_mode时，⾼频双边预滤波空域⼒度值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，⾼频双边预滤波空域滤波强度越⼤。即该双边滤波器的最⼤滤波强度越⼤。</p>
+<p>Dynamic: hw_sharpT_filtSpatial_wgt[3]</p>
+<p>【参数功能描述】</p>
+<p>当filtCfg_mode = sharp_cfgByFiltCoeff_mode时，⾼频双边预滤波空域权重系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为[0.2042, 0.1238, 0.0751]。</p>
+<p>Dynamic: sw_sharpT_rgeSgm_scale</p>
+<p>【参数功能描述】</p>
+<p>⾼频双边预滤波的值域sigma的倍率调整系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，⾼频双边预滤波的值域权重越⼤，保边效果越低，降噪⼒度越接近空域权重确定的最⼤滤波强度。</p>
+<p>被提取的待锐化的⾼频信息的⾼频细节越少。</p>
+<p>Dynamic: sw_sharpT_rgeSgm_offset</p>
+<p>【参数功能描述】</p>
+<p>⾼频双边预滤波的值域值域sigma的正向偏置调整参数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0，</p>
+<p>值越⼤，⾼频双边预滤波的值域权重越⼤，降噪⼒度越⼤。</p>
+<p>⼀般在值域sigma较⼩区域⼒度不⾜的时候，通过调整正向偏移值来进⾏单独调整，相对于调整sigma_scale参数减少对sigma较⼤区域的影响。</p>
+<p>Dynamic: hw_sharpT_bifiltOut_alpha</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-11>【参数功能描述】<a href=#参数功能描述-11 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>通过⾼频双边预滤波前后数据的加权进⾏细节的回填，该参数为双边预滤波后数据的权重。</p>
+<p>通过该双边预滤波器和⾼频提取的低通滤波器(hfExtra_lpf)的输出提取待锐化的⾼频信息hf。该滤波器影响待锐化⾼频细节的频段上限，即多⾼频的细节能够被锐化。</p>
+<p>该滤波器侧重于在于将⾼频噪声从⾼频细节中滤除。</p>
+<p>【参数⽤法】：</p>
+<p>默认值0.5，</p>
+<p>值越⼤，滤波后数据的加权权重越⼤，滤波强度越⼤。待锐化的⾼频细节越少。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=hfextra_lpf>hfExtra_lpf<a href=#hfextra_lpf class=hash-link aria-label="Direct link to hfExtra_lpf" title="Direct link to hfExtra_lpf" translate=no>​</a></h3>
+<p>Dynamic: sw_sharpT_filtCfg_mode</p>
+<p>【参数功能描述】</p>
+<p>⾼频提取的低通滤波器的配置模式。通过该低通滤波器和双边预滤波器（hfExtra_preBifilt）的输出提取待锐化的⾼频边缘信息（hf）。</p>
+<p>sharp_cfgByFiltStrg_mode：</p>
+<p>直接⽤滤波⼒度值控制该滤波器。</p>
+<p>sharp_cfgByFiltCoeff_mode：</p>
+<p>直接配置算⼦系数来控制该滤波器。</p>
+<p>【参数⽤法】：</p>
+<p>默认选择sharp_cfgByFiltStrg_mode。</p>
+<p>Dynamic<!-- -->:sw<!-- -->_sharpT_hfHi_strg</p>
+<p>【参数功能描述】</p>
+<p>filtCfg_mode==sharp_cfgByFiltStrg_mode时，低通滤波器的⼒度参数。该低通滤波器与双边预滤波器（hfExtra_preBifilt）配合提取待锐化⾼频信息中相对⾼频的部分（hfHi）。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为2，</p>
+<p>值越⼤，该低通滤波算⼦⼒度越⼤，对应提取的待锐化⾼频越强越多。</p>
+<p>Dynamic<!-- -->:sw<!-- -->_sharpT_hfMid_strg</p>
+<p>【参数功能描述】</p>
+<p>filtCfg_mode==sharp_cfgByFiltStrg_mode时，低通滤波器的⼒度参数。该低通滤波器与双边预滤波器（hfExtra_preBifilt）配合提取待锐化⾼频信息中相对⾼频的部分（hfMid）。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，该低通滤波算⼦⼒度越⼤，对应提取到的待锐化中⾼频越强越多。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_lpf_wgt</p>
+<p>【参数功能描述】</p>
+<p>filtCfg_mode==sharp_cfgByFiltCoeff_mode时，低通滤波器的算⼦系数</p>
+<p>【参数⽤法】：</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_lpfOut_alpha</p>
+<p>【参数功能描述】</p>
+<p>通过低通滤波前后数据的加权进⾏细节的回填，该参数为低通滤波后数据的权重。</p>
+<p>细节回填后的输出作为后级⾼频双边滤波器(hfExtra_hfBifilt)的导向图。</p>
+<p>【参数⽤法】：</p>
+<p>默认值0.5，</p>
+<p>值越⼤，低通滤波结果的权重越⼤，导向图降噪⼒度越⼤，进⽽影响⾼频双边滤波(hfExtra_hfBifilt)的边缘细节平滑度。对于⾼频边缘的⽑刺建议优先适当增加该滤波器的⼒度来获取更平滑的导向图。</p>
+<p>hfExtra_hfBifilt</p>
+<p>Dynamic<!-- -->:sw<!-- -->_sharpT_filtCfg_mode</p>
+<p>【参数功能描述】</p>
+<p>通过低通滤波前后数据的加权进⾏细节的回填，该参数为低通滤波后数据的权重。</p>
+<p>细节回填后的输出作为后级⾼频双边滤波器(hfExtra_hfBifilt)的导向图。</p>
+<p>【参数⽤法】：</p>
+<p>默认值0.5，</p>
+<p>值越⼤，低通滤波结果的权重越⼤，导向图降噪⼒度越⼤，进⽽影响⾼频双边滤波(hfExtra_hfBifilt)的边缘细节平滑度。对于⾼频边缘的⽑刺建议优先适当增加该滤波器的⼒度来获取更平滑的导向图。</p>
+<p>Dynamic<!-- -->:sw<!-- -->_sharpT_filtSpatial_strg</p>
+<p>【参数功能描述】</p>
+<p>当filtCfg_mode = sharp_cfgByFiltStrg_mode时，⾼频双边滤波空域⼒度值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，⾼频双边滤波空域滤波强度越⼤。即该双边滤波器的最⼤滤波强度越⼤。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_filtSpatial_wgt</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-12>【参数功能描述】<a href=#参数功能描述-12 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>当filtCfg_mode = sharp_cfgByFiltCoeff_mode时，⾼频双边滤波空域权重系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为：[0.2042, 0.1238, 0.0751]。</p>
+<p>Dynamic<!-- -->:sw<!-- -->_sharpT_rgeSgm_scale</p>
+<p>【参数功能描述】</p>
+<p>待锐化的⾼频细节信息hf的双边滤波对应的值域sigma的倍率调整参数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，降噪⼒度越⼤，⾼频细节损失越多。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_sharpt_rgesgm_offset>Dynamic<!-- -->:sw<!-- -->_sharpT_rgeSgm_offset<a href=#dynamic_sharpt_rgesgm_offset class=hash-link aria-label="Direct link to dynamic_sharpt_rgesgm_offset" title="Direct link to dynamic_sharpt_rgesgm_offset" translate=no>​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-13>【参数功能描述】<a href=#参数功能描述-13 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>待锐化的⾼频细节信息hf的双边滤波的值域sigma的正向偏置参数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0，</p>
+<p>值越⼤，⾼频双边滤波的值域权重越⼤，降噪⼒度越⼤。</p>
+<p>⼀般在值域sigma较⼩区域⼒度不⾜的时候，通过调整正向偏移值来进⾏单独调整，相对于调整sigma_scale参数减少对sigma较⼤区域的影响。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_sharpt_bifiltout_alpha>Dynamic<!-- -->:hw<!-- -->_sharpT_biFiltOut_alpha<a href=#dynamic_sharpt_bifiltout_alpha class=hash-link aria-label="Direct link to dynamic_sharpt_bifiltout_alpha" title="Direct link to dynamic_sharpt_bifiltout_alpha" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>待锐化的⾼频细节信息hf的双边滤波前后数据进⾏加权，此参数为双边滤波输出的权重⼤⼩。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0.5，</p>
+<p>值越⼤，双边滤波输出的权重越⼤，⾼频细节损失越多。⾼频细节低通滤波器(hfExtra_lpf)的输出是该双边滤波器的导向图，对于⾼频边缘的⽑刺建议：</p>
+<ol>
+<li class="">
+<p>适当增加(hfExtra_lpf)低通的⼒度使得导向图更加平滑。</p>
+</li>
+<li class="">
+<p>然后在适当增加该双边滤波的⼒度。</p>
+</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=shpscl_hf>shpScl_hf<a href=#shpscl_hf class=hash-link aria-label="Direct link to shpScl_hf" title="Direct link to shpScl_hf" translate=no>​</a></h3>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_luma2hfScl_val</p>
+<p>【参数功能描述】</p>
+<p>以像素亮度索引，映射不同⾼频细节信息hf的倍率调整系数。该曲线与hf2ShpScl_val曲线联动可以调整不同亮度区域的⾼频细节hf的锐化⼒度。</p>
+<p>【参数⽤法】：</p>
+<p>默认值全为1024，</p>
+<p>值越⼤，⾼频细节信息hf的倍率调整系数越⼤，经过该调整系数作⽤的hf作为hf2ShpScl_val曲线的索引值，进⼀步映射得到局部锐化⼒度倍率调整系数。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_hf2ShpScl_val</p>
+<p>【参数功能描述】</p>
+<p>该曲线以⾼频细节信息hf索引，映射得到局部锐化⼒度倍率调整系数。</p>
+<p>该曲线与luma2hfScl曲线联动可以调整不同亮度区域的⾼频细节hf的锐化⼒度。⼀般⽤于降低的噪声被锐化加强的影响，需要在弱纹理锐化和噪声被锐化加强上做平衡。</p>
+<p>【参数⽤法】：</p>
+<p>默认值全为1.0，</p>
+<p>值越⼤，⾼频细节信息hf的局部锐化⼒度倍率调整系数越⼤，⾼频细节信息hf锐化越强。</p>
+<p>注意该曲线建议设置成单调平滑递增，避免变化过于剧烈导致图像局部锐化的不均匀性。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=shpscl_locsgmstrg>shpScl_locSgmStrg<a href=#shpscl_locsgmstrg class=hash-link aria-label="Direct link to shpScl_locSgmStrg" title="Direct link to shpScl_locSgmStrg" translate=no>​</a></h3>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_locSgmStrg_mode</p>
+<p>【参数功能描述】</p>
+<p>YNR内部局部噪声强度表征值（locSgmStrg）⽣成模式的配置</p>
+<p>sharp_locGlbSgmStrgMix_mode：</p>
+<p>设置的全局噪声强度表征值与前级输⼊的局部噪声强度表征值加权混合模式。</p>
+<p>sharp_glbSgmStrgOnly_mode：</p>
+<p>仅来源于设置的全局噪声强度表征值。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为sharp_locGlbSgmStrgMix_mode。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_glbSgmStrg_val</p>
+<p>【参数功能描述】</p>
+<p>全局的图像噪声强度表征值（glbSgmStrg）设置参数。</p>
+<p>全局噪声强度表征值（glbSgmStrg）与前级输⼊的局部噪声强度表征值（locSgmStrg）进⾏加权作为该区域的局部噪声强度表征值（locSgmStrg）。</p>
+<p>【参数⽤法】：</p>
+<p>该参数越⼤，通过glbSgmStrg_alpha参数加权后的最终局部噪声强度值（locSgmStrg）也越⼤。</p>
+<p>局部噪声强度值（locSgmStrg）越⼤，锐化模块内部会认为噪声更⼤。从曲线</p>
+<p>（locSgmStrg2ShpScl_val）中映射得到的是更⼤局部图像噪声强度表征值（locSgmStrg）对应的锐化⼒度倍率调整系数（ShpScl），进⽽影响图像的局部锐化⼒度。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_glbSgmStrg_alpha</p>
+<p>【参数功能描述】</p>
+<p>全局噪声强度表征值加权的权重值。</p>
+<p>全局噪声强度表征值（glbSgmStrg）与前级输⼊的局部噪声强度表征值（locSgmStrg）进⾏加权作为该区域的局部噪声强度表征值（locSgmStrg）。</p>
+<p>【参数⽤法】：</p>
+<p>参数值越⼤，全局的图像噪声强度表征值权重越⼤。1.0表⽰最终的局部噪声强度值（locSgmStrg）等效于全局图像噪声强度表针值（glbSgmStrg）。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_sharpt_locsgmstrg_scale>Dynamic<!-- -->:hw<!-- -->_sharpT_locSgmStrg_scale<a href=#dynamic_sharpt_locsgmstrg_scale class=hash-link aria-label="Direct link to dynamic_sharpt_locsgmstrg_scale" title="Direct link to dynamic_sharpt_locsgmstrg_scale" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>来⾃前级的局部噪声强度表征值（locSgmStrg）对应的倍率调整系数。</p>
+<p>来⾃前级的局部噪声强度表征值在图像的不同区域是不同的，通过该参数等效实现不同区域的局部去噪⼒度。例如：经过btnr之后，静⽌区locSgmStrg 相对运动区域会⼩很多。</p>
+<p>【参数⽤法】：</p>
+<p>该倍率系数越⼤，</p>
+<ol>
+<li class="">
+<p>局部噪声强度表征值的局部差异越⼤，进⽽影响的局部锐化⼒度差异越⼤。</p>
+</li>
+<li class="">
+<p>同时局部噪声强度表征值也越⼤。</p>
+</li>
+</ol>
+<p>锐化模块内部会认为噪声更⼤。从曲线（locSgmStrg2ShpScl_val）中映射得到的是更⼤局部图像噪声强度表征值（locSgmStrg）对应的锐化⼒度倍率调整系数（ShpScl），进⽽影响图像的局部锐化⼒度。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=shpscl_textdetect>shpScl_textDetect<a href=#shpscl_textdetect class=hash-link aria-label="Direct link to shpScl_textDetect" title="Direct link to shpScl_textDetect" translate=no>​</a></h3>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_estNsFilt_mode</p>
+<p>【参数功能描述】</p>
+<p>预估噪声的计算模式配置</p>
+<p>sharp_allFilt_mode：</p>
+<p>预估窗⼝内所有点参与计算</p>
+<p>sharp_nhoodFiltOnly_mode：</p>
+<p>滤波窗⼝内邻域点参与，当前中⼼像素点不参与。</p>
+<p>【参数⽤法】：</p>
+<p>默认选择sharp_allFilt_mode。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_estNsClip_mode</p>
+<p>【参数功能描述】</p>
+<p>预估噪声的限制阈值的⽣成⽅式。</p>
+<p>sharp_preNsSgmStats_mode：</p>
+<p>基于硬件前⼀帧数据的全局统计值。</p>
+<p>sharp_setManual_mode：</p>
+<p>通过estNsManual_maxLimit参数配置其阈值</p>
+<p>【参数⽤法】：</p>
+<p>默认选择sharp_setManual_mode。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_estNsManual_maxLimit</p>
+<p>【参数功能描述】</p>
+<p>estNsClip_mode == sharp_setManual_mode时，预估噪声的最⼤限制阈值参数。</p>
+<p>预估纹理=带噪纹理-预估噪声。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0。</p>
+<p>值越⼤，最⼤预估噪声越⼤，最⼩预估纹理越⼩，纹理检测导致的局部锐化⼒度的倍率系数最⼩值越⼩。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_estNs_scale</p>
+<p>【参数功能描述】</p>
+<p>预估噪声的强度倍率调整系数。</p>
+<p>预估纹理=带噪纹理-预估噪声。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为1，</p>
+<p>值越⼤，预估噪声强度值越⼤，预估纹理（texShp）越⼩，进⽽</p>
+<div class="language-javascript codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-javascript codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">texShpSclRemap_en</span><span class="token operator" style=color:#393A34>==</span><span class="token boolean" style=color:#36acaa>false</span><span class="token plain">：</span><br/></div></code></pre></div></div>
+<p>预估纹理对应的局部锐化⼒度倍率调整系数（ShpScl）越⼤。</p>
+<div class="language-javascript codeBlockContainer_Ckt0 theme-code-block" style=--prism-color:#393A34;--prism-background-color:#f6f8fa><div class=codeBlockContent_QJqH><pre tabindex=0 class="prism-code language-javascript codeBlock_bY9V thin-scrollbar" style=color:#393A34;background-color:#f6f8fa><code class=codeBlockLines_e6Vv><div class=token-line style=color:#393A34><span class="token plain">texShpSclRemap_en</span><span class="token operator" style=color:#393A34>==</span><span class="token boolean" style=color:#36acaa>true</span><span class="token plain">：</span><br/></div></code></pre></div></div>
+<p>从曲线（texShpSclRemap_val）中映射得到的是更⼤预估纹理（texShp）对应的锐化⼒度倍率调整系数（ShpScl），进⽽影响图像的局部锐化⼒度。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=sharpopt>sharpOpt<a href=#sharpopt class=hash-link aria-label="Direct link to sharpOpt" title="Direct link to sharpOpt" translate=no>​</a></h3>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_shpSrc_mode</p>
+<p>【参数功能描述】</p>
+<p>锐化的⾼频值叠加回基础图像作为最终锐化的结果。此参数为基础图像源的选择。</p>
+<p>sharp_hfExactPreBfOut_mode：</p>
+<p>选择预滤波（hfExtra_preBifilt）输出为基础图像。</p>
+<p>sharp_sharpIn_mode：</p>
+<p>选择模块原始输⼊图像作为基础图像。</p>
+<p>【参数⽤法】：</p>
+<p>默认选择sharp_hfExactPreBfOut_mode。</p>
+<p>⼀般预滤波图像更平滑细节更少，原始输⼊图像细节更多噪声更⼤。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_shpOpt_mode</p>
+<p>【参数功能描述】</p>
+<p>纹理局部锐化⼒度（texShpScl）debug模式。</p>
+<p>sharp_allShpSclEn_mode：</p>
+<p>正常模式，纹理局部锐化⼒度（texShpScl）与其他局部锐化⼒度共同作⽤。</p>
+<p>sharp_texShpSclDis_othrEn_mode：</p>
+<p>仅关闭纹理局部锐化⼒度（texShpScl）。</p>
+<p>sharp_texShpSclEn_othrDis_mode:</p>
+<p>仅开启纹理局部锐化⼒度（texShpScl）。</p>
+<p>sharp_texShpSclDebugOut_mode：</p>
+<p>以灰度图⽅式显⽰输出纹理局部锐化⼒度（texShpScl），纹理局部锐化⼒度（texShpScl）越⼤灰度图越亮。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为sharp_allShpSclEn_mode。</p>
+<ol>
+<li class="">
+<p>texShpSclEn_othrDis_mode模式可以观察关⼼的图像纹理是否被纹理局部锐化⼒度（texShpScl）给增强，锐化⼒度是否合适。</p>
+</li>
+<li class="">
+<p>切换⾄texShpSclDebugOut_mode 模式，可以直接查看纹理局部锐化⼒度（texShpScl）的⼤⼩来调整纹理检测对应的参数。配合切换正常模式查看锐化⼒度。</p>
+</li>
+</ol>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_hfHiGlbShpScl_val</p>
+<p>【参数功能描述】</p>
+<p>待锐化⾼频信息的⾼频部分（hfHi）的全局锐化⼒度⼤⼩</p>
+<p>【参数⽤法】：</p>
+<p>默认值为5，</p>
+<p>值越⼤，待锐化⾼频信息的⾼频部分（hfHi）的全局锐化⼒度越强。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_hfMidGlbShpScl_val</p>
+<p>【参数功能描述】</p>
+<p>待锐化⾼频信息的中⾼频部分（hfMid）的全局锐化⼒度⼤⼩</p>
+<p>【参数⽤法】：</p>
+<p>默认值为5，</p>
+<p>值越⼤，待锐化⾼频信息的中⾼频部分（hfMid）的全局锐化⼒度越强。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_locSgmStrg2ShpScl_val</p>
+<p>【参数功能描述】</p>
+<p>该曲线以局部图像噪声强度表征值（locSgmStrg）索引，映射得到局部图像噪声强度表征值的局部锐化⼒度（locSgmStrgShpScl）。</p>
+<p>来⾃前级的局部噪声强度表征值在图像的不同区域是不同的，通过该参数等效实现不同区域的局部锐化⼒度。例如：经过btnr之后，静⽌区locSgmStrg 相对运动区域会⼩很多。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为全1. 1.0表⽰该倍率系数为1，即局部噪声强度表征值（locSgmStrg）对锐化⼒度没有影响。值越⼩，</p>
+<ol>
+<li class="">
+<p>局部噪声强度表征值（locSgmStrg）导致的局部锐化⼒度差异越⼩。</p>
+</li>
+<li class="">
+<p>锐化⼒度越⼩</p>
+</li>
+</ol>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_radiDist2ShpScl_val</p>
+<p>【参数功能描述】</p>
+<p>该曲线以距离光⼼的径向距离（radiDist）索引，映射得到径向距离局部锐化⼒度（radiDistShpScl）。由于镜头阴影的存在，距离镜头光学中⼼的不同距离ISP在图像上使⽤的增益往往不同导致噪声信噪⽐不同。该参数⽀持根据图像像素点的径向距离配置不同锐化⼒度</p>
+<p>【参数⽤法】：</p>
+<p>默认值为全1. 1.0表⽰该倍率系数为1，即径向距离（radiDist）对锐化⼒度没有影响。值越⼩，</p>
+<ol>
+<li class="">
+<p>径向距离（radiDist）导致的局部锐化⼒度差异越⼩。</p>
+</li>
+<li class="">
+<p>锐化⼒度越⼩</p>
+</li>
+</ol>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_tex2ShpScl_scale</p>
+<p>【参数功能描述】</p>
+<p>预估纹理（texShp）在转换为纹理局部锐化⼒度（texShpScl）的倍率调整系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值1，</p>
+<p>值越⼤，转换的局部锐化⼒度越强。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_texShpSclRemap_en</p>
+<p>【参数功能描述】</p>
+<p>对纹理局部锐化⼒度（texShpScl）重映射的开关。不同的纹理局部锐化⼒度（texShpScl）进⾏不同的倍率调整后作为最终的纹理局部锐化⼒度（texShpScl）。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为0，即关闭纹理局部锐化⼒度（texShpScl）重映射功能。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_texShpSclRemap_val</p>
+<p>【参数功能描述】</p>
+<p>该曲线以纹理局部锐化⼒度（texShpScl）索引，映射得到对纹理局部锐化⼒度（texShpScl）进⾏调整的倍率系数。</p>
+<p>【参数⽤法】：</p>
+<p>默认值全为1024。</p>
+<p>值越⼩，最终的纹理局部锐化⼒度（texShpScl）越⼩。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=参数功能描述-14>【参数功能描述】<a href=#参数功能描述-14 class=hash-link aria-label="Direct link to 【参数功能描述】" title="Direct link to 【参数功能描述】" translate=no>​</a></h3>
+<p>锐化后的⾼频细节信息（hf）上下限阈值曲线的查表索引源选择。</p>
+<p>sharp_orgPix_mode：</p>
+<p>以sharp模块原始输⼊像素的亮度值作为索引。</p>
+<p>sharp_lpfPix_mode：</p>
+<p>以低通滤波（hfExtra_lpf）后像素亮度值作为索引</p>
+<p>【参数⽤法】：</p>
+<p>默认sharp_lpfPix_mode。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=dynamic_sharpt_luma2whtedg_maxlimit>Dynamic<!-- -->:hw<!-- -->_sharpT_luma2WhtEdg_maxLimit<a href=#dynamic_sharpt_luma2whtedg_maxlimit class=hash-link aria-label="Direct link to dynamic_sharpt_luma2whtedg_maxlimit" title="Direct link to dynamic_sharpt_luma2whtedg_maxlimit" translate=no>​</a></h3>
+<p>【参数功能描述】</p>
+<p>锐化后的⾼频细节信息（hf）上限阈值曲线。即⾼频细节信息（hf）被锐化后的最⼤值，⾼频锐化的最⼤值决定了锐化⽩边的强度。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为256，</p>
+<p>值越⼤，⾼频细节信息（hf）被锐化后的最⼤值越⼤，⽩边强度越强。</p>
+<p>Dynamic<!-- -->:hw<!-- -->_sharpT_luma2BkEdg_maxLimit</p>
+<p>【参数功能描述】</p>
+<p>锐化后的⾼频细节信息（hf）下限阈值曲线。即⾼频细节信息（hf）被锐化后的最⼩值，⾼频锐化的最⼩值决定了锐化⿊边的强度。</p>
+<p>【参数⽤法】：</p>
+<p>默认值为256，</p>
+<p>值越⼤，⾼频细节信息（hf）被锐化后的最⼩值越⼤，⿊边强度越弱。</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=调试步骤-1>调试步骤<a href=#调试步骤-1 class=hash-link aria-label="Direct link to 调试步骤" title="Direct link to 调试步骤" translate=no>​</a></h3></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href=https://github.com/100askTeam/zephyr-docs/tree/master/docs/DshanPi-A1/9-原厂在线文档/Common/ISP/Tuning-Guide-ISP39-CN-v1.0.md target=_blank rel="noopener noreferrer" class=theme-edit-this-page><svg fill=currentColor height=20 width=20 viewBox="0 0 40 40" class=iconEdit_Z9Sw aria-hidden=true><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"/></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/Tuning-Guide-ISP32-lite-CN><div class=pagination-nav__sublabel>Previous</div><div class=pagination-nav__label>Rockchip Tunning Guide ISP32-lite</div></a><a class="pagination-nav__link pagination-nav__link--next" href=/en/docs/DshanPi-A1/原厂在线文档/Common/ISP/camera-engine-rkisp-user-manual-v2.0><div class=pagination-nav__sublabel>Next</div><div class=pagination-nav__label>Camera\_Engine\_Rkisp\_User\_Manual（ISP 部）</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href=#前 class="table-of-contents__link toc-highlight">前⾔</a><li><a href=#概述 class="table-of-contents__link toc-highlight">概述</a><li><a href=#读者对象 class="table-of-contents__link toc-highlight">读者对象</a><ul><li><a href=#isp图像效果调试程师 class="table-of-contents__link toc-highlight">ISP图像效果调试⼯程师</a></ul><li><a href=#修订记录 class="table-of-contents__link toc-highlight">修订记录</a><ul><li><a href=#录 class="table-of-contents__link toc-highlight">⽬录</a><li><a href=#isp39-introduction class="table-of-contents__link toc-highlight">ISP39 Introduction</a><li><a href=#isp39-框图 class="table-of-contents__link toc-highlight">ISP39 框图</a><li><a href=#isp39模块迭代列表 class="table-of-contents__link toc-highlight">ISP39模块迭代列表</a><li><a href=#isp39-约束 class="table-of-contents__link toc-highlight">ISP39 约束</a><li><a href=#模块介绍 class="table-of-contents__link toc-highlight">模块介绍</a><li><a href=#前置说明 class="table-of-contents__link toc-highlight">前置说明</a><li><a href=#模块控制模式 class="table-of-contents__link toc-highlight">模块控制模式</a><li><a href=#使能控制enable class="table-of-contents__link toc-highlight">使能控制(Enable)</a><li><a href=#效果旁路控制bypass class="table-of-contents__link toc-highlight">效果旁路控制(Bypass)</a><li><a href=#aiq模块运模式控制mode class="table-of-contents__link toc-highlight">AIQ模块运⾏模式控制(Mode)</a><li><a href=#参数规则 class="table-of-contents__link toc-highlight">参数规则</a><li><a href=#参数名称结构 class="table-of-contents__link toc-highlight">参数名称结构</a><li><a href=#参数类型域说明 class="table-of-contents__link toc-highlight">参数类型域说明</a><li><a href=#模块简称域说明 class="table-of-contents__link toc-highlight">模块简称域说明</a><li><a href=#参数描述域简称说明 class="table-of-contents__link toc-highlight">参数描述域简称说明</a><li><a href=#--a--- class="table-of-contents__link toc-highlight">--a---</a><li><a href=#--b--- class="table-of-contents__link toc-highlight">--b---</a><li><a href=#--c---- class="table-of-contents__link toc-highlight">--c----</a><li><a href=#--e---- class="table-of-contents__link toc-highlight">--e----</a><li><a href=#--g------ class="table-of-contents__link toc-highlight">--g------</a><li><a href=#--h---- class="table-of-contents__link toc-highlight">--h----</a><li><a href=#--i---- class="table-of-contents__link toc-highlight">--i----</a><li><a href=#--l---- class="table-of-contents__link toc-highlight">--l----</a><li><a href=#--n---- class="table-of-contents__link toc-highlight">--n----</a><li><a href=#--m---- class="table-of-contents__link toc-highlight">--m----</a><li><a href=#--o---- class="table-of-contents__link toc-highlight">--o----</a><li><a href=#--p--- class="table-of-contents__link toc-highlight">--p---</a><li><a href=#--r---- class="table-of-contents__link toc-highlight">--r----</a><li><a href=#--s--- class="table-of-contents__link toc-highlight">--s---</a><li><a href=#曲线类参数说明 class="table-of-contents__link toc-highlight">曲线类参数说明</a><li><a href=#参数属性域说明 class="table-of-contents__link toc-highlight">参数属性域说明</a><li><a href=#--f---------------- class="table-of-contents__link toc-highlight">--f----------------</a><li><a href=#--n----- class="table-of-contents__link toc-highlight">--n-----</a><li><a href=#negoff-negative-offset class="table-of-contents__link toc-highlight">*negOff: negative offset</a><li><a href=#negscl-negative-scale class="table-of-contents__link toc-highlight">*negScl: negative scale</a><li><a href=#--m---------------- class="table-of-contents__link toc-highlight">--m----------------</a><li><a href=#参数分类 class="table-of-contents__link toc-highlight">参数分类</a><li><a href=#固定配置参数 class="table-of-contents__link toc-highlight">固定配置参数</a><li><a href=#动态调试参数 class="table-of-contents__link toc-highlight">动态调试参数</a><li><a href=#特殊说明 class="table-of-contents__link toc-highlight">特殊说明</a><li><a href=#blc class="table-of-contents__link toc-highlight">BLC</a><li><a href=#模块框图 class="table-of-contents__link toc-highlight">模块框图</a><li><a href=#模块概念前置说明 class="table-of-contents__link toc-highlight">模块概念前置说明</a><li><a href=#参数说明 class="table-of-contents__link toc-highlight">参数说明</a><li><a href=#hw_btnrcfg_pixdomain_mode class="table-of-contents__link toc-highlight">hw_btnrCfg_pixDomain_mode</a><li><a href=#参数法 class="table-of-contents__link toc-highlight">【参数⽤法】：</a><li><a href=#transcfg class="table-of-contents__link toc-highlight">transCfg</a><li><a href=#sigmaenv class="table-of-contents__link toc-highlight">sigmaEnv</a><li><a href=#debug class="table-of-contents__link toc-highlight">debug</a><li><a href=#mdsigma class="table-of-contents__link toc-highlight">mdSigma</a><li><a href=#mddynamic-hw_btnrt_sigmahdrs_scale class="table-of-contents__link toc-highlight">mdDynamic: hw_btnrT_sigmaHdrS_scale</a><li><a href=#mddynamic_btnrt_mdwgt_negoff class="table-of-contents__link toc-highlight">mdDynamic_btnrT_mdWgt_negOff</a><li><a href=#参数功能描述 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#参数法-1 class="table-of-contents__link toc-highlight">【参数⽤法】：</a><li><a href=#值越 class="table-of-contents__link toc-highlight">值越⼤，</a><li><a href=#mddynamic_btnrt_mdwgtfstlnnegoff_en class="table-of-contents__link toc-highlight">mdDynamic_btnrT_mdWgtFstLnNegOff_en</a><li><a href=#参数功能描述-1 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#参数法-2 class="table-of-contents__link toc-highlight">【参数⽤法】：</a><li><a href=#参数功能描述-2 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#mddynamic_btnrt_mdwgt_scale class="table-of-contents__link toc-highlight">mdDynamic_btnrT_mdWgt_scale</a><li><a href=#参数功能描述-3 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#参数法-3 class="table-of-contents__link toc-highlight">【参数⽤法】：</a><li><a href=#值越-1 class="table-of-contents__link toc-highlight">值越⼤，</a><li><a href=#hw_btnrt_md_mode class="table-of-contents__link toc-highlight">hw_btnrT_md_mode</a><li><a href=#参数功能描述-4 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#默认值为05 class="table-of-contents__link toc-highlight">默认值为0.5，</a><li><a href=#mddynamic_btnrt_lowgtstat_scale class="table-of-contents__link toc-highlight">mdDynamic_btnrT_loWgtStat_scale</a><li><a href=#参数功能描述-5 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#参数法-4 class="table-of-contents__link toc-highlight">【参数⽤法】：</a><li><a href=#mddynamic_btnrt_lowgtstathdrs_scale class="table-of-contents__link toc-highlight">mdDynamic_btnrT_loWgtStatHdrS_scale</a><li><a href=#参数功能描述-6 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#mddynamic_btnrt_lowgtstathdrs_offset class="table-of-contents__link toc-highlight">mdDynamic_btnrT_loWgtStatHdrS_offset</a><li><a href=#参数功能描述-7 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#mddynamic_btnr_lowgtstat_minlimit class="table-of-contents__link toc-highlight">mdDynamic_btnr_loWgtStat_minLimit</a><li><a href=#参数功能描述-8 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#mddynamic_btnrt_mdwgthdrs_scale class="table-of-contents__link toc-highlight">mdDynamic_btnrT_mdWgtHdrS_scale</a><li><a href=#参数功能描述-9 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#mdwgtpost class="table-of-contents__link toc-highlight">mdWgtPost</a><li><a href=#sigmaenv-1 class="table-of-contents__link toc-highlight">sigmaEnv</a><li><a href=#dynamic_btnrt_sigmacurve_mode class="table-of-contents__link toc-highlight">Dynamic_btnrT_sigmaCurve_mode</a><li><a href=#dynamic_btnrt_sigma_offset class="table-of-contents__link toc-highlight">Dynamic_btnrT_sigma_offset</a><li><a href=#dynamic_btnrt_sigmahdrs_offset class="table-of-contents__link toc-highlight">Dynamic_btnrT_sigmaHdrS_offset</a><li><a href=#dynamic_btnrt_filtspatial_strg class="table-of-contents__link toc-highlight">Dynamic_btnrT_filtSpatial_strg</a><li><a href=#dynamic_btnrt_pixdiff_maxlimit class="table-of-contents__link toc-highlight">Dynamic_btnrT_pixDiff_maxLimit</a><li><a href=#dynamic_btnrt_pixdiff_scale class="table-of-contents__link toc-highlight">Dynamic_btnrT_pixDiff_scale</a><li><a href=#参数法-5 class="table-of-contents__link toc-highlight">【参数⽤法】：</a><li><a href=#dynamic_btnrt_sigmahdrs_offset-1 class="table-of-contents__link toc-highlight">Dynamic_btnrT_sigmaHdrS_offset</a><li><a href=#参数功能描述-10 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#参数法-6 class="table-of-contents__link toc-highlight">【参数⽤法】：</a><li><a href=#dynamic_btnrt_sigma_mode class="table-of-contents__link toc-highlight">Dynamic_btnrT_sigma_mode</a><li><a href=#dynamic_btnrt_filtspatial_strg-1 class="table-of-contents__link toc-highlight">Dynamic_btnrT_filtSpatial_strg</a><li><a href=#参数法-7 class="table-of-contents__link toc-highlight">【参数⽤法】：</a><li><a href=#dynamic_btnrt_pixdiff_negoff class="table-of-contents__link toc-highlight">Dynamic_btnrT_pixDiff_negOff</a><li><a href=#dynamic_btnrt_pixdiff_scale-1 class="table-of-contents__link toc-highlight">Dynamic_btnrT_pixDiff_scale</a><li><a href=#dynamic_btnrt_spnrout_alpha class="table-of-contents__link toc-highlight">Dynamic_btnrT_spNrOut_alpha</a><li><a href=#dynamic_btnrt_loalphahdrs_minlimit class="table-of-contents__link toc-highlight">Dynamic_btnrT_loAlphaHdrS_minLimit</a><li><a href=#dynamic_btnrt_loalpha_maxlimit class="table-of-contents__link toc-highlight">Dynamic_btnrT_loAlpha_maxLimit</a><li><a href=#dynamic_btnrt_hialphahdrs_minlimit class="table-of-contents__link toc-highlight">Dynamic_btnrT_hiAlphaHdrS_minLimit</a><li><a href=#hw_btnrt_noisebal_mode class="table-of-contents__link toc-highlight">hw_btnrT_noiseBal_mode</a><li><a href=#noisebal_byloalpha class="table-of-contents__link toc-highlight">noiseBal_byLoAlpha</a><li><a href=#localsgmstrg class="table-of-contents__link toc-highlight">localSgmStrg</a><li><a href=#模块框图-1 class="table-of-contents__link toc-highlight">模块框图</a><li><a href=#参数说明-1 class="table-of-contents__link toc-highlight">参数说明</a><li><a href=#参数法-8 class="table-of-contents__link toc-highlight">【参数⽤法】：</a><li><a href=#ynrscl_locsgmstrg class="table-of-contents__link toc-highlight">ynrScl_locSgmStrg</a><li><a href=#dynamic_ynrt_glbsgmstrg_alpha class="table-of-contents__link toc-highlight">Dynamic_ynrT_glbSgmStrg_alpha</a><li><a href=#lonr_preproc class="table-of-contents__link toc-highlight">loNr_preProc</a><li><a href=#调试步骤 class="table-of-contents__link toc-highlight">调试步骤</a><li><a href=#cnr class="table-of-contents__link toc-highlight">CNR</a><li><a href=#模块说明 class="table-of-contents__link toc-highlight">模块说明</a><li><a href=#模块约束 class="table-of-contents__link toc-highlight">模块约束</a><li><a href=#模块框图-2 class="table-of-contents__link toc-highlight">模块框图</a><li><a href=#参数说明-2 class="table-of-contents__link toc-highlight">参数说明</a><li><a href=#dynamic-hw_cnrt_glbsgmstrg_alpha class="table-of-contents__link toc-highlight">Dynamic: hw_cnrT_glbSgmStrg_alpha</a><li><a href=#dynamic-sw_cnrt_rgesgmratio_mode class="table-of-contents__link toc-highlight">Dynamic: sw_cnrT_rgeSgmRatio_mode</a><li><a href=#hinr_prelpf class="table-of-contents__link toc-highlight">hiNr_preLpf</a><li><a href=#模块框图-3 class="table-of-contents__link toc-highlight">模块框图</a><li><a href=#参数说明-3 class="table-of-contents__link toc-highlight">参数说明</a><li><a href=#参数功能描述-11 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#hfextra_lpf class="table-of-contents__link toc-highlight">hfExtra_lpf</a><li><a href=#参数功能描述-12 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#dynamic_sharpt_rgesgm_offset class="table-of-contents__link toc-highlight">Dynamic_sharpT_rgeSgm_offset</a><li><a href=#参数功能描述-13 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#dynamic_sharpt_bifiltout_alpha class="table-of-contents__link toc-highlight">Dynamic_sharpT_biFiltOut_alpha</a><li><a href=#shpscl_hf class="table-of-contents__link toc-highlight">shpScl_hf</a><li><a href=#shpscl_locsgmstrg class="table-of-contents__link toc-highlight">shpScl_locSgmStrg</a><li><a href=#dynamic_sharpt_locsgmstrg_scale class="table-of-contents__link toc-highlight">Dynamic_sharpT_locSgmStrg_scale</a><li><a href=#shpscl_textdetect class="table-of-contents__link toc-highlight">shpScl_textDetect</a><li><a href=#sharpopt class="table-of-contents__link toc-highlight">sharpOpt</a><li><a href=#参数功能描述-14 class="table-of-contents__link toc-highlight">【参数功能描述】</a><li><a href=#dynamic_sharpt_luma2whtedg_maxlimit class="table-of-contents__link toc-highlight">Dynamic_sharpT_luma2WhtEdg_maxLimit</a><li><a href=#调试步骤-1 class="table-of-contents__link toc-highlight">调试步骤</a></ul></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class=footer__copyright>Copyright © 2026 100askTeam, Inc. Built with Docusaurus.</div></div></div></footer></div></body>
