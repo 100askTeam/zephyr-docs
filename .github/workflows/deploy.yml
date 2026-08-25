@@ -51,7 +51,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: "build/**"
-          target: /www/wwwroot/rockchip.100ask.net/
+          target: /www/wwwroot/zephyr.100ask.net/
           strip_components: 1
 
       # Popular action to deploy to GitHub Pages:
@@ -64,4 +64,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # Build output to publish to the `gh-pages` branch:
           publish_dir: ./build
-          cname: wiki.dshanpi.org
+          cname: zephyr.100ask.org
