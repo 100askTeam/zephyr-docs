@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="485" viewBox="0 0 1100 485">
+  <rect width="1100" height="485" rx="28" fill="#f5f8fc"/>
+  <text x="550" y="55" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei" font-size="30" font-weight="700" fill="#17324d">最小可运行 Board 的三条硬件链</text>
+  <g font-family="Segoe UI, Microsoft YaHei" text-anchor="middle">
+    <g transform="translate(75 105)"><rect width="270" height="235" rx="20" fill="#d9efff" stroke="#3978ad" stroke-width="2"/><text x="135" y="45" font-size="23" font-weight="700" fill="#145a86">UART0</text><text x="135" y="87" font-size="18" fill="#315b75">原理图 PA00 / PA01</text><text x="135" y="122" font-size="18" fill="#315b75">pinctrl 复用功能 2</text><text x="135" y="157" font-size="18" fill="#315b75">chosen: console</text><text x="135" y="198" font-size="17" fill="#145a86">验证：启动日志</text></g>
+    <g transform="translate(415 105)"><rect width="270" height="235" rx="20" fill="#dff7eb" stroke="#3c9464" stroke-width="2"/><text x="135" y="45" font-size="23" font-weight="700" fill="#176846">绿色 LED</text><text x="135" y="87" font-size="18" fill="#3a6f5a">原理图 PC22</text><text x="135" y="122" font-size="18" fill="#3a6f5a">GPIO_ACTIVE_LOW</text><text x="135" y="157" font-size="18" fill="#3a6f5a">alias: led0</text><text x="135" y="198" font-size="17" fill="#176846">验证：每秒翻转</text></g>
+    <g transform="translate(755 105)"><rect width="270" height="235" rx="20" fill="#fff0d9" stroke="#c58325" stroke-width="2"/><text x="135" y="45" font-size="23" font-weight="700" fill="#8a5200">NOR Flash</text><text x="135" y="87" font-size="18" fill="#745b37">U5 · 16 MiB</text><text x="135" y="122" font-size="18" fill="#745b37">XPI0 · 0x80000000</text><text x="135" y="157" font-size="18" fill="#745b37">CONFIG_XIP=y</text><text x="135" y="198" font-size="17" fill="#8a5200">验证：写入与启动</text></g>
+  </g>
+  <g fill="none" stroke="#6b7f91" stroke-width="3">
+    <path d="M210 340 V370"/>
+    <path d="M550 340 V395"/>
+    <path d="M890 340 V370"/>
+    <path d="M210 370 H890"/>
+  </g>
+  <circle cx="210" cy="370" r="5" fill="#3978ad"/>
+  <circle cx="550" cy="370" r="5" fill="#3c9464"/>
+  <circle cx="890" cy="370" r="5" fill="#c58325"/>
+  <rect x="250" y="395" width="600" height="68" rx="16" fill="#243e5b"/>
+  <text x="550" y="423" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei" font-size="19" font-weight="700" fill="#ffffff">三条硬件链缺一不可</text>
+  <text x="550" y="449" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei" font-size="17" fill="#dce8f4">01_blinky 才能从板载 Flash 启动、闪灯并输出日志</text>
+</svg>

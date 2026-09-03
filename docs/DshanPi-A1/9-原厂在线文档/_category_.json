@@ -1,9 +1,0 @@
-{
-  "label": "原厂在线文档",
-  "position": 99,
-  "collapsed": true,
-  "link": {
-    "type": "generated-index",
-    "description": "瑞芯微原厂官方技术文档，涵盖各模块开发指南。"
-  }
-}

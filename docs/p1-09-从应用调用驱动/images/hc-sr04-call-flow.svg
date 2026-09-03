@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="360" viewBox="0 0 1120 360" role="img" aria-labelledby="title desc">
+  <title id="title">应用通过 Zephyr sensor API 调用 HC-SR04 驱动</title>
+  <desc id="desc">应用的采样和取值请求通过 sensor API 进入 HC-SR04 驱动，驱动根据设备树的 GPIO 配置操作 HC-SR04，距离结果再返回应用。</desc>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#3467d4"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2f855a"/></marker>
+    <filter id="flowGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .title{font:700 27px "Microsoft YaHei",sans-serif;fill:#172033}.name{font:700 18px "Microsoft YaHei",sans-serif;fill:#172033}.text{font:14px "Microsoft YaHei",sans-serif;fill:#4b596d}.blue{fill:#edf3ff;stroke:#4f7ee8;stroke-width:1.8}.amber{fill:#fff7e7;stroke:#d6972d;stroke-width:1.8}.green{fill:#edf8ef;stroke:#4b925d;stroke-width:1.8}.req{fill:none;stroke:#3467d4;stroke-width:2.6;marker-end:url(#a)}.ret{fill:none;stroke:#2f855a;stroke-width:2.6;marker-end:url(#g)}.flowParticle{opacity:0;filter:url(#flowGlow);pointer-events:none}.requestParticle{fill:#79a4ff}.returnParticle{fill:#6fc08a}
+    </style>
+  </defs>
+  <rect width="1120" height="360" rx="14" fill="#fff"/><text x="560" y="43" text-anchor="middle" class="title">应用不直接操作 TRIG 和 ECHO</text>
+  <rect x="35" y="100" width="205" height="130" rx="11" class="blue"/><text x="137" y="137" text-anchor="middle" class="name">应用 main.c</text><text x="137" y="170" text-anchor="middle" class="text">决定测量周期</text><text x="137" y="198" text-anchor="middle" class="text">把结果显示为厘米</text>
+  <rect x="320" y="100" width="220" height="130" rx="11" class="blue"/><text x="430" y="137" text-anchor="middle" class="name">Zephyr sensor API</text><text x="430" y="170" text-anchor="middle" class="text">sample_fetch()</text><text x="430" y="198" text-anchor="middle" class="text">channel_get()</text>
+  <rect x="620" y="100" width="220" height="130" rx="11" class="amber"/><text x="730" y="137" text-anchor="middle" class="name">HC-SR04 驱动</text><text x="730" y="170" text-anchor="middle" class="text">发送 TRIG、测量 ECHO</text><text x="730" y="198" text-anchor="middle" class="text">换算标准距离值</text>
+  <rect x="920" y="100" width="165" height="130" rx="11" class="green"/><text x="1002" y="137" text-anchor="middle" class="name">HC-SR04</text><text x="1002" y="175" text-anchor="middle" class="text">超声波模块</text>
+  <path d="M240 145 H320" class="req"/><path d="M540 145 H620" class="req"/><path d="M840 145 H920" class="req"/>
+  <path d="M920 205 H840" class="ret"/><path d="M620 205 H540" class="ret"/><path d="M320 205 H240" class="ret"/>
+  <circle r="6" class="flowParticle requestParticle">
+    <animateMotion id="requestAppToApi" begin="0s;returnApiToApp.end+0.8s" dur="0.75s" path="M240 145 H320"/>
+    <animate attributeName="opacity" begin="requestAppToApi.begin" dur="0.75s" values="0;1;1;0" keyTimes="0;0.12;0.88;1"/>
+  </circle>
+  <circle r="6" class="flowParticle requestParticle">
+    <animateMotion id="requestApiToDriver" begin="requestAppToApi.end+0.12s" dur="0.75s" path="M540 145 H620"/>
+    <animate attributeName="opacity" begin="requestApiToDriver.begin" dur="0.75s" values="0;1;1;0" keyTimes="0;0.12;0.88;1"/>
+  </circle>
+  <circle r="6" class="flowParticle requestParticle">
+    <animateMotion id="requestDriverToModule" begin="requestApiToDriver.end+0.12s" dur="0.75s" path="M840 145 H920"/>
+    <animate attributeName="opacity" begin="requestDriverToModule.begin" dur="0.75s" values="0;1;1;0" keyTimes="0;0.12;0.88;1"/>
+  </circle>
+  <circle r="6" class="flowParticle returnParticle">
+    <animateMotion id="returnModuleToDriver" begin="requestDriverToModule.end+0.5s" dur="0.75s" path="M920 205 H840"/>
+    <animate attributeName="opacity" begin="returnModuleToDriver.begin" dur="0.75s" values="0;1;1;0" keyTimes="0;0.12;0.88;1"/>
+  </circle>
+  <circle r="6" class="flowParticle returnParticle">
+    <animateMotion id="returnDriverToApi" begin="returnModuleToDriver.end+0.12s" dur="0.75s" path="M620 205 H540"/>
+    <animate attributeName="opacity" begin="returnDriverToApi.begin" dur="0.75s" values="0;1;1;0" keyTimes="0;0.12;0.88;1"/>
+  </circle>
+  <circle r="6" class="flowParticle returnParticle">
+    <animateMotion id="returnApiToApp" begin="returnDriverToApi.end+0.12s" dur="0.75s" path="M320 205 H240"/>
+    <animate attributeName="opacity" begin="returnApiToApp.begin" dur="0.75s" values="0;1;1;0" keyTimes="0;0.12;0.88;1"/>
+  </circle>
+  <text x="280" y="130" text-anchor="middle" class="text">请求</text><text x="580" y="130" text-anchor="middle" class="text">API 表转发</text><text x="880" y="130" text-anchor="middle" class="text">GPIO</text>
+  <text x="580" y="260" text-anchor="middle" class="text">sensor_value</text><text x="560" y="326" text-anchor="middle" class="text">设备树提供引脚，驱动处理硬件协议，应用安排任务并显示结果</text>
+</svg>

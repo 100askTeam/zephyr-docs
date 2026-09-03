@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="560" viewBox="0 0 1240 560" role="img" aria-labelledby="title desc">
+  <title id="title">SDRAM 配置项与资料来源映射</title>
+  <desc id="desc">四类并列资料分别提供文件组织、控制器接口、器件参数和板卡连接，最终写入 Board DTS、Kconfig、CMake 和 board_sdram.c。</desc>
+  <rect width="1240" height="560" fill="#f7f9fc"/>
+  <text x="620" y="54" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="32" font-weight="700" fill="#17263c">每项 SDRAM 配置都能找到对应依据</text>
+  <g font-family="Microsoft YaHei, sans-serif">
+    <rect x="45" y="88" width="1150" height="54" fill="#203a5f"/>
+    <text x="135" y="123" text-anchor="middle" font-size="19" font-weight="700" fill="#fff">资料来源</text>
+    <text x="440" y="123" text-anchor="middle" font-size="19" font-weight="700" fill="#fff">从中取得的信息</text>
+    <text x="825" y="123" text-anchor="middle" font-size="19" font-weight="700" fill="#fff">写入本工程</text>
+    <text x="1090" y="123" text-anchor="middle" font-size="19" font-weight="700" fill="#fff">构建或运行时由谁使用</text>
+
+    <rect x="45" y="142" width="1150" height="88" fill="#edf4ff" stroke="#c7d2e2"/>
+    <rect x="45" y="142" width="190" height="88" fill="#dce9fb"/>
+    <text x="140" y="178" text-anchor="middle" font-size="21" font-weight="700" fill="#24558f">Zephyr 规则</text>
+    <text x="140" y="205" text-anchor="middle" font-size="15" fill="#52697f">官方构建模型</text>
+    <text x="270" y="178" font-size="17" fill="#26384e">DTS 节点、Kconfig 依赖、初始化阶段</text>
+    <text x="270" y="205" font-size="16" fill="#5a6b80">决定配置放在哪类文件</text>
+    <text x="655" y="178" font-size="17" fill="#26384e">DTS、Kconfig、CMakeLists.txt</text>
+    <text x="1000" y="190" font-size="17" fill="#26384e">Devicetree、Kconfig、CMake</text>
+
+    <rect x="45" y="230" width="1150" height="88" fill="#fff" stroke="#c7d2e2"/>
+    <rect x="45" y="230" width="190" height="88" fill="#e9e2f7"/>
+    <text x="140" y="266" text-anchor="middle" font-size="21" font-weight="700" fill="#684394">HPM SDK</text>
+    <text x="140" y="293" text-anchor="middle" font-size="15" fill="#675a78">厂商控制器接口</text>
+    <text x="270" y="266" font-size="17" fill="#26384e">FEMC 时钟、结构体、初始化 API</text>
+    <text x="270" y="293" font-size="16" fill="#5a6b80">决定控制器怎样接收参数</text>
+    <text x="655" y="266" font-size="17" fill="#26384e">board_sdram.c</text>
+    <text x="1000" y="278" font-size="17" fill="#26384e">HPMicro FEMC 驱动</text>
+
+    <rect x="45" y="318" width="1150" height="88" fill="#fff8ed" stroke="#c7d2e2"/>
+    <rect x="45" y="318" width="190" height="88" fill="#f6e8d2"/>
+    <text x="140" y="354" text-anchor="middle" font-size="21" font-weight="700" fill="#8a5818">SDRAM 手册</text>
+    <text x="140" y="381" text-anchor="middle" font-size="15" fill="#725f45">IS42S16160J</text>
+    <text x="270" y="354" font-size="17" fill="#26384e">容量、行列、Bank、刷新与时序约束</text>
+    <text x="270" y="381" font-size="16" fill="#5a6b80">决定参数数值及其单位</text>
+    <text x="655" y="354" font-size="17" fill="#26384e">dram 节点、board_sdram.c</text>
+    <text x="1000" y="366" font-size="17" fill="#26384e">编译期检查与 FEMC 初始化</text>
+
+    <rect x="45" y="406" width="1150" height="88" fill="#eef8f1" stroke="#c7d2e2"/>
+    <rect x="45" y="406" width="190" height="88" fill="#dcefe2"/>
+    <text x="140" y="442" text-anchor="middle" font-size="21" font-weight="700" fill="#287047">板卡原理图</text>
+    <text x="140" y="469" text-anchor="middle" font-size="15" fill="#526d5a">真实焊接关系</text>
+    <text x="270" y="442" font-size="17" fill="#26384e">MCU 管脚、DQ[15:0]、DM0/1、PX07 DQS</text>
+    <text x="270" y="469" font-size="16" fill="#5a6b80">决定 pinctrl 与总线选项</text>
+    <text x="655" y="442" font-size="17" fill="#26384e">pinctrl、board_sdram.c</text>
+    <text x="1000" y="454" font-size="17" fill="#26384e">管脚复用与实板信号</text>
+  </g>
+  <text x="620" y="530" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="19" font-weight="700" fill="#24425f">生成的 zephyr.dts、.config 与实板 32 MiB 测试共同检查这些配置是否生效</text>
+</svg>

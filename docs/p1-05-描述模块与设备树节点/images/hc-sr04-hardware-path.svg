@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="330" viewBox="0 0 1080 330" role="img" aria-labelledby="title desc">
+  <title id="title">HC-SR04 到 HPM6E70 的信号连接</title>
+  <desc id="desc">TRIG 从 HC-SR04 M7-2 经过核心板 J4-4 连接到 PB05，ECHO 从 HC-SR04 M7-3 经过核心板 J4-5 连接到 PE01。</desc>
+  <defs>
+    <marker id="blueArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/></marker>
+    <marker id="greenArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2f855a"/></marker>
+    <filter id="signalGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="2.4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .title{font:700 27px "Microsoft YaHei",sans-serif;fill:#172033}.name{font:700 19px "Microsoft YaHei",sans-serif;fill:#172033}.text{font:15px "Microsoft YaHei",sans-serif;fill:#44536a}.label{font:700 15px "Microsoft YaHei",sans-serif}.module{fill:#fff8e8;stroke:#d7952b;stroke-width:2}.connector{fill:#f4f0ff;stroke:#8365d6;stroke-width:2}.mcu{fill:#edf7ef;stroke:#3f8b52;stroke-width:2}.trig{fill:none;stroke:#2563eb;stroke-width:3;marker-end:url(#blueArrow)}.echo{fill:none;stroke:#2f855a;stroke-width:3;marker-end:url(#greenArrow)}.signalParticle{filter:url(#signalGlow);pointer-events:none}.trigParticle{fill:#6f9cff}.echoParticle{fill:#66bd83}
+    </style>
+  </defs>
+  <rect width="1080" height="330" rx="14" fill="#fff"/>
+  <text x="540" y="42" text-anchor="middle" class="title">模块信号怎样到达 HPM6E70 引脚</text>
+  <rect x="35" y="86" width="230" height="190" rx="12" class="module"/>
+  <text x="150" y="122" text-anchor="middle" class="name">HC-SR04 / 底板 M7</text>
+  <text x="75" y="172" class="label" fill="#2563eb">M7-2  TRIG</text>
+  <text x="75" y="226" class="label" fill="#2f855a">M7-3  ECHO</text>
+  <rect x="425" y="86" width="230" height="190" rx="12" class="connector"/>
+  <text x="540" y="122" text-anchor="middle" class="name">核心板连接器 J4</text>
+  <text x="470" y="172" class="label" fill="#2563eb">J4-4</text>
+  <text x="470" y="226" class="label" fill="#2f855a">J4-5</text>
+  <rect x="815" y="86" width="230" height="190" rx="12" class="mcu"/>
+  <text x="930" y="122" text-anchor="middle" class="name">HPM6E70</text>
+  <text x="875" y="172" class="label" fill="#2563eb">PB05</text>
+  <text x="875" y="226" class="label" fill="#2f855a">PE01</text>
+  <path d="M190 166 H425" class="trig"/><path d="M530 166 H815" class="trig"/>
+  <path d="M815 220 H655" class="echo"/><path d="M425 220 H265" class="echo"/>
+  <circle r="6" class="signalParticle trigParticle">
+    <animateMotion dur="1.8s" repeatCount="indefinite" path="M190 166 H425"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.88;1" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="6" class="signalParticle trigParticle">
+    <animateMotion dur="1.9s" begin="0.45s" repeatCount="indefinite" path="M530 166 H815"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.88;1" dur="1.9s" begin="0.45s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="6" class="signalParticle echoParticle">
+    <animateMotion dur="1.6s" begin="0.25s" repeatCount="indefinite" path="M815 220 H655"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.88;1" dur="1.6s" begin="0.25s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="6" class="signalParticle echoParticle">
+    <animateMotion dur="1.6s" begin="0.7s" repeatCount="indefinite" path="M425 220 H265"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.88;1" dur="1.6s" begin="0.7s" repeatCount="indefinite"/>
+  </circle>
+  <text x="336" y="152" text-anchor="middle" class="text">触发脉冲</text><text x="725" y="152" text-anchor="middle" class="text">MCU 输出</text>
+  <text x="735" y="250" text-anchor="middle" class="text">模块返回脉宽</text><text x="345" y="250" text-anchor="middle" class="text">MCU 输入</text>
+  <text x="540" y="310" text-anchor="middle" class="text">ECHO 电平必须满足 MCU GPIO 的输入电压要求</text>
+</svg>

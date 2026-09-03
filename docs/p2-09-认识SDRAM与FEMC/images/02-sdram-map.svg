@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="650" viewBox="0 0 1280 650" role="img" aria-labelledby="title desc">
+  <title id="title">Flash、内部 SRAM 和板载 SDRAM 的区别</title>
+  <desc id="desc">Flash 用来长期保存程序，内部 SRAM 是容量较小、开机即可使用的工作区，板载 SDRAM 是容量更大的临时工作区，需要先初始化。</desc>
+  <rect width="1280" height="650" rx="28" fill="#f6f8fc"/>
+
+  <text x="640" y="58" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="34" font-weight="700" fill="#18263d">程序运行时，三种存储器各做什么？</text>
+  <text x="640" y="94" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#5a6472">Flash 保存固件；SRAM 与 SDRAM 保存程序运行时的数据</text>
+
+  <rect x="55" y="140" width="350" height="345" rx="22" fill="#fff8ee" stroke="#df7b21" stroke-width="3"/>
+  <circle cx="230" cy="205" r="42" fill="#ffe0b9"/>
+  <path d="M205 189h50v37h-50z M214 180h32v9h-32z" fill="#a8500b"/>
+  <text x="230" y="281" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="700" fill="#8e4308">Flash：长期储物柜</text>
+  <text x="230" y="330" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="21" fill="#26354b">保存固件和不会变化的数据</text>
+  <text x="230" y="370" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="21" font-weight="700" fill="#8e4308">断电后内容还在</text>
+  <text x="230" y="416" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="19" fill="#5a6472">主要用于需要断电保留的内容</text>
+
+  <rect x="465" y="140" width="350" height="345" rx="22" fill="#eef5ff" stroke="#4877d9" stroke-width="3"/>
+  <circle cx="640" cy="205" r="42" fill="#d8e7ff"/>
+  <path d="M610 189h60v40h-60z M622 177h36v12h-36z" fill="#2859bd"/>
+  <text x="640" y="281" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="700" fill="#244b9a">内部 SRAM：小书桌</text>
+  <text x="640" y="330" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="21" fill="#26354b">放栈、变量和较小的缓冲区</text>
+  <text x="640" y="370" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="21" font-weight="700" fill="#244b9a">开机就能用，但空间有限</text>
+  <text x="640" y="416" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="19" fill="#5a6472">断电后内容消失</text>
+
+  <rect x="875" y="140" width="350" height="345" rx="22" fill="#eef9f0" stroke="#42a15a" stroke-width="3"/>
+  <circle cx="1050" cy="205" r="42" fill="#d9f1df"/>
+  <path d="M1013 184h74v46h-74z M1022 173h56v11h-56z" fill="#28783d"/>
+  <text x="1050" y="281" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="700" fill="#23763a">板载 SDRAM：大桌面</text>
+  <text x="1050" y="330" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="21" fill="#26354b">放图片、大数组和大缓冲区</text>
+  <text x="1050" y="370" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="21" font-weight="700" fill="#23763a">本板有 32 MiB，使用前要初始化</text>
+  <text x="1050" y="416" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="19" fill="#5a6472">断电后内容同样消失</text>
+
+  <rect x="125" y="532" width="1030" height="72" rx="18" fill="#eaf7ed" stroke="#42a15a" stroke-width="2"/>
+  <text x="640" y="562" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="700" fill="#205f31">SDRAM 的作用：当“小书桌”放不下时，给运行中的程序增加一块更大的临时工作区</text>
+  <text x="640" y="590" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="18" fill="#376445">点灯和串口通常用不到；图像、音频、网络和大数组更容易用到</text>
+</svg>

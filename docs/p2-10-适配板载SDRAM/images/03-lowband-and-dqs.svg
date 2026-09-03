@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="560" viewBox="0 0 1280 560" role="img" aria-labelledby="title desc">
+  <title id="title">本板与 HPM6E00EVK 的数据半字和 DQS 配置差异</title>
+  <desc id="desc">本板的 16 位 SDRAM 连接 FEMC 低 16 位数据线，因此 HIGHBAND 为零；DQS 虚拟读采样脉冲经 PX07 IO 单元的输入回环返回 FEMC 采样端。</desc>
+  <defs>
+    <marker id="blueArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#4877d9"/>
+    </marker>
+    <marker id="greenArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#42a15a"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="560" rx="28" fill="#f6f8fc"/>
+  <text x="640" y="58" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="33" font-weight="700" fill="#18263d">本板与 HPM6E00EVK 参考板的两项差异</text>
+
+  <g font-family="Microsoft YaHei, sans-serif">
+    <rect x="45" y="105" width="560" height="395" rx="22" fill="#eef5ff" stroke="#4877d9" stroke-width="3"/>
+    <text x="325" y="153" text-anchor="middle" font-size="27" font-weight="700" fill="#244b9a">① 16 位 SDRAM 接在数据总线低半字</text>
+
+    <rect x="100" y="205" width="200" height="105" rx="15" fill="#dce9ff" stroke="#4877d9" stroke-width="2"/>
+    <text x="200" y="249" text-anchor="middle" font-size="27" font-weight="700" fill="#244b9a">DQ[15:0]</text>
+    <text x="200" y="283" text-anchor="middle" font-size="18" fill="#334155">本板 U9 的实际接线</text>
+
+    <rect x="350" y="205" width="200" height="105" rx="15" fill="#f3f5f8" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="450" y="249" text-anchor="middle" font-size="27" fill="#64748b">DQ[31:16]</text>
+    <text x="450" y="283" text-anchor="middle" font-size="18" fill="#64748b">HPM6E00EVK 接线</text>
+
+    <text x="325" y="376" text-anchor="middle" font-size="24" font-weight="700" fill="#a52a20">本板：HIGHBAND = 0，使用 DM0 / DM1</text>
+    <text x="325" y="420" text-anchor="middle" font-size="19" fill="#334155">依据：原理图 DQ0～DQ15、DM0、DM1</text>
+    <text x="325" y="453" text-anchor="middle" font-size="19" fill="#334155">规则：FEMC_SDRCTRL0.HIGHBAND 寄存器说明</text>
+
+    <rect x="645" y="105" width="590" height="395" rx="22" fill="#eef9f0" stroke="#42a15a" stroke-width="3"/>
+    <text x="940" y="153" text-anchor="middle" font-size="27" font-weight="700" fill="#23763a">② DQS 经 PX07 的 IO 输入路径回环</text>
+
+    <rect x="690" y="220" width="160" height="90" rx="14" fill="#dce9ff" stroke="#4877d9" stroke-width="2"/>
+    <text x="770" y="255" text-anchor="middle" font-size="22" font-weight="700" fill="#244b9a">FEMC</text>
+    <text x="770" y="285" text-anchor="middle" font-size="17" fill="#334155">产生 dummy DQS</text>
+
+    <rect x="895" y="220" width="150" height="90" rx="14" fill="#fff8ee" stroke="#df7b21" stroke-width="2"/>
+    <text x="970" y="255" text-anchor="middle" font-size="22" font-weight="700" fill="#8e4308">PX07</text>
+    <text x="970" y="285" text-anchor="middle" font-size="17" fill="#334155">DQS IO 单元</text>
+
+    <rect x="1080" y="220" width="125" height="90" rx="14" fill="#daf0df" stroke="#42a15a" stroke-width="2"/>
+    <text x="1142" y="255" text-anchor="middle" font-size="20" font-weight="700" fill="#23763a">FEMC</text>
+    <text x="1142" y="284" text-anchor="middle" font-size="16" fill="#334155">读采样输入</text>
+
+    <line x1="850" y1="250" x2="885" y2="250" stroke="#4877d9" stroke-width="5" marker-end="url(#blueArrow)"/>
+    <text x="868" y="214" text-anchor="middle" font-size="16" fill="#244b9a">输出</text>
+
+    <line x1="1045" y1="280" x2="1070" y2="280" stroke="#42a15a" stroke-width="5" marker-end="url(#greenArrow)"/>
+    <text x="1058" y="334" text-anchor="middle" font-size="16" fill="#23763a">输入回环</text>
+
+    <text x="940" y="382" text-anchor="middle" font-size="20" font-weight="700" fill="#23763a">FUNC_CTL = FEMC_DQS ｜ LOOP_BACK = 1</text>
+    <text x="940" y="422" text-anchor="middle" font-size="18" fill="#334155">DQS 模式选择“从 Pad 回环”，IO 控制器强制打开输入路径</text>
+    <text x="940" y="454" text-anchor="middle" font-size="18" fill="#334155">这条路径位于 HPM6E70 内部，不是 U9 的 PCB 信号线</text>
+  </g>
+</svg>

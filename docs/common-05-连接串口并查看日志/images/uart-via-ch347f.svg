@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="760" viewBox="0 0 1320 760" role="img" aria-labelledby="title desc">
+  <title id="title">CH347F 烧录器的串口与 JTAG 使用两条独立路径</title>
+  <desc id="desc">上方是 UART0 日志路径，经过 USB-C 分离器和烧录器串口 1 到达 Windows COM 端口。串口 1 在 Windows 中枚举为 USB-HiSpeed-SERIAL-B。下方是独立的 JTAG 烧录路径，从板卡 JTAG 接口直接进入 CH347F JTAG 通道，不经过 USB-C 分离器。</desc>
+  <defs>
+    <style>
+      .title{font:700 31px "Microsoft YaHei",sans-serif;fill:#172033}.lane{font:700 22px "Microsoft YaHei",sans-serif;fill:#172033}.head{font:700 20px "Microsoft YaHei",sans-serif;fill:#172033}.text{font:16px "Microsoft YaHei",sans-serif;fill:#344054}.small{font:14px "Microsoft YaHei",sans-serif;fill:#475467}.box{stroke-width:3}.uart-flow{stroke:#456bd9;stroke-width:4;fill:none}.jtag-flow{stroke:#d47a24;stroke-width:4;fill:none}
+    </style>
+    <marker id="uart-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto" viewBox="0 0 7 6">
+      <path d="M0,0 L0,6 L6,3 z" fill="#456bd9"/>
+    </marker>
+    <marker id="jtag-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto" viewBox="0 0 7 6">
+      <path d="M0,0 L0,6 L6,3 z" fill="#d47a24"/>
+    </marker>
+  </defs>
+
+  <rect width="1320" height="760" rx="28" fill="#f7f9fc"/>
+  <text x="660" y="52" text-anchor="middle" class="title">CH347F 的串口与 JTAG，是两条独立的硬件路径</text>
+
+  <rect x="28" y="82" width="1264" height="305" rx="22" fill="#eef4ff" stroke="#c8d8f5" stroke-width="2"/>
+  <text x="58" y="120" class="lane">程序日志路径（UART0）</text>
+
+  <rect x="50" y="150" width="245" height="180" rx="18" class="box" fill="#fff7ed" stroke="#e87520"/>
+  <text x="172" y="193" text-anchor="middle" class="head">HPM6E70 UART0</text>
+  <text x="172" y="235" text-anchor="middle" class="text">PA00 / UART0_TX</text>
+  <text x="172" y="268" text-anchor="middle" class="text">PA01 / UART0_RX</text>
+  <text x="172" y="306" text-anchor="middle" class="small">3.3 V UART，经 SBU 引出</text>
+
+  <path d="M310 240 L340 240" class="uart-flow" marker-end="url(#uart-arrow)"/>
+
+  <rect x="355" y="150" width="245" height="180" rx="18" class="box" fill="#ffffff" stroke="#4077d8"/>
+  <text x="477" y="193" text-anchor="middle" class="head">USB-C 分离器</text>
+  <text x="477" y="239" text-anchor="middle" class="text">引出 UART0_TX / RX</text>
+  <text x="477" y="274" text-anchor="middle" class="text">引出 GND</text>
+  <text x="477" y="306" text-anchor="middle" class="small">只引线，不做协议转换</text>
+
+  <path d="M615 240 L645 240" class="uart-flow" marker-end="url(#uart-arrow)"/>
+
+  <rect x="660" y="150" width="245" height="180" rx="18" class="box" fill="#f5f0ff" stroke="#7554c7"/>
+  <text x="782" y="193" text-anchor="middle" class="head">烧录器串口 1</text>
+  <text x="782" y="241" text-anchor="middle" class="text">UART ↔ USB</text>
+  <text x="782" y="278" text-anchor="middle" class="text">USB-HiSpeed-SERIAL-B</text>
+  <text x="782" y="306" text-anchor="middle" class="small">TX、RX、GND 按连接图确认</text>
+
+  <path d="M920 240 L950 240" class="uart-flow" marker-end="url(#uart-arrow)"/>
+
+  <rect x="965" y="150" width="305" height="180" rx="18" class="box" fill="#eef9f0" stroke="#3c9857"/>
+  <text x="1117" y="193" text-anchor="middle" class="head">Windows 串口终端</text>
+  <text x="1117" y="238" text-anchor="middle" class="text">打开烧录器对应的 COM 端口</text>
+  <text x="1117" y="274" text-anchor="middle" class="text">115200，8N1，无流控</text>
+  <text x="1117" y="306" text-anchor="middle" class="small">显示 HPM6E70 alive</text>
+
+  <text x="660" y="364" text-anchor="middle" class="small">本课查看日志时，数据只沿着上面这条路径由左向右传递。</text>
+
+  <rect x="28" y="410" width="1264" height="280" rx="22" fill="#fff7ed" stroke="#f0cfad" stroke-width="2"/>
+  <text x="58" y="449" class="lane">烧录与调试路径（JTAG）</text>
+
+  <rect x="85" y="485" width="300" height="145" rx="18" class="box" fill="#ffffff" stroke="#e87520"/>
+  <text x="235" y="529" text-anchor="middle" class="head">HPM6E70 JTAG 接口</text>
+  <text x="235" y="571" text-anchor="middle" class="text">TCK · TMS · TDI · TDO · GND</text>
+  <text x="235" y="605" text-anchor="middle" class="small">不经过 USB-C 分离器</text>
+
+  <path d="M405 557 L485 557" class="jtag-flow" marker-end="url(#jtag-arrow)"/>
+
+  <rect x="500" y="485" width="300" height="145" rx="18" class="box" fill="#ffffff" stroke="#7554c7"/>
+  <text x="650" y="529" text-anchor="middle" class="head">CH347F JTAG 通道</text>
+  <text x="650" y="571" text-anchor="middle" class="text">识别芯片 · 烧录 · 调试</text>
+  <text x="650" y="605" text-anchor="middle" class="small">使用烧录器 JTAG 端子</text>
+
+  <path d="M820 557 L900 557" class="jtag-flow" marker-end="url(#jtag-arrow)"/>
+
+  <rect x="915" y="485" width="320" height="145" rx="18" class="box" fill="#ffffff" stroke="#3c9857"/>
+  <text x="1075" y="529" text-anchor="middle" class="head">Windows OpenOCD</text>
+  <text x="1075" y="571" text-anchor="middle" class="text">通过 Interface 4 访问 JTAG</text>
+  <text x="1075" y="605" text-anchor="middle" class="small">west flash 使用的烧录路径</text>
+
+  <text x="660" y="724" text-anchor="middle" class="text">两条路径可以同时连接，但 UART0 不会经过 JTAG 线，JTAG 也不会经过 USB-C 分离器。</text>
+</svg>

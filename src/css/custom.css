@@ -1,417 +1,561 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
-
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #1769aa;
+  --ifm-color-primary-dark: #155f99;
+  --ifm-color-primary-darker: #145a91;
+  --ifm-color-primary-darkest: #104a77;
+  --ifm-color-primary-light: #1973bb;
+  --ifm-color-primary-lighter: #1a78c3;
+  --ifm-color-primary-lightest: #2589d9;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-font-family-base: Inter, "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --docusaurus-highlighted-code-line-bg: rgba(23, 105, 170, 0.12);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #69b7f0;
+  --ifm-color-primary-dark: #4ca8eb;
+  --ifm-color-primary-darker: #3da1e9;
+  --ifm-color-primary-darkest: #1784d2;
+  --ifm-color-primary-light: #86c6f5;
+  --ifm-color-primary-lighter: #95cdf7;
+  --ifm-color-primary-lightest: #c1e2fb;
+  --docusaurus-highlighted-code-line-bg: rgba(105, 183, 240, 0.18);
 }
 
-/* ============ Blog: Hero + Card Grid ============ */
-.blog-list-container {
-  margin-bottom: 2rem;
+.navbar__logo { height: 2.25rem; }
+.navbar__title { font-weight: 800; }
+.theme-doc-markdown { font-size: 1.02rem; line-height: 1.82; }
+.theme-doc-markdown h1 { font-size: clamp(2rem, 3vw, 2.65rem); }
+.theme-doc-markdown h2 {
+  margin-top: 2.7rem;
+  padding-left: 0.7rem;
+  border-left: 4px solid var(--ifm-color-primary);
 }
-
-/* Hero featured post */
-.blog-hero {
-  position: relative;
-  padding: 2.5rem 2rem;
-  margin-bottom: 2.5rem;
-  border-radius: 1rem;
-  background: linear-gradient(
-    135deg,
-    var(--ifm-color-primary-lightest),
-    var(--ifm-color-primary)
-  );
-  color: #fff;
-  overflow: hidden;
-}
-.blog-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at top right,
-    rgba(255, 255, 255, 0.25),
-    transparent 60%
-  );
-  pointer-events: none;
-}
-.blog-hero__badge {
-  display: inline-block;
-  padding: 0.25rem 0.75rem;
-  margin-bottom: 1rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.2);
-}
-.blog-hero__title {
-  margin-bottom: 0.75rem;
-  font-size: 2rem;
-  line-height: 1.2;
-}
-.blog-hero__title a {
-  color: #fff;
-  text-decoration: none;
-}
-.blog-hero__title a:hover {
-  text-decoration: underline;
-}
-.blog-hero__desc {
-  font-size: 1.1rem;
-  opacity: 0.95;
-  margin-bottom: 1rem;
-  max-width: 60ch;
-}
-.blog-hero__meta {
-  font-size: 0.9rem;
-  opacity: 0.9;
-  margin-bottom: 0.75rem;
-}
-.blog-hero__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
-}
-.blog-hero .blog-tag {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-.blog-hero__cta {
-  background: #fff !important;
-  color: var(--ifm-color-primary-darkest) !important;
-  border: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.blog-hero__cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  color: var(--ifm-color-primary-darkest) !important;
-}
-
-/* Shared tag badge */
-.blog-tag {
-  display: inline-block;
-  padding: 0.15rem 0.6rem;
-  font-size: 0.78rem;
-  border-radius: 999px;
-  background: var(--ifm-color-emphasis-200);
-  color: var(--ifm-color-emphasis-700);
-  white-space: nowrap;
-}
-
-/* Card grid */
-.blog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
-}
-
-/* Blog card */
-.blog-card {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-  border-radius: 0.75rem;
+.theme-doc-markdown h3 { margin-top: 2rem; }
+.theme-doc-markdown img {
+  display: block;
+  max-width: 100%;
+  margin: 1.25rem auto;
   border: 1px solid var(--ifm-color-emphasis-200);
-  background: var(--ifm-background-color);
-  text-decoration: none;
-  color: inherit;
-  height: 100%;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border-radius: 0.65rem;
+  box-shadow: 0 8px 24px rgba(21, 50, 75, 0.09);
 }
-.blog-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-  border-color: var(--ifm-color-primary-light);
-  text-decoration: none;
-  color: inherit;
-}
-.blog-card__body {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-.blog-card__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 0.6rem;
-}
-.blog-card__title {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: var(--ifm-heading-color);
-}
-.blog-card__desc {
+.theme-doc-markdown .image-caption {
+  max-width: 52rem;
+  margin: -0.7rem auto 1.65rem;
   color: var(--ifm-color-emphasis-700);
-  font-size: 0.92rem;
-  line-height: 1.55;
-  margin-bottom: 0.75rem;
-  flex: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: center;
+}
+.theme-doc-markdown table { display: table; width: 100%; }
+.theme-doc-markdown thead { background: #eaf4fc; }
+[data-theme='dark'] .theme-doc-markdown thead { background: #17364d; }
+.alert { border-radius: 0.75rem; }
+.menu__link { line-height: 1.45; }
+
+@media (max-width: 996px) {
+  .theme-doc-markdown table { display: block; overflow-x: auto; }
+}
+
+/* HPM6E70 course landing page */
+.course-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(19rem, 0.92fr);
+  gap: clamp(1.5rem, 3vw, 2.7rem);
+  align-items: center;
+  margin: 0.4rem 0 2.7rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border: 1px solid rgba(23, 105, 170, 0.14);
+  border-radius: 1.25rem;
+  color: var(--ifm-font-color-base);
+  background:
+    radial-gradient(circle at 92% 8%, rgba(90, 183, 231, 0.16), transparent 21rem),
+    linear-gradient(145deg, #f6fbff 0%, #fff 68%);
+  box-shadow: 0 16px 42px rgba(31, 76, 107, 0.08);
   overflow: hidden;
 }
-.blog-card__meta {
-  font-size: 0.82rem;
-  color: var(--ifm-color-emphasis-600);
-  margin-bottom: 0.5rem;
+
+.course-hero__copy {
+  min-width: 0;
+  padding: 0.35rem 0;
 }
-.blog-card__more {
-  font-size: 0.88rem;
-  font-weight: 600;
+
+.course-hero__eyebrow {
+  display: block;
+  margin-bottom: 0.85rem;
   color: var(--ifm-color-primary);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
 }
 
-/* Dark mode tweaks */
-[data-theme='dark'] .blog-hero {
-  background: linear-gradient(
-    135deg,
-    var(--ifm-color-primary),
-    var(--ifm-color-primary-darkest)
-  );
-}
-[data-theme='dark'] .blog-card {
-  border-color: var(--ifm-color-emphasis-300);
-}
-[data-theme='dark'] .blog-card:hover {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .blog-hero {
-    padding: 1.75rem 1.25rem;
-  }
-  .blog-hero__title {
-    font-size: 1.5rem;
-  }
-  .blog-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ============ Rockchip factory documents ============ */
-/*
- * Keep these rules scoped to the imported Common manual set. The rest of the
- * site keeps its existing Docusaurus styling.
- */
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/'] {
-  --rockchip-doc-border: var(--ifm-color-emphasis-200);
-  --rockchip-doc-surface: var(--ifm-color-emphasis-100);
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown {
-  color: var(--ifm-font-color-base);
-  font-size: 1rem;
-  line-height: 1.8;
-  overflow-wrap: anywhere;
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  h1:first-of-type {
-  margin-bottom: 1.75rem;
-  padding-bottom: 0.8rem;
-  border-bottom: 1px solid var(--rockchip-doc-border);
-  font-size: clamp(2rem, 2.6vw, 2.5rem);
-  line-height: 1.25;
+.theme-doc-markdown .course-hero h1 {
+  max-width: 12em;
+  margin: 0 0 1.05rem;
+  color: var(--ifm-heading-color);
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  line-height: 1.18;
   letter-spacing: -0.035em;
 }
 
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  h2 {
-  margin-top: 2.8rem;
-  padding-bottom: 0.45rem;
-  border-bottom: 1px solid var(--rockchip-doc-border);
-  font-size: 1.75rem;
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  h3 {
-  margin-top: 2.2rem;
-  font-size: 1.38rem;
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  h4 {
-  margin-top: 1.8rem;
-  font-size: 1.15rem;
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  h5,
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  h6 {
-  margin-top: 1.5rem;
-  font-size: 1rem;
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  p,
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  li {
-  max-width: 86ch;
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  ul,
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  ol {
-  padding-left: 1.5rem;
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  table {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  margin: 1.5rem 0 2rem;
-  border: 1px solid var(--rockchip-doc-border);
-  border-collapse: separate;
-  border-spacing: 0;
-  font-size: 0.93rem;
-  line-height: 1.55;
-  overflow-x: auto;
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  table
-  th {
-  background: var(--rockchip-doc-surface);
-  color: var(--ifm-heading-color);
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  table
-  th,
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  table
-  td {
-  min-width: 7rem;
-  padding: 0.7rem 0.85rem;
-  vertical-align: top;
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  table
-  tbody
-  tr:nth-child(even) {
-  background: color-mix(in srgb, var(--rockchip-doc-surface) 55%, transparent);
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  p:has(> img:only-child) {
-  max-width: 100%;
-  margin: 1.75rem auto 0.5rem;
-  text-align: center;
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-markdown
-  p
-  > img:only-child {
-  max-height: 42rem;
-  border: 1px solid var(--rockchip-doc-border);
-  border-radius: 0.55rem;
-  background: #fff;
-  box-shadow: 0 8px 24px rgba(20, 35, 30, 0.08);
-}
-
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .rockchip-figure-caption {
-  max-width: 76ch;
-  margin: 0.4rem auto 1.75rem;
+.course-hero__lead {
+  max-width: 42rem;
+  margin: 0;
   color: var(--ifm-color-emphasis-700);
-  font-size: 0.9rem;
-  text-align: center;
+  font-size: clamp(0.98rem, 1.25vw, 1.08rem);
+  line-height: 1.78;
 }
 
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-code-block {
-  max-height: 42rem;
-  overflow: auto;
+.course-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  align-items: center;
+  margin-top: 1.5rem;
 }
 
-html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-  .theme-doc-toc-desktop {
+.course-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.course-button:hover {
+  text-decoration: none;
+}
+
+.course-button--primary {
+  padding: 0.65rem 1.05rem;
+  border-radius: 0.68rem;
+  color: #fff;
+  background: var(--ifm-color-primary);
+  box-shadow: 0 8px 18px rgba(23, 105, 170, 0.2);
+}
+
+.course-button--primary:hover {
+  color: #fff;
+  background: var(--ifm-color-primary-dark);
+}
+
+.course-button--text,
+.course-button--text:hover {
+  color: var(--ifm-color-primary);
+}
+
+.course-hero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.2rem;
+  margin-top: 1.6rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-650);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.course-hero__facts span::before {
+  display: inline-block;
+  width: 0.38rem;
+  height: 0.38rem;
+  margin-right: 0.45rem;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  content: "";
+  vertical-align: 0.08rem;
+}
+
+.course-hero__visual {
+  margin: 0;
+  padding: 0.7rem 0.7rem 0;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 0.95rem;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(31, 76, 107, 0.1);
+  overflow: hidden;
+}
+
+.course-hero__image {
+  display: flex;
+  height: clamp(18rem, 24vw, 22rem);
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  overflow: hidden;
+}
+
+.theme-doc-markdown .course-hero__image img {
+  width: 88%;
+  max-width: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.course-hero__visual figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  padding: 0.68rem 0.3rem 0.75rem;
+  border-top: 1px solid #edf1f4;
+  color: #627787;
+  background: #fff;
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+
+.course-hero__visual figcaption strong {
+  color: #19384d;
   font-size: 0.82rem;
 }
 
-/* At common laptop widths, use the TOC drawer and give technical content room. */
-@media (min-width: 997px) and (max-width: 1440px) {
-  html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-    [class*='docItemCol_'] {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-  }
+.course-capabilities {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 1.3rem 0 2.8rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
 
-  html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-    .theme-doc-toc-desktop {
-    display: none;
-  }
+.course-capabilities > div {
+  padding: 1.25rem 1.2rem 1.2rem;
+  border-left: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.course-capabilities > div:first-child {
+  border-left: 0;
+}
+
+.course-capabilities span,
+.course-flow span {
+  color: var(--ifm-color-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.course-capabilities strong {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--ifm-heading-color);
+  font-size: 0.95rem;
+}
+
+.course-capabilities__description {
+  display: block;
+  margin: 0.45rem 0 0;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.course-prep {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  margin: 1.2rem 0 0.85rem;
+  padding: 1.05rem 1.2rem;
+  border: 1px solid rgba(23, 105, 170, 0.22);
+  border-radius: 0.9rem;
+  color: inherit;
+  background: linear-gradient(90deg, rgba(23, 105, 170, 0.08), rgba(23, 105, 170, 0.025));
+  text-decoration: none;
+}
+
+.course-prep:hover {
+  border-color: rgba(23, 105, 170, 0.45);
+  color: inherit;
+  text-decoration: none;
+}
+
+.course-prep__index,
+.course-track-card__index {
+  color: var(--ifm-color-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1.45rem;
+  font-weight: 800;
+}
+
+.course-prep__body {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.45;
+}
+
+.course-prep small,
+.course-track-card small {
+  color: var(--ifm-color-primary);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.course-prep strong {
+  margin: 0.12rem 0 0.18rem;
+  color: var(--ifm-heading-color);
+  font-size: 1rem;
+}
+
+.course-prep__body > span {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.8rem;
+}
+
+.course-prep > b,
+.course-track-card > b {
+  color: var(--ifm-color-primary);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.course-track-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  margin: 0 0 2.8rem;
+}
+
+.course-track-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 12.5rem;
+  padding: 1.25rem 1.35rem 1.2rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 0.9rem;
+  color: inherit;
+  background: var(--ifm-background-surface-color);
+  box-shadow: 0 10px 26px rgba(31, 76, 107, 0.055);
+  text-decoration: none;
+}
+
+.course-track-card:hover {
+  border-color: rgba(23, 105, 170, 0.42);
+  color: inherit;
+  box-shadow: 0 15px 32px rgba(31, 76, 107, 0.1);
+  text-decoration: none;
+}
+
+.course-track-card small {
+  margin-top: 0.45rem;
+}
+
+.course-track-card > strong {
+  margin-top: 0.15rem;
+  color: var(--ifm-heading-color);
+  font-size: 1.15rem;
+}
+
+.course-track-card__description {
+  display: block;
+  margin: 0.65rem 0 1rem;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.course-track-card > b {
+  margin-top: auto;
+}
+
+.course-track-card--featured {
+  border-color: rgba(23, 105, 170, 0.3);
+  background:
+    linear-gradient(145deg, rgba(23, 105, 170, 0.1), rgba(85, 186, 232, 0.035)),
+    var(--ifm-background-surface-color);
+}
+
+.course-flow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 1.35rem 0 2.8rem;
+  border-top: 2px solid rgba(23, 105, 170, 0.24);
+}
+
+.course-flow > div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  padding: 1.1rem 0.8rem 0;
+}
+
+.course-flow > div::before {
+  position: absolute;
+  top: -0.38rem;
+  left: 0.8rem;
+  width: 0.62rem;
+  height: 0.62rem;
+  border: 2px solid var(--ifm-background-color);
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  content: "";
+}
+
+.course-flow strong {
+  margin-top: 0.35rem;
+  color: var(--ifm-heading-color);
+  font-size: 0.86rem;
+}
+
+.course-flow small {
+  color: var(--ifm-color-emphasis-650);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.course-requirements {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 1.2rem 0 1.6rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 0.9rem;
+  background: var(--ifm-background-surface-color);
+  overflow: hidden;
+}
+
+.course-requirements > div {
+  padding: 1.1rem 1.2rem;
+  border-left: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.course-requirements > div:first-child {
+  border-left: 0;
+}
+
+.course-requirements strong {
+  color: var(--ifm-heading-color);
+  font-size: 0.9rem;
+}
+
+.course-requirements__description {
+  display: block;
+  margin: 0.45rem 0 0;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+[data-theme='dark'] .course-hero {
+  border-color: rgba(105, 183, 240, 0.17);
+  background:
+    radial-gradient(circle at 92% 8%, rgba(55, 160, 208, 0.14), transparent 21rem),
+    linear-gradient(145deg, #132633, #101d26);
+}
+
+[data-theme='dark'] .course-hero__visual {
+  border-color: rgba(105, 183, 240, 0.16);
+  background: #172b37;
+}
+
+[data-theme='dark'] .course-track-card--featured {
+  background:
+    linear-gradient(145deg, rgba(105, 183, 240, 0.13), rgba(105, 183, 240, 0.025)),
+    var(--ifm-background-surface-color);
 }
 
 @media (max-width: 996px) {
-  html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-    .theme-doc-markdown
-    h1:first-of-type {
+  .course-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .course-hero__visual {
+    width: min(100%, 34rem);
+  }
+
+  .course-capabilities {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .course-capabilities > div:nth-child(3) {
+    border-left: 0;
+    border-top: 1px solid var(--ifm-color-emphasis-200);
+  }
+
+  .course-capabilities > div:nth-child(4) {
+    border-top: 1px solid var(--ifm-color-emphasis-200);
+  }
+}
+
+@media (max-width: 720px) {
+  .course-hero {
+    gap: 1.35rem;
+    margin-top: 0;
+    padding: 1.25rem;
+    border-radius: 1rem;
+  }
+
+  .theme-doc-markdown .course-hero h1 {
     font-size: 2rem;
   }
 
-  html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-    .theme-doc-markdown
-    table
-    th,
-  html[class*='docs-doc-id-DshanPi-A1/原厂在线文档/Common/']
-    .theme-doc-markdown
-    table
-    td {
-    min-width: 6.5rem;
+  .course-hero__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .course-button--primary {
+    justify-content: center;
+  }
+
+  .course-hero__image {
+    height: 18rem;
+  }
+
+  .course-capabilities,
+  .course-track-grid,
+  .course-requirements {
+    grid-template-columns: 1fr;
+  }
+
+  .course-capabilities > div {
+    border-top: 1px solid var(--ifm-color-emphasis-200);
+    border-left: 0;
+  }
+
+  .course-capabilities > div:first-child {
+    border-top: 0;
+  }
+
+  .course-prep {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .course-prep > b {
+    grid-column: 2;
+  }
+
+  .course-track-card {
+    min-height: 0;
+  }
+
+  .course-flow {
+    grid-template-columns: 1fr;
+    border-top: 0;
+    border-left: 2px solid rgba(23, 105, 170, 0.24);
+  }
+
+  .course-flow > div {
+    padding: 0.5rem 0 0.85rem 1.2rem;
+  }
+
+  .course-flow > div::before {
+    top: 0.72rem;
+    left: -0.38rem;
+  }
+
+  .course-requirements > div {
+    border-top: 1px solid var(--ifm-color-emphasis-200);
+    border-left: 0;
+  }
+
+  .course-requirements > div:first-child {
+    border-top: 0;
   }
 }

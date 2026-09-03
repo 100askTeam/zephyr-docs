@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-labelledby="title desc">
+  <title id="title">沿着 SDRAM 的 A0 信号找到 FEMC 管脚功能</title>
+  <desc id="desc">从 SDRAM 引脚 A0，沿原理图网络 DRAM_A0 找到 HPM6E70 的 PD02，再查到该引脚的复用功能 FEMC_A_00。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4b6385"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="420" rx="28" fill="#f6f8fc"/>
+  <text x="640" y="58" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="32" font-weight="700" fill="#18263d">从 SDRAM 信号到 FEMC 管脚功能</text>
+
+  <rect x="55" y="115" width="250" height="170" rx="20" fill="#fff8ee" stroke="#df7b21" stroke-width="3"/>
+  <text x="180" y="157" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="21" font-weight="700" fill="#8e4308">① SDRAM U9</text>
+  <text x="180" y="211" text-anchor="middle" font-family="Consolas, monospace" font-size="31" font-weight="700" fill="#18263d">A0</text>
+  <text x="180" y="252" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="18" fill="#5a6472">芯片的地址引脚</text>
+
+  <line x1="305" y1="200" x2="370" y2="200" stroke="#4b6385" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <rect x="380" y="115" width="250" height="170" rx="20" fill="#eef5ff" stroke="#4877d9" stroke-width="3"/>
+  <text x="505" y="157" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="21" font-weight="700" fill="#244b9a">② 原理图网络名</text>
+  <text x="505" y="211" text-anchor="middle" font-family="Consolas, monospace" font-size="29" font-weight="700" fill="#18263d">DRAM_A0</text>
+  <text x="505" y="252" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="18" fill="#5a6472">沿同名网络找到 MCU</text>
+
+  <line x1="630" y1="200" x2="695" y2="200" stroke="#4b6385" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <rect x="705" y="115" width="220" height="170" rx="20" fill="#f4efff" stroke="#7653c6" stroke-width="3"/>
+  <text x="815" y="157" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="21" font-weight="700" fill="#55369b">③ MCU 引脚</text>
+  <text x="815" y="211" text-anchor="middle" font-family="Consolas, monospace" font-size="31" font-weight="700" fill="#18263d">PD02</text>
+  <text x="815" y="252" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="18" fill="#5a6472">再查引脚复用表</text>
+
+  <line x1="925" y1="200" x2="990" y2="200" stroke="#4b6385" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <rect x="1000" y="115" width="230" height="170" rx="20" fill="#eef9f0" stroke="#42a15a" stroke-width="3"/>
+  <text x="1115" y="157" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="21" font-weight="700" fill="#23763a">④ 复用功能</text>
+  <text x="1115" y="207" text-anchor="middle" font-family="Consolas, monospace" font-size="23" font-weight="700" fill="#18263d">FEMC_A_00</text>
+  <text x="1115" y="250" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="18" fill="#23763a">名称明确写着 FEMC</text>
+
+  <rect x="205" y="326" width="870" height="58" rx="16" fill="#eaf7ed" stroke="#42a15a" stroke-width="2"/>
+  <text x="640" y="364" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="23" font-weight="700" fill="#205f31">地址、数据、时钟和控制信号均对应 HPM6E70 的 FEMC 管脚功能</text>
+</svg>

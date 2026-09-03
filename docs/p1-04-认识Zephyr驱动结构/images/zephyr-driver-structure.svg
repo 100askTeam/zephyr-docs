@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">Zephyr 驱动结构</title>
+  <desc id="desc">应用通过 Zephyr sensor API 调用设备驱动，工程配置文件在构建时生成驱动实例，驱动再操作硬件。</desc>
+  <defs>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3668d8"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#31804a"/>
+    </marker>
+    <filter id="particleGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .title{font:700 25px Arial,"Microsoft YaHei",sans-serif;fill:#16213b}
+      .section{font:700 17px Arial,"Microsoft YaHei",sans-serif;fill:#24324a}
+      .label{font:700 17px Arial,"Microsoft YaHei",sans-serif;fill:#152038}
+      .text{font:14px Arial,"Microsoft YaHei",sans-serif;fill:#35435b}
+      .small{font:13px Arial,"Microsoft YaHei",sans-serif;fill:#536176}
+      .line{stroke:#3668d8;stroke-width:3;fill:none;marker-end:url(#arrowBlue)}
+      .buildLine{stroke:#31804a;stroke-width:2.5;fill:none;marker-end:url(#arrowGreen)}
+      .flowParticle{filter:url(#particleGlow);pointer-events:none}
+      .runtimeParticle{fill:#76a0ff}
+      .configParticle{fill:#68bd79}
+    </style>
+  </defs>
+
+  <rect width="960" height="560" rx="18" fill="#fbfcff"/>
+  <text x="480" y="42" text-anchor="middle" class="title">应用、Zephyr 接口与设备驱动</text>
+
+  <rect x="32" y="66" width="896" height="98" rx="14" fill="#eef4ff" stroke="#9cb7ed" stroke-width="1.5"/>
+  <text x="54" y="91" class="section">应用</text>
+  <rect x="190" y="88" width="178" height="54" rx="9" fill="#fff" stroke="#6188dd" stroke-width="1.5"/>
+  <text x="279" y="111" text-anchor="middle" class="label">main.c</text>
+  <text x="279" y="132" text-anchor="middle" class="small">决定测量周期与显示方式</text>
+  <path d="M 368 115 H 445" class="line"/>
+  <circle r="5" class="flowParticle runtimeParticle">
+    <animateMotion dur="1.5s" repeatCount="indefinite" path="M 368 115 H 445"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.84;1" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <rect x="446" y="88" width="300" height="54" rx="9" fill="#fff" stroke="#6188dd" stroke-width="1.5"/>
+  <text x="596" y="111" text-anchor="middle" class="label">sensor_sample_fetch()</text>
+  <text x="596" y="132" text-anchor="middle" class="small">sensor_channel_get()</text>
+
+  <rect x="152" y="190" width="620" height="66" rx="12" fill="#426bd7"/>
+  <text x="462" y="216" text-anchor="middle" font-family="Arial,Microsoft YaHei,sans-serif" font-size="19" font-weight="700" fill="#fff">Zephyr 设备模型与 sensor API</text>
+  <text x="462" y="240" text-anchor="middle" font-family="Arial,Microsoft YaHei,sans-serif" font-size="14" fill="#eaf0ff">把公共调用转到当前设备实例的驱动函数</text>
+  <path d="M 596 142 V 188" class="line"/>
+  <circle r="5" class="flowParticle runtimeParticle">
+    <animateMotion dur="1.35s" begin="0.35s" repeatCount="indefinite" path="M 596 142 V 188"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.84;1" dur="1.35s" begin="0.35s" repeatCount="indefinite"/>
+  </circle>
+
+  <rect x="32" y="286" width="600" height="190" rx="14" fill="#fff8e8" stroke="#e2ad48" stroke-width="1.5"/>
+  <text x="54" y="314" class="section">设备驱动</text>
+  <rect x="54" y="332" width="164" height="54" rx="9" fill="#fff" stroke="#d89a28"/>
+  <text x="136" y="355" text-anchor="middle" class="label">config</text>
+  <text x="136" y="376" text-anchor="middle" class="small">TRIG、ECHO 配置</text>
+  <rect x="234" y="332" width="164" height="54" rx="9" fill="#fff" stroke="#d89a28"/>
+  <text x="316" y="355" text-anchor="middle" class="label">data</text>
+  <text x="316" y="376" text-anchor="middle" class="small">最近一次测量数据</text>
+  <rect x="414" y="332" width="196" height="54" rx="9" fill="#fff" stroke="#d89a28"/>
+  <text x="512" y="355" text-anchor="middle" class="label">init()</text>
+  <text x="512" y="376" text-anchor="middle" class="small">检查并配置硬件</text>
+  <rect x="54" y="402" width="256" height="54" rx="9" fill="#fff" stroke="#d89a28"/>
+  <text x="182" y="425" text-anchor="middle" class="label">sample_fetch()</text>
+  <text x="182" y="446" text-anchor="middle" class="small">触发并保存一次测量</text>
+  <rect x="326" y="402" width="284" height="54" rx="9" fill="#fff" stroke="#d89a28"/>
+  <text x="468" y="425" text-anchor="middle" class="label">channel_get()</text>
+  <text x="468" y="446" text-anchor="middle" class="small">按距离通道返回结果</text>
+  <path d="M 462 256 V 284" class="line"/>
+  <circle r="5" class="flowParticle runtimeParticle">
+    <animateMotion dur="1.2s" begin="0.7s" repeatCount="indefinite" path="M 462 256 V 284"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.84;1" dur="1.2s" begin="0.7s" repeatCount="indefinite"/>
+  </circle>
+
+  <rect x="660" y="286" width="268" height="190" rx="14" fill="#eef9f0" stroke="#72ad7d" stroke-width="1.5"/>
+  <text x="682" y="314" class="section">构建时提供</text>
+  <text x="682" y="347" class="text">overlay：设备与引脚</text>
+  <text x="682" y="378" class="text">Binding：节点属性规则</text>
+  <text x="682" y="409" class="text">Kconfig：是否启用</text>
+  <text x="682" y="440" class="text">CMake：编译哪个源文件</text>
+  <path d="M 660 381 H 634" class="buildLine"/>
+  <circle r="5" class="flowParticle configParticle">
+    <animateMotion dur="1.4s" repeatCount="indefinite" path="M 660 381 H 634"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.84;1" dur="1.4s" repeatCount="indefinite"/>
+  </circle>
+
+  <path d="M 332 476 V 507" class="buildLine"/>
+  <circle r="5" class="flowParticle configParticle">
+    <animateMotion dur="1.3s" begin="0.55s" repeatCount="indefinite" path="M 332 476 V 507"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.84;1" dur="1.3s" begin="0.55s" repeatCount="indefinite"/>
+  </circle>
+  <rect x="246" y="508" width="172" height="38" rx="9" fill="#e9f7ec" stroke="#4f965d" stroke-width="1.5"/>
+  <text x="332" y="533" text-anchor="middle" class="label">硬件设备</text>
+  <text x="448" y="533" class="small">驱动读取配置并操作 TRIG、ECHO</text>
+</svg>

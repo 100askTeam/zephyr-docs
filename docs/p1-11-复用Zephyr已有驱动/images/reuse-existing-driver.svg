@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="610" viewBox="0 0 1120 610" role="img" aria-labelledby="title desc">
+  <title id="title">Zephyr 已有驱动如何进入应用</title>
+  <desc id="desc">Zephyr 已有的 Binding、Kconfig、CMake 和驱动源文件，与应用提供的 overlay 和 prj.conf 一起交给构建系统。构建系统匹配设备树节点并编译驱动，运行时应用通过设备实例和 sensor API 操作 MPU6050。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#4169cf"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#33804c"/>
+    </marker>
+    <style>
+      .title { font: 700 28px system-ui, "Microsoft YaHei", sans-serif; fill: #13213a; }
+      .group-title { font: 700 19px system-ui, "Microsoft YaHei", sans-serif; fill: #13213a; }
+      .box-title { font: 700 18px system-ui, "Microsoft YaHei", sans-serif; fill: #17233b; }
+      .body { font: 15px system-ui, "Microsoft YaHei", sans-serif; fill: #41506a; }
+      .small { font: 14px system-ui, "Microsoft YaHei", sans-serif; fill: #53617a; }
+      .arrow { fill: none; stroke: #4169cf; stroke-width: 3; marker-end: url(#arrow); }
+      .arrow-green { fill: none; stroke: #33804c; stroke-width: 3; marker-end: url(#arrow-green); }
+      .flow { fill: none; stroke-width: 5; stroke-dasharray: 12 40; stroke-linecap: round; pointer-events: none; }
+      .flow-blue { stroke: #ffffff; }
+      .flow-green { stroke: #ffffff; }
+    </style>
+  </defs>
+
+  <rect x="1" y="1" width="1118" height="608" rx="16" fill="#fbfcff" stroke="#d9e0ec"/>
+  <text x="560" y="42" text-anchor="middle" class="title">Zephyr 已有驱动如何进入应用</text>
+
+  <!-- 两组并列输入：不存在先后执行关系。 -->
+  <rect x="28" y="70" width="654" height="166" rx="14" fill="#f4f7ff" stroke="#9ab1e8" stroke-width="2"/>
+  <text x="50" y="99" class="group-title">Zephyr 已经提供</text>
+
+  <rect x="48" y="116" width="190" height="96" rx="11" fill="#f2edff" stroke="#8059d7" stroke-width="2"/>
+  <text x="143" y="147" text-anchor="middle" class="box-title">Binding</text>
+  <text x="143" y="173" text-anchor="middle" class="body">compatible 与节点规则</text>
+  <text x="143" y="196" text-anchor="middle" class="small">invensense,mpu6050</text>
+
+  <rect x="260" y="116" width="190" height="96" rx="11" fill="#eef4ff" stroke="#4d78dc" stroke-width="2"/>
+  <text x="355" y="147" text-anchor="middle" class="box-title">Kconfig + CMake</text>
+  <text x="355" y="173" text-anchor="middle" class="body">配置条件与编译规则</text>
+  <text x="355" y="196" text-anchor="middle" class="small">CONFIG_MPU6050</text>
+
+  <rect x="472" y="116" width="190" height="96" rx="11" fill="#fff6e7" stroke="#d89022" stroke-width="2"/>
+  <text x="567" y="147" text-anchor="middle" class="box-title">驱动源文件</text>
+  <text x="567" y="173" text-anchor="middle" class="body">I2C 操作与数据换算</text>
+  <text x="567" y="196" text-anchor="middle" class="small">mpu6050.c</text>
+
+  <rect x="708" y="70" width="384" height="166" rx="14" fill="#f2faf3" stroke="#8dbd98" stroke-width="2"/>
+  <text x="730" y="99" class="group-title">应用需要补充</text>
+
+  <rect x="728" y="116" width="160" height="96" rx="11" fill="#ffffff" stroke="#4f9962" stroke-width="2"/>
+  <text x="808" y="147" text-anchor="middle" class="box-title">overlay</text>
+  <text x="808" y="173" text-anchor="middle" class="body">I2C1、地址 0x68</text>
+  <text x="808" y="196" text-anchor="middle" class="small">模块接在哪里</text>
+
+  <rect x="912" y="116" width="160" height="96" rx="11" fill="#ffffff" stroke="#4f9962" stroke-width="2"/>
+  <text x="992" y="147" text-anchor="middle" class="box-title">prj.conf</text>
+  <text x="992" y="173" text-anchor="middle" class="body">启用 SENSOR</text>
+  <text x="992" y="196" text-anchor="middle" class="small">启用 MPU6050</text>
+
+  <!-- 两组输入分别进入构建系统，箭头避开所有文字。 -->
+  <path class="arrow" d="M355 236 V278"/>
+  <path class="arrow-green" d="M900 236 V278"/>
+  <path class="flow flow-blue" d="M355 236 V278">
+    <animate attributeName="stroke-dashoffset" from="12" to="-40" dur="1s" repeatCount="indefinite"/>
+  </path>
+  <path class="flow flow-green" d="M900 236 V278">
+    <animate attributeName="stroke-dashoffset" from="12" to="-40" dur="1s" begin="0.15s" repeatCount="indefinite"/>
+  </path>
+
+  <rect x="116" y="282" width="888" height="130" rx="15" fill="#eef3ff" stroke="#587bd2" stroke-width="2"/>
+  <text x="560" y="313" text-anchor="middle" class="group-title">构建时：匹配节点并选择驱动</text>
+
+  <rect x="146" y="330" width="388" height="58" rx="10" fill="#ffffff" stroke="#a8b9df"/>
+  <circle cx="169" cy="359" r="14" fill="#8059d7"/>
+  <text x="169" y="364" text-anchor="middle" font-family="system-ui, Microsoft YaHei, sans-serif" font-size="14" font-weight="700" fill="#ffffff">1</text>
+  <text x="194" y="353" class="box-title">overlay 的 compatible 匹配 Binding</text>
+  <text x="194" y="376" class="small">生成可用的 MPU6050 设备节点</text>
+
+  <rect x="558" y="330" width="416" height="58" rx="10" fill="#ffffff" stroke="#a8b9df"/>
+  <circle cx="581" cy="359" r="14" fill="#4d78dc"/>
+  <text x="581" y="364" text-anchor="middle" font-family="system-ui, Microsoft YaHei, sans-serif" font-size="14" font-weight="700" fill="#ffffff">2</text>
+  <text x="606" y="353" class="box-title">设备树条件与 prj.conf 通过 Kconfig</text>
+  <text x="606" y="376" class="small">CMake 把 Zephyr 的 mpu6050.c 编入固件</text>
+
+  <!-- 构建结果进入运行时。 -->
+  <path class="arrow" d="M560 412 V449"/>
+  <path class="flow flow-blue" d="M560 412 V449">
+    <animate attributeName="stroke-dashoffset" from="12" to="-40" dur="1s" begin="0.3s" repeatCount="indefinite"/>
+  </path>
+  <text x="580" y="438" class="small">生成固件</text>
+
+  <text x="36" y="474" class="group-title">运行时</text>
+
+  <rect x="36" y="490" width="240" height="86" rx="12" fill="#eef4ff" stroke="#4d78dc" stroke-width="2"/>
+  <text x="156" y="520" text-anchor="middle" class="box-title">应用代码</text>
+  <text x="156" y="546" text-anchor="middle" class="body">DEVICE_DT_GET()</text>
+  <text x="156" y="568" text-anchor="middle" class="small">sensor_sample_fetch()</text>
+
+  <rect x="326" y="490" width="210" height="86" rx="12" fill="#eef4ff" stroke="#4d78dc" stroke-width="2"/>
+  <text x="431" y="520" text-anchor="middle" class="box-title">Zephyr 设备实例</text>
+  <text x="431" y="546" text-anchor="middle" class="body">连接节点与 sensor API</text>
+
+  <rect x="586" y="490" width="210" height="86" rx="12" fill="#fff6e7" stroke="#d89022" stroke-width="2"/>
+  <text x="691" y="520" text-anchor="middle" class="box-title">已有 MPU6050 驱动</text>
+  <text x="691" y="546" text-anchor="middle" class="body">按照节点配置操作 I2C</text>
+
+  <rect x="846" y="490" width="238" height="86" rx="12" fill="#edf8ef" stroke="#4f9962" stroke-width="2"/>
+  <text x="965" y="520" text-anchor="middle" class="box-title">I2C1 上的 MPU6050</text>
+  <text x="965" y="546" text-anchor="middle" class="body">返回加速度、角速度和温度</text>
+
+  <path class="arrow" d="M276 533 H316"/>
+  <path class="arrow" d="M536 533 H576"/>
+  <path class="arrow-green" d="M796 533 H836"/>
+  <path class="flow flow-blue" d="M276 533 H316">
+    <animate attributeName="stroke-dashoffset" from="12" to="-40" dur="1s" repeatCount="indefinite"/>
+  </path>
+  <path class="flow flow-blue" d="M536 533 H576">
+    <animate attributeName="stroke-dashoffset" from="12" to="-40" dur="1s" begin="0.2s" repeatCount="indefinite"/>
+  </path>
+  <path class="flow flow-green" d="M796 533 H836">
+    <animate attributeName="stroke-dashoffset" from="12" to="-40" dur="1s" begin="0.4s" repeatCount="indefinite"/>
+  </path>
+</svg>

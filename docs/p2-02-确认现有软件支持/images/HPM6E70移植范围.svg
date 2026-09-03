@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650">
+  <rect width="1200" height="650" fill="#f7f9fc"/>
+  <text x="600" y="60" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="34" font-weight="700" fill="#172b4d">把 Zephyr 运行到 HPM6E70 需要接通哪些层</text>
+
+  <rect x="110" y="105" width="980" height="90" rx="18" fill="#e8f1ff" stroke="#3b78c8" stroke-width="3"/>
+  <text x="150" y="145" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#174d88">Zephyr RISC-V 架构层</text>
+  <text x="150" y="178" font-family="Microsoft YaHei, sans-serif" font-size="19" fill="#29445f">上下文切换、中断入口和内核架构支持已经存在，本次直接复用</text>
+  <rect x="880" y="125" width="160" height="48" rx="24" fill="#2f855a"/>
+  <text x="960" y="157" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="white">已有支持</text>
+
+  <rect x="110" y="220" width="980" height="105" rx="18" fill="#fff2d9" stroke="#cf7b16" stroke-width="4"/>
+  <text x="150" y="263" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#8a4b00">HPM6E70 Zephyr SoC 层</text>
+  <text x="150" y="299" font-family="Microsoft YaHei, sans-serif" font-size="19" fill="#5a3d1c">SoC 清单、SOC_HPM6E70、系列启动入口、SoC DTSI</text>
+  <rect x="880" y="249" width="160" height="48" rx="24" fill="#c05621"/>
+  <text x="960" y="281" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="white">需要补充</text>
+
+  <rect x="110" y="350" width="980" height="105" rx="18" fill="#f1eafd" stroke="#7254b3" stroke-width="4"/>
+  <text x="150" y="393" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#4b3285">HPM SDK 芯片 HAL</text>
+  <text x="150" y="429" font-family="Microsoft YaHei, sans-serif" font-size="19" fill="#493b66">v1.11.0 没有 HPM6E70 专用目录；建立可追踪的 HPM6E80 兼容连接</text>
+  <rect x="830" y="379" width="210" height="48" rx="24" fill="#6b46c1"/>
+  <text x="935" y="411" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="white">需要连接并验证</text>
+
+  <rect x="110" y="480" width="980" height="105" rx="18" fill="#e8f7ee" stroke="#31845a" stroke-width="4"/>
+  <text x="150" y="523" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#236344">HPM6E70 Board 层</text>
+  <text x="150" y="559" font-family="Microsoft YaHei, sans-serif" font-size="19" fill="#315b46">板卡身份、UART0、PC22 绿色 LED、XPI0 Flash 和管脚复用</text>
+  <rect x="880" y="509" width="160" height="48" rx="24" fill="#2f855a"/>
+  <text x="960" y="541" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="white">随后创建</text>
+</svg>

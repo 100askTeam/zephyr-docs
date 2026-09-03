@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="390" viewBox="0 0 1100 390" role="img" aria-labelledby="title desc">
+  <title id="title">Board 身份阶段只创建三个必要文件</title>
+  <desc id="desc">board.yml 声明板名和 SoC，板卡 YAML 记录展示元数据，Kconfig 文件连接 Board 与已有 SoC 定义。</desc>
+  <rect width="1100" height="390" rx="28" fill="#f5f8fc"/>
+  <text x="550" y="55" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei" font-size="30" font-weight="700" fill="#17324d">先回答“这块板是谁”，暂时不描述外设</text>
+  <g font-family="Segoe UI, Microsoft YaHei">
+    <rect x="90" y="92" width="920" height="240" rx="22" fill="white" stroke="#cfdae5" stroke-width="2"/>
+    <text x="130" y="137" font-size="21" font-weight="700" fill="#17324d">boards/hpmicro/dshanmcu_hpm6e70/</text>
+    <text x="145" y="190" font-size="19" font-weight="700" fill="#145a86">board.yml</text>
+    <text x="430" y="190" font-size="19" fill="#42596b">板名、厂商和当前复用的 SoC</text>
+    <text x="145" y="240" font-size="19" font-weight="700" fill="#176846">dshanmcu_hpm6e70.yaml</text>
+    <text x="430" y="240" font-size="19" fill="#42596b">架构、工具链和容量元数据</text>
+    <text x="145" y="290" font-size="19" font-weight="700" fill="#5c3d91">Kconfig.dshanmcu_hpm6e70</text>
+    <text x="430" y="290" font-size="19" fill="#42596b">选择 Board 时接通 HPM6E80 SoC 定义</text>
+  </g>
+  <text x="550" y="365" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei" font-size="18" fill="#42596b">DTS、pinctrl 和板级 C 代码在出现真实硬件需求时再创建</text>
+</svg>

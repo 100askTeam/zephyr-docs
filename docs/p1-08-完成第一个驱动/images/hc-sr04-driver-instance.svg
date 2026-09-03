@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="540" viewBox="0 0 1120 540" role="img" aria-labelledby="title desc">
+  <title id="title">注册宏生成 HC-SR04 的 Zephyr 设备实例</title>
+  <desc id="desc">设备树节点经过 Binding 检查后提供 GPIO 配置。配置、运行数据、初始化函数和 sensor API 表作为四项输入，由设备注册宏组合成 Zephyr 设备实例。</desc>
+  <defs>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#3568d4"/>
+    </marker>
+    <filter id="particleGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="2.4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .title{font:700 27px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .section{font:700 17px Arial,"Microsoft YaHei",sans-serif;fill:#334155}
+      .name{font:700 17px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .text{font:14px Arial,"Microsoft YaHei",sans-serif;fill:#4c5b70}
+      .small{font:13px Arial,"Microsoft YaHei",sans-serif;fill:#59677b}
+      .purple{fill:#f5efff;stroke:#8664d5;stroke-width:1.8}
+      .blue{fill:#edf3ff;stroke:#4f7ee8;stroke-width:1.8}
+      .amber{fill:#fff7e7;stroke:#d6972d;stroke-width:1.8}
+      .green{fill:#edf8ef;stroke:#4b925d;stroke-width:1.8}
+      .arrow{fill:none;stroke:#3568d4;stroke-width:2.5;marker-end:url(#arrowBlue)}
+      .inputLine{fill:none;stroke:#7b8baa;stroke-width:2.2;marker-end:url(#arrowBlue)}
+      .particle{filter:url(#particleGlow);pointer-events:none}
+      .purpleParticle{fill:#a789ee}
+      .blueParticle{fill:#79a2ff}
+      .amberParticle{fill:#e5aa43}
+      .greenParticle{fill:#68ba79}
+    </style>
+  </defs>
+
+  <rect width="1120" height="540" rx="16" fill="#fbfcff"/>
+  <text x="560" y="42" text-anchor="middle" class="title">注册宏怎样生成一个 Zephyr 设备</text>
+
+  <rect x="18" y="62" width="1084" height="430" rx="14" fill="#f7f9fd" stroke="#d5ddec" stroke-width="1.5"/>
+  <text x="40" y="92" class="section">构建时</text>
+  <text x="280" y="92" class="section">注册宏需要的四项内容</text>
+
+  <rect x="36" y="118" width="196" height="106" rx="10" class="purple"/>
+  <text x="134" y="149" text-anchor="middle" class="name">启用的设备树节点</text>
+  <text x="134" y="177" text-anchor="middle" class="text">trig-gpios</text>
+  <text x="134" y="201" text-anchor="middle" class="text">echo-gpios</text>
+
+  <path d="M232 171 H277" class="arrow"/>
+  <text x="254" y="109" text-anchor="middle" class="small">Binding 检查</text>
+  <circle r="5.5" class="particle purpleParticle">
+    <animateMotion dur="1.7s" repeatCount="indefinite" path="M232 171 H277"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.84;1" dur="1.7s" repeatCount="indefinite"/>
+  </circle>
+
+  <rect x="280" y="118" width="180" height="106" rx="10" class="blue"/>
+  <text x="370" y="149" text-anchor="middle" class="name">hc_sr04_config</text>
+  <text x="370" y="177" text-anchor="middle" class="text">TRIG GPIO</text>
+  <text x="370" y="201" text-anchor="middle" class="text">ECHO GPIO</text>
+
+  <rect x="480" y="118" width="180" height="106" rx="10" class="amber"/>
+  <text x="570" y="149" text-anchor="middle" class="name">hc_sr04_data</text>
+  <text x="570" y="177" text-anchor="middle" class="text">保存最近一次</text>
+  <text x="570" y="201" text-anchor="middle" class="text">ECHO 脉宽</text>
+
+  <rect x="680" y="118" width="180" height="106" rx="10" class="blue"/>
+  <text x="770" y="149" text-anchor="middle" class="name">hc_sr04_init()</text>
+  <text x="770" y="177" text-anchor="middle" class="text">检查 GPIO 控制器</text>
+  <text x="770" y="201" text-anchor="middle" class="text">配置输入输出方向</text>
+
+  <rect x="880" y="118" width="180" height="106" rx="10" class="green"/>
+  <text x="970" y="149" text-anchor="middle" class="name">sensor_driver_api</text>
+  <text x="970" y="177" text-anchor="middle" class="text">采样函数</text>
+  <text x="970" y="201" text-anchor="middle" class="text">取值函数</text>
+
+  <path d="M370 224 V278" class="inputLine"/>
+  <path d="M570 224 V278" class="inputLine"/>
+  <path d="M770 224 V278" class="inputLine"/>
+  <path d="M970 224 V278" class="inputLine"/>
+
+  <circle r="5.5" class="particle blueParticle">
+    <animateMotion dur="1.65s" begin="0.35s" repeatCount="indefinite" path="M370 224 V278"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.84;1" dur="1.65s" begin="0.35s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="5.5" class="particle amberParticle">
+    <animateMotion dur="1.65s" begin="0.35s" repeatCount="indefinite" path="M570 224 V278"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.84;1" dur="1.65s" begin="0.35s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="5.5" class="particle blueParticle">
+    <animateMotion dur="1.65s" begin="0.35s" repeatCount="indefinite" path="M770 224 V278"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.84;1" dur="1.65s" begin="0.35s" repeatCount="indefinite"/>
+  </circle>
+  <circle r="5.5" class="particle greenParticle">
+    <animateMotion dur="1.65s" begin="0.35s" repeatCount="indefinite" path="M970 224 V278"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.84;1" dur="1.65s" begin="0.35s" repeatCount="indefinite"/>
+  </circle>
+
+  <rect x="280" y="281" width="780" height="70" rx="11" fill="#476fd5"/>
+  <text x="670" y="311" text-anchor="middle" font-family="Arial,Microsoft YaHei,sans-serif" font-size="19" font-weight="700" fill="#fff">SENSOR_DEVICE_DT_INST_DEFINE()</text>
+  <text x="670" y="336" text-anchor="middle" font-family="Arial,Microsoft YaHei,sans-serif" font-size="14" fill="#edf3ff">把配置、数据、初始化函数和 API 表登记到同一个设备中</text>
+
+  <path d="M670 351 V394" class="arrow"/>
+  <circle r="6" class="particle blueParticle">
+    <animateMotion dur="1.5s" begin="0.9s" repeatCount="indefinite" path="M670 351 V394"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.84;1" dur="1.5s" begin="0.9s" repeatCount="indefinite"/>
+  </circle>
+
+  <rect x="400" y="397" width="540" height="76" rx="12" class="green"/>
+  <text x="670" y="427" text-anchor="middle" class="name">Zephyr 设备实例</text>
+  <text x="670" y="454" text-anchor="middle" class="text">系统启动时调用 init()，应用运行时通过 sensor API 使用该设备</text>
+
+  <text x="560" y="521" text-anchor="middle" class="text">DT_INST_FOREACH_STATUS_OKAY() 会对每个 status = "okay" 的 HC-SR04 节点执行一次注册</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650">
+  <defs>
+    <style>
+      .title{font:700 31px "Microsoft YaHei",sans-serif;fill:#172033}.head{font:700 25px "Microsoft YaHei",sans-serif;fill:#fff}.row{font:700 19px "Microsoft YaHei",sans-serif;fill:#172033}.mid{font:17px "Microsoft YaHei",sans-serif;fill:#475467}.note{font:700 19px "Microsoft YaHei",sans-serif;fill:#9f1239}.boxL{fill:#eaf3ff;stroke:#2563eb;stroke-width:3}.boxR{fill:#fff4e8;stroke:#ea580c;stroke-width:3}.line1{stroke:#2563eb}.line2{stroke:#16a34a}.line3{stroke:#8b5cf6}.line4{stroke:#e8790b}.line5{stroke:#475569}.wire{stroke-width:6;fill:none}
+    </style>
+  </defs>
+  <rect width="1200" height="650" fill="#ffffff"/>
+  <text x="600" y="48" text-anchor="middle" class="title">JTAG 接线：先翻译 CH347F 的 IO 别名，再连接同名信号</text>
+
+  <rect x="55" y="85" width="380" height="430" rx="20" class="boxL"/>
+  <rect x="55" y="85" width="380" height="65" rx="20" fill="#2563eb"/>
+  <rect x="765" y="85" width="380" height="430" rx="20" class="boxR"/>
+  <rect x="765" y="85" width="380" height="65" rx="20" fill="#ea580c"/>
+  <text x="245" y="128" text-anchor="middle" class="head">CH347F 调试器 J1</text>
+  <text x="955" y="128" text-anchor="middle" class="head">HPM6E70 板卡 J5</text>
+
+  <text x="245" y="202" text-anchor="middle" class="row">J1-14　TCK / IO4</text>
+  <text x="245" y="270" text-anchor="middle" class="row">J1-13　TMS / IO7</text>
+  <text x="245" y="338" text-anchor="middle" class="row">J1-18　TDI / IO6</text>
+  <text x="245" y="406" text-anchor="middle" class="row">J1-16　TDO / IO5</text>
+  <text x="245" y="474" text-anchor="middle" class="row">J1-19/20　GND</text>
+
+  <text x="955" y="202" text-anchor="middle" class="row">J5-5　SWCLK / TCK</text>
+  <text x="955" y="270" text-anchor="middle" class="row">J5-6　SWDIO / TMS</text>
+  <text x="955" y="338" text-anchor="middle" class="row">J5-3　TDI</text>
+  <text x="955" y="406" text-anchor="middle" class="row">J5-4　TDO</text>
+  <text x="955" y="474" text-anchor="middle" class="row">J5-7　GND</text>
+
+  <line x1="435" y1="195" x2="765" y2="195" class="wire line1"/>
+  <line x1="435" y1="263" x2="765" y2="263" class="wire line2"/>
+  <line x1="435" y1="331" x2="765" y2="331" class="wire line3"/>
+  <line x1="435" y1="399" x2="765" y2="399" class="wire line4"/>
+  <line x1="435" y1="467" x2="765" y2="467" class="wire line5"/>
+
+  <text x="600" y="185" text-anchor="middle" class="mid">TCK</text>
+  <text x="600" y="253" text-anchor="middle" class="mid">TMS</text>
+  <text x="600" y="321" text-anchor="middle" class="mid">TDI</text>
+  <text x="600" y="389" text-anchor="middle" class="mid">TDO</text>
+  <text x="600" y="457" text-anchor="middle" class="mid">GND</text>
+
+  <rect x="90" y="550" width="1020" height="64" rx="14" fill="#fff1f2" stroke="#fb7185" stroke-width="2"/>
+  <text x="600" y="590" text-anchor="middle" class="note">IO4～IO7 是 CH347F 的复用别名；HPM6E70 板卡 J5 端只按 TCK、TMS、TDI、TDO 找信号。</text>
+</svg>

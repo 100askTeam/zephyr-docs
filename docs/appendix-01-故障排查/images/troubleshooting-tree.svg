@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="680" viewBox="0 0 1240 680" role="img" aria-labelledby="title desc">
+  <title id="title">根据最后一个通过点定位故障</title>
+  <desc id="desc">从环境、编译、JTAG、Flash、启动到外设测试逐项判断，失败分支指向对应排查范围。</desc>
+  <defs>
+    <marker id="greenArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2f855a"/></marker>
+    <marker id="redArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c14a3a"/></marker>
+  </defs>
+  <rect width="1240" height="680" fill="#f7f9fc"/>
+  <text x="620" y="52" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="32" font-weight="700" fill="#17263c">先找到最后一个通过的检查点</text>
+  <g font-family="Microsoft YaHei, sans-serif">
+    <line x1="480" y1="112" x2="480" y2="596" stroke="#2f855a" stroke-width="5"/>
+
+    <circle cx="480" cy="120" r="33" fill="#fff" stroke="#2f855a" stroke-width="4"/>
+    <text x="480" y="128" text-anchor="middle" font-size="22" font-weight="700" fill="#236844">1</text>
+    <text x="410" y="104" text-anchor="end" font-size="21" font-weight="700" fill="#24364d">环境检查通过？</text>
+    <text x="410" y="130" text-anchor="end" font-size="15" fill="#607087">west / SDK / Board</text>
+    <line x1="513" y1="120" x2="690" y2="120" stroke="#c14a3a" stroke-width="3" marker-end="url(#redArrow)"/>
+    <text x="535" y="108" font-size="15" fill="#9e3e31">否</text>
+    <rect x="705" y="86" width="465" height="68" fill="#fff1ef" stroke="#d9796c" stroke-width="2"/>
+    <text x="730" y="113" font-size="18" font-weight="700" fill="#8f342a">检查工程依赖和版本组合</text>
+    <text x="730" y="138" font-size="15" fill="#675c5a">Python · west · Zephyr · HPM SDK · RISC-V GCC</text>
+
+    <circle cx="480" cy="215" r="33" fill="#fff" stroke="#2f855a" stroke-width="4"/>
+    <text x="480" y="223" text-anchor="middle" font-size="22" font-weight="700" fill="#236844">2</text>
+    <text x="410" y="199" text-anchor="end" font-size="21" font-weight="700" fill="#24364d">固件编译完成？</text>
+    <text x="410" y="225" text-anchor="end" font-size="15" fill="#607087">zephyr.elf 存在</text>
+    <line x1="513" y1="215" x2="690" y2="215" stroke="#c14a3a" stroke-width="3" marker-end="url(#redArrow)"/>
+    <text x="535" y="203" font-size="15" fill="#9e3e31">否</text>
+    <rect x="705" y="181" width="465" height="68" fill="#fff1ef" stroke="#d9796c" stroke-width="2"/>
+    <text x="730" y="208" font-size="18" font-weight="700" fill="#8f342a">读取第一条构建错误</text>
+    <text x="730" y="233" font-size="15" fill="#675c5a">应用源码 · DTS · Kconfig · Board 搜索路径</text>
+
+    <circle cx="480" cy="310" r="33" fill="#fff" stroke="#2f855a" stroke-width="4"/>
+    <text x="480" y="318" text-anchor="middle" font-size="22" font-weight="700" fill="#236844">3</text>
+    <text x="410" y="294" text-anchor="end" font-size="21" font-weight="700" fill="#24364d">TAP ID 正确？</text>
+    <text x="410" y="320" text-anchor="end" font-size="15" fill="#607087">0x1000563D</text>
+    <line x1="513" y1="310" x2="690" y2="310" stroke="#c14a3a" stroke-width="3" marker-end="url(#redArrow)"/>
+    <text x="535" y="298" font-size="15" fill="#9e3e31">否</text>
+    <rect x="705" y="276" width="465" height="68" fill="#fff1ef" stroke="#d9796c" stroke-width="2"/>
+    <text x="730" y="303" font-size="18" font-weight="700" fill="#8f342a">检查调试器与 JTAG 物理链路</text>
+    <text x="730" y="328" font-size="15" fill="#675c5a">驱动 · 供电 · 共地 · TCK/TMS/TDI/TDO</text>
+
+    <circle cx="480" cy="405" r="33" fill="#fff" stroke="#2f855a" stroke-width="4"/>
+    <text x="480" y="413" text-anchor="middle" font-size="22" font-weight="700" fill="#236844">4</text>
+    <text x="410" y="389" text-anchor="end" font-size="21" font-weight="700" fill="#24364d">Flash 校验通过？</text>
+    <text x="410" y="415" text-anchor="end" font-size="15" fill="#607087">Verified OK</text>
+    <line x1="513" y1="405" x2="690" y2="405" stroke="#c14a3a" stroke-width="3" marker-end="url(#redArrow)"/>
+    <text x="535" y="393" font-size="15" fill="#9e3e31">否</text>
+    <rect x="705" y="371" width="465" height="68" fill="#fff1ef" stroke="#d9796c" stroke-width="2"/>
+    <text x="730" y="398" font-size="18" font-weight="700" fill="#8f342a">检查外部 Flash 写入路径</text>
+    <text x="730" y="423" font-size="15" fill="#675c5a">专用 OpenOCD · ELF · XPI 配置 · U5</text>
+
+    <circle cx="480" cy="500" r="33" fill="#fff" stroke="#2f855a" stroke-width="4"/>
+    <text x="480" y="508" text-anchor="middle" font-size="22" font-weight="700" fill="#236844">5</text>
+    <text x="410" y="484" text-anchor="end" font-size="21" font-weight="700" fill="#24364d">LED 或 UART 有现象？</text>
+    <text x="410" y="510" text-anchor="end" font-size="15" fill="#607087">应用已经执行</text>
+    <line x1="513" y1="500" x2="690" y2="500" stroke="#c14a3a" stroke-width="3" marker-end="url(#redArrow)"/>
+    <text x="535" y="488" font-size="15" fill="#9e3e31">否</text>
+    <rect x="705" y="466" width="465" height="68" fill="#fff1ef" stroke="#d9796c" stroke-width="2"/>
+    <text x="730" y="493" font-size="18" font-weight="700" fill="#8f342a">检查启动与观察通道</text>
+    <text x="730" y="518" font-size="15" fill="#675c5a">启动模式 · XIP 地址 · 复位 · UART 连接</text>
+
+    <circle cx="480" cy="595" r="33" fill="#2f855a"/>
+    <path d="M465 595l10 10 22-25" fill="none" stroke="#fff" stroke-width="5"/>
+    <text x="410" y="579" text-anchor="end" font-size="21" font-weight="700" fill="#24364d">再检查目标外设</text>
+    <text x="410" y="605" text-anchor="end" font-size="15" fill="#607087">例如 SDRAM 分层测试</text>
+
+    <text x="480" y="660" text-anchor="middle" font-size="16" font-weight="700" fill="#2f855a">绿色主线：通过后进入下一层</text>
+    <text x="900" y="660" text-anchor="middle" font-size="16" font-weight="700" fill="#c14a3a">红色分支：停在当前层处理</text>
+  </g>
+</svg>

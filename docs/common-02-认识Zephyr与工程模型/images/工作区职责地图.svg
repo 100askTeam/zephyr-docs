@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#183153" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="1400" height="760" rx="30" fill="#f6f8fb"/>
+  <text x="700" y="66" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="34" font-weight="700" fill="#17233c">HPMicro 官方工作区的组成关系</text>
+  <text x="700" y="96" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="19" fill="#64748b">west 按清单下载并组织多个相互配合的仓库</text>
+
+  <rect x="490" y="108" width="420" height="128" rx="22" fill="#233b5d" filter="url(#shadow)"/>
+  <text x="700" y="158" text-anchor="middle" font-family="Consolas, monospace" font-size="28" font-weight="700" fill="#ffffff">sdk_glue/west.yml</text>
+  <text x="700" y="198" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="21" fill="#dce8f7">HPMicro 发布的版本与依赖清单</text>
+
+  <line x1="700" y1="236" x2="700" y2="252" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+  <rect x="565" y="252" width="270" height="46" rx="23" fill="#e7edf6" stroke="#9aaac0" stroke-width="2"/>
+  <text x="700" y="282" text-anchor="middle" font-family="Consolas, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="#344b68">west update</text>
+
+  <rect x="70" y="322" width="380" height="270" rx="24" fill="#eaf4ff" stroke="#4e82c5" stroke-width="3" filter="url(#shadow)"/>
+  <text x="260" y="378" text-anchor="middle" font-family="Consolas, monospace" font-size="31" font-weight="700" fill="#255890">zephyr/</text>
+  <text x="260" y="416" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="700" fill="#255890">Zephyr 项目</text>
+  <text x="105" y="466" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#29435f">• 内核与 RISC-V 架构实现</text>
+  <text x="105" y="508" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#29435f">• Devicetree 与 Kconfig</text>
+  <text x="105" y="550" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#29435f">• 统一驱动 API 与构建系统</text>
+
+  <rect x="510" y="322" width="380" height="270" rx="24" fill="#edf9ef" stroke="#4f9961" stroke-width="3" filter="url(#shadow)"/>
+  <text x="700" y="378" text-anchor="middle" font-family="Consolas, monospace" font-size="31" font-weight="700" fill="#28713a">sdk_glue/</text>
+  <text x="700" y="416" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="700" fill="#28713a">HPMicro Zephyr 适配层</text>
+  <text x="545" y="466" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#315c3c">• HPM 系列 SoC 支持</text>
+  <text x="545" y="508" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#315c3c">• Zephyr 驱动适配</text>
+  <text x="545" y="550" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#315c3c">• west 扩展与集成配置</text>
+
+  <rect x="950" y="322" width="380" height="270" rx="24" fill="#fff5e5" stroke="#c5872a" stroke-width="3" filter="url(#shadow)"/>
+  <text x="1140" y="378" text-anchor="middle" font-family="Consolas, monospace" font-size="31" font-weight="700" fill="#8b570b">sdk_env/</text>
+  <text x="1140" y="416" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="700" fill="#8b570b">HPM SDK 与工具</text>
+  <text x="985" y="466" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#65471f">• 芯片寄存器与底层驱动</text>
+  <text x="985" y="508" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#65471f">• 启动、时钟与外设实现</text>
+  <text x="985" y="550" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#65471f">• HPMicro 工具链</text>
+
+  <!-- 箭头统一从清单指向 west update 下载的三个目录，箭头尖端停在目录边缘之外，避免被边框遮挡。 -->
+  <line x1="700" y1="298" x2="700" y2="306" stroke="#64748b" stroke-width="4"/>
+  <line x1="700" y1="306" x2="260" y2="318" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="700" y1="306" x2="700" y2="318" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+  <line x1="700" y1="306" x2="1140" y2="318" stroke="#64748b" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <rect x="188" y="635" width="1024" height="76" rx="18" fill="#ffffff" stroke="#d4dce7" stroke-width="2"/>
+  <text x="700" y="682" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="22" font-weight="700" fill="#263a55">后续课程在这套工作区中补充 HPM6E70 Board，并用 Zephyr API 编写应用</text>
+</svg>

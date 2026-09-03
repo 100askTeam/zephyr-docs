@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560">
+  <rect width="1200" height="560" rx="30" fill="#f6f8fb"/>
+
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif">
+    <text x="54" y="62" font-size="30" font-weight="700" fill="#172b4d">一份 Zephyr 固件，由哪些层共同组成</text>
+    <text x="55" y="94" font-size="16" fill="#5b6b7e">课程会从实物出发，逐层建立芯片支持、板级描述和应用之间的联系</text>
+
+    <g transform="translate(250 120)">
+      <rect width="560" height="82" rx="12" fill="#ffffff" stroke="#1f9d8a" stroke-width="2.5"/>
+      <rect width="560" height="12" rx="12" fill="#1f9d8a"/>
+      <circle cx="24" cy="28" r="4" fill="#ff7a59"/>
+      <circle cx="38" cy="28" r="4" fill="#f6c344"/>
+      <circle cx="52" cy="28" r="4" fill="#45b97c"/>
+      <text x="280" y="43" text-anchor="middle" font-size="23" font-weight="700" fill="#176b62">应用与 Zephyr API</text>
+      <text x="280" y="69" text-anchor="middle" font-size="16" fill="#4c6870">main.c · GPIO API · printk · 后续应用</text>
+    </g>
+
+    <g transform="translate(190 224)">
+      <path d="M18 0 H682 L700 16 V94 H0 V18 Z" fill="#eee9ff" stroke="#7857c7" stroke-width="2.5"/>
+      <rect x="22" y="21" width="126" height="50" rx="9" fill="#7857c7"/>
+      <text x="85" y="52" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">Board</text>
+      <text x="176" y="41" font-size="22" font-weight="700" fill="#4f3595">HPM6E70 板级支持</text>
+      <text x="176" y="70" font-size="16" fill="#655a7e">DTS · pinctrl · Kconfig · defconfig</text>
+      <text x="662" y="50" text-anchor="end" font-size="15" fill="#59449a">记录板上的真实连接</text>
+    </g>
+
+    <g transform="translate(135 340)">
+      <path d="M0 22 L24 0 H746 L770 22 V104 H0 Z" fill="#dcecff" stroke="#3575b8" stroke-width="2.5"/>
+      <g transform="translate(24 25)">
+        <rect width="126" height="54" rx="6" fill="#3575b8"/>
+        <path d="M18 13 h90 v28 h-90 z M8 18 h10 M8 28 h10 M8 38 h10 M108 18 h10 M108 28 h10 M108 38 h10" fill="none" stroke="#ffffff" stroke-width="2"/>
+        <text x="63" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="#ffffff">SoC</text>
+      </g>
+      <text x="178" y="51" font-size="22" font-weight="700" fill="#215b92">芯片与厂商支持</text>
+      <text x="178" y="79" font-size="16" fill="#496b89">RISC-V 架构 · 启动 · 时钟 · 中断 · 驱动</text>
+      <text x="730" y="61" text-anchor="end" font-size="15" fill="#315f88">让内核能够在芯片上运行</text>
+    </g>
+
+    <g transform="translate(80 466)">
+      <rect width="880" height="70" rx="13" fill="#18324d"/>
+      <text x="30" y="29" font-size="19" font-weight="700" fill="#ffffff">HPM6E70 实物板卡</text>
+      <text x="30" y="53" font-size="14" fill="#c9d8e6">丝印 · 原理图 · 器件手册</text>
+
+      <g transform="translate(262 14)" text-anchor="middle">
+        <rect width="120" height="42" rx="7" fill="#2d597d" stroke="#8eb8d7"/>
+        <text x="60" y="27" font-size="15" font-weight="700" fill="#ffffff">HPM6E70</text>
+      </g>
+      <g transform="translate(398 14)" text-anchor="middle">
+        <rect width="112" height="42" rx="7" fill="#6f5120" stroke="#d9b66d"/>
+        <text x="56" y="27" font-size="15" font-weight="700" fill="#ffffff">NOR Flash</text>
+      </g>
+      <g transform="translate(526 14)" text-anchor="middle">
+        <rect width="112" height="42" rx="7" fill="#1c6a61" stroke="#84c6bd"/>
+        <text x="56" y="27" font-size="15" font-weight="700" fill="#ffffff">UART · LED</text>
+      </g>
+      <g transform="translate(654 14)" text-anchor="middle">
+        <rect width="112" height="42" rx="7" fill="#604587" stroke="#b8a1db"/>
+        <text x="56" y="27" font-size="15" font-weight="700" fill="#ffffff">SDRAM</text>
+      </g>
+    </g>
+
+    <g transform="translate(990 120)">
+      <text x="0" y="0" font-size="18" font-weight="700" fill="#34465a">每一层都能看到结果</text>
+      <line x1="0" y1="18" x2="160" y2="18" stroke="#c8d1dc" stroke-width="2"/>
+
+      <g transform="translate(0 45)">
+        <circle cx="10" cy="10" r="10" fill="#1f9d8a"/>
+        <path d="M5 10 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2"/>
+        <text x="30" y="15" font-size="15" fill="#405468">LED 与串口日志</text>
+      </g>
+      <g transform="translate(0 145)">
+        <circle cx="10" cy="10" r="10" fill="#7857c7"/>
+        <path d="M5 10 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2"/>
+        <text x="30" y="8" font-size="15" fill="#405468">zephyr.dts</text>
+        <text x="30" y="28" font-size="15" fill="#405468">与 .config</text>
+      </g>
+      <g transform="translate(0 263)">
+        <circle cx="10" cy="10" r="10" fill="#3575b8"/>
+        <path d="M5 10 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2"/>
+        <text x="30" y="8" font-size="15" fill="#405468">启动、时钟</text>
+        <text x="30" y="28" font-size="15" fill="#405468">与驱动源码</text>
+      </g>
+      <g transform="translate(0 378)">
+        <circle cx="10" cy="10" r="10" fill="#18324d"/>
+        <path d="M5 10 l4 4 l7 -8" fill="none" stroke="#ffffff" stroke-width="2"/>
+        <text x="30" y="8" font-size="15" fill="#405468">丝印、原理图</text>
+        <text x="30" y="28" font-size="15" fill="#405468">与实物现象</text>
+      </g>
+    </g>
+  </g>
+</svg>

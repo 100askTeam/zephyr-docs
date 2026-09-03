@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="540" viewBox="0 0 1180 540" role="img" aria-labelledby="title desc">
+  <title id="title">HPM6E70 Zephyr 移植的四类验证结果</title>
+  <desc id="desc">用表格区分构建选择、调试连接、固件写入和真实运行，以及每一层能够验证的内容。</desc>
+  <rect width="1180" height="540" fill="#f7f9fc"/>
+  <text x="590" y="54" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="32" font-weight="700" fill="#17263c">HPM6E70 Zephyr 移植的验证结果</text>
+  <g font-family="Microsoft YaHei, sans-serif">
+    <rect x="55" y="92" width="1070" height="54" fill="#203a5f"/>
+    <text x="105" y="127" font-size="19" font-weight="700" fill="#fff">层次</text>
+    <text x="330" y="127" font-size="19" font-weight="700" fill="#fff">检查对象</text>
+    <text x="710" y="127" font-size="19" font-weight="700" fill="#fff">可观察证据</text>
+    <text x="1015" y="127" text-anchor="middle" font-size="19" font-weight="700" fill="#fff">能够证明</text>
+
+    <rect x="55" y="146" width="1070" height="82" fill="#eef3fb" stroke="#c8d3e2"/>
+    <rect x="55" y="146" width="145" height="82" fill="#dce9fb"/>
+    <text x="127" y="181" text-anchor="middle" font-size="21" font-weight="700" fill="#25558d">构建配置</text>
+    <text x="127" y="207" text-anchor="middle" font-size="15" fill="#49627d">Zephyr</text>
+    <text x="230" y="181" font-size="18" fill="#26384e">架构、SoC、HAL、Board</text>
+    <text x="230" y="207" font-size="16" fill="#5a6b80">最终构建采用了哪一层实现</text>
+    <text x="610" y="181" font-size="18" fill="#26384e">.config、zephyr.dts、compile_commands.json</text>
+    <text x="1015" y="190" text-anchor="middle" font-size="17" fill="#26384e">移植代码已进入构建</text>
+
+    <rect x="55" y="228" width="1070" height="82" fill="#fff" stroke="#c8d3e2"/>
+    <rect x="55" y="228" width="145" height="82" fill="#f4e9d8"/>
+    <text x="127" y="263" text-anchor="middle" font-size="21" font-weight="700" fill="#8a5a19">调试连接</text>
+    <text x="127" y="289" text-anchor="middle" font-size="15" fill="#765e3e">OpenOCD</text>
+    <text x="230" y="263" font-size="18" fill="#26384e">CH347F、JTAG、CPU TAP</text>
+    <text x="230" y="289" font-size="16" fill="#5a6b80">电脑能否访问处理器</text>
+    <text x="610" y="276" font-size="18" fill="#26384e">TAP ID 0x1000563D</text>
+    <text x="1015" y="272" text-anchor="middle" font-size="17" fill="#26384e">调试链路已连通</text>
+
+    <rect x="55" y="310" width="1070" height="82" fill="#eef7f1" stroke="#c8d3e2"/>
+    <rect x="55" y="310" width="145" height="82" fill="#dcefe2"/>
+    <text x="127" y="345" text-anchor="middle" font-size="21" font-weight="700" fill="#287047">固件写入</text>
+    <text x="127" y="371" text-anchor="middle" font-size="15" fill="#496b57">外部 Flash</text>
+    <text x="230" y="345" font-size="18" fill="#26384e">ELF、XPI Flash 驱动</text>
+    <text x="230" y="371" font-size="16" fill="#5a6b80">程序数据是否写入 U5</text>
+    <text x="610" y="358" font-size="18" fill="#26384e">Programming Finished、Verified OK</text>
+    <text x="1015" y="354" text-anchor="middle" font-size="17" fill="#26384e">Flash 内容与固件一致</text>
+
+    <rect x="55" y="392" width="1070" height="82" fill="#fff" stroke="#c8d3e2"/>
+    <rect x="55" y="392" width="145" height="82" fill="#ece3f7"/>
+    <text x="127" y="427" text-anchor="middle" font-size="21" font-weight="700" fill="#694394">真实运行</text>
+    <text x="127" y="453" text-anchor="middle" font-size="15" fill="#695579">板卡现象</text>
+    <text x="230" y="427" font-size="18" fill="#26384e">启动、GPIO、UART</text>
+    <text x="230" y="453" font-size="16" fill="#5a6b80">处理器是否执行新程序</text>
+    <text x="610" y="440" font-size="18" fill="#26384e">LED 亮灭、UART 周期日志</text>
+    <text x="1015" y="436" text-anchor="middle" font-size="17" fill="#26384e">Zephyr 已在实板运行</text>
+  </g>
+  <text x="590" y="510" text-anchor="middle" font-family="Microsoft YaHei, sans-serif" font-size="19" font-weight="700" fill="#24425f">单独一项证据不能替代其他层：编译成功不等于已写入，校验成功也不等于已经启动</text>
+</svg>
