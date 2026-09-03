@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdshanpi_website=self.webpackChunkdshanpi_website||[]).push([["4823"],{7176(e,s,t){t.r(s),t.d(s,{default:()=>r});var a=t(4848);t(6540);var n=t(6347);function r(){return(0,a.jsx)(n.rd,{to:"/docs/\u51C6\u5907\u5F00\u59CB"})}}}]);
