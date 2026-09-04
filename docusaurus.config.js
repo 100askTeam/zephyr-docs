@@ -30,7 +30,7 @@ const config = {
       docs: {sidebar: {autoCollapseCategories: false, hideable: true}},
       navbar: {
         title: '东山Π',
-        logo: {alt: '百问网 · 东山Π', src: 'img/logo.svg'},
+        logo: {alt: '百问网 · 东山Π', src: 'img/logo.svg', href: '/docs/'},
         items: [
           {type: 'docSidebar', sidebarId: 'tutorialSidebar', label: 'HPM6E70 Zephyr 教程', position: 'left'},
           {href: 'https://github.com/100askTeam/zephyr-docs', label: 'GitHub', position: 'right'},
