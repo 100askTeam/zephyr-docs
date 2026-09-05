@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="530" viewBox="0 0 1000 530" role="img" aria-labelledby="title desc">
+  <title id="title">设备树属性与驱动配置对应</title>
+  <desc id="desc">左侧设备树节点的 GPIO、事件编号和消抖间隔经 Binding 校验，在构建期通过 DT 宏初始化右侧设备配置结构体。compatible 连接节点、Binding 和驱动。</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#596675"/></marker></defs>
+  <rect width="1000" height="530" rx="12" fill="#f8fafc"/>
+  <g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#172c43">
+    <text x="34" y="42" font-size="25" font-weight="700">从硬件描述生成设备配置</text>
+    <text x="34" y="73" font-size="17" fill="#536273">以下对应发生在构建期，运行时直接读取已生成的 config。</text>
+    <rect x="34" y="105" width="445" height="65" rx="6" fill="#e6edf5"/>
+    <text x="52" y="132" font-size="17">设备树 compatible</text>
+    <text x="52" y="157" font-family="Consolas, monospace" font-size="19">"dshan,gpio-button"</text>
+    <path d="M481 137H513" stroke="#596675" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="525" y="105" width="440" height="65" rx="6" fill="#e6edf5"/>
+    <text x="544" y="132" font-size="17">驱动 DT_DRV_COMPAT</text>
+    <text x="544" y="157" font-family="Consolas, monospace" font-size="19">dshan_gpio_button</text>
+    <text x="34" y="210" font-size="19" font-weight="700">overlay 节点属性</text>
+    <text x="525" y="210" font-size="19" font-weight="700">dshan_gpio_button_config</text>
+    <rect x="34" y="230" width="445" height="55" fill="#e6f2fc"/>
+    <text x="49" y="264" font-family="Consolas, monospace" font-size="18" fill="#165c98">gpios = &lt;&amp;ioport0 0 GPIO_ACTIVE_LOW&gt;</text>
+    <path d="M481 256H513" stroke="#596675" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="525" y="230" width="440" height="55" fill="#e6f2fc"/>
+    <text x="540" y="254" font-family="Consolas, monospace" font-size="18" fill="#165c98">.gpio</text>
+    <text x="540" y="276" font-family="Consolas, monospace" font-size="16" fill="#165c98">GPIO_DT_SPEC_INST_GET(inst, gpios)</text>
+    <rect x="34" y="300" width="445" height="55" fill="#e7f4ee"/>
+    <text x="49" y="334" font-family="Consolas, monospace" font-size="18" fill="#176b4d">zephyr,code = &lt;INPUT_KEY_0&gt;</text>
+    <path d="M481 326H513" stroke="#596675" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="525" y="300" width="440" height="55" fill="#e7f4ee"/>
+    <text x="540" y="324" font-family="Consolas, monospace" font-size="18" fill="#176b4d">.code</text>
+    <text x="540" y="346" font-family="Consolas, monospace" font-size="16" fill="#176b4d">DT_INST_PROP(inst, zephyr_code)</text>
+    <rect x="34" y="370" width="445" height="55" fill="#fff1dc"/>
+    <text x="49" y="404" font-family="Consolas, monospace" font-size="18" fill="#8c5616">debounce-interval-ms = &lt;30&gt;</text>
+    <path d="M481 396H513" stroke="#596675" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="525" y="370" width="440" height="55" fill="#fff1dc"/>
+    <text x="540" y="394" font-family="Consolas, monospace" font-size="18" fill="#8c5616">.debounce_interval_ms</text>
+    <text x="540" y="416" font-family="Consolas, monospace" font-size="16" fill="#8c5616">DT_INST_PROP(inst, debounce_interval_ms)</text>
+    <path d="M34 450H965" stroke="#c7d2df"/>
+    <text x="34" y="480" font-size="18" font-weight="700">Binding：dts/bindings/input/dshan,gpio-button.yaml</text>
+    <text x="34" y="508" font-size="17" fill="#536273">检查 gpios 和 zephyr,code 必填；为 debounce-interval-ms 提供默认值 30。</text>
+  </g>
+</svg>

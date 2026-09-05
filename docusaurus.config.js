@@ -4,7 +4,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'HPM6E70 Zephyr 教程',
+  title: 'Zephyr 教程',
   tagline: '从官方工作区到板级适配与板载外设验证',
   favicon: 'img/favicon.ico',
   url: 'https://zephyr.100ask.org',
@@ -33,6 +33,7 @@ const config = {
         logo: {alt: '百问网 · 东山Π', src: 'img/logo.svg', href: '/docs/'},
         items: [
           {type: 'docSidebar', sidebarId: 'tutorialSidebar', label: 'HPM6E70 Zephyr 教程', position: 'left'},
+          {type: 'docSidebar', sidebarId: 'ra6m5Sidebar', label: 'RA6M5 Zephyr 快速入门', position: 'left'},
           {href: 'https://github.com/100askTeam/zephyr-docs', label: 'GitHub', position: 'right'},
         ],
       },

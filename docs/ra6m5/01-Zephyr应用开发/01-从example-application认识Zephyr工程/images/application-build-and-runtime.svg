@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="590" viewBox="0 0 960 590" role="img" aria-labelledby="title desc">
+  <title id="title">Zephyr 应用在构建期和运行期的关系</title>
+  <desc id="desc">应用源码与配置、板卡设备树与 Binding、内核与驱动源码进入 Zephyr 构建系统，生成固件。运行后，应用通过 GPIO API 调用 GPIO 驱动，由驱动操作 LED 所连接的控制器。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#315c78" stroke-width="1.6"/></marker>
+  </defs>
+  <rect width="960" height="590" rx="12" fill="#fff"/>
+  <g font-family="Microsoft YaHei, Noto Sans SC, sans-serif" fill="#183447">
+    <text x="32" y="42" font-size="25" font-weight="700">构建期：把源码与硬件描述组合成固件</text>
+    <g fill="#f5f8fb" stroke="#b4c8d8" stroke-width="1.5">
+      <rect x="32" y="68" width="274" height="104" rx="6"/>
+      <rect x="343" y="68" width="274" height="104" rx="6"/>
+      <rect x="654" y="68" width="274" height="104" rx="6"/>
+    </g>
+    <g font-size="21" font-weight="700" text-anchor="middle">
+      <text x="169" y="102">应用</text><text x="480" y="102">硬件描述</text><text x="791" y="102">系统实现</text>
+    </g>
+    <g font-size="18" text-anchor="middle" fill="#476173">
+      <text x="169" y="135">main.c · prj.conf</text><text x="169" y="159">应用 CMakeLists.txt</text>
+      <text x="480" y="135">Board DTS · Binding</text><text x="480" y="159">控制器、引脚、有效电平</text>
+      <text x="791" y="135">Zephyr 内核 · GPIO 驱动</text><text x="791" y="159">已选择的模块代码</text>
+    </g>
+    <g fill="none" stroke="#315c78" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M169 174 V205 H395 V228"/><path d="M480 174 V228"/><path d="M791 174 V205 H565 V228"/>
+    </g>
+    <rect x="295" y="235" width="370" height="56" rx="6" fill="#1769aa"/>
+    <text x="480" y="271" font-size="23" font-weight="700" text-anchor="middle" fill="#fff">Zephyr 构建系统</text>
+    <path d="M480 293 V326" fill="none" stroke="#315c78" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="480" y="357" font-size="21" text-anchor="middle">build/&lt;应用名&gt;/zephyr/zephyr.elf</text>
+    <path d="M32 391 H928" stroke="#cedce6" stroke-width="1.5"/>
+    <text x="32" y="434" font-size="25" font-weight="700">运行期：应用通过驱动接口操作硬件</text>
+    <g font-size="21" font-weight="700" text-anchor="middle">
+      <text x="118" y="488">应用</text><text x="348" y="488">GPIO API</text><text x="593" y="488">GPIO 驱动</text><text x="841" y="488">控制器与 LED</text>
+    </g>
+    <g fill="none" stroke="#315c78" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M169 481 H260"/><path d="M435 481 H502"/><path d="M684 481 H742"/>
+    </g>
+    <g font-size="17" text-anchor="middle" fill="#476173">
+      <text x="118" y="523">决定何时翻转</text><text x="348" y="523">统一调用方式</text><text x="593" y="523">执行硬件操作</text><text x="841" y="523">输出电平改变</text>
+    </g>
+    <text x="32" y="565" font-size="17" fill="#476173">设备树在构建时提供连接信息，不是运行时执行的程序。</text>
+  </g>
+</svg>

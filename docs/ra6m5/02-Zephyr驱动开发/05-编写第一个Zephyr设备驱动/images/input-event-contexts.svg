@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="735" viewBox="0 0 1000 735" role="img" aria-labelledby="title desc">
+  <title id="title">按键事件经过中断、工作队列、Input 线程和主线程</title>
+  <desc id="desc">GPIO 中断重新安排消抖工作。系统工作队列读 GPIO 并上报到 Input 内部队列。Input 线程调用应用回调，将时间和状态复制到应用消息队列。main 线程取出消息后更新计数、灯和日志。</desc>
+  <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#445b74"/></marker></defs>
+  <rect width="1000" height="735" rx="12" fill="#fff"/>
+  <g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#172c43">
+    <text x="28" y="39" font-size="25" font-weight="700">一个状态变化，经过哪些执行位置？</text>
+    <text x="28" y="70" font-size="17" fill="#526477">当前配置：CONFIG_INPUT_MODE_THREAD=y</text>
+    <rect x="25" y="98" width="950" height="103" fill="#fff1df"/>
+    <text x="45" y="133" font-size="21" font-weight="700">GPIO 中断</text>
+    <text x="270" y="134" font-size="21">dshan_gpio_button_interrupt()</text>
+    <text x="270" y="169" font-size="18">每次边沿：k_work_reschedule(..., 30 ms)</text>
+    <path d="M606 179V230" stroke="#445b74" stroke-width="2.5" marker-end="url(#arr)"/>
+    <text x="635" y="222" font-size="16" fill="#526477">延时到期后入队，等待执行</text>
+    <rect x="25" y="240" width="950" height="120" fill="#edf4fb"/>
+    <text x="45" y="276" font-size="21" font-weight="700">系统工作队列</text>
+    <text x="45" y="305" font-size="17" fill="#526477">共享的工作线程</text>
+    <text x="270" y="273" font-size="21">dshan_gpio_button_debounce()</text>
+    <text x="270" y="306" font-size="18">读取 GPIO → 与 stable_state 比较</text>
+    <text x="270" y="338" font-size="18">状态改变才调用 input_report_key()</text>
+    <path d="M606 349V382" stroke="#445b74" stroke-width="2.5" marker-end="url(#arr)"/>
+    <rect x="443" y="393" width="327" height="45" rx="5" fill="#fff" stroke="#70879f" stroke-width="2"/>
+    <text x="465" y="422" font-size="18">Input 内部队列 input_msgq</text>
+    <path d="M606 439V462" stroke="#445b74" stroke-width="2.5" marker-end="url(#arr)"/>
+    <rect x="25" y="471" width="950" height="90" fill="#eaf5ef"/>
+    <text x="45" y="509" font-size="21" font-weight="700">Input 线程</text>
+    <text x="270" y="505" font-size="21">button_input_callback()</text>
+    <text x="270" y="538" font-size="18">筛选事件，记录时间，将状态复制到应用队列</text>
+    <path d="M606 550V573" stroke="#445b74" stroke-width="2.5" marker-end="url(#arr)"/>
+    <rect x="412" y="583" width="388" height="45" rx="5" fill="#fff" stroke="#70879f" stroke-width="2"/>
+    <text x="433" y="612" font-size="18">应用消息队列 button_event_queue</text>
+    <path d="M606 629V653" stroke="#445b74" stroke-width="2.5" marker-end="url(#arr)"/>
+    <rect x="25" y="662" width="950" height="52" fill="#edf0f7"/>
+    <text x="45" y="695" font-size="21" font-weight="700">main 线程</text>
+    <text x="270" y="695" font-size="19">取出消息 → 计数、翻转 D12、输出时长</text>
+  </g>
+</svg>

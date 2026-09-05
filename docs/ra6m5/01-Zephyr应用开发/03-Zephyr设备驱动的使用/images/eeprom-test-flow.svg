@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">EEPROM 末页测试：备份、写读比较、恢复</title>
+  <desc id="desc">256 字节 EEPROM 只测试最后八字节。原数据读入 RAM 的 original，生成不同 pattern 写入，再读回比较，最后写回 original 并再次读回校验。</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#475569"/></marker></defs>
+  <rect width="960" height="600" fill="#fff"/>
+  <g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#172033">
+    <text x="42" y="42" font-size="24" font-weight="700">EEPROM 的最后一页与 RAM 缓冲区</text>
+    <text x="42" y="75" font-size="17" fill="#526174">I2C 从地址 0x50 选择器件；0xF8 选择器件内部的测试起点</text>
+    <text x="42" y="124" font-size="18" font-weight="700">AT24C02 · 256 字节</text>
+    <rect x="42" y="143" width="690" height="57" fill="#e9eff5" stroke="#94a3b8"/>
+    <rect x="732" y="143" width="184" height="57" fill="#ffedd1" stroke="#c77818" stroke-width="2"/>
+    <text x="64" y="178" font-size="18">其余 248 字节：不参与测试</text>
+    <text x="759" y="178" font-size="18" font-weight="700">末页 · 8 字节</text>
+    <text x="42" y="225" font-size="16" fill="#526174">0x00</text>
+    <text x="674" y="225" font-size="16" fill="#526174">0xF7</text>
+    <text x="732" y="225" font-size="16" fill="#995b10">0xF8</text>
+    <text x="875" y="225" font-size="16" fill="#995b10">0xFF</text>
+    <line x1="43" y1="263" x2="917" y2="263" stroke="#cbd5e1"/>
+    <text x="42" y="300" font-size="18" font-weight="700">同一次程序运行中的操作顺序</text>
+    <line x1="69" y1="342" x2="69" y2="518" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+    <g font-size="17">
+      <circle cx="69" cy="341" r="17" fill="#1f5e81"/><text x="64" y="347" fill="#fff">1</text>
+      <text x="104" y="347" font-weight="700">备份</text><text x="184" y="347">EEPROM 末页 → original[8]</text>
+      <text x="604" y="347" fill="#526174">读失败则退出，不开始写入</text>
+      <circle cx="69" cy="400" r="17" fill="#1f5e81"/><text x="64" y="406" fill="#fff">2</text>
+      <text x="104" y="406" font-weight="700">测试</text><text x="184" y="406">original → 生成 pattern → 写入末页</text>
+      <text x="604" y="406" fill="#526174">再次读入 readback，与 pattern 比较</text>
+      <circle cx="69" cy="459" r="17" fill="#1f5e81"/><text x="64" y="465" fill="#fff">3</text>
+      <text x="104" y="465" font-weight="700">恢复</text><text x="184" y="465">original → 写回末页</text>
+      <text x="604" y="465" fill="#526174">再次读回，与 original 比较</text>
+      <text x="104" y="522" font-weight="700" fill="#216a4e">测试、恢复均成功 → EEPROM test passed</text>
+    </g>
+    <rect x="42" y="551" width="874" height="30" fill="#f5f7fa"/>
+    <text x="57" y="572" font-size="15" fill="#526174">original 是 RAM 备份；测试期间中断供电或复位，不能保证恢复原值。</text>
+  </g>
+</svg>

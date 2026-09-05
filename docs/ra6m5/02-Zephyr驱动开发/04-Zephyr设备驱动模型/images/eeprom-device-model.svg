@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="700" viewBox="0 0 1040 700" role="img" aria-labelledby="title desc">
+  <title id="title">AT24C02 设备实例的配置、运行数据和接口</title>
+  <desc id="desc">应用取得 AT24C02 的 struct device 地址。config 指向 EEPROM 配置，data 指向互斥锁，api 指向 EEPROM 操作表，ops.init 是初始化函数。配置里的 I2C bus 又引用 SCI4 I2C 控制器设备。</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#46586b"/></marker></defs>
+  <rect width="1040" height="700" fill="#fff"/>
+  <g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#172033">
+    <text x="38" y="42" font-size="24" font-weight="700">一个设备对象，关联四类信息</text>
+    <text x="38" y="74" font-size="17" fill="#526174">箭头表示对象引用关系；初始化与数据读取发生在不同阶段</text>
+    <text x="38" y="122" font-size="18" font-weight="700">应用：DEVICE_DT_GET(DT_ALIAS(eeprom0))</text>
+    <path d="M206 133V177" fill="none" stroke="#46586b" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="38" y="182" width="329" height="362" fill="#fff" stroke="#334e68" stroke-width="2"/>
+    <rect x="38" y="182" width="329" height="58" fill="#244b63"/>
+    <text x="60" y="218" font-size="21" fill="#fff" font-weight="700">struct device · AT24C02</text>
+    <g font-size="20">
+      <text x="62" y="280">config</text><text x="62" y="342">data</text><text x="62" y="404">api</text><text x="62" y="466">ops.init</text><text x="62" y="521">state</text>
+    </g>
+    <g stroke="#d6dfe8"><path d="M38 301H367"/><path d="M38 363H367"/><path d="M38 425H367"/><path d="M38 487H367"/></g>
+    <g fill="none" stroke="#46586b" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M160 273H412V200H458"/>
+      <path d="M160 335H423V326H458"/>
+      <path d="M160 397H426V433H458"/>
+      <path d="M176 459H403V555H458"/>
+    </g>
+    <rect x="467" y="134" width="530" height="134" fill="#edf4f7" stroke="#7396ac"/>
+    <text x="487" y="164" font-size="20" font-weight="700">eeprom_at2x_config · 只读配置</text>
+    <text x="487" y="194" font-size="17">size = 256　 pagesize = 8　 addr_width = 8</text>
+    <text x="487" y="222" font-size="17">bus.i2c = { SCI4 I2C 设备指针, 0x50 }</text>
+    <text x="487" y="248" font-size="17">read_fn → eeprom_at24_read</text>
+    <rect x="467" y="291" width="530" height="76" fill="#fff6e7" stroke="#c9a462"/>
+    <text x="487" y="321" font-size="20" font-weight="700">eeprom_at2x_data · 可写运行数据</text>
+    <text x="487" y="347" font-size="17">lock：同一设备的访问互斥锁</text>
+    <rect x="467" y="391" width="530" height="96" fill="#eef6ef" stroke="#79a38a"/>
+    <text x="487" y="421" font-size="20" font-weight="700">eeprom_at2x_api · EEPROM 操作表</text>
+    <text x="487" y="449" font-size="17">read → eeprom_at2x_read</text>
+    <text x="487" y="475" font-size="17">write → eeprom_at2x_write　 size → 容量函数</text>
+    <rect x="467" y="518" width="530" height="75" fill="#f3f1f7" stroke="#a89bb9"/>
+    <text x="487" y="548" font-size="20" font-weight="700">eeprom_at2x_init · 启动时初始化</text>
+    <text x="487" y="576" font-size="17">初始化锁，检查父总线；结果写入 state</text>
+    <text x="38" y="578" font-size="16" fill="#526174">state 保存初始化执行状态及结果</text>
+    <line x1="38" y1="619" x2="997" y2="619" stroke="#cbd5e1"/>
+    <text x="38" y="652" font-size="18">读取时：eeprom_read() → api.read → config.read_fn → I2C 控制器</text>
+    <text x="38" y="679" font-size="16" fill="#526174">设备对象不是外设寄存器；config 中的 0x50 也不是这个对象的内存地址。</text>
+  </g>
+</svg>

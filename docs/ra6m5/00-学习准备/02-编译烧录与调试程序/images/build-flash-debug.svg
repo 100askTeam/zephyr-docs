@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="400" viewBox="0 0 940 400" role="img" aria-labelledby="title desc">
+  <title id="title">编译、烧录与观察程序</title>
+  <desc id="desc">应用源码和配置经过build生成ELF，flash下载程序到RA6M5；串口观察程序输出，调试器结合ELF符号设置断点。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#386b9b"/></marker></defs>
+  <rect width="940" height="400" fill="#fff"/>
+  <g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#183247">
+    <text x="30" y="37" font-size="21" font-weight="bold">生成并运行程序</text>
+    <rect x="30" y="62" width="210" height="111" fill="#f4f6f8" stroke="#536b80"/>
+    <text x="135" y="94" text-anchor="middle" font-size="20">应用源码与配置</text>
+    <text x="135" y="125" text-anchor="middle" font-size="17">main.c / prj.conf</text>
+    <text x="135" y="151" text-anchor="middle" font-size="17">CMakeLists.txt</text>
+    <rect x="365" y="62" width="225" height="111" fill="#eef4fa" stroke="#386b9b"/>
+    <text x="477" y="96" text-anchor="middle" font-size="21">zephyr.elf</text>
+    <text x="477" y="129" text-anchor="middle" font-size="17">程序 + 调试符号</text>
+    <text x="477" y="153" text-anchor="middle" font-size="16">位于 build/应用名/zephyr/</text>
+    <rect x="725" y="62" width="185" height="111" fill="#f4f6f8" stroke="#536b80"/>
+    <text x="817" y="105" text-anchor="middle" font-size="22">RA6M5</text>
+    <text x="817" y="139" text-anchor="middle" font-size="17">复位后执行程序</text>
+    <path d="M248 116H355" stroke="#386b9b" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M600 116H715" stroke="#386b9b" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="298" y="99" text-anchor="middle" font-size="19">build</text>
+    <text x="656" y="99" text-anchor="middle" font-size="19">flash</text>
+    <text x="656" y="146" text-anchor="middle" font-size="16">处理镜像后下载</text>
+    <path d="M30 213H910" stroke="#ccd5dd"/>
+    <text x="30" y="250" font-size="21" font-weight="bold">观察程序</text>
+    <text x="50" y="290" font-size="19" font-weight="bold">串口 monitor</text>
+    <text x="265" y="290" font-size="18">查看运行时的打印信息；需要时按 RES 重看启动信息。</text>
+    <text x="50" y="336" font-size="19" font-weight="bold">断点调试 F5</text>
+    <text x="265" y="336" font-size="18">结合 ELF 符号暂停程序、单步执行和查看变量。</text>
+    <text x="265" y="373" font-size="17" fill="#536b80">先烧录当前代码，再调试同一个应用。</text>
+  </g>
+</svg>
