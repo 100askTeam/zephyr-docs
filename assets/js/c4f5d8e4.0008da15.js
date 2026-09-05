@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdshanpi_website=self.webpackChunkdshanpi_website||[]).push([["4823"],{37176(e,s,t){t.r(s),t.d(s,{default:()=>r});var a=t(74848);t(96540);var n=t(56347);function r(){return(0,a.jsx)(n.rd,{to:"/docs/"})}}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdshanpi_website=self.webpackChunkdshanpi_website||[]).push([["6762"],{37089(e,s,c){c.d(s,{createArchitectureServices:()=>i.S});var i=c(45796);c(4954)}}]);
