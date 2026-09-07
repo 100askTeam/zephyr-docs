@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="650" viewBox="0 0 1120 650" role="img" aria-labelledby="title desc">
+  <title id="title">应用通过 EEPROM 子系统访问 AT24C02</title>
+  <desc id="desc">应用调用 eeprom_read，EEPROM 接口通过传入设备的 api 操作表调用 eeprom_at2x_read。AT24 驱动组织访问请求，调用 I2C API，再经 RA SCI I2C 驱动和 Renesas FSP 控制 SCI4，与 AT24C02 通信。软件箭头表示调用方向，读取结果沿调用返回。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="10" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0 0 10 4 0 8Z" fill="#51565c"/></marker>
+    <style>
+      text { font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #24282d; }
+      .box { fill: #fff; stroke: #626971; stroke-width: 1.4; }
+      .wire { fill: none; stroke: #51565c; stroke-width: 1.6; marker-end: url(#arrow); }
+      .rule { fill: none; stroke: #bdc2c7; stroke-width: 1; }
+      .heading { font-size: 24px; font-weight: 700; }
+      .label { font-size: 21px; font-weight: 600; }
+      .body { font-size: 18px; }
+      .small { font-size: 17px; fill: #555d65; }
+      .code { font-family: Consolas, "Liberation Mono", monospace; }
+    </style>
+  </defs>
+  <rect width="1120" height="650" fill="#fff"/>
+  <text x="28" y="39" class="heading">应用与驱动</text>
+  <text x="1092" y="39" text-anchor="end" class="small">软件箭头表示调用，结果沿调用返回</text>
+  <path d="M28 57H1092" class="rule"/>
+  <rect x="28" y="91" width="276" height="108" class="box"/>
+  <text x="166" y="122" text-anchor="middle" class="label">应用程序</text>
+  <text x="166" y="153" text-anchor="middle" class="body code">apps/eeprom/src/main.c</text>
+  <text x="166" y="181" text-anchor="middle" class="small">传入设备、偏移和缓冲区</text>
+  <path d="M304 145H414" class="wire"/>
+  <text x="359" y="130" text-anchor="middle" class="small">调用</text>
+  <rect x="414" y="91" width="294" height="108" class="box"/>
+  <text x="561" y="122" text-anchor="middle" class="label">Zephyr EEPROM 接口</text>
+  <text x="561" y="153" text-anchor="middle" class="body code">eeprom_read(dev, …)</text>
+  <text x="561" y="181" text-anchor="middle" class="small">通过设备操作表调用 read</text>
+  <path d="M708 145H812" class="wire"/>
+  <text x="760" y="130" text-anchor="middle" class="small code">dev-&gt;api</text>
+  <rect x="812" y="79" width="280" height="132" class="box"/>
+  <text x="952" y="110" text-anchor="middle" class="label">AT24 驱动</text>
+  <text x="952" y="139" text-anchor="middle" class="small">read 回调指向</text>
+  <text x="952" y="167" text-anchor="middle" class="body code">eeprom_at2x_read()</text>
+  <text x="952" y="195" text-anchor="middle" class="small">检查范围，组织 EEPROM 访问</text>
+  <path d="M952 211V288" class="wire"/>
+  <text x="930" y="245" text-anchor="end" class="small code">eeprom_at24_read()</text>
+  <text x="930" y="271" text-anchor="end" class="small">发起 I2C 写后读请求</text>
+  <rect x="812" y="288" width="280" height="102" class="box"/>
+  <text x="952" y="319" text-anchor="middle" class="label">Zephyr I2C 接口</text>
+  <text x="952" y="347" text-anchor="middle" class="body code">i2c_write_read()</text>
+  <text x="952" y="374" text-anchor="middle" class="body code">i2c_transfer()</text>
+  <path d="M812 339H708" class="wire"/>
+  <text x="760" y="317" text-anchor="middle" class="small code">transfer</text>
+  <text x="760" y="367" text-anchor="middle" class="small">回调</text>
+  <rect x="414" y="288" width="294" height="102" class="box"/>
+  <text x="561" y="319" text-anchor="middle" class="label">RA SCI I2C 驱动</text>
+  <text x="561" y="350" text-anchor="middle" class="body">使用 SCI4 控制器设备</text>
+  <text x="561" y="376" text-anchor="middle" class="small">执行总线传输</text>
+  <path d="M414 339H304" class="wire"/>
+  <text x="359" y="324" text-anchor="middle" class="small">调用</text>
+  <rect x="28" y="288" width="276" height="102" class="box"/>
+  <text x="166" y="319" text-anchor="middle" class="label">Renesas FSP</text>
+  <text x="166" y="350" text-anchor="middle" class="body code">R_SCI_I2C_Write()</text>
+  <text x="166" y="376" text-anchor="middle" class="body code">R_SCI_I2C_Read()</text>
+  <path d="M28 431H1092" class="rule" stroke-dasharray="6 5"/>
+  <text x="1092" y="460" text-anchor="end" class="heading">开发板硬件</text>
+  <path d="M166 390V492" class="wire"/>
+  <text x="183" y="465" class="small">控制外设</text>
+  <rect x="28" y="492" width="276" height="90" class="box"/>
+  <text x="166" y="527" text-anchor="middle" class="label">RA6M5 · SCI4</text>
+  <text x="166" y="557" text-anchor="middle" class="body">I2C 控制器</text>
+  <path d="M304 537H812" class="wire" marker-start="url(#arrow)"/>
+  <text x="558" y="519" text-anchor="middle" class="body">I2C 总线 · SCL / SDA</text>
+  <text x="558" y="565" text-anchor="middle" class="small">发送内部地址，读取指定位置的数据</text>
+  <rect x="812" y="492" width="280" height="90" class="box"/>
+  <text x="952" y="527" text-anchor="middle" class="label">AT24C02</text>
+  <text x="952" y="557" text-anchor="middle" class="body">EEPROM · 地址 0x50</text>
+  <path d="M28 608H1092" class="rule"/>
+  <text x="28" y="636" class="small">EEPROM 设备与 I2C 控制器分别拥有设备对象，分别遵守 EEPROM 和 I2C 的接口规范。</text>
+</svg>

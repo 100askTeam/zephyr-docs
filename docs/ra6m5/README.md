@@ -70,11 +70,13 @@ import styles from './overview.module.css';
         <span className={styles.stageNumber} aria-hidden="true">00</span>
         <div className={styles.stageIntro}>
           <h3 id="ra6m5-preparation">学习准备</h3>
-          <p>获取课程工程，连接开发板，掌握后续各章共用的开发操作。</p>
+          <p>获取课程工程，连接开发板，配置 VS Code，掌握编译、烧录与调试操作。</p>
         </div>
         <ul className={styles.lessons}>
           <li><Link to="/docs/ra6m5/preparation/project-and-board/">准备工程与连接开发板<span aria-hidden="true">→</span></Link></li>
-          <li><Link to="/docs/ra6m5/preparation/build-flash-debug/">编译、烧录与调试程序<span aria-hidden="true">→</span></Link></li>
+          <li><Link to="/docs/ra6m5/preparation/vscode/">配置 VS Code 开发环境<span aria-hidden="true">→</span></Link></li>
+          <li><Link to="/docs/ra6m5/preparation/build-flash-debug/">编译与烧录程序<span aria-hidden="true">→</span></Link></li>
+          <li><Link to="/docs/ra6m5/preparation/debug/">使用 VS Code 调试程序<span aria-hidden="true">→</span></Link></li>
         </ul>
       </section>
       <section className={styles.stage} aria-labelledby="ra6m5-application">

@@ -1,43 +1,114 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="590" viewBox="0 0 960 590" role="img" aria-labelledby="title desc">
-  <title id="title">Zephyr 应用在构建期和运行期的关系</title>
-  <desc id="desc">应用源码与配置、板卡设备树与 Binding、内核与驱动源码进入 Zephyr 构建系统，生成固件。运行后，应用通过 GPIO API 调用 GPIO 驱动，由驱动操作 LED 所连接的控制器。</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="778" viewBox="0 0 1120 778" role="img" aria-labelledby="title desc">
+  <title id="title">Zephyr 工程的构建输入与 GPIO 运行调用</title>
+  <desc id="desc">在电脑上，应用配置、板卡默认配置和 Kconfig 确定软件功能；板卡设备树及其包含文件与 Binding 被解析为硬件配置宏。构建规则依据配置组织应用、内核和驱动源码，编译链接生成 zephyr.elf。烧录后，开发板 CPU 执行应用，通过 GPIO API 调用 RA GPIO 驱动，改变 P400 输出电平，控制 D12 亮灭。设备树文件和 Binding 不在运行时重新解析。</desc>
   <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#315c78" stroke-width="1.6"/></marker>
+    <marker id="arrow" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="10" markerHeight="8" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 10 4 0 8Z" fill="#4b535c"/>
+    </marker>
+    <style>
+      text { font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #242a31; }
+      .box { fill: #fff; stroke: #535d67; stroke-width: 1.5; }
+      .wire { fill: none; stroke: #4b535c; stroke-width: 1.7; marker-end: url(#arrow); }
+      .rule { fill: none; stroke: #b3b9bf; stroke-width: 1; }
+      .heading { font-size: 24px; font-weight: 700; }
+      .label { font-size: 20px; font-weight: 600; }
+      .body { font-size: 18px; }
+      .small { font-size: 17px; fill: #505a64; }
+      .code { font-family: Consolas, "Liberation Mono", monospace; }
+    </style>
   </defs>
-  <rect width="960" height="590" rx="12" fill="#fff"/>
-  <g font-family="Microsoft YaHei, Noto Sans SC, sans-serif" fill="#183447">
-    <text x="32" y="42" font-size="25" font-weight="700">构建期：把源码与硬件描述组合成固件</text>
-    <g fill="#f5f8fb" stroke="#b4c8d8" stroke-width="1.5">
-      <rect x="32" y="68" width="274" height="104" rx="6"/>
-      <rect x="343" y="68" width="274" height="104" rx="6"/>
-      <rect x="654" y="68" width="274" height="104" rx="6"/>
-    </g>
-    <g font-size="21" font-weight="700" text-anchor="middle">
-      <text x="169" y="102">应用</text><text x="480" y="102">硬件描述</text><text x="791" y="102">系统实现</text>
-    </g>
-    <g font-size="18" text-anchor="middle" fill="#476173">
-      <text x="169" y="135">main.c · prj.conf</text><text x="169" y="159">应用 CMakeLists.txt</text>
-      <text x="480" y="135">Board DTS · Binding</text><text x="480" y="159">控制器、引脚、有效电平</text>
-      <text x="791" y="135">Zephyr 内核 · GPIO 驱动</text><text x="791" y="159">已选择的模块代码</text>
-    </g>
-    <g fill="none" stroke="#315c78" stroke-width="2" marker-end="url(#arrow)">
-      <path d="M169 174 V205 H395 V228"/><path d="M480 174 V228"/><path d="M791 174 V205 H565 V228"/>
-    </g>
-    <rect x="295" y="235" width="370" height="56" rx="6" fill="#1769aa"/>
-    <text x="480" y="271" font-size="23" font-weight="700" text-anchor="middle" fill="#fff">Zephyr 构建系统</text>
-    <path d="M480 293 V326" fill="none" stroke="#315c78" stroke-width="2" marker-end="url(#arrow)"/>
-    <text x="480" y="357" font-size="21" text-anchor="middle">build/&lt;应用名&gt;/zephyr/zephyr.elf</text>
-    <path d="M32 391 H928" stroke="#cedce6" stroke-width="1.5"/>
-    <text x="32" y="434" font-size="25" font-weight="700">运行期：应用通过驱动接口操作硬件</text>
-    <g font-size="21" font-weight="700" text-anchor="middle">
-      <text x="118" y="488">应用</text><text x="348" y="488">GPIO API</text><text x="593" y="488">GPIO 驱动</text><text x="841" y="488">控制器与 LED</text>
-    </g>
-    <g fill="none" stroke="#315c78" stroke-width="2" marker-end="url(#arrow)">
-      <path d="M169 481 H260"/><path d="M435 481 H502"/><path d="M684 481 H742"/>
-    </g>
-    <g font-size="17" text-anchor="middle" fill="#476173">
-      <text x="118" y="523">决定何时翻转</text><text x="348" y="523">统一调用方式</text><text x="593" y="523">执行硬件操作</text><text x="841" y="523">输出电平改变</text>
-    </g>
-    <text x="32" y="565" font-size="17" fill="#476173">设备树在构建时提供连接信息，不是运行时执行的程序。</text>
-  </g>
+
+  <rect width="1120" height="778" fill="#fff"/>
+
+  <text x="28" y="40" class="heading">构建阶段</text>
+  <text x="150" y="40" class="body">电脑上</text>
+  <path d="M28 60H1092" class="rule"/>
+
+  <!-- 软件配置包含应用选择与板卡默认值，由 Kconfig 确定最终配置。 -->
+  <rect x="28" y="86" width="244" height="104" class="box"/>
+  <text x="150" y="118" text-anchor="middle" class="label">软件配置与规则</text>
+  <text x="150" y="148" text-anchor="middle" class="body">prj.conf · 板卡默认配置</text>
+  <text x="150" y="175" text-anchor="middle" class="body code">Kconfig</text>
+  <path d="M272 138H388" class="wire"/>
+  <text x="330" y="121" text-anchor="middle" class="small">确定配置</text>
+  <rect x="388" y="86" width="248" height="104" class="box"/>
+  <text x="512" y="121" text-anchor="middle" class="label">.config 与配置宏</text>
+  <text x="512" y="155" text-anchor="middle" class="body">启用功能、选择驱动</text>
+  <path d="M636 138H748" class="wire"/>
+  <text x="692" y="121" text-anchor="middle" class="small">功能配置</text>
+
+  <!-- DTS 与 Binding 在构建期转为宏，C 源码使用这些硬件信息。 -->
+  <rect x="28" y="216" width="244" height="104" class="box"/>
+  <text x="150" y="248" text-anchor="middle" class="label">硬件描述</text>
+  <text x="150" y="278" text-anchor="middle" class="body">板卡 DTS 及其包含文件</text>
+  <text x="150" y="305" text-anchor="middle" class="body">Binding 属性规则</text>
+  <path d="M272 268H388" class="wire"/>
+  <text x="330" y="251" text-anchor="middle" class="small">解析、生成</text>
+  <rect x="388" y="216" width="248" height="104" class="box"/>
+  <text x="512" y="251" text-anchor="middle" class="label">设备树生成头文件</text>
+  <text x="512" y="285" text-anchor="middle" class="body">控制器、引脚、有效电平</text>
+  <path d="M636 268H748" class="wire"/>
+  <text x="692" y="251" text-anchor="middle" class="small">硬件参数</text>
+
+  <!-- 构建规则组织应用与系统代码，不把所有驱动一并编译。 -->
+  <rect x="28" y="346" width="608" height="104" class="box"/>
+  <text x="332" y="378" text-anchor="middle" class="label">应用与系统源码</text>
+  <text x="332" y="407" text-anchor="middle" class="body">src/main.c · Zephyr 内核 · GPIO 驱动</text>
+  <text x="332" y="434" text-anchor="middle" class="small">由 CMakeLists.txt 组织构建</text>
+  <path d="M636 398H748" class="wire"/>
+  <text x="692" y="381" text-anchor="middle" class="small">选中源码</text>
+
+  <rect x="748" y="86" width="140" height="364" class="box"/>
+  <text x="818" y="246" text-anchor="middle" class="label">编译、链接</text>
+  <text x="818" y="280" text-anchor="middle" class="small">CMake · Ninja</text>
+  <text x="818" y="310" text-anchor="middle" class="small">Arm 工具链</text>
+
+  <path d="M888 268H964" class="wire"/>
+  <text x="926" y="251" text-anchor="middle" class="small">生成</text>
+  <rect x="964" y="208" width="128" height="120" class="box"/>
+  <text x="1028" y="244" text-anchor="middle" class="label code">zephyr.elf</text>
+  <text x="1028" y="279" text-anchor="middle" class="body">程序与数据</text>
+  <text x="1028" y="307" text-anchor="middle" class="small">调试符号</text>
+
+  <text x="28" y="482" class="body">固件位置：<tspan class="code">build/&lt;应用名&gt;/zephyr/zephyr.elf</tspan></text>
+  <path d="M28 510H1092" class="rule"/>
+
+  <text x="28" y="550" class="heading">运行阶段</text>
+  <text x="150" y="550" class="body">开发板上</text>
+  <text x="1092" y="550" text-anchor="end" class="small">烧录后，RA6M5 CPU 执行固件中的程序</text>
+  <text x="373" y="587" text-anchor="middle" class="small">CPU 执行的代码</text>
+  <path d="M28 599H718" class="rule"/>
+  <text x="949" y="587" text-anchor="middle" class="small">硬件</text>
+  <path d="M806 599H1092" class="rule"/>
+
+  <rect x="28" y="616" width="190" height="88" class="box"/>
+  <text x="123" y="648" text-anchor="middle" class="label">应用</text>
+  <text x="123" y="682" text-anchor="middle" class="body">决定闪烁间隔</text>
+  <path d="M218 660H278" class="wire"/>
+  <text x="248" y="643" text-anchor="middle" class="small">调用</text>
+
+  <rect x="278" y="616" width="190" height="88" class="box"/>
+  <text x="373" y="648" text-anchor="middle" class="label">GPIO API</text>
+  <text x="373" y="682" text-anchor="middle" class="body">统一接口</text>
+  <path d="M468 660H528" class="wire"/>
+  <text x="498" y="643" text-anchor="middle" class="small">调用</text>
+
+  <rect x="528" y="616" width="190" height="88" class="box"/>
+  <text x="623" y="648" text-anchor="middle" class="label">RA GPIO 驱动</text>
+  <text x="623" y="682" text-anchor="middle" class="body">执行端口操作</text>
+  <path d="M718 660H806" class="wire"/>
+  <text x="762" y="643" text-anchor="middle" class="small">读写</text>
+  <text x="762" y="685" text-anchor="middle" class="small">寄存器</text>
+
+  <rect x="806" y="616" width="140" height="88" class="box"/>
+  <text x="876" y="648" text-anchor="middle" class="label">GPIO 控制器</text>
+  <text x="876" y="682" text-anchor="middle" class="body">P400 引脚</text>
+  <path d="M946 660H1012" class="wire"/>
+  <text x="979" y="643" text-anchor="middle" class="small">电平</text>
+
+  <rect x="1012" y="616" width="80" height="88" class="box"/>
+  <text x="1052" y="648" text-anchor="middle" class="label">D12</text>
+  <text x="1052" y="682" text-anchor="middle" class="body">LED</text>
+
+  <text x="28" y="747" class="small">设备树与 Binding 在构建时解析；运行时使用已生成的连接参数，不再读取这些文件。</text>
 </svg>

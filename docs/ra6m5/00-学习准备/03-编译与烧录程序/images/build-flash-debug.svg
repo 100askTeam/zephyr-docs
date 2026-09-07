@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="720" viewBox="0 0 1120 720" role="img" aria-labelledby="title desc">
+  <title id="title">编译、烧录、串口与调试的连接关系</title>
+  <desc id="desc">电脑上的应用源码与配置经编译链接生成 ELF。烧录工具处理 ELF 中的程序段，通过 USB 连接板载调试器，再经 SWD 写入 RA6M5 片内 Flash。CPU 复位后从 Flash 取指执行。VS Code 读取电脑上的 ELF 调试符号，经板载调试器与 CPU 双向交互。程序打印从 UART7 送到板载调试器，再经 USB 串口到达电脑上的串口工具。这些 USB 通道共用开发板的 Debug 接口。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="10" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+      <path d="M0 0 10 4 0 8Z" fill="#4b535c"/>
+    </marker>
+    <style>
+      text { font-family: "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #242a31; }
+      .box { fill: #fff; stroke: #535d67; stroke-width: 1.5; }
+      .wire { fill: none; stroke: #4b535c; stroke-width: 1.7; marker-end: url(#arrow); }
+      .both { marker-start: url(#arrow); }
+      .heading { font-size: 24px; font-weight: 700; }
+      .label { font-size: 20px; font-weight: 600; }
+      .body { font-size: 18px; }
+      .small { font-size: 17px; fill: #505a64; }
+      .code { font-family: Consolas, "Liberation Mono", monospace; }
+    </style>
+  </defs>
+
+  <rect width="1120" height="720" fill="#fff"/>
+
+  <!-- 位置区分电脑软件、板载调试器与目标 MCU。 -->
+  <text x="28" y="42" class="heading">电脑</text>
+  <text x="710" y="42" class="heading">开发板</text>
+  <path d="M28 62H1090" stroke="#b3b9bf" stroke-width="1"/>
+  <path d="M660 76V148 M660 238V356 M660 420V505 M660 568V610" stroke="#b3b9bf" stroke-width="1" stroke-dasharray="5 6"/>
+  <text x="1015" y="99" text-anchor="middle" class="label">RA6M5</text>
+
+  <!-- 编译与烧录：程序段进入 Flash，调试符号留在电脑上。 -->
+  <rect x="28" y="128" width="202" height="138" class="box"/>
+  <text x="129" y="158" text-anchor="middle" class="label">应用源码与配置</text>
+  <text x="129" y="190" text-anchor="middle" class="body code">src/main.c</text>
+  <text x="129" y="219" text-anchor="middle" class="body code">prj.conf</text>
+  <text x="129" y="248" text-anchor="middle" class="body code">CMakeLists.txt</text>
+
+  <path d="M230 196H345" class="wire"/>
+  <text x="287" y="175" text-anchor="middle" class="body code">build</text>
+  <text x="287" y="224" text-anchor="middle" class="small">编译、链接</text>
+
+  <rect x="345" y="128" width="255" height="138" class="box"/>
+  <text x="472" y="165" text-anchor="middle" class="label code">zephyr.elf</text>
+  <text x="472" y="204" text-anchor="middle" class="body">程序代码</text>
+  <text x="472" y="239" text-anchor="middle" class="body">调试符号</text>
+
+  <path d="M600 196H715" class="wire"/>
+  <text x="657" y="175" text-anchor="middle" class="body code">flash</text>
+  <text x="657" y="224" text-anchor="middle" class="small">USB</text>
+
+  <rect x="715" y="128" width="120" height="470" class="box"/>
+  <text x="775" y="306" text-anchor="middle" class="label">板载调试器</text>
+  <text x="775" y="339" text-anchor="middle" class="small">烧录与调试</text>
+  <text x="775" y="371" text-anchor="middle" class="small">USB 转串口</text>
+
+  <path d="M835 196H940" class="wire"/>
+  <text x="887" y="175" text-anchor="middle" class="small">SWD</text>
+  <rect x="940" y="146" width="150" height="100" class="box"/>
+  <text x="1015" y="182" text-anchor="middle" class="label">片内 Flash</text>
+  <text x="1015" y="218" text-anchor="middle" class="body">程序代码</text>
+
+  <path d="M1015 246V355" class="wire"/>
+  <text x="997" y="292" text-anchor="end" class="small">复位后</text>
+  <text x="997" y="319" text-anchor="end" class="small">取指执行</text>
+  <rect x="940" y="355" width="150" height="90" class="box"/>
+  <text x="1015" y="389" text-anchor="middle" class="label">CPU</text>
+  <text x="1015" y="423" text-anchor="middle" class="body">运行程序</text>
+
+  <!-- 调试器同时需要 ELF 中的符号与 MCU 的运行状态。 -->
+  <path d="M472 266V355" class="wire"/>
+  <text x="488" y="316" class="small">读取调试符号</text>
+  <rect x="345" y="355" width="255" height="90" class="box"/>
+  <text x="472" y="389" text-anchor="middle" class="label">VS Code 调试</text>
+  <text x="472" y="423" text-anchor="middle" class="body">断点、单步、变量</text>
+  <path d="M600 400H715" class="wire both"/>
+  <text x="657" y="382" text-anchor="middle" class="small">USB</text>
+  <path d="M835 400H940" class="wire both"/>
+  <text x="887" y="382" text-anchor="middle" class="small">SWD</text>
+
+  <!-- 打印方向从目标程序流向电脑，经过板载调试器的串口桥。 -->
+  <path d="M1015 445V553H835" class="wire"/>
+  <text x="935" y="533" text-anchor="middle" class="small">UART7 打印</text>
+  <path d="M715 553H600" class="wire"/>
+  <text x="657" y="533" text-anchor="middle" class="small">USB 串口</text>
+  <rect x="345" y="508" width="255" height="90" class="box"/>
+  <text x="472" y="542" text-anchor="middle" class="label">串口工具</text>
+  <text x="472" y="576" text-anchor="middle" font-size="16">Serial Monitor / 工程任务</text>
+  <text x="935" y="587" text-anchor="middle" class="small">115200，8N1</text>
+
+  <path d="M28 627H1090" stroke="#b3b9bf" stroke-width="1"/>
+  <text x="28" y="660" class="small">图中的 USB 通道共用开发板的 Debug 接口，连接一根 USB 数据线即可。</text>
+  <text x="28" y="692" class="small">flash 会先构建、处理镜像，再下载并复位；F5 会先构建并启动调试，不执行烧录。</text>
+</svg>

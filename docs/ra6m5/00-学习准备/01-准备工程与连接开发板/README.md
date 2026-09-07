@@ -19,7 +19,7 @@ slug: /ra6m5/preparation/project-and-board/
 完整课程工程的下载入口待发布。开发板原理图、位号图等硬件资料可从[百问网 RA6M5 资料页面](https://download.100ask.net/boards/Renesas/DShanMCU-RA6M5/index.html)获取。
 :::
 
-取得工程压缩包后，先完整解压，再用 VS Code 的“文件 → 打开文件夹”打开工程根目录。选择的是包含 `apps`、`scripts` 和 `west.yml` 的这一层，不是其中的 `zephyr` 文件夹。
+取得工程压缩包后，先完整解压。工程根目录是包含 `apps`、`scripts` 和 `west.yml` 的这一层；下一篇会在 VS Code 中打开这个目录。
 
 建议将工程放在路径较短、没有空格的英文目录中。解压完成后，至少应能找到下面这些内容：
 
@@ -84,7 +84,7 @@ USB 数据线接入 **Debug** 口后，即可通过同一根线供电、烧录�
 
 ## 确认电脑识别到开发板
 
-先打开 Windows“设备管理器”，展开“端口（COM 和 LPT）”。插拔开发板时应出现或消失一个 USB 串口。COM 编号由电脑分配，后文的串口脚本会自动识别，无需记住某个固定编号。
+先打开 Windows“设备管理器”，展开“端口（COM 和 LPT）”。插拔开发板时应出现或消失一个 USB 串口。COM 编号由电脑分配，记下本次识别到的编号，后面使用串口插件时需要选择它；换一台电脑后应重新确认。
 
 下图中，开发板对应的是 **USB 串行设备（COM23）**。列表里的蓝牙串口属于其他设备；通过插拔时的变化，可以找到当前开发板对应的那一项。
 
@@ -105,33 +105,4 @@ USB 数据线接入 **Debug** 口后，即可通过同一根线供电、烧录�
 
 板载调试器按本工程的 CMSIS-DAP 方式使用，无需额外接入调试器。
 
-接下来，在 VS Code 中选择“终端 → 新建终端”，使用 PowerShell。终端的当前目录应是工程根目录。执行：
-
-```powershell
-.\sdk_env\probe-rs\probe-rs.exe list
-```
-
-本工程使用的板载调试器会显示为 `WCH-Link`，设备标识包含 `1a86:8011`，接口类型为 `CMSIS-DAP`。下面是当前开发板的实际枚举结果；另一块板的序列号可能不同：
-
-```text
-The following debug probes were found:
-[0]: WCH-Link -- 1a86:8011-2:0001A0000001 (CMSIS-DAP)
-```
-
-还可以用工程中的 Python 列出串口：
-
-```powershell
-.\.venv\Scripts\python.exe -m serial.tools.list_ports -v
-```
-
-在对应串口的硬件标识中寻找 `VID:PID=1A86:8011`。调试器和串口都能识别，说明烧录、调试及查看输出所需的 USB 通道已经连接。
-
-下面是这两个命令在 VS Code 终端中的输出。上方的 `WCH-Link` 和 `CMSIS-DAP` 对应调试通道，下方 `COM23` 的硬件标识包含 `VID:PID=1A86:8011`，与设备管理器中看到的串口一致。
-
-[![VS Code PowerShell 终端中列出的 WCH-Link 调试器和 COM23 串口](./images/vscode-probe-and-serial-check.png)](./images/vscode-probe-and-serial-check.png)
-
-*图 3：在工程根目录检查调试器和串口。截图中的 `D:\100ask\work\RA6M5` 是示例存放位置，请以自己解压后的工程根目录为准。点击图片可查看原图。*
-
-如果 `probe-rs list` 没有列出开发板，依次检查接口是否插在 Debug、USB 线是否支持数据传输、电脑是否识别到 USB 设备。此时还没有运行应用，不需要修改应用代码。
-
-下一步阅读[编译、烧录与调试程序](../02-编译烧录与调试程序/README.md)，掌握后续各章共用的操作。
+工程已经解压，设备管理器中也出现了板载串口。下一步阅读[配置 VS Code 开发环境](../02-配置VSCode开发环境/README.md)，安装编辑器和所需扩展，打开工程并检查调试器连接。

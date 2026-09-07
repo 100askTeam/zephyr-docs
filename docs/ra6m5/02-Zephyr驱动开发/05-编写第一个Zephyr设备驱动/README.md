@@ -13,7 +13,17 @@ slug: /ra6m5/drivers/implementation-and-registration/
 
 ## 5.1 确定驱动与应用之间的接口
 
-驱动与应用之间采用 Zephyr 的标准输入事件 `struct input_event`，本例约定如下。
+本章使用 Zephyr 已有的 Input 子系统。它规定输入事件的格式，提供驱动上报入口，并把事件分发给应用登记的接收函数。K2 驱动按这套接口报告按下、松开，应用接收事件后决定怎样使用它。
+
+先沿图中的上报方向观察驱动、Input 与应用的关系，再看按键驱动怎样调用已有的 GPIO API。引脚读取和消抖由按键驱动完成，Input 负责传递已经形成的输入事件。
+
+![K2 输入驱动向下调用 GPIO API，向上通过 Input 子系统向应用传递按键事件](./images/input-subsystem-overview.svg)
+
+*图 5-1　K2 按键驱动、Input 子系统与应用的接口关系。依据 `drivers/input/input_dshan_gpio_button.c`、`zephyr/subsys/input/input.c` 和 `apps/k2_button/src/main.c` 绘制。*
+
+应用用 `INPUT_CALLBACK_DEFINE()` 登记接收函数，驱动用 `input_report_key()` 上报事件。这两个入口都由 `zephyr/include/zephyr/input/input.h` 提供。应用与驱动共同遵守 Input 的接口约定，无需在双方之间另外定义一套按键读写函数。
+
+事件使用 Zephyr 的标准结构体 `struct input_event` 表示，本例约定如下。
 
 | 字段 | 本例的取值 | 应用如何使用 |
 | --- | --- | --- |
@@ -31,7 +41,19 @@ slug: /ra6m5/drivers/implementation-and-registration/
 return input_report(dev, INPUT_EV_KEY, code, !!value, sync, timeout);
 ```
 
-驱动调用 `input_report_key()` 上报，应用用 `INPUT_CALLBACK_DEFINE()` 注册接收函数。本设备仍需注册到 Zephyr 设备模型，但应用访问入口由 Input 提供，因此设备的 `.api` 指针可以为 `NULL`。[Input 官方说明](https://docs.zephyrproject.org/latest/services/input/index.html)
+Input 收到事件后，根据事件来源找到接收函数。在 `zephyr/subsys/input/input.c` 的 `input_process()` 中可以看到实际分发规则：
+
+```c
+	STRUCT_SECTION_FOREACH(input_callback, callback) {
+		if (callback->dev == NULL || callback->dev == evt->dev) {
+			callback->callback(evt, callback->user_data);
+		}
+	}
+```
+
+这里遍历应用登记的接收记录。记录中的设备指针与事件的 `dev` 相同时，Input 才调用对应回调；设备过滤条件为 `NULL` 时接收所有设备的事件。本例将使用 `button_dev` 作为过滤条件，只接收自定义 K2 设备的事件。
+
+按键设备仍需由 `DEVICE_DT_INST_DEFINE()` 关联配置、运行数据和初始化函数，交给 Zephyr 设备模型管理。Input 的事件分发不通过这个设备的 `.api` 操作表，因此本例注册设备时将 `.api` 设为 `NULL`；应用接收函数则由 `INPUT_CALLBACK_DEFINE()` 单独登记。[Input 官方说明](https://docs.zephyrproject.org/latest/services/input/index.html)
 
 ## 5.2 为应用描述一个输入设备
 
@@ -100,7 +122,7 @@ properties:
 
 ![K2 按键连接到 P000，R42 提供 10 kΩ 上拉，按下时接地](./images/k2-schematic.png)
 
-*图 5-1　K2 的引脚和有效电平。《RA6M5_v4_20230706》原理图第 3 页 KEY 部分，见[完整原理图](pathname:///files/ra6m5/ra6m5-v4-schematic.pdf)。*
+*图 5-2　K2 的引脚和有效电平。《RA6M5_v4_20230706》原理图第 3 页 KEY 部分，见[完整原理图](pathname:///files/ra6m5/ra6m5-v4-schematic.pdf)。*
 
 因此按下对应低电平，松开对应高电平；板上已有 10 kΩ 外部上拉，本例不再配置 GPIO 内部上拉。
 
@@ -156,7 +178,7 @@ buttons {
 
 ![设备树属性通过 Binding 检查，再由 DT 宏初始化驱动配置](./images/device-property-mapping.svg)
 
-*图 5-2　设备树属性与驱动配置的对应关系。依据本章的 overlay、Binding 和设备注册宏绘制。*
+*图 5-3　设备树属性与驱动配置的对应关系。依据本章的 overlay、Binding 和设备注册宏绘制。*
 
 例如 `zephyr,code` 在 C 宏参数中写成 `zephyr_code`，属性名中的逗号、连字符会转换为下划线。Binding 负责定义和检查属性，稍后注册设备时使用的 `DT_INST_PROP()` 才把具体值放进配置结构体。
 
@@ -274,7 +296,9 @@ struct dshan_gpio_button_data {
 };
 ```
 
-`config` 由设备树初始化，其中的 `gpio_dt_spec` 同时保存控制器设备、引脚号和标志。`data` 归当前设备实例所有，后续回调通过 `data->dev->config` 取得该实例的配置。
+`config` 由设备树初始化，其中的 `gpio_dt_spec` 同时保存控制器设备、引脚号和标志。`data` 归当前按键设备实例所有，后续回调通过 `data->dev->config` 取得该实例的配置。
+
+这里会用到两个设备对象：`data->dev` 指向本驱动定义的按键设备，与应用稍后取得的 `button_dev` 对应；`config->gpio.port` 指向已有的 `ioport0` GPIO 控制器设备。调用 GPIO API 时使用控制器设备，上报 Input 事件时使用按键设备作为事件来源。
 
 ### 5.4.2 编写初始化函数
 
@@ -338,7 +362,7 @@ Zephyr 保存初始化函数的返回结果，应用随后通过 `device_is_read
 DT_INST_FOREACH_STATUS_OKAY(DSHAN_GPIO_BUTTON_DEFINE)
 ```
 
-宏在构建时为每个启用节点生成 `data`、`config` 和设备对象，并记录初始化入口。启动时由 Zephyr 按初始化阶段和优先级调用 `dshan_gpio_button_init()`；应用无需自行调用它。
+宏在构建时为每个启用节点生成 `data`、`config` 和设备对象，并记录初始化入口。启动时由 Zephyr 按初始化阶段和优先级调用 `dshan_gpio_button_init()`；应用无需自行调用它。此处完成的是设备定义，应用向 Input 登记接收函数的代码将在 5.6 节加入。
 
 | 写法 | 含义 |
 | --- | --- |
@@ -543,7 +567,7 @@ DT_INST_FOREACH_STATUS_OKAY(...)
 
 ![从 GPIO 中断到系统工作队列、Input 线程和应用主线程的事件路径](./images/input-event-contexts.svg)
 
-*图 5-3　当前配置下的事件传递与执行位置。依据驱动、应用及 `zephyr/subsys/input/input.c` 绘制。*
+*图 5-4　当前配置下的事件传递与执行位置。依据驱动、应用及 `zephyr/subsys/input/input.c` 绘制。*
 
 在 `zephyr/subsys/input/input.c` 中，`CONFIG_INPUT_MODE_THREAD` 使 `input_report()` 将事件放入内部的 `input_msgq`，由 `input_thread()` 取出并分发。应用另外定义的 `button_event_queue` 负责将处理转交给 `main()`，不会改变 Input 回调自身的执行位置。
 
@@ -615,7 +639,14 @@ static void button_input_callback(struct input_event *event, void *user_data)
 INPUT_CALLBACK_DEFINE(button_dev, button_input_callback, NULL);
 ```
 
-`INPUT_CALLBACK_DEFINE()` 在构建时登记设备过滤条件和接收函数，Input 分发事件时调用匹配项；无需在 `main()` 中另行注册。这里记录的 `k_uptime_get()` 是消抖后事件到达回调的时间，不是 GPIO 边沿时间。
+`INPUT_CALLBACK_DEFINE()` 在构建时登记设备过滤条件和接收函数，Input 分发事件时调用匹配项；无需在 `main()` 中另行注册。对照本章已经使用的两个宏，可以分别找到设备初始化和应用事件接收的入口：
+
+| 定义位置与宏 | 构建时保存的内容 | 运行时由谁使用 |
+| --- | --- | --- |
+| 驱动中的 `DEVICE_DT_INST_DEFINE()` | 按键设备对象及其 `config`、`data`、初始化入口；本例 `.api = NULL` | Zephyr 设备模型调用初始化函数，维护就绪状态 |
+| 应用中的 `INPUT_CALLBACK_DEFINE()` | `button_dev` 过滤条件、`button_input_callback` 和用户数据 | Input 匹配事件的 `dev`，调用应用接收函数 |
+
+回调记录中的 `button_dev` 与驱动上报时传入的 `data->dev` 指向同一个按键设备。Input 按这个对象匹配事件，接收函数不存放在设备的 `.api` 中。接收函数调用 `k_uptime_get()` 记录的是消抖后事件到达回调的时间，不是 GPIO 边沿时间。
 
 `K_NO_WAIT` 使回调在应用队列已满时立即返回，避免它等待主线程而阻塞其它 Input 事件的分发。此时增加丢失计数，由主线程统一报告。
 

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="855" viewBox="0 0 1100 855" role="img" aria-labelledby="title desc">
+  <title id="title">K2 按键驱动与 Input 子系统</title>
+  <desc id="desc">应用向 Input 登记接收函数。K2 输入驱动调用已有 GPIO API 配置和读取引脚，GPIO 驱动通过已登记的回调通知边沿变化。按键驱动完成消抖后调用 input_report_key 上报，Input 按设备匹配并调用应用接收函数。图中区分登记、调用与事件传递，不展开执行线程。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#404040"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="855" fill="#ffffff"/>
+  <g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" fill="#202020">
+    <text x="35" y="35" font-size="25" font-weight="700">K2 按键驱动与 Input 子系统</text>
+
+    <g fill="#ffffff" stroke="#555555" stroke-width="1.5">
+      <rect x="260" y="65" width="580" height="95"/>
+      <rect x="260" y="280" width="580" height="95"/>
+      <rect x="260" y="480" width="580" height="120"/>
+      <rect x="260" y="750" width="580" height="80"/>
+    </g>
+
+    <g text-anchor="middle">
+      <text x="550" y="100" font-size="23" font-weight="700">应用</text>
+      <text x="550" y="132" font-size="20">接收按下、松开事件，完成灯光、计数和日志处理</text>
+
+      <text x="550" y="315" font-size="23" font-weight="700">Zephyr Input 子系统</text>
+      <text x="550" y="347" font-size="20">规定事件格式，按设备匹配并分发事件</text>
+
+      <text x="550" y="514" font-size="23" font-weight="700">本章编写：K2 输入驱动</text>
+      <text x="550" y="545" font-size="20">读取 GPIO、消抖、生成标准按键事件</text>
+      <text x="550" y="577" font-family="Consolas, monospace" font-size="18">drivers/input/input_dshan_gpio_button.c</text>
+
+      <text x="550" y="782" font-size="22" font-weight="700">已有 GPIO API 与 RA GPIO 控制器驱动</text>
+      <text x="550" y="811" font-size="20">配置、读取 ioport0 的第 0 引脚（P000）</text>
+    </g>
+
+    <g fill="none" stroke="#404040" stroke-width="1.6" marker-end="url(#arrow)">
+      <path d="M 350 160 V 280"/>
+      <path d="M 730 280 V 160"/>
+      <path d="M 550 480 V 375"/>
+      <path d="M 350 600 V 750"/>
+      <path d="M 730 750 V 600"/>
+    </g>
+
+    <g font-size="20">
+      <text x="325" y="207" text-anchor="end">构建时登记接收函数</text>
+      <text x="325" y="238" text-anchor="end" font-family="Consolas, monospace" font-size="18">INPUT_CALLBACK_DEFINE()</text>
+      <text x="755" y="207">调用匹配的接收函数</text>
+      <text x="755" y="238" font-size="18">传入 struct input_event</text>
+
+      <text x="575" y="420">上报按键事件</text>
+      <text x="575" y="451" font-family="Consolas, monospace" font-size="19">input_report_key()</text>
+
+      <text x="325" y="655" text-anchor="end">调用 GPIO API</text>
+      <text x="325" y="685" text-anchor="end" font-size="18">配置、读取、设置中断</text>
+      <text x="755" y="655">GPIO 边沿通知</text>
+      <text x="755" y="685" font-size="18">调用已登记的 GPIO 回调</text>
+    </g>
+  </g>
+</svg>

@@ -9,9 +9,28 @@ slug: /ra6m5/drivers/framework/
 
 上一章的 `apps/eeprom` 只调用了 `eeprom_get_size()`、`eeprom_read()` 和 `eeprom_write()`，没有写 I2C 时序，却能完成 AT24C02 的读写。应用中还存在一个值得继续追踪的对象：`const struct device *eeprom`。它怎样决定调用哪个函数，又怎样把 `0x50`、256 字节和 SCI4 传给驱动？
 
-保持上一章的应用和 Board 配置不变，从 `eeprom_read()` 逐层查看工程里的 Zephyr 源码。沿这次读取，可以把设备对象、配置、运行数据、操作表和初始化过程连在一起。
+保持上一章的应用和 Board 配置不变。先把应用、EEPROM 接口和具体驱动放在一起，再沿 `eeprom_read()` 查看设备对象怎样把它们关联起来。
 
-## 4.1 从应用接口进入操作表
+## 4.1 子系统接口与驱动实现 {#41-从应用接口进入操作表}
+
+EEPROM 子系统规定“如何读取、写入、查询容量”，AT24 驱动按照这些规定实现具体函数。应用调用 `eeprom_read()` 时，传入的设备对象决定使用哪一个驱动实现。应用接口由 Zephyr 定义，具体硬件操作由驱动完成。
+
+这种接口规范按设备类别划分：
+
+| 设备类别 | 应用使用的接口举例 | 对应驱动实现的操作 |
+| --- | --- | --- |
+| EEPROM | `eeprom_read()`、`eeprom_write()` | 读取和写入指定范围的数据 |
+| GPIO | `gpio_pin_configure()`、`gpio_pin_set()` | 配置引脚和设置输出电平 |
+
+图中先沿上排查看应用如何进入 AT24 驱动，再沿下方箭头查看它如何借助 I2C 控制器完成通信。EEPROM 驱动处理存储器的访问规则，I2C 控制器驱动处理 MCU 的总线外设，两者通过 I2C API 配合。
+
+![应用通过 EEPROM 接口调用 AT24 驱动，再经 I2C API、RA 驱动和 FSP 访问硬件](./images/eeprom-api-call-path.svg)
+
+图 4-1：本板 EEPROM 的读取路径。软件箭头表示调用，底部连线表示 I2C 通信；读取结果沿函数调用返回。依据工程内 `eeprom.h`、`eeprom_at2x.c`、`i2c.h` 与 `i2c_renesas_ra_sci.c` 绘制。
+
+先关注图中的 `dev->api`：它指向当前设备提供的操作表，表中保存驱动函数的地址。下面把应用调用、接口分发和操作表三处代码对应起来；I2C 传输细节在 4.4 节继续展开。
+
+### 从 `eeprom_read()` 进入操作表
 
 打开 `apps/eeprom/src/main.c`，找到备份原数据的这一行：
 
@@ -56,6 +75,26 @@ typedef int (*eeprom_api_read)(const struct device *dev, off_t offset,
 
 各驱动按这个类型实现读取函数，应用便可以通过 `eeprom_read()` 访问不同 EEPROM；具体调用哪一个实现由传入的设备对象决定。
 
+打开 `zephyr/drivers/eeprom/eeprom_at2x.c`，查找 `eeprom_at2x_api`，就能看到 AT24 所用驱动填入的函数：
+
+```c
+static DEVICE_API(eeprom, eeprom_at2x_api) = {
+	.read = eeprom_at2x_read,
+	.write = eeprom_at2x_write,
+	.size = eeprom_at2x_size,
+};
+```
+
+`DEVICE_API(eeprom, ...)` 定义 EEPROM 类别的操作表。左边的 `read`、`write`、`size` 是子系统规定的成员，右边是具体驱动实现的函数。于是图 4-1 上排的这次读取可以对应到三处代码：
+
+| 位置 | 本次调用对应的代码 | 职责 |
+| --- | --- | --- |
+| 应用 | `eeprom_read(eeprom, ...)` | 选择设备、读取位置和缓冲区 |
+| EEPROM 接口 | `api->read(dev, ...)` | 从该设备的操作表调用读取函数 |
+| AT24 所用驱动 | `.read = eeprom_at2x_read` | 提供实际执行的函数 |
+
+`api->read` 中的 `read` 属于 EEPROM 操作表，不能据此推断其他类别的驱动也必须提供同名函数。GPIO 驱动遵守的是 GPIO 操作表的定义。
+
 这里的“统一”有类别限制。EEPROM 对象应传给 EEPROM API，GPIO 控制器对象应传给 GPIO API；两个对象都用 `struct device` 表示，不代表可以交换使用。`eeprom_read()` 也不会通过 `device_is_ready()` 自动检查对象，调用前的状态检查仍由应用负责。
 
 ## 4.2 `struct device` 中保存了什么
@@ -79,11 +118,11 @@ typedef int (*eeprom_api_read)(const struct device *dev, off_t offset,
 
 这些是 `struct device` 的字段节选。Zephyr 管理通用设备对象，具体驱动定义 `config`、`data` 和 `api` 所指向的类型；应用通过相应类别的 API 使用设备。
 
-图中实线表示指针指向的对象，不表示按箭头顺序执行函数。注意同一个设备同时关联只读配置、运行数据和操作表。
+图 4-1 表示函数调用，下面这张图表示设备对象与其他对象的引用关系。沿 `api` 找到刚才的操作表，再观察 `config` 和 `data`：驱动函数还要从同一个设备对象取得硬件参数和运行状态。
 
 ![AT24C02 设备对象与配置、数据、操作表的关系](./images/eeprom-device-model.svg)
 
-图 4-1：AT24C02 设备实例的对象关系。根据工程内 Zephyr v4.4.2 的 `include/zephyr/device.h`、`drivers/eeprom/eeprom_at2x.c` 及本板设备树绘制；上游原文件见 [device.h](https://github.com/zephyrproject-rtos/zephyr/blob/v4.4.2/include/zephyr/device.h) 和 [AT2X 驱动](https://github.com/zephyrproject-rtos/zephyr/blob/v4.4.2/drivers/eeprom/eeprom_at2x.c)。
+图 4-2：AT24C02 设备实例的对象关系，箭头表示指针引用，不表示执行顺序。根据工程内 Zephyr v4.4.2 的 `include/zephyr/device.h`、`drivers/eeprom/eeprom_at2x.c` 及本板设备树绘制；上游原文件见 [device.h](https://github.com/zephyrproject-rtos/zephyr/blob/v4.4.2/include/zephyr/device.h) 和 [AT2X 驱动](https://github.com/zephyrproject-rtos/zephyr/blob/v4.4.2/drivers/eeprom/eeprom_at2x.c)。
 
 | 字段 | AT24C02 实例关联的内容 | 使用阶段 |
 | --- | --- | --- |
@@ -96,19 +135,9 @@ typedef int (*eeprom_api_read)(const struct device *dev, off_t offset,
 
 `ops.init` 与 `api->read` 不属于同一张表。前者是设备生命周期中的初始化入口，由设备框架调用；后者是 EEPROM 类别定义的读操作，由 EEPROM API 调用。不能在应用中每读一次数据就重新调用初始化函数。
 
-## 4.3 找到 AT24 对应的具体函数
+## 4.3 驱动如何使用配置与运行数据 {#43-找到-at24-对应的具体函数}
 
-`api->read` 只告诉我们“从操作表调用读取函数”，还没有给出函数名称。打开 `zephyr/drivers/eeprom/eeprom_at2x.c`，查找 `eeprom_at2x_api`：
-
-```c
-static DEVICE_API(eeprom, eeprom_at2x_api) = {
-	.read = eeprom_at2x_read,
-	.write = eeprom_at2x_write,
-	.size = eeprom_at2x_size,
-};
-```
-
-`DEVICE_API(eeprom, ...)` 定义 EEPROM 类别的操作表。三个成员分别指向当前驱动的读取、写入和容量函数。文件名中的 `at2x` 表示这里共用了 AT24 I2C EEPROM 与 AT25 SPI EEPROM 的一部分逻辑，不能只凭文件名判断底层一定使用 I2C。
+已经找到操作表中的函数，接下来查看它们如何使用图 4-2 中的 `config` 和 `data`。继续打开 `zephyr/drivers/eeprom/eeprom_at2x.c`。文件名中的 `at2x` 表示这里共用了 AT24 I2C EEPROM 与 AT25 SPI EEPROM 的一部分逻辑，本板使用其中的 AT24 I2C 访问路径。
 
 ### 容量来自 `config`
 
@@ -271,7 +300,7 @@ apps/eeprom/src/main.c
 			    &eeprom_at2x_api)
 ```
 
-这里使用的是 `DEVICE_DT_DEFINE()`。它接受一个节点标识，并将前面几部分关联起来：
+这里使用的是 `DEVICE_DT_DEFINE()`。对照图 4-2，宏的 `config`、`data`、`api` 参数分别接入图中三类对象，`init_fn` 接入初始化函数。它接受一个节点标识，并将前面几部分关联起来：
 
 | 参数 | 当前驱动传入的对象 | 含义 |
 | --- | --- | --- |
