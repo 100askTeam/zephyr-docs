@@ -230,10 +230,9 @@ static int32_t to_milli(const struct sensor_value *value)
 
 ### 使用 VS Code
 
-1. 按 `Ctrl+Shift+B` 打开任务列表；
-2. 选择「Demo 工具（选择应用：构建 / 烧录 / 构建并烧录）」；
-3. 输入 `mpu6050_demo` 对应的序号；
-4. 输入 `4`，执行「全量重建」。
+1. 按 `Ctrl+Shift+B` 运行默认的「Demo 工具（选择应用：仅烧录 / 构建 / 构建并烧录）」任务；
+2. 输入 `mpu6050_demo` 对应的序号；
+3. 输入 `4`，执行「全量重建」。
 
 ### 使用终端
 
@@ -301,7 +300,7 @@ Select-String `
 
 确认模块已经接到 M11 插座后，可以构建并烧录。
 
-使用 VS Code 时，再次按 `Ctrl+Shift+B`，选择 `mpu6050_demo`，然后输入 `2` 执行「构建并烧录」。
+使用 VS Code 时，再次按 `Ctrl+Shift+B`，选择 `mpu6050_demo`，然后输入 `3` 执行「构建并烧录」。
 
 使用终端时执行：
 

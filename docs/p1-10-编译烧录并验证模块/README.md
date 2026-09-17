@@ -135,7 +135,7 @@ Select-String `
 
 ## 构建并烧录
 
-使用 VS Code 时，按下 `Ctrl+Shift+B` 打开 Demo 工具，先输入 `hc_sr04_demo` 前面的序号，再输入 `2` 选择「构建并烧录」。
+使用 VS Code 时，按下 `Ctrl+Shift+B` 打开 Demo 工具，先输入 `hc_sr04_demo` 前面的序号，再输入 `3` 选择「构建并烧录」。
 
 使用终端时，在工程根目录执行：
 

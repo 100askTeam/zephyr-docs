@@ -10,7 +10,15 @@ HPM6E70 工程的 `apps/` 目录中可以保存多个应用。构建时需要确
 
 ## 使用终端命令
 
-在 HPM6E70 工程根目录打开 PowerShell。脚本会使用工程中 `.venv` 目录里的 Python 和 west，以及 `sdk_env/tools` 目录里的 CMake 与 Ninja，不需要在终端中另外查找这些工具。
+在完整工程包的 `HPM6E70` 根目录打开 PowerShell。`scripts/dev.ps1` 明确调用 `tools/python-portable/python.exe` 中的 Python 和 west，并把工程内的 Git、DTC、gperf、CMake、Ninja 和交叉编译工具放到本次脚本运行的 PATH 前面；不依赖电脑上另装的 Python 或 Git，也不读取旧电脑的 `.venv`。
+
+直接在 PowerShell 中运行 `.ps1` 文件时，先为**当前窗口**允许脚本执行：
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass -Force
+```
+
+关闭这个窗口后设置即失效。VS Code 任务已经使用 `-ExecutionPolicy Bypass` 调用脚本，不需要在任务终端重复设置。
 
 ### 打开应用操作菜单
 
@@ -24,11 +32,13 @@ HPM6E70 工程的 `apps/` 目录中可以保存多个应用。构建时需要确
 
 | 输入 | 执行的操作 |
 | --- | --- |
-| `1` | 仅构建 |
-| `2` | 构建并烧录 |
-| `3` | 仅烧录 |
-| `4` | 清除原有构建结果后重新构建 |
+| `1` | 仅烧录现成固件，不编译 |
+| `2` | 仅构建 |
+| `3` | 构建并烧录 |
+| `4` | 全量重新构建 |
 | `5` | 取消本次操作 |
+
+选择应用后，终端会显示 `1) 仅烧录现成固件  2) 仅构建  3) 构建并烧录  4) 全量重建  5) 取消`。只有选择 `3` 时才会先构建再烧录。
 
 ### 按名称执行操作
 
@@ -39,9 +49,11 @@ HPM6E70 工程的 `apps/` 目录中可以保存多个应用。构建时需要确
 | `.\scripts\dev.ps1 list` | 扫描 `apps/` 目录，并同步 VS Code 中的应用选项 |
 | `.\scripts\dev.ps1 new <名称>` | 从模板创建新应用 |
 | `.\scripts\dev.ps1 build <名称>` | 构建指定应用，结果保存到 `build/<名称>/` |
-| `.\scripts\dev.ps1 rebuild <名称>` | 清除原有构建结果后重新构建指定应用 |
-| `.\scripts\dev.ps1 flash <名称>` | 烧录指定应用的构建结果 |
+| `.\scripts\dev.ps1 rebuild <名称>` | 全量重新配置并构建指定应用 |
+| `.\scripts\dev.ps1 flash <名称>` | 仅烧录已有 HEX，不触发编译 |
 | `.\scripts\dev.ps1 build-flash <名称>` | 构建并烧录指定应用 |
+
+`flash` 优先使用 `build/<名称>/zephyr/zephyr.hex`；该文件不存在时使用 `firmware/<名称>.hex`。完整工程包已附带 `firmware/hpm6e70_demo.hex`，因此刚解压、尚未编译时也能烧录默认 Demo。使用 `build-flash` 才会编译当前源码再烧录，二者不能混用。
 
 例如，下面的命令会构建 `hpm6e70_demo`，并把结果保存到 `build/hpm6e70_demo/`：
 
@@ -86,9 +98,7 @@ HPM6E70 工程在 `.vscode/extensions.json` 中列出了 3 个推荐扩展。它
 
 按下 `Ctrl+Shift+B`。VS Code 会运行默认任务，并在终端中显示可用的应用。
 
-![按下 Ctrl+Shift+B 后显示 Demo 工具菜单](./images/ctrl-shift-b-demo-menu.png)
-
-先输入应用前面的序号，再输入要执行的操作。图中的应用列表来自当前工程的 `apps/` 目录；增加或删除应用后，列表内容也会发生变化。
+先输入应用前面的序号，再按上面的菜单选择操作。应用列表来自当前工程的 `apps/` 目录；增加或删除应用后，列表内容也会变化。
 
 ### 从菜单打开操作任务
 
@@ -96,9 +106,7 @@ HPM6E70 工程在 `.vscode/extensions.json` 中列出了 3 个推荐扩展。它
 
 ![从终端菜单打开运行任务](./images/vscode-terminal-run-task.png)
 
-任务列表出现后，选择「Demo 工具（选择应用：构建 / 烧录 / 构建并烧录）」。
-
-![在任务列表中选择 Demo 工具](./images/vscode-select-demo-tool.png)
+任务列表出现后，选择「Demo 工具（选择应用：仅烧录 / 构建 / 构建并烧录）」。
 
 选择完成后，终端中会出现与 `Ctrl+Shift+B` 相同的应用列表和操作选项。
 
@@ -111,6 +119,7 @@ HPM6E70 工程在 `.vscode/extensions.json` 中列出了 3 个推荐扩展。它
 | 构建指定应用 | 「构建应用（选择应用）」 |
 | 构建并烧录指定应用 | 「构建并烧录（选择应用）」 |
 | 烧录指定应用 | 「烧录应用（选择应用）」 |
+| 刚解压时仅烧录默认 Demo | 「仅烧录预编译 Demo（无需编译环境）」 |
 | 更新应用下拉列表 | 「列出并同步应用（更新下拉选项）」 |
 | 新建应用 | 「新建工程（选择模板，支持任意应用作为模板）」 |
 
@@ -118,7 +127,7 @@ HPM6E70 工程在 `.vscode/extensions.json` 中列出了 3 个推荐扩展。它
 
 ### 使用 F5 调试当前应用
 
-确认 Cortex-Debug 已经安装后，按下 `F5` 并选择要调试的应用。VS Code 会先构建该应用，再使用 `build/current/zephyr/zephyr.elf` 进入调试。
+确认 Cortex-Debug 已经安装、JTAG 驱动和接线正常后，按下 `F5` 并选择要调试的应用。VS Code 会先构建该应用，再使用 `build/current/zephyr/zephyr.elf` 启动调试；仅完成编译不代表板卡连接已经成功。
 
 OpenOCD、GDB 和开发板配置已经写在工程的 `.vscode` 目录中，不需要再次填写路径。
 

@@ -11,36 +11,43 @@ title: 认识 Zephyr 与工程模型
 
 ## 从课程工程开始
 
-在 Windows PowerShell 中进入 `HPM6E70` 根目录，查看 west 使用的清单：
+在完整工程包的 `HPM6E70` 根目录打开 Windows PowerShell，先查看 west 的入口配置，再列出它识别的项目。直接调用工程内的 west 时，把工程内的 Git 放到当前窗口的 PATH 前面；后续使用 `scripts/dev.ps1` 构建时，脚本会自动完成这一步。
 
 ```powershell
 Get-Content .\.west\config
-west list zephyr sdk_glue sdk_env -f '{name}: {path}'
+$env:Path = "$PWD\tools\git-portable\cmd;$env:Path"
+.\tools\python-portable\python.exe -m west list manifest sdk_glue zephyr sdk_env -f '{name}: {path}'
 ```
 
-正常情况下可以看到三项：
-
-```text
-zephyr: zephyr
-sdk_glue: sdk_glue
-sdk_env: sdk_env
-```
-
-下面是一次实际验证结果。第一条命令显示 `.west/config` 的内容，第二条命令列出 west 识别到的工程路径：
-
-![west 清单与工作区目录验证](./images/west配置与目录验证.png)
-
-`.west/config` 的 `[manifest]` 部分记录清单仓库路径和清单文件名。本课程完成 Gitee 配置后应为：
+`.west/config` 中的清单位置应为：
 
 ```ini
 [manifest]
-path = sdk_glue
-file = west_gitee.yml
+path = .
+file = west.yml
 ```
 
-也就是说，west 读取的是 `sdk_glue/west_gitee.yml`，再按照这份清单取得对应版本的 Zephyr、HPMicro 适配层和 HPM SDK；不是把 `.west/config` 当成源码目录。三个目录不是重复副本，每个目录保存不同的内容。
+`path = .` 指向工程根目录，`file = west.yml` 指向根目录的清单文件。再打开 `west.yml`，可以看到它把 HPMicro 的清单导入当前工作区：
 
-`west list` 输出中的 `manifest: sdk_glue` 表示“清单仓库是 `sdk_glue`”，不是需要另外创建的第四个源码目录。
+```yaml
+manifest:
+  projects:
+    - name: sdk_glue
+      import: west_gitee.yml
+```
+
+这里摘录了 `west.yml` 中与清单导入有关的字段；实际文件还固定了 `sdk_glue` 的远端和 revision。west 先读取根目录的 `west.yml`，再由 `import` 读取 `sdk_glue/west_gitee.yml`，因此能找到 Zephyr、HPM SDK 等项目。`.west/config` 记录入口位置，本身不是源码目录。
+
+上面的 `west list` 命令应输出：
+
+```text
+manifest: .
+sdk_glue: sdk_glue
+zephyr: zephyr
+sdk_env: sdk_env
+```
+
+`manifest: .` 表示当前工程根目录是清单入口；`sdk_glue` 是被根清单导入的项目。它们不是同一个目录。
 
 把配置项放回工程目录中，可以直接看到 west 最终读取的文件：
 
@@ -48,13 +55,14 @@ file = west_gitee.yml
 HPM6E70/
 ├─ .west/
 │  └─ config                 ← 记录 path 和 file
+├─ west.yml                  ← west 首先读取的根清单
 ├─ sdk_glue/
-│  └─ west_gitee.yml        ← west 实际读取的清单
+│  └─ west_gitee.yml        ← 由根清单导入的上游清单
 ├─ zephyr/                   ← Zephyr 项目
 └─ sdk_env/                  ← HPM SDK 与工具
 ```
 
-`.west/config` 中的 `path = sdk_glue` 与 `file = west_gitee.yml` 组合成相对路径 `sdk_glue/west_gitee.yml`。执行 `west update` 时，west 再根据这份清单更新工作区中的各个仓库。
+`.west/config` 中的 `path = .` 与 `file = west.yml` 组合成根目录的 `west.yml`；`west.yml` 中的 `import` 再连接到 `sdk_glue/west_gitee.yml`。执行 `west update` 时，west 才会按这两层清单更新各个仓库。二期从零搭建过程中的中间状态可能不同，本页描述的是一期完整工程包的最终结构。
 
 | 目录 | 主要内容 | 后续会在哪里遇到 |
 |---|---|---|
@@ -92,7 +100,7 @@ Zephyr 官方在 *Distinguishing Features* 中列出了可配置与模块化、�
 
 继续下一篇前，确认自己能够回答：
 
-1. `.west/config` 中的 `path` 和 `file` 最终组合成哪个清单路径？
+1. `.west/config` 中的 `path` 和 `file` 组合成哪个入口文件？它又导入哪个清单？
 2. `zephyr/`、`sdk_glue/` 和 `sdk_env/` 分别由谁维护、提供什么内容？
 3. 为什么仅查看 west 工作区还不能确定当前板卡的 UART、LED 和外部存储器连接？
 

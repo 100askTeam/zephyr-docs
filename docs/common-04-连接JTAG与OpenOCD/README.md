@@ -24,11 +24,9 @@ description: 完成 CH347F 与 HPM6E70 的 JTAG 接线和 Windows WinUSB 驱动�
 
 `TDI` 和 `TDO` 的 I/O 以目标芯片为参照。CH347F 丝印中的 `IO4～IO7` 是复用名称，不能按照数字顺序猜测它们对应哪根 JTAG 线。
 
-## 从两张原理图确认排针位置
+## 核对调试器 J1 与板卡 J5 的针脚
 
-CH347F 的 J1 排针把 JTAG 信号标成了复用名称：
-
-![CH347F 原理图中的 J1 与 JTAG 复用信号](./images/ch347-j1-jtag-schematic.png)
+本教程使用的 CH347F 调试器在 J1 排针上同时标有 GPIO 与 JTAG 复用名称。先按下表找到 J1 的针脚编号，再核对手中调试器的实物标识；若调试器型号、接口方向或针脚标识不同，不要直接照搬这张表接线。
 
 | CH347F J1 针脚 | 丝印或复用名称 | JTAG 信号 |
 | --- | --- | --- |
@@ -41,6 +39,8 @@ CH347F 的 J1 排针把 JTAG 信号标成了复用名称：
 HPM6E70 板卡的 J5 已直接标出目标端信号：
 
 ![HPM6E70 板卡原理图中的 J5 调试接口](./images/hpm-j5-debug-schematic.png)
+
+*板卡 J5 接口位置和信号来自工程中的 `hardware/开发板/DshanMCU-HPM6E8Y_SCH_V1.pdf`；这里展示的是 HPM6E70 板卡，不是 CH347F 调试器。*
 
 | HPM6E70 J5 针脚 | 信号 |
 | --- | --- |
