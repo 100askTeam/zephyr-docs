@@ -45,6 +45,26 @@ west list zephyr sdk_env sdk_glue
 
 如果此路线的 `west` 无法识别，再检查 `.\.venv\Scripts\west.exe` 是否存在并重新激活；不要把这个步骤套用到一期完整工程包。
 
+### CMake 报工具链无法编译 dummy C 文件
+
+如果配置阶段在 `zephyr/cmake/modules/kernel.cmake:145` 停止，并出现：
+
+```text
+The toolchain is unable to build a dummy C file
+```
+
+这一步是编译器自检，还没有进入 Board、设备树或应用代码。常见原因是把另一台电脑的 `build/` 或 `zephyr/.cache/ToolchainCapabilityDatabase/` 一起复制过来，缓存中的工具链判断已经失效。
+
+在一期完整工程根目录执行：
+
+```powershell
+Remove-Item .\build -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item .\zephyr\.cache -Recurse -Force -ErrorAction SilentlyContinue
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\dev.ps1 rebuild hpm6e70_demo
+```
+
+交付工程应使用 `scripts/export-portable.ps1` 导出；它会排除 `zephyr/.cache`，而构建脚本会在当前电脑的临时目录重新建立工具链能力缓存。如果清理后仍失败，再打开 `build/hpm6e70_demo/CMakeFiles/CMakeError.log`，查看编译器实际报错，而不要只根据最后的 CMake 调用栈判断。
+
 若构建在读取 `board.yml`、DTS 或其他 UTF-8 文件时出现下面这类错误：
 
 ```text
