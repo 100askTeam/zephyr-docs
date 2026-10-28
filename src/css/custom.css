@@ -54,6 +54,8 @@
 .alert { border-radius: 0.75rem; }
 .menu__link { line-height: 1.45; }
 
+.asciinema-cast { margin: 1.25rem auto; }
+
 @media (max-width: 996px) {
   .theme-doc-markdown table { display: block; overflow-x: auto; }
 }

@@ -34,6 +34,7 @@ const config = {
         items: [
           {type: 'docSidebar', sidebarId: 'tutorialSidebar', label: 'HPM6E70 Zephyr 教程', position: 'left'},
           {type: 'docSidebar', sidebarId: 'ra6m5Sidebar', label: 'RA6M5 Zephyr 快速入门', position: 'left'},
+          {type: 'docSidebar', sidebarId: 'yuzukiNekoSidebar', label: 'YuzukiNeko 文档', position: 'left'},
           {href: 'https://github.com/100askTeam/zephyr-docs', label: 'GitHub', position: 'right'},
         ],
       },
