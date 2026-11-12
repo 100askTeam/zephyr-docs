@@ -27,11 +27,11 @@ slug: /ra6m5/preparation/vscode/
 
 *图 1：红框标出“文件”菜单和其中的“打开文件夹…”。点击图片可查看原图。*
 
-打开后，点击左侧“资源管理器（Explorer）”，检查 **①根目录名称**和 **②目录内容**：应能同时找到 `.vscode`、`applications`、`platform`、`sdk` 和 `.west`。
+打开后，点击左侧“资源管理器（Explorer）”，检查根目录名称与目录内容：应能同时找到 `.vscode`、`.west`、`applications`、`platform`、`patches`、`scripts` 和 `zephyr`。`sdk` 与 `.venv` 默认被 `files.exclude` 隐藏，不在资源管理器里显示，但终端命令仍会使用它们。
 
 <a href={require('./images/vscode-workspace-root.png').default}><img src={require('./images/vscode-workspace-root.png').default} alt="确认 VS Code 打开的是包含配置与工具的 RA6M5 根目录" width="380" /></a>
 
-*图 2：①当前工作区是 RA6M5；②工程目录中包含编辑器配置、应用和配套工具。这里截取资源管理器区域，便于核对目录层级。（截图待更新：图中为旧版目录名。）*
+*图 2：资源管理器中的 RA6M5 根目录，含 applications、platform、patches 等目录；sdk 与 .venv 默认隐藏。点击图片可查看原图。*
 
 **打开目录的层级会影响后面的操作。** VS Code 从当前文件夹的 `.vscode` 读取推荐扩展和终端环境。如果只打开 `applications/board_bringup`、`zephyr` 或一个 `main.c`，这些工程配置就不会按本教程的方式加载。后文的终端命令找不到配套工具时，先回到“打开文件夹”，重新选择整个工程根目录。
 
@@ -101,9 +101,9 @@ C/C++ 扩展本身不包含编译器，见[官方 C/C++ 说明](https://code.vis
 
 找到硬件标识包含 **`VID:PID=1A86:8011`** 的 USB 串口，并核对它的 COM 编号是否与设备管理器一致。不要把列表中的蓝牙串口当作开发板。
 
-[![VS Code 终端中检查到 WCH-Link 调试器和开发板串口](./images/vscode-probe-and-serial-check.png)](./images/vscode-probe-and-serial-check.png)
+[![VS Code 终端中检查到 WCH-Link 烧录器和开发板串口](./images/vscode-probe-and-serial-check.png)](./images/vscode-probe-and-serial-check.png)
 
-*图 4：①WCH-Link / CMSIS-DAP 是烧录器枚举结果，②COM23 的 VID:PID 对应同一开发板的串口。截图中的存放路径和 COM23 是实例值，以你的工程位置及实际端口为准。（截图待更新：图中工具路径为旧版 sdk_env。）*
+*图 4：红框处分别为 probe-rs 枚举到的 WCH-Link（CMSIS-DAP，`1a86:8011`）与串口列表中 `VID:PID=1A86:8011` 的 USB 串行设备（本例 COM10）。COM 编号以你的电脑实际识别为准。点击图片可查看原图。*
 
 两条命令都能执行，且分别找到调试器和串口，说明工程工具与 USB 连接已具备后续操作条件。这里执行的是设备枚举，还没有编译或烧录应用。
 
