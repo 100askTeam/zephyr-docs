@@ -41,7 +41,7 @@ slug: /ra6m5/preparation/build-flash-debug/
 
 VS Code 下方会打开任务终端，显示构建输出。等待任务结束，再核对图中的两个位置：
 
-- **① 链接与内存占用**：看到 `Linking C executable zephyr\zephyr.elf` 和随后的 `Memory region` 表（FLASH、RAM 占用百分比），且没有 error，说明程序文件已经生成。构建成功后工程还会自动刷新代码索引与调试镜像，无需手动操作。
+- **① 链接与内存占用**：看到 `Linking C executable zephyr\zephyr.elf` 和随后的 `Memory region` 表（FLASH、RAM 占用百分比），且没有 error，说明程序文件已经生成。构建成功后工程还会自动刷新代码索引，无需手动操作。
 - **② 任务结束提示**：看到“终端将被任务重用，按任意键关闭”时，本次任务已经结束，终端保留输出供你查看。
 
 [![构建完成后查看链接结果和任务结束提示](./images/vscode-build-result.png)](./images/vscode-build-result.png)
@@ -56,7 +56,7 @@ VS Code 下方会打开任务终端，显示构建输出。等待任务结束，
 
 ### 1. 选择烧录任务
 
-确认 USB 数据线连接板上的 **Debug** 接口，**BootMode 为 OFF**。如果正在调试，先结束调试会话，释放调试器连接。
+确认 USB 数据线连接板上的 **Debug** 接口，**BootMode 为 OFF**。
 
 再次点击 **“终端 → 运行任务…”**，在任务列表中选择 **①“West: 烧录应用”**。
 
@@ -168,18 +168,18 @@ VS Code 下方会打开任务终端，显示构建输出。等待任务结束，
 build/board_bringup/
 ├─ compile_commands.json
 └─ zephyr/
-   ├─ zephyr.elf        # 程序及调试符号
+   ├─ zephyr.elf        # 程序与符号信息
    ├─ zephyr.dts        # 本次构建实际采用的设备树
    └─ .config          # 本次构建实际采用的配置
 ```
 
-其中，`zephyr.elf` 保存构建得到的程序。烧录时 runner 用 probe-rs 的 `--skip-section` 跳过 RA 选项字节段，只写入程序使用的 Code Flash 内容。构建成功后工程还会把 ELF 镜像到 `build/current/zephyr/zephyr.elf`，供下一篇的调试操作使用。
+其中，`zephyr.elf` 保存构建得到的程序。烧录时 runner 用 probe-rs 的 `--skip-section` 跳过 RA 选项字节段，只写入程序使用的 Code Flash 内容。
 
-下图按电脑和开发板划分位置。上方的箭头表示编译和烧录；中间的双向连线表示调试交互；下方的箭头表示开发板把打印信息送回电脑。烧录、调试和 USB 串口都经过板载调试器，共用开发板的 Debug 接口。
+下图按电脑和开发板划分位置。上方的箭头表示编译和烧录；下方的箭头表示开发板把打印信息送回电脑。烧录和 USB 串口都经过板载调试器，共用开发板的 Debug 接口。
 
-![编译、烧录、串口与调试之间的关系](./images/build-flash-debug.svg)
+![编译、烧录与串口之间的关系](./images/build-flash-serial.svg)
 
-*图 11：编译、烧录、串口与调试的连接关系。电脑保留 ELF 调试符号，开发板执行写入 Flash 的程序代码。*
+*图 11：编译、烧录与串口的连接关系。电脑保留 ELF，开发板执行写入 Flash 的程序代码。*
 
 图中的 `build`、`flash` 对应工程任务；调试流程由 `.vscode/launch.json` 配置。修改代码后，先重新烧录，再调试同一个应用，保证电脑上的 ELF 与板上程序一致。
 
@@ -209,4 +209,4 @@ $Py = '.\.venv\Scripts\python.exe'
 
 `west flash` 会自动先增量重建，再烧录复位，所以改完代码可以直接跑它。
 
-程序已经能在板上运行，也能通过串口查看输出。下一篇[使用 VS Code 调试程序](../04-使用VSCode调试程序/README.md)，将让程序在指定位置暂停，查看变量并控制它继续执行。
+程序已经能在板上运行，也能通过串口查看输出。接下来从[第1章：认识课程工程的 Zephyr 结构](../../01-Zephyr应用开发/01-认识课程工程结构/README.md)开始阅读工程结构，理解应用、配置与设备树怎样组合成固件。

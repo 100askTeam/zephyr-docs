@@ -26,7 +26,7 @@ slug: /ra6m5/preparation/project-and-board/
 ```text
 RA6M5/
 ├─ .venv/          # 环境入口:python/west 两个原生启动器
-├─ .vscode/        # 编辑器任务与调试配置
+├─ .vscode/        # 编辑器任务配置
 ├─ .west/          # 工作区接线:清单指向 platform
 ├─ applications/   # 各个独立的 Zephyr 示例应用
 ├─ platform/       # 板卡、驱动、设备树 Binding、公共头
@@ -105,4 +105,4 @@ USB 数据线接入 **Debug** 口后，即可通过同一根线供电、烧录�
 
 板载调试器按本工程的 CMSIS-DAP 方式使用，无需额外接入调试器。
 
-工程已经解压，设备管理器中也出现了板载串口。下一步阅读[配置 VS Code 开发环境](../02-配置VSCode开发环境/README.md)，安装编辑器和所需扩展，打开工程并检查调试器连接。
+工程已经解压，设备管理器中也出现了板载串口。下一步阅读[配置 VS Code 开发环境](../02-配置VSCode开发环境/README.md)，安装编辑器和所需扩展，打开工程并检查烧录通道。

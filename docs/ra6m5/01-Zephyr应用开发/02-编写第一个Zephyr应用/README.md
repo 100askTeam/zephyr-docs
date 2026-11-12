@@ -63,13 +63,13 @@ CONFIG_PRINTK=y
 # 保留 Zephyr 自身的启动横幅，便于观察复位后是否启动。
 CONFIG_BOOT_BANNER=y
 
-# 使用面向调试的优化级别，便于单步执行和查看变量。
+# 使用较保守的优化级别，便于查看变量与源码的对应关系。
 CONFIG_DEBUG_OPTIMIZATIONS=y
 ```
 
 `prj.conf` 是应用的 Kconfig 配置片段。Zephyr 把它与板卡默认配置等输入合并，最终配置保存在构建目录的 `zephyr/.config` 中。
 
-`CONFIG_DEBUG_OPTIMIZATIONS=y` 让编译器使用 `-Og` 优化级别，减少变量被优化掉、源码单步跳行的情况，便于按[使用 VS Code 调试程序](../../00-学习准备/04-使用VSCode调试程序/README.md)中的步骤检查 GPIO 配置结果。这个选项定义在 `zephyr/Kconfig.zephyr` 中，构建后可以在生成的 `.config` 中确认它是否生效。
+`CONFIG_DEBUG_OPTIMIZATIONS=y` 让编译器使用 `-Og` 优化级别，减少变量被优化掉、源码与指令对应错乱的情况，便于检查 GPIO 配置结果。这个选项定义在 `zephyr/Kconfig.zephyr` 中，构建后可以在生成的 `.config` 中确认它是否生效。
 
 当前 Board 的 `platform/boards/dshan/dshan_ra6m5/dshan_ra6m5_defconfig` 已经提供以下设置，可以打开文件核对：
 

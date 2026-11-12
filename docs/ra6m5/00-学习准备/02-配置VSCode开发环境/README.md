@@ -7,7 +7,7 @@ slug: /ra6m5/preparation/vscode/
 
 # 配置 VS Code 开发环境
 
-上一节已经解压课程工程，并在设备管理器中找到了开发板的串口。接下来把工程放进 VS Code，安装代码编辑、调试和串口查看所用的扩展，再检查电脑能否通过工程配套工具找到开发板。
+上一节已经解压课程工程，并在设备管理器中找到了开发板的串口。接下来把工程放进 VS Code，安装代码编辑和串口查看所用的扩展，再检查电脑能否通过工程配套工具找到开发板。
 
 课程工程的 `.venv` 与 `sdk` 已包含全部开发工具：`.venv/Scripts` 里是 python/west 两个原生启动器，真正的 Python、west、CMake、Ninja、Git、Arm 编译器和 probe-rs 都在 `sdk/` 下。VS Code 提供编辑和操作界面，编译、烧录任务调用这些配套工具；保留工程目录的相对位置即可，无需重新搭建 Zephyr 工具链，换电脑也不需要重装。
 
@@ -33,20 +33,19 @@ slug: /ra6m5/preparation/vscode/
 
 *图 2：①当前工作区是 RA6M5；②工程目录中包含编辑器配置、应用和配套工具。这里截取资源管理器区域，便于核对目录层级。（截图待更新：图中为旧版目录名。）*
 
-**打开目录的层级会影响后面的操作。** VS Code 从当前文件夹的 `.vscode` 读取推荐扩展、菜单任务和调试配置。如果只打开 `applications/board_bringup`、`zephyr` 或一个 `main.c`，这些工程配置就不会按本教程的方式加载。找不到后文的任务时，先回到“打开文件夹”，重新选择整个工程根目录。
+**打开目录的层级会影响后面的操作。** VS Code 从当前文件夹的 `.vscode` 读取推荐扩展和菜单任务。如果只打开 `applications/board_bringup`、`zephyr` 或一个 `main.c`，这些工程配置就不会按本教程的方式加载。找不到后文的任务时，先回到“打开文件夹”，重新选择整个工程根目录。
 
-若首次打开时出现“是否信任此文件夹中文件的作者”提示，确认选择的是你从课程渠道取得的工程，再选择信任，以允许工程任务和调试功能运行。工作区信任的作用见 [VS Code 官方说明](https://code.visualstudio.com/docs/editing/workspaces/workspace-trust)。
+若首次打开时出现“是否信任此文件夹中文件的作者”提示，确认选择的是你从课程渠道取得的工程，再选择信任，以允许工程任务运行。工作区信任的作用见 [VS Code 官方说明](https://code.visualstudio.com/docs/editing/workspaces/workspace-trust)。
 
-## 安装工程使用的三项扩展
+## 安装工程使用的两项扩展
 
 工程里的 `.vscode/extensions.json` 保存推荐名单，但**推荐不代表已经安装**。即使没有看到右下角提示，也可以按 **Ctrl+Shift+X** 打开“扩展（Extensions）”，在顶部搜索框输入 `@recommended`，查看“工作区推荐（Workspace Recommendations）”。这一入口由 VS Code 提供，见[官方推荐扩展说明](https://code.visualstudio.com/docs/configure/extensions/extension-marketplace#_workspace-recommended-extensions)。
 
-课程使用以下三项。可以从推荐列表逐一打开，也可以清空搜索框，输入表中完整的 **`@id:…`** 条件直接查找：
+课程使用以下两项。可以从推荐列表逐一打开，也可以清空搜索框，输入表中完整的 **`@id:…`** 条件直接查找：
 
 | 扩展与发布者 | 扩展搜索框中输入 | 在课程中的用途 |
 | --- | --- | --- |
 | [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) · Microsoft | `@id:ms-vscode.cpptools` | C 代码补全、函数跳转和编辑检查 |
-| [Debugger for probe-rs](https://marketplace.visualstudio.com/items?itemName=probe-rs.probe-rs-debugger) · probe-rs | `@id:probe-rs.probe-rs-debugger` | 连接调试器，设置断点、单步执行和查看变量 |
 | [Serial Monitor](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-serial-monitor) · Microsoft | `@id:ms-vscode.vscode-serial-monitor` | 在 VS Code 面板中选择串口并查看打印信息 |
 
 ### 查找扩展并确认安装状态
@@ -62,9 +61,9 @@ slug: /ra6m5/preparation/vscode/
 
 *图 3：①扩展入口，②搜索框，③名称与发布者，④安装状态。本图是在已安装的电脑上截取的，因此④显示“禁用”和“卸载”。*
 
-用相同的方法检查 **C/C++** 和 **Debugger for probe-rs**。C/C++ 选择表中的单个扩展即可。如果详情页显示“启用（Enable）”，先启用；出现“重新加载窗口”或“重启扩展”按钮时，按提示完成后再继续。列表中暂时没有推荐项时，仍可通过表中的 ID 查找并检查状态。
+用相同的方法检查 **C/C++**。如果详情页显示“启用（Enable）”，先启用；出现“重新加载窗口”或“重启扩展”按钮时，按提示完成后再继续。列表中暂时没有推荐项时，仍可通过表中的 ID 查找并检查状态。
 
-本课程调试配置按 **Debugger for probe-rs 0.32.0** 与工程内 **probe-rs 0.32.0** 验证。该版本扩展要求 VS Code **1.116.0 或更高版本**；若安装时提示编辑器版本不兼容，先从官网下载并更新 VS Code。扩展是编辑器里的调试入口，实际连接硬件的 probe-rs 程序已在 `sdk/probe-rs/` 中，由工程配置指定路径。
+烧录用的 **probe-rs 0.32.0** 已在工程内 `sdk/probe-rs/` 中，由工程任务与配置指定路径，不需要在编辑器里另装扩展。
 
 ### 工程已经提供的配置
 
@@ -74,7 +73,6 @@ slug: /ra6m5/preparation/vscode/
 | --- | --- |
 | `extensions.json` | 显示前面的三项扩展推荐 |
 | `tasks.json` | 提供构建、烧录和串口等菜单任务，直接调用 west 与配套 Python 工具 |
-| `launch.json` | 指定 probe-rs 程序、芯片和调试 ELF，供“运行和调试”使用 |
 | `c_cpp_properties.json` | 让 C/C++ 扩展使用工程内的 Arm 编译器及当前应用的代码索引 |
 
 C/C++ 扩展本身不包含编译器，见[官方 C/C++ 说明](https://code.visualstudio.com/docs/languages/cpp)。本工程已经配好 Arm 编译器，后面通过“终端 → 运行任务…”构建整个 Zephyr 应用；不使用源码右上角的“运行 C/C++ 文件”按钮编译单个文件。
@@ -87,13 +85,13 @@ C/C++ 扩展本身不包含编译器，见[官方 C/C++ 说明](https://code.vis
 
 终端提示符中 `PS` 后面的路径应是解压后的工程根目录。以下两条命令都从这一层执行；开头的 `.\` 表示从当前目录查找配套工具。
 
-先输入下面的命令，按回车列出调试器：
+先输入下面的命令，按回车列出板载烧录器：
 
 ```powershell
 .\sdk\probe-rs\probe-rs.exe list
 ```
 
-输出中应出现 **`WCH-Link`**，设备标识包含 **`1a86:8011`**，括号内为 **`CMSIS-DAP`**。这表示工程里的 probe-rs 程序已经运行，并找到了板载调试器。
+输出中应出现 **`WCH-Link`**，设备标识包含 **`1a86:8011`**，括号内为 **`CMSIS-DAP`**。这表示工程里的 probe-rs 程序已经运行，并找到了板载烧录器。
 
 等提示符重新出现，再输入第二条命令，列出串口：
 
@@ -105,7 +103,7 @@ C/C++ 扩展本身不包含编译器，见[官方 C/C++ 说明](https://code.vis
 
 [![VS Code 终端中检查到 WCH-Link 调试器和开发板串口](./images/vscode-probe-and-serial-check.png)](./images/vscode-probe-and-serial-check.png)
 
-*图 4：①WCH-Link / CMSIS-DAP 是调试器枚举结果，②COM23 的 VID:PID 对应同一开发板的串口。截图中的存放路径和 COM23 是实例值，以你的工程位置及实际端口为准。（截图待更新：图中工具路径为旧版 sdk_env。）*
+*图 4：①WCH-Link / CMSIS-DAP 是烧录器枚举结果，②COM23 的 VID:PID 对应同一开发板的串口。截图中的存放路径和 COM23 是实例值，以你的工程位置及实际端口为准。（截图待更新：图中工具路径为旧版 sdk_env。）*
 
 两条命令都能执行，且分别找到调试器和串口，说明工程工具与 USB 连接已具备后续操作条件。这里执行的是设备枚举，还没有编译或烧录应用。
 
