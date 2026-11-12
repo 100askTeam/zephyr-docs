@@ -9,7 +9,7 @@ slug: /ra6m5/preparation/vscode/
 
 上一节已经解压课程工程，并在设备管理器中找到了开发板的串口。接下来把工程放进 VS Code，安装代码编辑和串口查看所用的扩展，再检查电脑能否通过工程配套工具找到开发板。
 
-课程工程的 `.venv` 与 `sdk` 已包含全部开发工具：`.venv/Scripts` 里是 python/west 两个原生启动器，真正的 Python、west、CMake、Ninja、Git、Arm 编译器和 probe-rs 都在 `sdk/` 下。VS Code 提供编辑和操作界面，编译、烧录任务调用这些配套工具；保留工程目录的相对位置即可，无需重新搭建 Zephyr 工具链，换电脑也不需要重装。
+课程工程的 `.venv` 与 `sdk` 已包含全部开发工具：`.venv/Scripts` 里是 python/west 两个原生启动器，真正的 Python、west、CMake、Ninja、Git、Arm 编译器和 probe-rs 都在 `sdk/` 下。VS Code 提供编辑界面，编译、烧录在终端里用 west 调用这些配套工具；保留工程目录的相对位置即可，无需重新搭建 Zephyr 工具链，换电脑也不需要重装。
 
 ## 安装 VS Code
 
@@ -33,9 +33,9 @@ slug: /ra6m5/preparation/vscode/
 
 *图 2：①当前工作区是 RA6M5；②工程目录中包含编辑器配置、应用和配套工具。这里截取资源管理器区域，便于核对目录层级。（截图待更新：图中为旧版目录名。）*
 
-**打开目录的层级会影响后面的操作。** VS Code 从当前文件夹的 `.vscode` 读取推荐扩展和菜单任务。如果只打开 `applications/board_bringup`、`zephyr` 或一个 `main.c`，这些工程配置就不会按本教程的方式加载。找不到后文的任务时，先回到“打开文件夹”，重新选择整个工程根目录。
+**打开目录的层级会影响后面的操作。** VS Code 从当前文件夹的 `.vscode` 读取推荐扩展和终端环境。如果只打开 `applications/board_bringup`、`zephyr` 或一个 `main.c`，这些工程配置就不会按本教程的方式加载。后文的终端命令找不到配套工具时，先回到“打开文件夹”，重新选择整个工程根目录。
 
-若首次打开时出现“是否信任此文件夹中文件的作者”提示，确认选择的是你从课程渠道取得的工程，再选择信任，以允许工程任务运行。工作区信任的作用见 [VS Code 官方说明](https://code.visualstudio.com/docs/editing/workspaces/workspace-trust)。
+若首次打开时出现“是否信任此文件夹中文件的作者”提示，确认选择的是你从课程渠道取得的工程，再选择信任，以允许工程配置生效。工作区信任的作用见 [VS Code 官方说明](https://code.visualstudio.com/docs/editing/workspaces/workspace-trust)。
 
 ## 安装工程使用的两项扩展
 
@@ -63,7 +63,7 @@ slug: /ra6m5/preparation/vscode/
 
 用相同的方法检查 **C/C++**。如果详情页显示“启用（Enable）”，先启用；出现“重新加载窗口”或“重启扩展”按钮时，按提示完成后再继续。列表中暂时没有推荐项时，仍可通过表中的 ID 查找并检查状态。
 
-烧录用的 **probe-rs 0.32.0** 已在工程内 `sdk/probe-rs/` 中，由工程任务与配置指定路径，不需要在编辑器里另装扩展。
+烧录用的 **probe-rs 0.32.0** 已在工程内 `sdk/probe-rs/` 中，由工程配置指定路径，不需要在编辑器里另装扩展。
 
 ### 工程已经提供的配置
 
@@ -72,12 +72,12 @@ slug: /ra6m5/preparation/vscode/
 | 文件 | VS Code 如何使用它 |
 | --- | --- |
 | `extensions.json` | 显示前面的三项扩展推荐 |
-| `tasks.json` | 提供构建、烧录和串口等菜单任务，直接调用 west 与配套 Python 工具 |
+| `settings.json` | 配好终端环境变量，使终端里的 west 直接使用随包工具链 |
 | `c_cpp_properties.json` | 让 C/C++ 扩展使用工程内的 Arm 编译器及当前应用的代码索引 |
 
-C/C++ 扩展本身不包含编译器，见[官方 C/C++ 说明](https://code.visualstudio.com/docs/languages/cpp)。本工程已经配好 Arm 编译器，后面通过“终端 → 运行任务…”构建整个 Zephyr 应用；不使用源码右上角的“运行 C/C++ 文件”按钮编译单个文件。
+C/C++ 扩展本身不包含编译器，见[官方 C/C++ 说明](https://code.visualstudio.com/docs/languages/cpp)。本工程已经配好 Arm 编译器，后面在终端里用 `west build` 构建整个 Zephyr 应用；不使用源码右上角的“运行 C/C++ 文件”按钮编译单个文件。
 
-初次构建前，编辑器可能提示找不到 `compile_commands.json` 或某些生成头文件。这个索引由构建过程生成，构建成功后会自动发布到 `build/compile_commands.json`，供 C/C++ 扩展读取。完成下一篇的首次构建后再检查代码提示；红色波浪线和任务终端中的编译结果需要分别判断。
+初次构建前，编辑器可能提示找不到 `compile_commands.json` 或某些生成头文件。这个索引由构建过程生成，构建成功后会自动发布到 `build/compile_commands.json`，供 C/C++ 扩展读取。完成下一篇的首次构建后再检查代码提示；红色波浪线和终端中的编译结果需要分别判断。
 
 ## 在终端检查工程工具与开发板
 
