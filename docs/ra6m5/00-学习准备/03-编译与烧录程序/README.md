@@ -23,7 +23,7 @@ slug: /ra6m5/preparation/build-flash-debug/
 $Py = '.\.venv\Scripts\python.exe'
 ```
 
-`$Py` 会自动配好工具链环境；**不要用系统 `python` 或系统 `west`**。
+`$Py` 会自动配好工具链环境；**不要用系统 `python` 或系统 `west`**。`$Py` 只在当前终端会话有效，新开终端需重新定义；也可以在任何命令里直接用全路径 `.\.venv\Scripts\python.exe` 代替 `$Py`。
 
 ### 2. 执行构建
 
@@ -126,10 +126,10 @@ $Py = '.\.venv\Scripts\python.exe'
 
 #### 1. 打开串口监视
 
-在工程根目录的 PowerShell 终端输入：
+在工程根目录的 PowerShell 终端输入（全路径，不依赖 `$Py`）：
 
 ```powershell
-& $Py -m serial.tools.miniterm COM23 115200
+.\.venv\Scripts\python.exe -m serial.tools.miniterm COM23 115200
 ```
 
 把 `COM23` 换成[连接开发板时查到的端口](../01-准备工程与连接开发板/README.md#确认电脑识别到开发板)。miniterm 默认就是 8 数据位、无校验、1 停止位，无需另设参数。
@@ -181,7 +181,7 @@ build/board_bringup/
 | --- | --- |
 | 编译应用 | `& $Py -m west build -b dshan_ra6m5 applications\board_bringup -d build\board_bringup` |
 | 编译后烧录并复位 | `& $Py -m west flash -d build\board_bringup` |
-| 查看串口输出 | `& $Py -m serial.tools.miniterm COM23 115200` |
+| 查看串口输出 | `.\.venv\Scripts\python.exe -m serial.tools.miniterm COM23 115200` |
 
 `build` 和 `flash` 命令中的应用名换成其他 `applications` 子目录名即可操作对应应用。日常编译采用增量构建；需要清除旧构建结果、重新完整编译时，给 build 加 `-p always`：
 
