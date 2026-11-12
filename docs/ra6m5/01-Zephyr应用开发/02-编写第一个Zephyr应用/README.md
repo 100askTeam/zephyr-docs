@@ -16,7 +16,7 @@ slug: /ra6m5/application/first-application/
 在 VS Code 的资源管理器中找到 `applications/`，新建 `board_bringup/`，再在里面新建 `src/`。也可以在工程根目录的 PowerShell 终端执行：
 
 ```powershell
-New-Item -ItemType Directory -Path .\apps\board_bringup\src -Force
+New-Item -ItemType Directory -Path .\applications\board_bringup\src -Force
 ```
 
 应用的核心文件放在下面的位置，接下来逐个创建：
