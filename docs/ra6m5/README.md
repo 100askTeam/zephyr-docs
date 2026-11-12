@@ -15,7 +15,7 @@ import styles from './overview.module.css';
     <div className="course-hero__copy">
       <span className="course-hero__eyebrow">RA6M5 Zephyr 快速入门</span>
       <h1 id="ra6m5-course-title">从应用开发到设备驱动</h1>
-      <p className="course-hero__lead">从官方 example-application 开始，掌握 Zephyr 工程、设备树与配置，逐步编写应用和设备驱动，在 RA6M5 开发板上完成编译、烧录与调试。</p>
+      <p className="course-hero__lead">从课程工程的 platform 与 applications 结构开始，掌握 Zephyr 工程、设备树与配置，逐步编写应用和设备驱动，在 RA6M5 开发板上完成编译、烧录与调试。</p>
       <div className="course-hero__actions">
         <Link className="course-button course-button--primary" to="/docs/ra6m5/preparation/project-and-board/">从学习准备开始</Link>
         <Link className="course-button course-button--text" to="/docs/ra6m5/application/example-application/">已完成准备，进入第 1 章 →</Link>
@@ -84,10 +84,10 @@ import styles from './overview.module.css';
         <div className={styles.stageIntro}>
           <span className={styles.stageLabel}>第一篇</span>
           <h3 id="ra6m5-application">Zephyr 应用开发</h3>
-          <p>从 example-application 认识工程，编写应用并通过设备接口访问板载器件。</p>
+          <p>从课程工程结构认识 Zephyr，编写应用并通过设备接口访问板载器件。</p>
         </div>
         <ul className={styles.lessons}>
-          <li><Link to="/docs/ra6m5/application/example-application/">1. 从 example-application 认识 Zephyr 工程<span aria-hidden="true">→</span></Link></li>
+          <li><Link to="/docs/ra6m5/application/example-application/">1. 认识课程工程的 Zephyr 结构<span aria-hidden="true">→</span></Link></li>
           <li><Link to="/docs/ra6m5/application/first-application/">2. 编写第一个 Zephyr 应用<span aria-hidden="true">→</span></Link></li>
           <li><Link to="/docs/ra6m5/application/devicetree-and-device-model/">3. Zephyr 设备驱动的使用<span aria-hidden="true">→</span></Link></li>
         </ul>

@@ -7,7 +7,7 @@ slug: /ra6m5/drivers/framework/
 
 # 第4章 Zephyr 设备驱动模型
 
-上一章的 `apps/eeprom` 只调用了 `eeprom_get_size()`、`eeprom_read()` 和 `eeprom_write()`，没有写 I2C 时序，却能完成 AT24C02 的读写。应用中还存在一个值得继续追踪的对象：`const struct device *eeprom`。它怎样决定调用哪个函数，又怎样把 `0x50`、256 字节和 SCI4 传给驱动？
+上一章的 `applications/eeprom` 只调用了 `eeprom_get_size()`、`eeprom_read()` 和 `eeprom_write()`，没有写 I2C 时序，却能完成 AT24C02 的读写。应用中还存在一个值得继续追踪的对象：`const struct device *eeprom`。它怎样决定调用哪个函数，又怎样把 `0x50`、256 字节和 SCI4 传给驱动？
 
 保持上一章的应用和 Board 配置不变。先把应用、EEPROM 接口和具体驱动放在一起，再沿 `eeprom_read()` 查看设备对象怎样把它们关联起来。
 
@@ -32,7 +32,7 @@ EEPROM 子系统规定“如何读取、写入、查询容量”，AT24 驱动�
 
 ### 从 `eeprom_read()` 进入操作表
 
-打开 `apps/eeprom/src/main.c`，找到备份原数据的这一行：
+打开 `applications/eeprom/src/main.c`，找到备份原数据的这一行：
 
 ```c
 ret = eeprom_read(eeprom, offset, original, sizeof(original));
@@ -251,7 +251,7 @@ EEPROM 配置里的 `bus.i2c` 使用这个结构，分别保存控制器对象�
 至此，这次读取的方向已经明确：
 
 ```text
-apps/eeprom/src/main.c
+applications/eeprom/src/main.c
   eeprom_read(EEPROM 设备, 0xF8, original, 8)
     → z_impl_eeprom_read()
     → dev->api->read，即 eeprom_at2x_read()
@@ -393,7 +393,7 @@ CONFIG_EEPROM_AT2X_INIT_PRIORITY=80
 回到工程根目录，用上一章的应用生成这次检查所需的产物：
 
 ```powershell
-.\scripts\dev.ps1 build eeprom
+.\.venv\Scripts\python.exe -m west build -b dshan_ra6m5 applications\eeprom -d build\eeprom
 ```
 
 这一步构建应用，不需要重新烧录。依次打开下面三个文件，把刚刚看到的源码与产物对应起来。

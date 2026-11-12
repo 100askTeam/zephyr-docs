@@ -11,7 +11,7 @@ slug: /ra6m5/application/devicetree-and-device-model/
 
 Zephyr 按设备功能组织接口和公共处理，这些部分称为子系统。GPIO 子系统提供引脚配置、电平控制等接口；EEPROM 子系统提供读取、写入、查询容量等接口。应用选择设备后，调用它所属子系统的 API，具体驱动负责完成硬件操作。
 
-在 `apps/eeprom` 中创建应用，依次完成设备获取、容量读取、末页备份、写读比较和原值恢复。Board 提供器件与总线配置，`prj.conf` 选择驱动，应用决定测试范围和数据处理。
+在 `applications/eeprom` 中创建应用，依次完成设备获取、容量读取、末页备份、写读比较和原值恢复。Board 提供器件与总线配置，`prj.conf` 选择驱动，应用决定测试范围和数据处理。
 
 这次访问按“启用驱动 → 获取设备对象 → 检查设备就绪 → 调用 EEPROM API”展开。设备对象代表要访问的那个实例；本章先完成应用，下一章再追踪 API 如何找到 AT24 驱动。
 
@@ -25,7 +25,7 @@ Zephyr 按设备功能组织接口和公共处理，这些部分称为子系统�
 
 图中的器件为 AT24C02D-MAHM-T，R33、R34 把 SDA、SCL 分别通过 10 kΩ 电阻上拉到 3.3 V。WP 接地，硬件未禁止写入。AT24C02D 的地址格式为 `1010 A2 A1 A0` 加读写位；本板三个地址引脚为低电平，因此传给 Zephyr 的 **7 位地址为 `0x50`**，不要填包含读写位的 `0xA0` 或 `0xA1`。地址格式及 32 页、每页 8 字节的组织方式见 [AT24C01D/AT24C02D 数据手册 DS20006100A，第 6 节](https://ww1.microchip.com/downloads/en/DeviceDoc/AT24C01D-AT24C02D-I2C-Compatible-Two-Wire-Serial-EEPROM-1Kbit-2Kbit-20006100A.pdf)。
 
-在工程根目录打开 `boards/dshan/dshan_ra6m5/dshan_ra6m5.dts`，先查找 `eeprom0`。它位于 `/aliases` 中：
+在工程根目录打开 `platform/boards/dshan/dshan_ra6m5/dshan_ra6m5.dts`，先查找 `eeprom0`。它位于 `/aliases` 中：
 
 ```dts
 eeprom0 = &at24c02;
@@ -79,7 +79,7 @@ eeprom0 = &at24c02;
 在 VS Code 的工程资源管理器中，在 `apps` 下新建 `eeprom`，再创建下面三个文件：
 
 ```text
-apps/
+applications/
 └─ eeprom/
    ├─ CMakeLists.txt
    ├─ prj.conf
@@ -87,7 +87,7 @@ apps/
       └─ main.c
 ```
 
-在 `apps/eeprom/CMakeLists.txt` 写入：
+在 `applications/eeprom/CMakeLists.txt` 写入：
 
 ```cmake
 # SPDX-License-Identifier: Apache-2.0
@@ -100,11 +100,11 @@ project(eeprom LANGUAGES C)
 target_sources(app PRIVATE src/main.c)
 ```
 
-工程脚本根据名称 `eeprom` 选择 `apps/eeprom`，`target_sources()` 将这个应用的 `src/main.c` 加入 `app` 编译目标。
+构建命令根据名称 `eeprom` 选择 `applications/eeprom`，`target_sources()` 将这个应用的 `src/main.c` 加入 `app` 编译目标。
 
 ### 启用 EEPROM、I2C 和日志
 
-设备树描述硬件，`prj.conf` 决定当前固件需要哪些软件能力。在 `apps/eeprom/prj.conf` 写入：
+设备树描述硬件，`prj.conf` 决定当前固件需要哪些软件能力。在 `applications/eeprom/prj.conf` 写入：
 
 ```ini
 # 启用 EEPROM 接口及其底层 I2C 传输。
@@ -139,7 +139,7 @@ eeprom_get_size(...) → EEPROM 容量
 
 `DT_ALIAS(eeprom0)` 选中设备树节点，`DEVICE_DT_GET()` 引用构建时为该节点生成的设备对象。宏展开不执行设备初始化；`device_is_ready()` 检查的是系统启动时记录的初始化结果。应用确认设备就绪后，再调用 EEPROM API。
 
-在 `apps/eeprom/src/main.c` 写入第一个可构建版本：
+在 `applications/eeprom/src/main.c` 写入第一个可构建版本：
 
 ```c
 /* SPDX-License-Identifier: Apache-2.0 */
@@ -179,7 +179,7 @@ int main(void)
 在**工程根目录**的 PowerShell 中构建：
 
 ```powershell
-.\scripts\dev.ps1 build eeprom
+.\.venv\Scripts\python.exe -m west build -b dshan_ra6m5 applications\eeprom -d build\eeprom
 ```
 
 构建成功后，打开 `build/eeprom/zephyr/.config`，确认有以下最终配置：
@@ -211,9 +211,9 @@ I2C 从设备地址仍为 0x50
 
 ![EEPROM 最后一页测试与 RAM 缓冲区的关系](./images/eeprom-test-flow.svg)
 
-图 3-2：EEPROM 最后一页的备份、测试与恢复。容量、页大小来自 `boards/dshan/dshan_ra6m5/dshan_ra6m5.dts`；缓冲区和操作顺序对应本章编写的 `apps/eeprom/src/main.c`。
+图 3-2：EEPROM 最后一页的备份、测试与恢复。容量、页大小来自 `platform/boards/dshan/dshan_ra6m5/dshan_ra6m5.dts`；缓冲区和操作顺序对应本章编写的 `applications/eeprom/src/main.c`。
 
-先在 `apps/eeprom/src/main.c` 的 `#include <errno.h>` 后追加：
+先在 `applications/eeprom/src/main.c` 的 `#include <errno.h>` 后追加：
 
 ```c
 #include <stdint.h>
@@ -302,9 +302,9 @@ int main(void)
 此时 `run_eeprom_test()` 只包含读取，所以当前版本的 `EEPROM test passed` 也只代表读取测试通过。在工程根目录依次执行：
 
 ```powershell
-.\scripts\dev.ps1 build eeprom
-.\scripts\dev.ps1 flash eeprom
-.\scripts\dev.ps1 monitor
+.\.venv\Scripts\python.exe -m west build -b dshan_ra6m5 applications\eeprom -d build\eeprom
+.\.venv\Scripts\python.exe -m west flash -d build\eeprom
+.\.venv\Scripts\python.exe -m serial.tools.miniterm COM23 115200
 ```
 
 串口监视打开后按开发板复位键。应看到容量 `256 bytes`、`Backup read passed at offset 0xf8`，随后是测试通过信息，表示末页已通过 I2C 读入 RAM。若出现 `Backup read failed`，先保留返回码并检查当前固件、最终设备树和供电，读取成功后再继续。
@@ -313,7 +313,7 @@ int main(void)
 
 测试数据根据备份逐字节生成，确保这 8 个字节与原值不同，避免原内容恰好等于测试数据而掩盖写入问题。
 
-在 `apps/eeprom/src/main.c` 中，把下面的函数插入到 `run_eeprom_test()` **之前**：
+在 `applications/eeprom/src/main.c` 中，把下面的函数插入到 `run_eeprom_test()` **之前**：
 
 ```c
 static void make_test_pattern(const uint8_t *original, uint8_t *pattern)
@@ -373,7 +373,7 @@ static int restore_original(const struct device *eeprom, off_t offset,
 
 ## 3.6 完成读写校验和原值恢复
 
-现在三个缓冲区各有用途：`original` 始终保存原值，`pattern` 保存要写入的新值，`readback` 接收测试读取的数据。在 `apps/eeprom/src/main.c` 中，将只读版本的 `run_eeprom_test()` 替换为：
+现在三个缓冲区各有用途：`original` 始终保存原值，`pattern` 保存要写入的新值，`readback` 接收测试读取的数据。在 `applications/eeprom/src/main.c` 中，将只读版本的 `run_eeprom_test()` 替换为：
 
 ```c
 static int run_eeprom_test(const struct device *eeprom, size_t capacity)
@@ -437,17 +437,17 @@ restore:
 在工程根目录重新构建：
 
 ```powershell
-.\scripts\dev.ps1 build eeprom
+.\.venv\Scripts\python.exe -m west build -b dshan_ra6m5 applications\eeprom -d build\eeprom
 ```
 
-本次变化都在 `apps/eeprom/src/main.c` 中，成功后会更新 `build/eeprom/zephyr/zephyr.elf`。确认没有编译或链接错误，再执行：
+本次变化都在 `applications/eeprom/src/main.c` 中，成功后会更新 `build/eeprom/zephyr/zephyr.elf`。确认没有编译或链接错误，再执行：
 
 ```powershell
-.\scripts\dev.ps1 flash eeprom
-.\scripts\dev.ps1 monitor
+.\.venv\Scripts\python.exe -m west flash -d build\eeprom
+.\.venv\Scripts\python.exe -m serial.tools.miniterm COM23 115200
 ```
 
-`dev.ps1` 是当前工程的辅助脚本。它在烧录前构建应用，从 ELF 中剥离 RA 选项字节段，再通过 probe-rs 下载程序并复位；本课继续使用准备课的这条烧录路径。
+`west flash` 使用本工程的 `ra6m5-probe-rs` runner：它先增量构建，再用 probe-rs 的 `--skip-section` 跳过 RA 选项字节段，下载程序并复位；本课继续使用准备课的这条烧录路径。
 
 打开串口后按一次板上复位键。下面是一轮完整测试的板上串口记录，可以用它核对消息顺序；每次运行的时间戳可能不同：
 
@@ -480,6 +480,6 @@ restore:
 
 - [Zephyr v4.4.2 EEPROM API 源码](https://github.com/zephyrproject-rtos/zephyr/blob/v4.4.2/include/zephyr/drivers/eeprom.h)：读写参数、返回值及容量接口。
 - [Zephyr v4.4.2 AT24 binding](https://github.com/zephyrproject-rtos/zephyr/blob/v4.4.2/dts/bindings/mtd/atmel,at24.yaml) 与 [AT2X 公共属性](https://github.com/zephyrproject-rtos/zephyr/blob/v4.4.2/dts/bindings/mtd/atmel,at2x-base.yaml)：设备属性及单位。
-- 工程内 `boards/dshan/dshan_ra6m5/dshan_ra6m5.dts`、`dshan_ra6m5-pinctrl.dtsi` 与 `scripts/dev.ps1`：本板连接、应用配置与烧录入口。
+- 工程内 `platform/boards/dshan/dshan_ra6m5/dshan_ra6m5.dts`、`dshan_ra6m5-pinctrl.dtsi` 与 `platform/scripts/ra6m5_probe_rs.py`：本板连接、应用配置与烧录入口。
 
 [上一章：编写第一个 Zephyr 应用](../02-编写第一个Zephyr应用/README.md) · [下一章：Zephyr 设备驱动模型](../../02-Zephyr驱动开发/04-Zephyr设备驱动模型/README.md)

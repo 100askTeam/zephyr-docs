@@ -13,7 +13,7 @@ slug: /ra6m5/preparation/debug/
 
 **调试可以让开发板上的程序暂停，查看暂停时的数据，再控制它继续执行。** VS Code 通过板载调试器控制 RA6M5；程序仍然运行在开发板上，电脑负责显示源码、发送控制命令和读取数据。
 
-这篇文章只检查一件事：**程序配置 LED 引脚的这次调用，是否执行成功。** `apps/board_bringup/src/main.c` 中负责配置的代码是：
+这篇文章只检查一件事：**程序配置 LED 引脚的这次调用，是否执行成功。** `applications/board_bringup/src/main.c` 中负责配置的代码是：
 
 ```c
 ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_INACTIVE);
@@ -38,16 +38,17 @@ ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_INACTIVE);
 本次仍然调试 `board_bringup`。如果已经按上一篇完成烧录，而且没有修改代码或配置，可以直接进入下一步；否则，在工程根目录的终端执行：
 
 ```powershell
-.\scripts\dev.ps1 flash board_bringup
+$Py = '.\.venv\Scripts\python.exe'
+& $Py -m west flash -d build\board_bringup
 ```
 
-等到出现“烧录完成，已复位运行。”，说明本次要观察的程序已经写入开发板。下一步打开它的源码，选择暂停位置。
+等到出现“烧录完成，已复位运行”，说明本次要观察的程序已经写入开发板。下一步打开它的源码，选择暂停位置。
 
 **本工程需要先烧录，再启动调试。** 后面按 F5 会连接并复位开发板，但不会代替这次下载；修改代码后，也要重新执行上面的烧录命令，使屏幕上的源码与板上程序一致。
 
 ## 2. 设置断点并选择调试配置
 
-按 **Ctrl+P**，输入 `apps/board_bringup/src/main.c` 并回车。在 `main()` 中找到下面这行代码，本工程中位于第 31 行：
+按 **Ctrl+P**，输入 `applications/board_bringup/src/main.c` 并回车。在 `main()` 中找到下面这行代码，本工程中位于第 31 行：
 
 ```c
 ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_INACTIVE);
@@ -61,7 +62,7 @@ ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_INACTIVE);
 
 [![设置 GPIO 配置语句断点并选择 probe-rs 调试配置](./images/vscode-debug-select.png)](./images/vscode-debug-select.png)
 
-*图 1：只需核对两个位置：第 31 行左侧有红点，左上方选中“调试当前应用 (probe-rs)”。*
+*图 1：只需核对两个位置：第 31 行左侧有红点，左上方选中“调试当前应用 (probe-rs)”。（截图待更新：图中源码路径为旧版 apps/。）*
 
 ## 3. 按 F5，等待程序命中断点
 
@@ -69,7 +70,7 @@ ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_INACTIVE);
 
 [![F5 启动调试时选择 board_bringup 应用](./images/vscode-debug-app.png)](./images/vscode-debug-app.png)
 
-*图 2：选择与刚才烧录一致的应用，构建任务会同步它的调试 ELF。*
+*图 2：选择与刚才烧录一致的应用，构建任务会同步它的调试 ELF。（截图待更新：图中为旧版列表提示语。）*
 
 等待构建完成。调试器连接开发板并复位，让程序从启动位置重新执行。当它到达断点，RA6M5 就暂停执行程序，等待下一条调试命令。
 
@@ -145,7 +146,7 @@ F10 不保证每次恰好移动到下一行 C 源码；编译时的优化和内�
 
 *图 5：展开 `led` 后，可以分别读取结构体成员；本次显示 `pin = 0`、`dt_flags = 1`。*
 
-`led` 保存 LED 的 GPIO 配置，其中 `port` 是控制器设备，`pin` 是该控制器的引脚编号，`dt_flags` 是引脚的配置标志。这些值来自板卡设备树 `boards/dshan/dshan_ra6m5/dshan_ra6m5.dts`：
+`led` 保存 LED 的 GPIO 配置，其中 `port` 是控制器设备，`pin` 是该控制器的引脚编号，`dt_flags` 是引脚的配置标志。这些值来自板卡设备树 `platform/boards/dshan/dshan_ra6m5/dshan_ra6m5.dts`：
 
 ```dts
 gpios = <&ioport4 0 GPIO_ACTIVE_LOW>;
@@ -158,7 +159,7 @@ gpios = <&ioport4 0 GPIO_ACTIVE_LOW>;
 <details>
 <summary>调试配置与常见问题</summary>
 
-应用的 `apps/board_bringup/prj.conf` 已包含：
+应用的 `applications/board_bringup/prj.conf` 已包含：
 
 ```ini
 CONFIG_DEBUG_OPTIMIZATIONS=y
@@ -172,20 +173,20 @@ CONFIG_DEBUG_OPTIMIZATIONS=y
 
 | 字段 | 本工程的值与作用 |
 | --- | --- |
-| `runtimeExecutable` | `${workspaceFolder}/sdk_env/probe-rs/probe-rs.exe`，指定实际使用的 probe-rs 程序 |
+| `runtimeExecutable` | `${workspaceFolder}/sdk/probe-rs/probe-rs.exe`，指定实际使用的 probe-rs 程序 |
 | `coreConfigs[0].programBinary` | `${workspaceFolder}/build/current/zephyr/zephyr.elf`，指定调试符号所在的 ELF |
-| `preLaunchTask` | `构建应用（选择应用）`，F5 启动前构建所选应用并同步 ELF |
-| `flashingConfig.flashingEnabled` | `false`，烧录由前面的 `dev.ps1 flash` 命令完成 |
+| `preLaunchTask` | `West: 构建应用`，F5 启动前构建所选应用并刷新 ELF 镜像 |
+| `flashingConfig.flashingEnabled` | `false`，烧录由前面的 `west flash` 命令完成 |
 
 `${workspaceFolder}` 表示 VS Code 打开的工程根目录。字段名称应保持上述写法；probe-rs 0.32.0 的 ELF 配置字段为 `programBinary`。配置定义可查阅 [probe-rs 0.32.0 官方源码](https://github.com/probe-rs/probe-rs/blob/v0.32.0/probe-rs-tools/src/bin/probe-rs/cmd/dap_server/server/configuration.rs)。
 
 | 现象 | 检查方法 |
 | --- | --- |
 | 提示找不到 probe-rs | 确认打开的是整个 `RA6M5` 目录，并检查 `runtimeExecutable` 指向的文件是否存在 |
-| 提示 `Cannot set source breakpoint without debug information` | 核对 `programBinary` 字段和 ELF 路径；重新执行 `flash board_bringup`，F5 时仍选择 `board_bringup` |
+| 提示 `Cannot set source breakpoint without debug information` | 核对 `programBinary` 字段和 ELF 路径；重新执行 `west flash -d build\board_bringup`，F5 时仍选择 `board_bringup` |
 | 看不到 `ret`，或显示被优化 | 先等配置调用完成，再选择调用堆栈中的 `main`；确认 `prj.conf` 已启用调试优化，并已重新编译、烧录 |
 | 调试器连接失败或被占用 | 检查 USB 是否连接 Debug，结束另一个 VS Code 调试会话，等待烧录命令退出后再试 |
 
 </details>
 
-完成这次调试后，你已经能让程序在指定位置暂停，执行一次调用并查看返回值，再让它继续运行。接下来从[第1章：从 example-application 认识 Zephyr 工程](../../01-Zephyr应用开发/01-从example-application认识Zephyr工程/README.md)开始阅读工程结构；[第2章](../../01-Zephyr应用开发/02-编写第一个Zephyr应用/README.md)会逐步讲解本次调试的应用如何编写。
+完成这次调试后，你已经能让程序在指定位置暂停，执行一次调用并查看返回值，再让它继续运行。接下来从[第1章：认识课程工程的 Zephyr 结构](../../01-Zephyr应用开发/01-认识课程工程结构/README.md)开始阅读工程结构；[第2章](../../01-Zephyr应用开发/02-编写第一个Zephyr应用/README.md)会逐步讲解本次调试的应用如何编写。

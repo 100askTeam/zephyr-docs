@@ -19,7 +19,7 @@ slug: /ra6m5/drivers/implementation-and-registration/
 
 ![K2 输入驱动向下调用 GPIO API，向上通过 Input 子系统向应用传递按键事件](./images/input-subsystem-overview.svg)
 
-*图 5-1　K2 按键驱动、Input 子系统与应用的接口关系。依据 `drivers/input/input_dshan_gpio_button.c`、`zephyr/subsys/input/input.c` 和 `apps/k2_button/src/main.c` 绘制。*
+*图 5-1　K2 按键驱动、Input 子系统与应用的接口关系。依据 `platform/drivers/input/input_dshan_gpio_button.c`、`zephyr/subsys/input/input.c` 和 `applications/k2_button/src/main.c` 绘制。*
 
 应用用 `INPUT_CALLBACK_DEFINE()` 登记接收函数，驱动用 `input_report_key()` 上报事件。这两个入口都由 `zephyr/include/zephyr/input/input.h` 提供。应用与驱动共同遵守 Input 的接口约定，无需在双方之间另外定义一套按键读写函数。
 
@@ -60,7 +60,7 @@ Input 收到事件后，根据事件来源找到接收函数。在 `zephyr/subsy
 以下路径均相对于工程根目录。先在编辑器中创建这些目录和文件：
 
 ```text
-apps/k2_button/
+applications/k2_button/
 ├─ CMakeLists.txt
 ├─ prj.conf
 ├─ boards/
@@ -126,7 +126,7 @@ properties:
 
 因此按下对应低电平，松开对应高电平；板上已有 10 kΩ 外部上拉，本例不再配置 GPIO 内部上拉。
 
-先查看 `boards/dshan/dshan_ra6m5/dshan_ra6m5.dts`。Board 已用下面的节点描述 K2：
+先查看 `platform/boards/dshan/dshan_ra6m5/dshan_ra6m5.dts`。Board 已用下面的节点描述 K2：
 
 ```dts
 buttons {
@@ -142,7 +142,7 @@ buttons {
 
 `&ioport0` 的第 `0` 个引脚对应 P000，`GPIO_ACTIVE_LOW` 表示低电平为有效状态。现在给自定义驱动使用同一个引脚，需要在当前应用中禁用原来的 `gpio-keys` 节点，避免两套驱动同时配置 P000。
 
-新建 `apps/k2_button/boards/dshan_ra6m5.overlay`，写入：
+新建 `applications/k2_button/boards/dshan_ra6m5.overlay`，写入：
 
 ```dts
 /* SPDX-License-Identifier: Apache-2.0 */
@@ -224,7 +224,7 @@ zephyr_library_sources_ifdef(CONFIG_INPUT_DSHAN_GPIO_BUTTON input_dshan_gpio_but
 
 ### 5.3.2 写应用构建文件
 
-在 `apps/k2_button/CMakeLists.txt` 中写入：
+在 `applications/k2_button/CMakeLists.txt` 中写入：
 
 ```cmake
 # SPDX-License-Identifier: Apache-2.0
@@ -237,7 +237,7 @@ project(k2_button LANGUAGES C)
 target_sources(app PRIVATE src/main.c)
 ```
 
-在 `apps/k2_button/prj.conf` 中写入：
+在 `applications/k2_button/prj.conf` 中写入：
 
 ```ini
 CONFIG_INPUT=y
@@ -263,7 +263,7 @@ CONFIG_STACK_SENTINEL=y
 
 ### 5.4.1 保存配置和运行状态
 
-新建 `drivers/input/input_dshan_gpio_button.c`，先写入头文件、日志模块和两个结构体：
+新建 `platform/drivers/input/input_dshan_gpio_button.c`，先写入头文件、日志模块和两个结构体：
 
 ```c
 /* SPDX-License-Identifier: Apache-2.0 */
@@ -378,7 +378,7 @@ DT_INST_FOREACH_STATUS_OKAY(DSHAN_GPIO_BUTTON_DEFINE)
 
 ### 5.4.4 从应用取得设备
 
-在 `apps/k2_button/src/main.c` 中写入这个阶段的完整程序：
+在 `applications/k2_button/src/main.c` 中写入这个阶段的完整程序：
 
 ```c
 #include <errno.h>
@@ -408,10 +408,10 @@ int main(void)
 回到工程根目录的 PowerShell 终端执行：
 
 ```powershell
-.\scripts\dev.ps1 build k2_button
+.\.venv\Scripts\python.exe -m west build -b dshan_ra6m5 applications\k2_button -d build\k2_button
 ```
 
-本工程脚本会构建 `apps/k2_button/`，输出位于 `build/k2_button/`。构建成功后，打开以下文件核对刚刚建立的关系：
+west build 会构建 `applications/k2_button/`，输出位于 `build/k2_button/`。构建成功后，打开以下文件核对刚刚建立的关系：
 
 | 生成文件 | 检查内容 |
 | --- | --- |
@@ -431,7 +431,7 @@ int main(void)
 
 ### 5.5.1 为回调保存状态
 
-打开 `drivers/input/input_dshan_gpio_button.c`，将原来的 `struct dshan_gpio_button_data` 替换为：
+打开 `platform/drivers/input/input_dshan_gpio_button.c`，将原来的 `struct dshan_gpio_button_data` 替换为：
 
 ```c
 struct dshan_gpio_button_data {
@@ -559,7 +559,7 @@ DSHAN_GPIO_BUTTON_DEFINE 宏
 DT_INST_FOREACH_STATUS_OKAY(...)
 ```
 
-再次在工程根目录执行 `.\scripts\dev.ps1 build k2_button`，确认新加入的回调、工作对象及 GPIO 中断接口能完成编译链接。应用目前仍只检查设备就绪，接下来为它加入事件接收。
+再次在工程根目录执行 `.\.venv\Scripts\python.exe -m west build -b dshan_ra6m5 applications\k2_button -d build\k2_button`，确认新加入的回调、工作对象及 GPIO 中断接口能完成编译链接。应用目前仍只检查设备就绪，接下来为它加入事件接收。
 
 ## 5.6 在应用中接收并处理事件
 
@@ -575,7 +575,7 @@ DT_INST_FOREACH_STATUS_OKAY(...)
 
 ### 5.6.1 定义应用自己的消息
 
-打开 `apps/k2_button/src/main.c`，将现有头文件区替换为：
+打开 `applications/k2_button/src/main.c`，将现有头文件区替换为：
 
 ```c
 #include <errno.h>
@@ -733,9 +733,9 @@ main()
 在工程根目录执行：
 
 ```powershell
-.\scripts\dev.ps1 build k2_button
-.\scripts\dev.ps1 flash k2_button
-.\scripts\dev.ps1 monitor
+.\.venv\Scripts\python.exe -m west build -b dshan_ra6m5 applications\k2_button -d build\k2_button
+.\.venv\Scripts\python.exe -m west flash -d build\k2_button
+.\.venv\Scripts\python.exe -m serial.tools.miniterm COM23 115200
 ```
 
 烧录和串口连接方法沿用学习准备中的操作。打开串口后按一下 RES，可以看到下面的启动信息：

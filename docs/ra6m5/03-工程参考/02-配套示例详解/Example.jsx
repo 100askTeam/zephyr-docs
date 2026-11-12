@@ -22,7 +22,7 @@ export default function Example({name, title, description, hardware, notice, api
         {children}
         <dl className={styles.technical}>
           <div><dt>Zephyr 接口</dt><dd>{apis}</dd></div>
-          <div><dt>源码入口</dt><dd><code>apps/{name}/src/main.c</code></dd></div>
+          <div><dt>源码入口</dt><dd><code>applications/{name}/src/main.c</code></dd></div>
         </dl>
       </div>
     </details>

@@ -73,7 +73,7 @@ CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC=200000000
 
 **SCI4 简易 I²C** 和 **IIC2** 都用于 I²C 通信，但属于不同硬件模块。手册使用 `SCI`、`IIC`、`GPT` 等硬件模块名称，应用则按 UART、I²C、PWM 等接口类型访问它们；同一个 SCI 模块可以工作在不同模式。
 
-连接和参数记录在 `boards/dshan/dshan_ra6m5/dshan_ra6m5.dts`、同目录的 `dshan_ra6m5-pinctrl.dtsi`，以及各应用的 `boards/dshan_ra6m5.overlay` 中。Wi-Fi 和 BLE 由外接 W800 提供；屏幕也有独立的显示、触摸控制器，RA6M5 通过相应总线控制它们。
+连接和参数记录在 `platform/boards/dshan/dshan_ra6m5/dshan_ra6m5.dts`、同目录的 `dshan_ra6m5-pinctrl.dtsi`，以及各应用的 `boards/dshan_ra6m5.overlay` 中。Wi-Fi 和 BLE 由外接 W800 提供；屏幕也有独立的显示、触摸控制器，RA6M5 通过相应总线控制它们。
 
 板载调试器通过 **SWD** 与 RA6M5 通信，并向电脑提供 USB 调试和串口通道。连接电脑的 **Debug 接口**与应用使用的 **USB HOST/OTG 接口**用途不同，连接时应按接口丝印区分。
 

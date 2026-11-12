@@ -19,29 +19,29 @@ slug: /ra6m5/preparation/project-and-board/
 完整课程工程的下载入口待发布。开发板原理图、位号图等硬件资料可从[百问网 RA6M5 资料页面](https://download.100ask.net/boards/Renesas/DShanMCU-RA6M5/index.html)获取。
 :::
 
-取得工程压缩包后，先完整解压。工程根目录是包含 `apps`、`scripts` 和 `west.yml` 的这一层；下一篇会在 VS Code 中打开这个目录。
+取得工程压缩包后，先完整解压。工程根目录是包含 `applications`、`platform` 和 `.west` 的这一层；下一篇会在 VS Code 中打开这个目录。
 
 建议将工程放在路径较短、没有空格的英文目录中。解压完成后，至少应能找到下面这些内容：
 
 ```text
 RA6M5/
-├─ .venv/          # Python、west、CMake 等开发工具所在目录
+├─ .venv/          # 环境入口:python/west 两个原生启动器
 ├─ .vscode/        # 编辑器任务与调试配置
-├─ apps/           # 各个独立的 Zephyr 示例应用
-├─ boards/         # 本开发板的硬件描述
-├─ drivers/        # 工程中的设备驱动
-├─ dts/            # 设备树 Binding
-├─ hardware/       # 原理图和位号图
+├─ .west/          # 工作区接线:清单指向 platform
+├─ applications/   # 各个独立的 Zephyr 示例应用
+├─ platform/       # 板卡、驱动、设备树 Binding、公共头
+├─ patches/        # 对 Zephyr 与 HAL 的下游修改
+├─ docs/           # 工程自带操作文档
 ├─ modules/        # Zephyr 依赖模块
-├─ scripts/        # 编译、烧录、串口脚本
-├─ sdk_env/        # Arm 编译器与 probe-rs
+├─ scripts/        # 创建应用、补丁维护等主机工具
+├─ sdk/            # Python、CMake、Ninja、Git、Arm 编译器与 probe-rs
 ├─ zephyr/         # Zephyr 源码
-└─ west.yml        # 工作区清单
+└─ build/          # 构建产物(首次构建后生成)
 ```
 
-这些目录需要保留相对位置。`scripts/dev.ps1` 会相对于工程根目录寻找工具，不要单独移动其中的 `scripts` 或 `sdk_env`。
+这些目录需要保留相对位置。`.venv/Scripts` 里的启动器按自身位置寻找 `sdk/` 中的工具，整个工程可以换目录、换电脑，但不要单独移动其中的 `.venv`、`scripts` 或 `sdk`。
 
-`apps` 中的每个子目录都是一个独立的 Zephyr 应用，初次使用可以先编译、烧录 `board_bringup`，确认串口输出和 LED 闪烁。
+`applications` 中的每个子目录都是一个独立的 Zephyr 应用，初次使用可以先编译、烧录 `board_bringup`，确认串口输出和 LED 闪烁。
 
 ## 配套资料
 

@@ -7,13 +7,13 @@ slug: /ra6m5/application/first-application/
 
 # 第2章 编写第一个 Zephyr 应用
 
-上一章已经找到应用、板卡描述和共享驱动的位置。现在在 `apps/board_bringup/` 中编写一个应用：启动时通过串口打印 Zephyr 版本与板卡目标，然后让板载用户 LED 每隔 500 ms 切换一次亮灭状态。这颗 LED 的器件编号是 D12，后文的 LED 操作都针对它。
+上一章已经找到应用、板卡描述和共享驱动的位置。现在在 `applications/board_bringup/` 中编写一个应用：启动时通过串口打印 Zephyr 版本与板卡目标，然后让板载用户 LED 每隔 500 ms 切换一次亮灭状态。这颗 LED 的器件编号是 D12，后文的 LED 操作都针对它。
 
 先建立能够编译的串口应用，再使用 Board 已有的 `led0` 描述加入 GPIO 操作。所有命令从 `RA6M5/` 工程根目录执行；编译、烧录和串口操作参阅[编译与烧录程序](../../00-学习准备/03-编译与烧录程序/README.md)。
 
 ## 建立应用目录
 
-在 VS Code 的资源管理器中找到 `apps/`，新建 `board_bringup/`，再在里面新建 `src/`。也可以在工程根目录的 PowerShell 终端执行：
+在 VS Code 的资源管理器中找到 `applications/`，新建 `board_bringup/`，再在里面新建 `src/`。也可以在工程根目录的 PowerShell 终端执行：
 
 ```powershell
 New-Item -ItemType Directory -Path .\apps\board_bringup\src -Force
@@ -22,18 +22,18 @@ New-Item -ItemType Directory -Path .\apps\board_bringup\src -Force
 应用的核心文件放在下面的位置，接下来逐个创建：
 
 ```text
-apps/board_bringup/
+applications/board_bringup/
 ├─ CMakeLists.txt       # 连接 Zephyr 构建系统，列出应用源文件
 ├─ prj.conf             # 选择应用需要的软件功能
 └─ src/
    └─ main.c            # 串口启动信息与 LED 闪烁程序
 ```
 
-目录名 `board_bringup` 会作为工程脚本的应用参数。脚本在 `apps/board_bringup/` 中查找源码，把构建结果放入 `build/board_bringup/`，因此不要把 `main.c` 建在 `build/` 下。
+目录名 `board_bringup` 会作为构建命令的应用参数。west 在 `applications/board_bringup/` 中查找源码，把构建结果放入 `build/board_bringup/`，因此不要把 `main.c` 建在 `build/` 下。
 
 ## 将 main.c 加入 Zephyr 构建
 
-在 `apps/board_bringup/` 中新建 `CMakeLists.txt`，先写入下面的内容：
+在 `applications/board_bringup/` 中新建 `CMakeLists.txt`，先写入下面的内容：
 
 ```cmake
 # 沿用工程模板的入口声明；实际工具版本由配套开发环境提供。
@@ -54,7 +54,7 @@ target_sources(app PRIVATE src/main.c)
 
 ## 配置串口输出
 
-在 `apps/board_bringup/` 中新建 `prj.conf`，完整内容为：
+在 `applications/board_bringup/` 中新建 `prj.conf`，完整内容为：
 
 ```ini
 # main() 使用 printk 输出启动信息。
@@ -71,7 +71,7 @@ CONFIG_DEBUG_OPTIMIZATIONS=y
 
 `CONFIG_DEBUG_OPTIMIZATIONS=y` 让编译器使用 `-Og` 优化级别，减少变量被优化掉、源码单步跳行的情况，便于按[使用 VS Code 调试程序](../../00-学习准备/04-使用VSCode调试程序/README.md)中的步骤检查 GPIO 配置结果。这个选项定义在 `zephyr/Kconfig.zephyr` 中，构建后可以在生成的 `.config` 中确认它是否生效。
 
-当前 Board 的 `boards/dshan/dshan_ra6m5/dshan_ra6m5_defconfig` 已经提供以下设置，可以打开文件核对：
+当前 Board 的 `platform/boards/dshan/dshan_ra6m5/dshan_ra6m5_defconfig` 已经提供以下设置，可以打开文件核对：
 
 ```ini
 CONFIG_GPIO=y
@@ -85,7 +85,7 @@ CONFIG_CONSOLE=y
 
 ## 让 main() 通过串口输出启动信息
 
-在 `apps/board_bringup/src/` 中新建 `main.c`。`printk()` 是本次使用的输出函数，声明在 `zephyr/sys/printk.h`；`zephyr/version.h` 提供内核版本字符串。将文件写成下面的最小状态：
+在 `applications/board_bringup/src/` 中新建 `main.c`。`printk()` 是本次使用的输出函数，声明在 `zephyr/sys/printk.h`；`zephyr/version.h` 提供内核版本字符串。将文件写成下面的最小状态：
 
 ```c
 /* SPDX-License-Identifier: Apache-2.0 */
@@ -113,7 +113,7 @@ int main(void)
 保存文件，在工程根目录执行：
 
 ```powershell
-.\scripts\dev.ps1 build board_bringup
+.\.venv\Scripts\python.exe -m west build -b dshan_ra6m5 applications\board_bringup -d build\board_bringup
 ```
 
 脚本已经指定 Board 为 `dshan_ra6m5`，并设置配套工具环境。它调用 west 构建当前应用，成功后应产生以下文件：
@@ -135,7 +135,7 @@ Select-String -Path .\build\board_bringup\zephyr\.config -Pattern '^CONFIG_PRINT
 
 ## 从 Board 的 led0 取得 LED 连接
 
-GPIO API 需要知道控制器、引脚与有效电平。应用使用的 `led0` 是设备树别名，不是 C 变量。在 `boards/dshan/dshan_ra6m5/dshan_ra6m5.dts` 中分别找到 `aliases` 与 `leds`，相关内容为：
+GPIO API 需要知道控制器、引脚与有效电平。应用使用的 `led0` 是设备树别名，不是 C 变量。在 `platform/boards/dshan/dshan_ra6m5/dshan_ra6m5.dts` 中分别找到 `aliases` 与 `leds`，相关内容为：
 
 ```dts
 aliases {
@@ -162,7 +162,7 @@ leds {
 
 Zephyr 提供 `struct gpio_dt_spec` 保存这组信息，包括控制器指针 `port`、引脚 `pin` 和设备树标志 `dt_flags`。`GPIO_DT_SPEC_GET()` 从指定节点的 GPIO 属性生成这份描述，调用时不用在 C 文件里重复写 P400。
 
-打开 `apps/board_bringup/src/main.c`，在 `#include <zephyr/kernel.h>` 后增加 GPIO 头文件：
+打开 `applications/board_bringup/src/main.c`，在 `#include <zephyr/kernel.h>` 后增加 GPIO 头文件：
 
 ```c
 #include <zephyr/drivers/gpio.h>
@@ -238,7 +238,7 @@ static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 
 ### 核对完整 main.c
 
-完成以上修改后，`apps/board_bringup/src/main.c` 应包含下面的结构。先核对头文件、设备描述和 `main()` 内的顺序，再进行最终构建。
+完成以上修改后，`applications/board_bringup/src/main.c` 应包含下面的结构。先核对头文件、设备描述和 `main()` 内的顺序，再进行最终构建。
 
 <details>
 <summary>展开完整 main.c</summary>
@@ -294,7 +294,7 @@ int main(void)
 保存全部文件，再次从工程根目录构建：
 
 ```powershell
-.\scripts\dev.ps1 build board_bringup
+.\.venv\Scripts\python.exe -m west build -b dshan_ra6m5 applications\board_bringup -d build\board_bringup
 ```
 
 构建成功后，打开 `build/board_bringup/zephyr/zephyr.dts`，搜索 `led0` 与 `user-led`。应能沿着 `led0 = &user_led` 找到 LED 节点。生成文件里的 `gpios` 可能已转换成数值形式，可以回到 Board DTS 对照控制器、引脚编号与标志。
@@ -312,16 +312,16 @@ Select-String -Path .\build\board_bringup\zephyr\.config -Pattern '^CONFIG_GPIO=
 在工程根目录执行：
 
 ```powershell
-.\scripts\dev.ps1 flash board_bringup
+.\.venv\Scripts\python.exe -m west flash -d build\board_bringup
 ```
 
-这里使用工程提供的烧录脚本。它先增量构建，再生成供下载使用的 `zephyr_codeflash.elf`，通过配套工具烧录并复位板卡。确认脚本结束并提示烧录完成后，打开串口监视：
+这里使用 `west flash`。它先增量构建，再跳过 RA 选项字节段，通过 probe-rs 下载并复位板卡。确认提示烧录完成后，打开串口监视：
 
 ```powershell
-.\scripts\dev.ps1 monitor
+.\.venv\Scripts\python.exe -m serial.tools.miniterm COM23 115200
 ```
 
-串口打开后复位板卡，观察从启动开始的输出。`monitor` 会根据板载调试器的 USB 标识寻找串口，以 115200、8N1 打开；退出时按 `Ctrl+C`。
+串口打开后复位板卡，观察从启动开始的输出。miniterm 以 115200、8N1 打开所选串口；退出时按 `Ctrl+]`。`COM23` 是示例编号，以[连接开发板时查到的端口](../../00-学习准备/01-准备工程与连接开发板/README.md#确认电脑识别到开发板)为准。
 
 本次在开发板上运行 `board_bringup`，串口实测的应用启动信息为：
 
@@ -347,4 +347,4 @@ Dshan RA6M5 bring-up: Zephyr 4.4.2 on dshan_ra6m5/r7fa6m5bf2cbg
 
 现在已经把一个应用从构建入口、配置和最小 `main.c` 写到了设备操作。下一章继续沿着设备树和标准 API，学习使用工程已有的设备驱动。
 
-[上一章：从 example-application 认识 Zephyr 工程](../01-从example-application认识Zephyr工程/README.md) · [下一章：Zephyr 设备驱动的使用](../03-Zephyr设备驱动的使用/README.md)
+[上一章：认识课程工程的 Zephyr 结构](../01-认识课程工程结构/README.md) · [下一章：Zephyr 设备驱动的使用](../03-Zephyr设备驱动的使用/README.md)
