@@ -21,11 +21,11 @@ slug: /ra6m5/preparation/vscode/
 
 ## 打开完整的 RA6M5 工程
 
-点击 **①“文件（File）” → ②“打开文件夹…（Open Folder…）”**，在文件夹选择窗口中找到解压后的 `RA6M5` 目录，点击“选择文件夹”。
+点击 **“文件（File）” → “打开文件夹…（Open Folder…）”**（图中红框处），在文件夹选择窗口中找到解压后的 `RA6M5` 目录，点击“选择文件夹”。
 
 [![在 VS Code 文件菜单中选择打开文件夹](./images/vscode-open-folder.png)](./images/vscode-open-folder.png)
 
-*图 1：①打开文件菜单，②选择“打开文件夹…”。每张图中的序号对应当前图里的操作或检查位置，点击图片可查看原图。*
+*图 1：红框标出“文件”菜单和其中的“打开文件夹…”。点击图片可查看原图。*
 
 打开后，点击左侧“资源管理器（Explorer）”，检查 **①根目录名称**和 **②目录内容**：应能同时找到 `.vscode`、`applications`、`platform`、`sdk` 和 `.west`。
 
