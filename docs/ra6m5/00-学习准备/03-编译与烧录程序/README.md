@@ -140,7 +140,7 @@ $Py = '.\.venv\Scripts\python.exe'
 
 [![串口终端中显示开发板启动信息](./images/vscode-serial-output.png)](./images/vscode-serial-output.png)
 
-*图 6：开发板的实际输出；之前还会显示 Zephyr 的启动信息。（截图待更新：图中为旧版串口任务界面。）*
+*图 6：miniterm 打开串口后的输出：连接提示与 `Quit: Ctrl+]` 说明、Zephyr 启动信息，以及应用打印的 bring-up 行。点击图片可查看原图。*
 
 **这个应用只在启动时打印一次信息，之后循环控制 D12 闪烁。** 因此，看到启动信息后，终端不再增加新内容是正常现象。若没有应用输出，先确认前面已烧录 `board_bringup`，再保持监视打开，按一下 **RES**。
 
