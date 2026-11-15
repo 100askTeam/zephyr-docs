@@ -12,15 +12,15 @@ import TabItem from '@theme/TabItem';
 按正在学习的课程选择一项，完成对应步骤即可。
 
 <Tabs defaultValue="phase1" queryString="phase" lazy>
-<TabItem value="phase1" label="一期：使用完整工程包">
+<TabItem value="phase1" label="一、二期：使用完整工程包">
 
-在现成工程中学习驱动、应用和设备树。**工具已随包提供，无需安装 Git、Python、uv，也无需创建或激活 `.venv`。**
+在现成工程中学习驱动、应用和设备树。**工具已随包提供，无需安装 Git、Python、uv，也无需创建或激活虚拟环境。**
 
 ## 1. 解压工程包
 
 建议放在 `D:\work\HPM6E70\` 这样的短路径中，盘符可自行选择。各级目录建议使用英文、数字、连字符或下划线，避免中文、空格和临时目录。
 
-保持包内目录结构，确认 `HPM6E70` 下有 `.west/`、`zephyr/`、`sdk_glue/`、`sdk_env/` 和 `tools/`。
+保持包内目录结构，确认 `HPM6E70` 下有 `.west/`、`.venv/`、`platform/`、`applications/`、`sdk/`、`zephyr/`、`sdk_glue/` 和 `sdk_env/`。
 
 ## 2. 检查内置工具
 
@@ -28,26 +28,28 @@ import TabItem from '@theme/TabItem';
 
 ```powershell
 Test-Path .\.west\config
-Test-Path .\tools\python-portable\python.exe
-Test-Path .\tools\git-portable\cmd\git.exe
-Test-Path .\sdk_env\tools\cmake\bin\cmake.exe
-.\tools\python-portable\python.exe -m west --version
+Test-Path .\sdk\python\python.exe
+Test-Path .\sdk\git\cmd\git.exe
+Test-Path .\sdk\cmake\bin\cmake.exe
+.\.venv\Scripts\python.exe -m west --version
 ```
 
 前四项均为 `True`，最后显示 west 1.5.0，即可继续。缺少文件时，请重新取得完整工程包。
 
-**一期环境准备到这里结束。** 下一步：[认识 Zephyr 与工程模型](../common-02-认识Zephyr与工程模型/README.md)。编译检查在[构建和烧录应用](../p1-02-一键开发工作流/README.md)中进行。
+`.venv\Scripts` 里只有两个原生启动器（`python.exe` 与 `west.exe`），它们按自身位置找到 `sdk/` 里的随包工具并配好环境，**不是普通虚拟环境，不需要激活**。整个工程可以换盘、换目录、换电脑。后续命令统一用 `.\.venv\Scripts\python.exe` 作为入口，不要用系统安装的 python 或 west。
+
+**一、二期环境准备到这里结束。** 下一步：[认识 Zephyr 与工程模型](../common-02-认识Zephyr与工程模型/README.md)。若直接上手模块体验，可从[一期：RGB 全彩 LED 调色](../p1-01-RGB全彩LED调色/README.md)开始；若想系统学习驱动与应用开发，编译检查见[二期：一键开发工作流](../p2-02-一键开发工作流/README.md)。
 
 </TabItem>
-<TabItem value="phase2" label="二期：从零搭建工程">
+<TabItem value="phase3" label="三期：从零搭建工程">
 
-从空目录准备 Git、Python 和 west，再下载源码、工具链并搭建整个工程。**以下步骤仅用于二期。**
+从空目录准备 Git、Python 和 west，再下载源码、工具链并搭建整个工程。**以下步骤仅用于三期。**
 
 ## 1. 创建工程目录
 
 在计划存放工程的**父目录**打开 Windows PowerShell。建议使用短路径，例如 `D:\work\`；各级目录建议使用英文、数字、连字符或下划线，避免中文、空格和临时目录。
 
-创建并进入一个新的 `HPM6E70` 目录。若已有一期工程，请另选父目录：
+创建并进入一个新的 `HPM6E70` 目录。若已有一、二期完整工程包，请另选父目录：
 
 ```powershell
 New-Item -ItemType Directory -Path .\HPM6E70 -Force
@@ -157,7 +159,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 
 看到提示符前出现 `(.venv)`，表示已经进入工程虚拟环境。
 
-后续安装的 west 和 Python 包都会进入当前工程的 `.venv`；CMake 与 Ninja 不在 venv 中，而是统一使用 `sdk_env\tools` 里的版本。
+后续安装的 west 和 Python 包都会进入当前工程的 `.venv`；CMake 与 Ninja 不在 venv 中，而是统一使用下一课集中到 `sdk/` 里的版本。
 
 ## 5. 安装 west
 
@@ -175,7 +177,7 @@ uv --version
 west --version
 ```
 
-三条命令均返回版本号，且提示符前有 `(.venv)`，即可进入[搭建 SDK Glue 工作区](../p2-01-搭建SDK-Glue工作区/README.md)。CMake、Ninja 和交叉编译工具链将在下一课下载到 `sdk_env/`，无需在此单独安装。
+三条命令均返回版本号，且提示符前有 `(.venv)`，即可进入[搭建 SDK Glue 工作区](../p3-01-搭建SDK-Glue工作区/README.md)。CMake、Ninja 和交叉编译工具链将在下一课下载到 `sdk_env/`，无需在此单独安装。
 
 </TabItem>
 </Tabs>

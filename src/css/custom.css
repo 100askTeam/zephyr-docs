@@ -318,7 +318,7 @@
 
 .course-track-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.85rem;
   margin: 0 0 2.8rem;
 }
@@ -473,6 +473,10 @@
 
   .course-capabilities {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .course-track-grid {
+    grid-template-columns: 1fr;
   }
 
   .course-capabilities > div:nth-child(3) {

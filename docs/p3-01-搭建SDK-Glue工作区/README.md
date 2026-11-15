@@ -1,0 +1,313 @@
+---
+sidebar_position: 2
+title: 第 1 课：搭建 SDK Glue 工作区
+---
+
+# 第 1 课：搭建 SDK Glue 工作区
+
+HPM6E70 的 Zephyr 开发环境由多部分组成：Zephyr 内核提供操作系统能力，SDK Glue 连接 Zephyr 与 HPMicro 平台，HPM SDK 提供芯片支持，RISC-V 工具链负责生成固件。本课从已经准备好的工程目录开始，先建立 `platform/` 清单仓库，再用 `west` 把其余部分组合成一个完整工作区。最终结构与一、二期完整工程包一致。
+
+本课操作依据：[HPMicro《Zephyr SDK Glue 开发指南》](https://kb.hpmicro.com/2025/12/03/zephyr-zephyr-sdk-glue-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#windows-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA)。
+
+开始前请确认：当前终端位于工程根目录，提示符前有 `(.venv)`，且 Git 与 west 已完成版本检查。
+
+## 认识 west：工作区管理工具
+
+`west` 是 Zephyr 官方提供的**工作区管理工具**。可以把它理解为“工程总管”：Git 负责下载某一个代码仓库，而 west 按照一份清单（`platform/west.yml`）一次性下载并管理 Zephyr、HPMicro 适配层、HPM SDK 等多个相互配合的仓库，还能调用构建、烧录命令。
+
+因此，west 不是编译器，也不是芯片驱动：
+
+| 工具 | 负责什么 |
+| --- | --- |
+| Git | 下载和管理单个代码仓库 |
+| west | 按清单组织多个仓库，并提供 `build`、`flash` 等开发命令 |
+| CMake + Ninja | 生成并执行 C/C++ 构建过程 |
+| RISC-V GCC | 把源代码编译成 HPM6E70 能运行的固件 |
+
+本课执行 `west init`、`west update` 后，west 会根据清单把完整源码放入工作区；后续课程执行 `west build` 时，west 再把应用、Board 和工具链串起来。你不需要手工猜测每个仓库应该放在哪里。
+
+:::info[完成后的可见结果]
+`west list zephyr sdk_glue sdk_env` 能列出三部分的版本和目录；工作区中能够看到 `.west/`、`platform/`、`zephyr/`、`sdk_glue/`、`sdk_env/` 和 `sdk/`；RISC-V 编译器文件检查结果为 `True`。
+:::
+
+## 目标工作区目录
+
+本教程使用下面的工作区：
+
+```text
+D:\100ask\work\HPM6E70
+```
+
+环境完成后，各目录的作用如下：
+
+| 目录 | 内容 |
+| --- | --- |
+| `.west/` | west 工作区配置，manifest 指向 `platform/` |
+| `platform/` | 本课程的清单仓库 + Zephyr 模块（板卡、驱动、绑定、公共头） |
+| `applications/` | 可以分别构建和运行的应用 |
+| `sdk_glue/` | HPMicro 的 Zephyr 适配层和 west 清单 |
+| `zephyr/` | Zephyr 源码 |
+| `sdk_env/` | HPM SDK 源码 |
+| `sdk/` | 随包工具链：RISC-V GCC、CMake、Ninja、OpenOCD、dtc、gperf |
+| `.venv/` | 本工程使用的 Python、west 和 Python 包 |
+
+## 开始前检查
+
+尚未安装 Git、uv 和 west 时，先完成[三期环境准备](../common-01-准备开发环境/README.md?phase=phase3)，再从下面的工作区初始化开始。
+
+## 第一步：建立 platform 清单仓库
+
+先让当前终端使用 UTF-8：
+
+```powershell
+$env:PYTHONUTF8 = '1'
+```
+
+`platform/` 既是 west 清单仓库，也是 Zephyr 模块。先创建目录和清单文件：
+
+```powershell
+New-Item -ItemType Directory -Path .\platform\zephyr -Force
+```
+
+在 `platform/west.yml` 写入：
+
+```yaml
+manifest:
+  remotes:
+    - name: gitee
+      url-base: https://gitee.com/hpmicro
+
+  projects:
+    - name: sdk_glue
+      remote: gitee
+      repo-path: zephyr_sdk_glue
+      path: sdk_glue
+      revision: 1756cb8fbef2334d9ad89aef08a01233f8502919
+      import:
+        file: west_gitee.yml
+        name-blocklist:
+          - mcuboot
+      west-commands: scripts/west-commands.yml
+```
+
+注意远端仓库名是 `zephyr_sdk_glue`，本地目录仍叫 `sdk_glue`；`name-blocklist` 排除本工程不使用的 mcuboot。
+
+再在 `platform/zephyr/module.yml` 写入模块入口，让 Zephyr 从 `platform/` 查找板卡与设备树：
+
+```yaml
+name: dshanmcu
+build:
+  settings:
+    board_root: .
+    dts_root: .
+```
+
+`board_root`/`dts_root` 的 `.` 相对模块根目录（即 `platform/`）。后续课程把 Board 文件放进 `platform/boards/`、绑定放进 `platform/dts/bindings/`，Zephyr 就能自动发现，不需要在命令行重复传 `--board-root`。等加入自研驱动后（二期第 7 课），再给这个文件补上 `cmake:` 与 `kconfig:` 入口。
+
+## 第二步：初始化并下载工作区
+
+确认当前终端位于工程根目录后，用本地清单初始化：
+
+```powershell
+west init -l platform
+```
+
+`west init -l` 生成 `.west/config`，记录 `path = platform`、`file = west.yml`。然后下载各个仓库：
+
+```powershell
+west update
+```
+
+west 先克隆 `sdk_glue` 并读取它导入的 `west_gitee.yml`，再据此克隆 Zephyr、HPM SDK 与其余模块。
+
+### `CherryUSB` 更新失败时如何恢复
+
+`west update` 会按清单逐个更新仓库。某个仓库失败时，前面已经显示 `HEAD is now at ...` 的仓库仍然有效，不需要全部重新下载。
+
+如果命令最后显示：
+
+```text
+ERROR: update failed for project CherryUSB
+```
+
+先确认清单中的路径：
+
+```powershell
+west list CherryUSB
+```
+
+本工程中 `CherryUSB` 的目录是 `modules/lib/CherryUSB`。先在工程根目录重试该项目：
+
+```powershell
+west update CherryUSB
+```
+
+如果仍然失败，强制重新获取该项目：
+
+```powershell
+west update -f always CherryUSB
+```
+
+如果仓库已经创建但只有 `.git` 目录，说明源码提交还没有拉取完整。清单为 `CherryUSB` 指定的提交是 `5ffe9cbe7fb41489d99806daa8572124ace1b99b`，可以直接从清单配置的 `cherry-embedded` 远程补齐：
+
+```powershell
+git -C .\modules\lib\CherryUSB fetch cherry-embedded 5ffe9cbe7fb41489d99806daa8572124ace1b99b
+west update CherryUSB
+```
+
+成功时会看到类似下面的结果：
+
+```text
+HEAD is now at 5ffe9cbe fix(port/dwc2/usb_hc_dwc2): fix incorrect HFIR_RELOAD_CTRL setting
+```
+
+![CherryUSB 更新成功](./images/CherryUSB更新成功.png)
+
+图中 `HEAD is now at 5ffe9cbe` 表示 `CherryUSB` 已切换到清单要求的版本；命令返回提示符且没有新的 `ERROR` 时，才继续执行下一步。
+
+下载完成后，工作区应至少包含：
+
+```text
+HPM6E70/
+├─ .venv/
+├─ .west/
+├─ platform/
+├─ modules/
+├─ sdk_env/
+├─ sdk_glue/
+└─ zephyr/
+```
+
+检查清单配置：
+
+```powershell
+Get-Content .\.west\config
+```
+
+其中应看到：
+
+```ini
+[manifest]
+path = platform
+file = west.yml
+```
+
+## 第三步：安装 Zephyr 依赖并应用 HPM SDK 补丁
+
+`west update` 完成后，确认终端提示符前有 `(.venv)`，然后按下面的顺序逐条执行。
+
+### 3.1 安装 Zephyr 的 Python 依赖
+
+```powershell
+python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r .\zephyr\scripts\requirements.txt
+```
+
+这条命令只负责把 Zephyr 构建所需的 Python 包安装到当前工程的 `.venv` 中。
+
+### 3.2 检查依赖是否完整
+
+```powershell
+python -m pip check
+```
+
+看到 `No broken requirements found.` 表示依赖关系没有缺失。本课程**不往 venv 安装 Ninja**（它由 `sdk/` 提供）。
+
+### 3.3 注册 Zephyr 工程
+
+```powershell
+west zephyr-export
+```
+
+该命令把当前工作区的 Zephyr CMake 包注册到用户环境中，使后续 CMake 配置能够找到 Zephyr。
+
+### 3.4 应用 HPM SDK 补丁
+
+```powershell
+west supply
+```
+
+该命令根据清单把 HPM SDK 补丁应用到 `sdk_env\hpm_sdk\`，其中包括 RTL8201 网口与显示枚举两处修复。正常完成时，命令返回提示符且没有出现 `patched ... failed` 或 `ERROR`。
+
+#### Windows 下补丁换行符不一致时
+
+如果输出：
+
+```text
+0002-fix-enet-phy-rtl8211.patch patched in ...\sdk_env\hpm_sdk failed
+```
+
+这是补丁文件与 HPM SDK 源文件的换行符不同导致的检查失败。如果错误只指向这个 `0002` 补丁，前面的补丁已经完成，不要重复执行整个命令。保持当前目录为工程根目录，直接应用第二个补丁：
+
+```powershell
+git -C .\sdk_env\hpm_sdk apply --ignore-whitespace ..\..\sdk_glue\scripts\patch\hpm_sdk_v1.11.0\0002-fix-enet-phy-rtl8211.patch
+```
+
+检查补丁是否已经写入：
+
+```powershell
+Select-String .\sdk_env\hpm_sdk\components\enet_phy\rtl8201\hpm_rtl8201.h -Pattern media_interface
+```
+
+输出包含 `uint8_t media_interface;` 后，表示补丁已完成。
+
+## 第四步：把工具集中到 sdk/ 并选择工具链
+
+`west update` 把 RISC-V 工具链、CMake、Ninja 放在 `sdk_env/` 里。为与一、二期工程包一致，把它们集中到 `sdk/`：
+
+```powershell
+New-Item -ItemType Directory -Path .\sdk -Force
+Move-Item .\sdk_env\toolchains\rv32imac_zicsr_zifencei_multilib_b_ext-win .\sdk\riscv-toolchain
+Move-Item .\sdk_env\tools\cmake .\sdk\cmake
+Move-Item .\sdk_env\tools\ninja .\sdk\ninja
+```
+
+CH347 版 OpenOCD、dtc、gperf、zadig 不在 `west update` 的下载内容里，从课程资料包取得后分别放入 `sdk\openocd\`、`sdk\dtc\`、`sdk\gperf\`、`sdk\zadig\`（见[资料与下载](../appendix-02-资料与下载/README.md)）。
+
+然后在当前终端逐行执行：
+
+```powershell
+$env:ZEPHYR_TOOLCHAIN_VARIANT = 'cross-compile'
+$env:CROSS_COMPILE = "$PWD\sdk\riscv-toolchain\bin\riscv32-unknown-elf-"
+$env:HPM_SDK_DIR = "$PWD\sdk_env\hpm_sdk"
+$env:Path = "$PWD\sdk\cmake\bin;$PWD\sdk\ninja;$PWD\sdk\dtc;$PWD\sdk\gperf;$env:Path"
+```
+
+最后一行把 `sdk/` 里的 CMake、Ninja、dtc、gperf 放到 PATH 最前面，后续 `west build` 固定使用这些版本，不受系统安装影响。
+
+检查文件确实存在：
+
+```powershell
+Test-Path "${env:CROSS_COMPILE}gcc.exe"
+Get-Command cmake, ninja | Select-Object Name, Source
+cmake --version
+ninja --version
+```
+
+第一条应输出 `True`；`Get-Command` 显示的 CMake 和 Ninja 路径都应位于当前工程的 `sdk/`。
+
+![工具链与 HPM SDK 验证](./images/工具链与HPM-SDK验证.png)
+
+## 每次新建 Windows PowerShell 都要做什么
+
+虚拟环境和下载内容会一直保留，不需要重新安装。在**三期从零自建工作区**中，每次打开新的 Windows PowerShell 后，进入工作区并重新设置当前终端（如果直接使用随课程分发的 `HPM6E70` 完整工程包，`.venv\Scripts\` 中是原生启动器，没有 `Activate.ps1`，直接执行 `.\.venv\Scripts\west.exe` 即可）：
+
+```powershell
+Set-Location D:\100ask\work\HPM6E70
+Set-ExecutionPolicy -Scope Process Bypass
+.\.venv\Scripts\Activate.ps1
+$env:PYTHONUTF8 = '1'
+$env:ZEPHYR_TOOLCHAIN_VARIANT = 'cross-compile'
+$env:CROSS_COMPILE = "$PWD\sdk\riscv-toolchain\bin\riscv32-unknown-elf-"
+$env:HPM_SDK_DIR = "$PWD\sdk_env\hpm_sdk"
+$env:Path = "$PWD\sdk\cmake\bin;$PWD\sdk\ninja;$PWD\sdk\dtc;$PWD\sdk\gperf;$env:Path"
+```
+
+最后检查：
+
+```powershell
+python --version
+west --version
+west list zephyr sdk_env sdk_glue
+```
+
+此时 Zephyr SDK Glue 开发环境已经准备完成，结构与一、二期完整工程包一致。后续课程中的 PowerShell 命令默认都在完成这一节的终端中执行。

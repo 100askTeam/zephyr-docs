@@ -181,8 +181,119 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '一期 · 驱动、应用与设备树',
-      collapsed: false,
+      label: '一期 · 快速烧录与模块演示',
+      collapsible: true,
+      collapsed: true,
+      items: [
+        'p1-00-交互认识实验套件/README',
+        {
+          type: 'category',
+          label: '声光与显示基础',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              type: 'doc',
+              id: 'p1-01-RGB全彩LED调色/README',
+              label: '第 1 课：RGB 全彩 LED 调色',
+            },
+            {
+              type: 'doc',
+              id: 'p1-02-有源无源蜂鸣器/README',
+              label: '第 2 课：有源/无源蜂鸣器',
+            },
+            {
+              type: 'doc',
+              id: 'p1-03-OLED双色屏显示/README',
+              label: '第 3 课：OLED 双色屏显示',
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: '传感器采集与测距',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              type: 'doc',
+              id: 'p1-04-DHT11温湿度采集/README',
+              label: '第 4 课：DHT11 温湿度采集',
+            },
+            {
+              type: 'doc',
+              id: 'p1-05-DS18B20单总线测温/README',
+              label: '第 5 课：DS18B20 单总线测温',
+            },
+            {
+              type: 'doc',
+              id: 'p1-06-HC-SR04超声波测距/README',
+              label: '第 6 课：HC-SR04 超声波测距',
+            },
+            {
+              type: 'doc',
+              id: 'p1-07-MPU6050六轴姿态采集/README',
+              label: '第 7 课：MPU6050 六轴姿态采集',
+            },
+            {
+              type: 'doc',
+              id: 'p1-08-光敏电阻亮度采集/README',
+              label: '第 8 课：光敏电阻亮度采集',
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: '人机交互与红外通信',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              type: 'doc',
+              id: 'p1-09-旋转编码器与按键/README',
+              label: '第 9 课：旋转编码器与按键',
+            },
+            {
+              type: 'doc',
+              id: 'p1-10-红外对管避障检测/README',
+              label: '第 10 课：红外对管避障检测',
+            },
+            {
+              type: 'doc',
+              id: 'p1-11-红外发射与接收通信/README',
+              label: '第 11 课：红外发射与接收通信',
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'SPI Flash 外部存储对比',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              type: 'doc',
+              id: 'p1-12-W25Q64轮询读写/README',
+              label: '第 12 课：W25Q64 轮询读写',
+            },
+            {
+              type: 'doc',
+              id: 'p1-13-W25Q64中断读写/README',
+              label: '第 13 课：W25Q64 中断读写',
+            },
+            {
+              type: 'doc',
+              id: 'p1-14-W25Q64-DMA读写/README',
+              label: '第 14 课：W25Q64 DMA 读写',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: '二期 · 驱动、应用与设备树',
+      collapsed: true,
       items: [
         {
           type: 'category',
@@ -191,12 +302,12 @@ const sidebars = {
           items: [
             {
               type: 'doc',
-              id: 'p1-01-从example-application认识标准工程/README',
+              id: 'p2-01-从example-application认识标准工程/README',
               label: '第 1 课：认识 example-application',
             },
             {
               type: 'doc',
-              id: 'p1-02-一键开发工作流/README',
+              id: 'p2-02-一键开发工作流/README',
               label: '第 2 课：构建和烧录应用',
             },
           ],
@@ -208,7 +319,7 @@ const sidebars = {
           items: [
             {
               type: 'doc',
-              id: 'p1-03-创建第一个应用工程/README',
+              id: 'p2-03-创建第一个应用工程/README',
               label: '第 3 课：创建第一个应用工程',
             },
           ],
@@ -220,27 +331,27 @@ const sidebars = {
           items: [
             {
               type: 'doc',
-              id: 'p1-04-认识Zephyr驱动结构/README',
+              id: 'p2-04-认识Zephyr驱动结构/README',
               label: '第 4 课：认识 Zephyr 驱动结构',
             },
             {
               type: 'doc',
-              id: 'p1-05-描述模块与设备树节点/README',
+              id: 'p2-05-描述模块与设备树节点/README',
               label: '第 5 课：描述模块与设备树节点',
             },
             {
               type: 'doc',
-              id: 'p1-06-编写Devicetree-Binding/README',
+              id: 'p2-06-编写Devicetree-Binding/README',
               label: '第 6 课：编写 Devicetree Binding',
             },
             {
               type: 'doc',
-              id: 'p1-07-使用Kconfig与CMake注册驱动/README',
+              id: 'p2-07-使用Kconfig与CMake注册驱动/README',
               label: '第 7 课：使用 Kconfig 与 CMake 注册',
             },
             {
               type: 'doc',
-              id: 'p1-08-完成第一个驱动/README',
+              id: 'p2-08-完成第一个驱动/README',
               label: '第 8 课：完成第一个驱动',
             },
           ],
@@ -252,17 +363,17 @@ const sidebars = {
           items: [
             {
               type: 'doc',
-              id: 'p1-09-从应用调用驱动/README',
+              id: 'p2-09-从应用调用驱动/README',
               label: '第 9 课：编写应用并调用驱动',
             },
             {
               type: 'doc',
-              id: 'p1-10-编译烧录并验证模块/README',
+              id: 'p2-10-编译烧录并验证模块/README',
               label: '第 10 课：编译烧录并验证模块',
             },
             {
               type: 'doc',
-              id: 'p1-11-复用Zephyr已有驱动/README',
+              id: 'p2-11-复用Zephyr已有驱动/README',
               label: '第 11 课：复用 Zephyr 已有驱动',
             },
           ],
@@ -271,42 +382,42 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '二期 · 从零搭建完整工程',
-      collapsed: false,
+      label: '三期 · 从零搭建完整工程',
+      collapsed: true,
       items: [
         {
           type: 'category',
           label: '建立 SDK Glue 工作区',
           items: [
-            'p2-01-搭建SDK-Glue工作区/README',
-            'p2-02-确认现有软件支持/README',
+            'p3-01-搭建SDK-Glue工作区/README',
+            'p3-02-确认现有软件支持/README',
           ],
         },
         {
           type: 'category',
           label: '接入 SoC 与 Board',
           items: [
-            'p2-03-建立Board身份/README',
-            'p2-04-接入SoC与启动链/README',
+            'p3-03-建立Board身份/README',
+            'p3-04-接入SoC与启动链/README',
           ],
         },
         {
           type: 'category',
           label: '接通基础硬件',
           items: [
-            'p2-05-接通UART0控制台/README',
-            'p2-06-配置板载LED与GPIO/README',
-            'p2-07-配置XPI-NOR-Flash/README',
-            'p2-08-编译烧录并验证/README',
+            'p3-05-接通UART0控制台/README',
+            'p3-06-配置板载LED与GPIO/README',
+            'p3-07-配置XPI-NOR-Flash/README',
+            'p3-08-编译烧录并验证/README',
           ],
         },
         {
           type: 'category',
           label: '接入板载 SDRAM',
           items: [
-            'p2-09-认识SDRAM与FEMC/README',
-            'p2-10-适配板载SDRAM/README',
-            'p2-11-编写SDRAM测试/README',
+            'p3-09-认识SDRAM与FEMC/README',
+            'p3-10-适配板载SDRAM/README',
+            'p3-11-编写SDRAM测试/README',
           ],
         },
       ],
@@ -314,6 +425,7 @@ const sidebars = {
     {
       type: 'category',
       label: '排查与资料',
+      collapsed: true,
       items: [
         'appendix-01-故障排查/README',
         'appendix-02-资料与下载/README',

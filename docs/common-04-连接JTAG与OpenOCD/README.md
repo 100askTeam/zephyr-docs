@@ -1,12 +1,12 @@
 ---
 title: 连接并验证 JTAG
 sidebar_position: 10
-description: 完成 CH347F 与 HPM6E70 的 JTAG 接线和 Windows WinUSB 驱动安装，为烧录与调试做好准备。
+description: 完成 CH347F 与 HPM6E70 的 JTAG 接线和 Windows WinUSB 驱动安装，为烧录做好准备。
 ---
 
 # 连接并验证 JTAG
 
-本课把 CH347F 的 JTAG 通道连接到板卡，并配置 Windows 驱动。烧录和调试都要经过这条通道；一期可以用现成工程立即验证，二期则在工程具备可编译固件后验证。这里先把硬件连接和驱动准备就绪。
+本课把 CH347F 的 JTAG 通道连接到板卡，并配置 Windows 驱动。烧录要经过这条通道；一、二期可以用现成工程立即验证，三期则在工程具备可编译固件后验证。这里先把硬件连接和驱动准备就绪。
 
 :::info[完成后的可见结果]
 设备管理器能识别 CH347F 的 JTAG 接口：Interface 4 可能显示为 `UART+SPI+I2C+JTAG`，也可能显示为 `USB DshanPI USBToolBox`。该接口由 WinUSB 提供，两个串口接口保持原驱动不变。
@@ -40,7 +40,7 @@ HPM6E70 板卡的 J5 已直接标出目标端信号：
 
 ![HPM6E70 板卡原理图中的 J5 调试接口](./images/hpm-j5-debug-schematic.png)
 
-*板卡 J5 接口位置和信号来自工程中的 `hardware/开发板/DshanMCU-HPM6E8Y_SCH_V1.pdf`；这里展示的是 HPM6E70 板卡，不是 CH347F 调试器。*
+*板卡 J5 接口位置和信号来自课程配套原理图 `DshanMCU-HPM6E8Y_SCH_V1.pdf`（见[资料与下载](../appendix-02-资料与下载/README.md)）；这里展示的是 HPM6E70 板卡，不是 CH347F 调试器。*
 
 | HPM6E70 J5 针脚 | 信号 |
 | --- | --- |
@@ -89,7 +89,7 @@ CH347F 是复合 USB 设备：串口通道和 JTAG 通道会作为不同接口�
 从工程根目录运行：
 
 ```powershell
-.\tools\zadig\zadig-2.9.exe
+.\sdk\zadig\zadig-2.9.exe
 ```
 
 Zadig 是用于安装 WinUSB 等通用 USB 驱动的 Windows 工具，工程内附带的版本与[官方 Zadig 2.9](https://zadig.akeo.ie/)一致。打开后执行：

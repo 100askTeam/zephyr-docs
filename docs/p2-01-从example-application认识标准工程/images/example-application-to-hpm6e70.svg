@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+  <title id="title">example-application 与 HPM6E70 工程的目录对应关系</title>
+  <desc id="desc">左侧列出官方 example-application 根目录下的 app、boards、drivers、dts/bindings、include 与模块配置；横向箭头指向右侧 HPM6E70 工程中根目录的 applications/&lt;应用名&gt;/ 与收拢在 platform/ 下的对应模块目录；底部列出 zephyr/、sdk_glue/、sdk_env/、sdk/、.venv/ 与 patches/ 等工作区依赖和随包支撑目录。</desc>
+  <defs>
+    <filter id="card-shadow" x="-5%" y="-5%" width="110%" height="114%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .title { font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; font-size: 28px; font-weight: 700; fill: #0f172a; }
+      .subtitle { font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; font-size: 14.5px; fill: #475569; }
+      .head { font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; font-size: 21px; font-weight: 700; fill: #0f172a; }
+      .subhead { font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; font-size: 13px; fill: #64748b; }
+      .group-title { font-family: Consolas, "Microsoft YaHei", monospace; font-size: 14px; font-weight: 700; fill: #1e293b; }
+      .group-meta { font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; font-size: 12.5px; fill: #475569; }
+      .path { font-family: Consolas, "Courier New", "Microsoft YaHei", monospace; font-size: 16.5px; font-weight: 700; fill: #0f172a; }
+      .body { font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; font-size: 13.5px; fill: #475569; }
+      .foot-note { font-family: Consolas, "Microsoft YaHei", monospace; font-size: 12px; fill: #475569; }
+      .badge-text { font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; font-size: 13px; font-weight: 700; fill: #1d4ed8; }
+      .dep-head { font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; font-size: 16px; font-weight: 700; fill: #78350f; }
+      .dep-meta { font-family: Consolas, "Microsoft YaHei", monospace; font-size: 12.5px; fill: #92400e; }
+      .dep-path { font-family: Consolas, "Courier New", monospace; font-size: 15.5px; font-weight: 700; fill: #0f172a; }
+      .dep-body { font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; font-size: 12.5px; fill: #475569; }
+      .card { stroke-width: 1.8; rx: 10; }
+      .arrow-line { fill: none; stroke: #2563eb; stroke-width: 2.6; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="1200" height="780" fill="#ffffff"/>
+
+  <!-- Title & Subtitle -->
+  <text x="600" y="44" text-anchor="middle" class="title">从官方参考工程到 HPM6E70 工程</text>
+  <text x="600" y="70" text-anchor="middle" class="subtitle">核心目录职责保持不变，按“多应用根目录 + platform/ 模块化清单 + 随包工具链”重新组织</text>
+
+  <!-- Left Column: example-application -->
+  <rect x="48" y="92" width="432" height="514" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2" filter="url(#card-shadow)"/>
+  <text x="264" y="124" text-anchor="middle" class="head">example-application</text>
+  <text x="264" y="145" text-anchor="middle" class="subhead">官方模板：整个仓库根目录直接充当 Zephyr 模块</text>
+
+  <!-- Row 1 Left: app/ -->
+  <rect x="78" y="162" width="372" height="58" class="card" fill="#eff6ff" stroke="#3b82f6"/>
+  <text x="264" y="186" text-anchor="middle" class="path">app/</text>
+  <text x="264" y="207" text-anchor="middle" class="body">单个 Zephyr 参考应用</text>
+
+  <!-- Left Grouped Module Container (Repo Root) -->
+  <rect x="64" y="236" width="400" height="354" rx="14" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="80" y="259" class="group-title">仓库根目录</text>
+  <text x="448" y="259" text-anchor="end" class="group-meta">直接承载板卡、驱动与配置</text>
+
+  <!-- Row 2 Left: boards/ -->
+  <rect x="78" y="276" width="372" height="58" class="card" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="264" y="300" text-anchor="middle" class="path">boards/</text>
+  <text x="264" y="321" text-anchor="middle" class="body">自定义板卡定义</text>
+
+  <!-- Row 3 Left: drivers/ -->
+  <rect x="78" y="346" width="372" height="58" class="card" fill="#fffbeb" stroke="#f59e0b"/>
+  <text x="264" y="370" text-anchor="middle" class="path">drivers/</text>
+  <text x="264" y="391" text-anchor="middle" class="body">自定义设备驱动</text>
+
+  <!-- Row 4 Left: dts/bindings/ -->
+  <rect x="78" y="416" width="372" height="58" class="card" fill="#f5f3ff" stroke="#8b5cf6"/>
+  <text x="264" y="440" text-anchor="middle" class="path">dts/bindings/</text>
+  <text x="264" y="461" text-anchor="middle" class="body">设备树 Binding 规则</text>
+
+  <!-- Row 5 Left: include/ -->
+  <rect x="78" y="486" width="372" height="58" class="card" fill="#f1f5f9" stroke="#64748b"/>
+  <text x="264" y="510" text-anchor="middle" class="path">include/</text>
+  <text x="264" y="531" text-anchor="middle" class="body">对外公共接口头文件</text>
+
+  <text x="264" y="572" text-anchor="middle" class="foot-note">根目录附带：west.yml · zephyr/module.yml · Kconfig</text>
+
+  <!-- Right Column: HPM6E70 -->
+  <rect x="720" y="92" width="432" height="514" rx="18" fill="#f2fbf5" stroke="#86efac" stroke-width="2" filter="url(#card-shadow)"/>
+  <text x="936" y="124" text-anchor="middle" class="head">HPM6E70 工程</text>
+  <text x="936" y="145" text-anchor="middle" class="subhead" fill="#166534">多应用放根目录，模块与 west 清单集中进 platform/</text>
+
+  <!-- Row 1 Right: applications/<应用名>/ -->
+  <rect x="750" y="162" width="372" height="58" class="card" fill="#eff6ff" stroke="#3b82f6"/>
+  <text x="936" y="186" text-anchor="middle" class="path">applications/&lt;应用名&gt;/</text>
+  <text x="936" y="207" text-anchor="middle" class="body">多个独立课程与示例应用</text>
+
+  <!-- Right Grouped Module Container (platform/) -->
+  <rect x="736" y="236" width="400" height="354" rx="14" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <rect x="748" y="244" width="96" height="22" rx="6" fill="#dcfce7" stroke="#86efac" stroke-width="1"/>
+  <text x="796" y="259" text-anchor="middle" class="group-title" fill="#166534">platform/</text>
+  <text x="1122" y="259" text-anchor="end" class="group-meta" fill="#166534">west 清单仓库 + dshanmcu 模块</text>
+
+  <!-- Row 2 Right: boards/hpmicro/dshanmcu_hpm6e70/ -->
+  <rect x="750" y="276" width="372" height="58" class="card" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="936" y="300" text-anchor="middle" class="path">boards/hpmicro/dshanmcu_hpm6e70/</text>
+  <text x="936" y="321" text-anchor="middle" class="body">本课程开发板 Board 定义</text>
+
+  <!-- Row 3 Right: drivers/ -->
+  <rect x="750" y="346" width="372" height="58" class="card" fill="#fffbeb" stroke="#f59e0b"/>
+  <text x="936" y="370" text-anchor="middle" class="path">drivers/</text>
+  <text x="936" y="391" text-anchor="middle" class="body">课程编写的设备驱动</text>
+
+  <!-- Row 4 Right: dts/bindings/ -->
+  <rect x="750" y="416" width="372" height="58" class="card" fill="#f5f3ff" stroke="#8b5cf6"/>
+  <text x="936" y="440" text-anchor="middle" class="path">dts/bindings/</text>
+  <text x="936" y="461" text-anchor="middle" class="body">课程设备树 Binding 规则</text>
+
+  <!-- Row 5 Right: include/dshan/ -->
+  <rect x="750" y="486" width="372" height="58" class="card" fill="#f1f5f9" stroke="#64748b"/>
+  <text x="936" y="510" text-anchor="middle" class="path">include/dshan/</text>
+  <text x="936" y="531" text-anchor="middle" class="body">提供给应用的课程公共接口</text>
+
+  <text x="936" y="572" text-anchor="middle" class="foot-note" fill="#166534">含：west.yml · zephyr/module.yml · Kconfig</text>
+
+  <!-- Center Badge & Mapping Arrows -->
+  <rect x="526" y="138" width="148" height="28" rx="14" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="600" y="157" text-anchor="middle" class="badge-text">目录职责保持不变</text>
+
+  <path class="arrow-line" d="M452 191 H742" marker-end="url(#arrow)"/>
+  <circle r="4" fill="#60a5fa"><animateMotion path="M452 191 H742" dur="1.6s" begin="0s" repeatCount="indefinite"/></circle>
+
+  <path class="arrow-line" d="M452 305 H742" marker-end="url(#arrow)"/>
+  <circle r="4" fill="#60a5fa"><animateMotion path="M452 305 H742" dur="1.6s" begin="0.16s" repeatCount="indefinite"/></circle>
+
+  <path class="arrow-line" d="M452 375 H742" marker-end="url(#arrow)"/>
+  <circle r="4" fill="#60a5fa"><animateMotion path="M452 375 H742" dur="1.6s" begin="0.32s" repeatCount="indefinite"/></circle>
+
+  <path class="arrow-line" d="M452 445 H742" marker-end="url(#arrow)"/>
+  <circle r="4" fill="#60a5fa"><animateMotion path="M452 445 H742" dur="1.6s" begin="0.48s" repeatCount="indefinite"/></circle>
+
+  <path class="arrow-line" d="M452 515 H742" marker-end="url(#arrow)"/>
+  <circle r="4" fill="#60a5fa"><animateMotion path="M452 515 H742" dur="1.6s" begin="0.64s" repeatCount="indefinite"/></circle>
+
+  <!-- Bottom Dependencies & Bundle Strip -->
+  <rect x="48" y="626" width="1104" height="134" rx="16" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.8" filter="url(#card-shadow)"/>
+  <text x="72" y="654" class="dep-head">HPM6E70 工程的底层依赖与随包工具</text>
+  <text x="1128" y="654" text-anchor="end" class="dep-meta">.west/config 指向 platform/ · zephyr/module.yml 接入构建</text>
+
+  <!-- 6 mini cards: x=68..1132, gap=12, width=167 -->
+  <rect x="69" y="670" width="167" height="74" rx="10" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="152.5" y="698" text-anchor="middle" class="dep-path">zephyr/</text>
+  <text x="152.5" y="724" text-anchor="middle" class="dep-body">Zephyr RTOS 内核</text>
+
+  <rect x="248" y="670" width="167" height="74" rx="10" fill="#ffffff" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="331.5" y="698" text-anchor="middle" class="dep-path">sdk_glue/</text>
+  <text x="331.5" y="724" text-anchor="middle" class="dep-body">HPMicro SoC 适配</text>
+
+  <rect x="427" y="670" width="167" height="74" rx="10" fill="#ffffff" stroke="#fcd34d" stroke-width="1.5"/>
+  <text x="510.5" y="698" text-anchor="middle" class="dep-path">sdk_env/</text>
+  <text x="510.5" y="724" text-anchor="middle" class="dep-body">HPM-SDK 源码</text>
+
+  <rect x="606" y="670" width="167" height="74" rx="10" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.5"/>
+  <text x="689.5" y="698" text-anchor="middle" class="dep-path">sdk/</text>
+  <text x="689.5" y="724" text-anchor="middle" class="dep-body">工具链与 OpenOCD</text>
+
+  <rect x="785" y="670" width="167" height="74" rx="10" fill="#ffffff" stroke="#67e8f9" stroke-width="1.5"/>
+  <text x="868.5" y="698" text-anchor="middle" class="dep-path">.venv/</text>
+  <text x="868.5" y="724" text-anchor="middle" class="dep-body">Python / west 入口</text>
+
+  <rect x="964" y="670" width="167" height="74" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="1047.5" y="698" text-anchor="middle" class="dep-path">patches/</text>
+  <text x="1047.5" y="724" text-anchor="middle" class="dep-body">上下游补丁栈</text>
+</svg>

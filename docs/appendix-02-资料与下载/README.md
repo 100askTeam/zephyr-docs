@@ -14,7 +14,7 @@
 
 板卡原理图、HPM6E70/HPM6E00 用户手册、Flash 与 SDRAM 器件资料应随工程发行包放在 `hardware/` 或单独资料包中。课程中的管脚、容量、时序和地址结论均应能回到这些原始资料核对。
 
-## 调试工具
+## 烧录与串口工具
 
 - [WCH CH347 官方页面](https://www.wch.cn/products/CH347.html)
 - [WCH CH343/CH347 Windows 串口驱动](https://www.wch-ic.com/downloads/CH343SER_EXE.html)
@@ -23,8 +23,8 @@
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Microsoft Serial Monitor](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-serial-monitor)
 
-本工程的 `tools/openocd-ch347/` 是为了同时支持 CH347F 与 HPM XPI Flash 的已验证 OpenOCD 版本。官方 Zephyr SDK Glue 提供的 OpenOCD 可用于受支持的调试器，但当前版本不包含本课程需要的 CH347 适配器驱动。
+本工程的 `sdk/openocd/` 是为了同时支持 CH347F 与 HPM XPI Flash 的已验证 OpenOCD 版本。官方 Zephyr SDK Glue 提供的 OpenOCD 可用于受支持的调试器，但当前版本不包含本课程需要的 CH347 适配器驱动。
 
 ## 版本原则
 
-`west.yml` 固定的是一组相互配合的源码版本。更新 Zephyr、sdk_glue、HPM SDK 或工具链后，应重新执行编译、JTAG、Flash、UART、LED 与 SDRAM回归验证，不能只根据单个版本号判断兼容性。
+`platform/west.yml` 固定的是一组相互配合的源码版本。更新 Zephyr、sdk_glue、HPM SDK 或工具链后，应重新执行编译、JTAG、Flash、UART、LED 与 SDRAM回归验证，不能只根据单个版本号判断兼容性。
