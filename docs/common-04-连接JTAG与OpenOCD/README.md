@@ -99,8 +99,6 @@ Zadig 是用于安装 WinUSB 等通用 USB 驱动的 Windows 工具，工程内�
 3. 再核对 USB ID 为 `1A86:55DE`、接口号为 `04`。
 4. 目标驱动选择 `WinUSB`，然后点击 `Replace Driver` 或 `Install Driver`。
 
-![在 Zadig 中定位 CH347F Interface 4](./images/zadig-select-interface4.png)
-
 ![只把 Interface 4 替换为 WinUSB](./images/zadig-replace-winusb.png)
 
 截图中的接口名称会随 CH347F 固件略有变化；接口号和 USB ID 比显示名称更可靠。不要选择 SERIAL-A、SERIAL-B、其他 Interface 或 `USB Composite Device`，否则串口可能从设备管理器消失。
