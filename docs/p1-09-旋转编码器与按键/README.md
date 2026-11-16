@@ -23,7 +23,7 @@ import KitExplorer from '@site/src/components/KitExplorer';
 | `GND` | 5 | `GND` | `GND` | — |
 
 :::note[供电与默认模式说明]
-1. **关于 M13 5V 供电**：底板 M13-1 接入经过限流保护的 `VCC_+5V`，配套编码器模块已在实板上直接插 M13 完成正反转与按键按下/松开测试，按本示例直接插接运行即可（无需改线）。若后续用于长期量产并严格要求 GPIO 仅承受 3.3V 电平，可将模块改接 3.3V 或增加 5V→3.3V 电平转换。
+1. **关于 M13 5V 供电**：底板 M13-1 接入经过限流保护的 `VCC_+5V`，配套编码器模块可直接插在 M13 插座运行正反转与按键检测，无需改线。若后续用于长期量产并严格要求 GPIO 仅承受 3.3V 电平，可将模块改接 3.3V 或增加 5V→3.3V 电平转换。
 2. **默认运行模式**：overlay 默认开启 `polling-mode;`（每 1000 us 采样一次、`steps-per-detent = 4`、按键消抖 `20 ms`）。如需切换为中断模式，可删除 `applications/rotary_encoder_demo/boards/dshanmcu_hpm6e70.overlay` 中的 `polling-mode;` 一行并加 `-p always` 重新编译烧录。
 :::
 

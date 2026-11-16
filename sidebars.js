@@ -181,11 +181,11 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '一期 · 快速烧录与模块演示',
+      label: '一期 · 外设模块实验',
       collapsible: true,
       collapsed: true,
       items: [
-        'p1-00-交互认识实验套件/README',
+        'p1-00-认识实验套件/README',
         {
           type: 'category',
           label: '声光与显示基础',

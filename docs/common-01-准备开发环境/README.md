@@ -38,7 +38,7 @@ Test-Path .\sdk\cmake\bin\cmake.exe
 
 `.venv\Scripts` 里只有两个原生启动器（`python.exe` 与 `west.exe`），它们按自身位置找到 `sdk/` 里的随包工具并配好环境，**不是普通虚拟环境，不需要激活**。整个工程可以换盘、换目录、换电脑。后续命令统一用 `.\.venv\Scripts\python.exe` 作为入口，不要用系统安装的 python 或 west。
 
-**一、二期环境准备到这里结束。** 下一步：[认识 Zephyr 与工程模型](../common-02-认识Zephyr与工程模型/README.md)。若直接上手模块体验，可从[一期：RGB 全彩 LED 调色](../p1-01-RGB全彩LED调色/README.md)开始；若想系统学习驱动与应用开发，编译检查见[二期：一键开发工作流](../p2-02-一键开发工作流/README.md)。
+**一、二期环境准备到这里结束。** 下一步：[认识 Zephyr 与工程模型](../common-02-认识Zephyr与工程模型/README.md)。若直接开始验证外设模块，可从[一期：认识实验套件](../p1-00-认识实验套件/README.md)或[第 1 课：RGB 全彩 LED 调色](../p1-01-RGB全彩LED调色/README.md)进入；若学习驱动与应用开发，编译检查见[二期：构建和烧录应用](../p2-02-一键开发工作流/README.md)。
 
 </TabItem>
 <TabItem value="phase3" label="三期：从零搭建工程">

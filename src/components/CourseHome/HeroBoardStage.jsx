@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 const LENS_OPTIONS = [
   {
     id: 'all',
-    label: '全板透视',
+    label: '全板总览',
     telemetryCode: 'dts: dshanmcu_hpm6e70',
     telemetryText: '双核 RISC-V 600MHz · 16MiB NOR · 32MiB SDRAM',
     linkLabel: '板卡硬件详解 →',
@@ -17,8 +17,8 @@ const LENS_OPTIONS = [
     label: '一期外设',
     telemetryCode: 'pinctrl: PWM / I2C1 / SPI1 / ADC',
     telemetryText: '双排 40Pin 扩展母座直连底板 14 路外设模块',
-    linkLabel: '套件接线导览 →',
-    linkTo: '/docs/p1-00-交互认识实验套件/',
+    linkLabel: '认识实验套件 →',
+    linkTo: '/docs/p1-00-认识实验套件/',
   },
   {
     id: 'p2',
@@ -127,8 +127,8 @@ const HW_NODES = [
     points: '1225,1234 1225,1194 1160,1129 1160,1118',
     telemetryCode: 'header: 2×20 Pin GPIO/Bus',
     telemetryText: '核心板倒扣接入底板总线，映射 M1–M13 全部模块插座',
-    linkLabel: '打开套件导览 →',
-    linkTo: '/docs/p1-00-交互认识实验套件/',
+    linkLabel: '认识实验套件 →',
+    linkTo: '/docs/p1-00-认识实验套件/',
   },
 ];
 
@@ -163,7 +163,7 @@ function renderCornerBrackets(rect, color, len = 24, strokeWidth = 4.5) {
 }
 
 /**
- * Virtual-Physical Digital-Twin Hero Stage for DshanMCU-HPM6E70.
+ * DshanMCU-HPM6E70 coreboard hardware overview panel.
  */
 export default function HeroBoardStage() {
   const boardImgUrl = useBaseUrl('/img/hpm6e70-coreboard.png');
@@ -194,17 +194,16 @@ export default function HeroBoardStage() {
   };
 
   return (
-    <aside className={styles.heroStage} aria-label="DshanMCU-HPM6E70 虚实融合硬件透视面板">
+    <aside className={styles.heroStage} aria-label="DshanMCU-HPM6E70 核心板硬件资源总览">
       <div className={styles.stageGridOverlay} aria-hidden="true" />
 
       <div className={styles.stageHeader}>
         <div className={styles.stageTitleGroup}>
           <span className={styles.stageBeacon} aria-hidden="true" />
           <span className={styles.stageBoardCode}>DshanMCU-HPM6E70</span>
-          <span className={styles.stageModeBadge}>虚实透视</span>
         </div>
 
-        <div className={styles.lensTabs} role="tablist" aria-label="课程硬件透视视角">
+        <div className={styles.lensTabs} role="tablist" aria-label="按课程阶段筛选板载资源">
           {LENS_OPTIONS.map((opt) => {
             const isActive = lens === opt.id && !pinnedId;
             return (
@@ -228,7 +227,7 @@ export default function HeroBoardStage() {
           className={styles.stageSvg}
           viewBox="175 214 1260 1168"
           role="img"
-          aria-label="HPM6E70 核心板实拍与器件功能透视标定图"
+          aria-label="DshanMCU-HPM6E70 核心板主要器件与接口分布图"
         >
           <defs>
             <filter id="hpm-board-shadow" x="-15%" y="-15%" width="130%" height="145%">
@@ -249,7 +248,7 @@ export default function HeroBoardStage() {
             </radialGradient>
           </defs>
 
-          {/* Virtual Blueprint Aura & CAD Registration Rings */}
+          {/* Aura & Registration Rings */}
           <ellipse cx="804" cy="800" rx="560" ry="380" fill="url(#hpm-pcb-warmth)" />
           <circle cx="997" cy="781" r="370" fill="url(#hpm-core-aura)" />
           <g stroke="var(--stage-ring)" fill="none">
@@ -266,7 +265,7 @@ export default function HeroBoardStage() {
             <path d="M 1390 1370 L 1420 1370 L 1420 1340" />
           </g>
 
-          {/* Physical Transparent Coreboard Cutout */}
+          {/* Coreboard Image */}
           <image
             href={boardImgUrl}
             x="0"
@@ -364,7 +363,7 @@ export default function HeroBoardStage() {
                 {showSecondary &&
                   renderCornerBrackets(node.secondaryReticle, node.accent, 20, 3.6)}
 
-                {/* Frosted HUD Callout Card */}
+                {/* Callout Card */}
                 <rect
                   x={node.card.x}
                   y={node.card.y}

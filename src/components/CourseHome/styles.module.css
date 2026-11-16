@@ -255,7 +255,7 @@
 }
 
 /* =========================
- * Hero Right Stage (Virtual-Physical Light Blueprint)
+ * Hero Right Panel (Coreboard Hardware Overview)
  * ========================= */
 .heroStage {
   --stage-card-bg: rgba(255, 255, 255, 0.94);
@@ -374,24 +374,6 @@
 
 :global([data-theme='dark']) .stageBoardCode {
   color: #e0f2fe;
-}
-
-.stageModeBadge {
-  padding: 0.12rem 0.48rem;
-  border: 1px solid rgba(14, 165, 233, 0.24);
-  border-radius: 999px;
-  color: #0369a1;
-  background: rgba(14, 165, 233, 0.1);
-  font-size: 0.66rem;
-  font-weight: 800;
-  letter-spacing: 0.03em;
-  white-space: nowrap;
-}
-
-:global([data-theme='dark']) .stageModeBadge {
-  color: #7dd3fc;
-  border-color: rgba(56, 189, 248, 0.3);
-  background: rgba(56, 189, 248, 0.12);
 }
 
 .lensTabs {
@@ -608,10 +590,10 @@
 
 .sectionEyebrow {
   color: var(--ifm-color-primary);
-  font-family: var(--ifm-font-family-monospace);
+  font-family: inherit;
   font-size: 0.74rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 

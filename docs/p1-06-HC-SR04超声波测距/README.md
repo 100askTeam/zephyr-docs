@@ -62,7 +62,7 @@ distance: (no echo, target out of range)
 | 串口无任何输出 | 确认 `USB-HiSpeed-SERIAL-B` 与 `115200 8-N-1`，烧录后按一次核心板 RESET 键 |
 
 :::tip[想继续了解背后的驱动与设备树吗？]
-本例使用的 `dshan,hc-sr04` 自研驱动正是 **二期教程** 的主线教学案例。跑通快速演示后，可进入 [二期：从 example-application 认识标准工程](../p2-01-从example-application认识标准工程/README.md) 深入学习设备树、Binding、Kconfig/CMake 与驱动编码。
+本例使用的 `dshan,hc-sr04` 自研驱动正是 **二期教程** 的主线教学案例。完成本课验证后，可进入 [二期：从 example-application 认识标准工程](../p2-01-从example-application认识标准工程/README.md) 深入学习设备树、Binding、Kconfig/CMake 与驱动编码。
 :::
 
 ---

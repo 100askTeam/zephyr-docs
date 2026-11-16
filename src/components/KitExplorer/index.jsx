@@ -459,19 +459,19 @@ export default function KitExplorer({
       className={styles.explorerRoot}
       aria-label={
         resolvedMode === 'explorer'
-          ? 'HPM6E70 实验套件交互导览'
-          : `${displayTitle} 接线定位图`
+          ? 'HPM6E70 实验套件接线图'
+          : `${displayTitle} 插座位置图`
       }
     >
       <div className={styles.topBar}>
         <div className={styles.topBarTitleGroup}>
           <span className={styles.modeBadge}>
-            {resolvedMode === 'explorer' ? '套件交互导览' : '实板硬件定位'}
+            {resolvedMode === 'explorer' ? '实验套件总览' : '模块插接位置'}
           </span>
           <span className={styles.topBarHeading}>
             {resolvedMode === 'explorer'
-              ? '点击照片上的任意模块底座或核心板，查看信号引脚与冲突提示'
-              : `本课涉及位置：${displayTitle}`}
+              ? '点击图中模块插座（M1–M13）或核心板，查看引脚连接与共用关系'
+              : `本课使用插座：${displayTitle}`}
           </span>
         </div>
 
@@ -535,7 +535,7 @@ export default function KitExplorer({
             >
               <img
                 src={KIT_IMAGE_SRC}
-                alt="DshanMCU-HPM6E70 实验套件全板实拍俯视图"
+                alt="DshanMCU-HPM6E70 核心板与模块化底板俯视图"
                 className={styles.photoImg}
                 draggable={false}
               />
@@ -852,7 +852,7 @@ export default function KitExplorer({
             <div className={styles.legendItems}>
               <span className={styles.legendItem}>
                 <i className={styles.swatchActive} />
-                当前高亮模块
+                {isExplorer ? '当前选中模块' : '本课使用模块'}
               </span>
               {conflictTargets.length > 0 && (
                 <span className={styles.legendItem}>
@@ -870,7 +870,7 @@ export default function KitExplorer({
             <span className={styles.legendHint}>
               {zoom > 1.05
                 ? '按住拖动平移 · 双击恢复全板总览'
-                : '双击画布或点“局部放大”可近看'}
+                : '双击图片或点击“局部放大”查看细节'}
             </span>
           </div>
         </div>
@@ -924,7 +924,7 @@ export default function KitExplorer({
                   className={styles.inlineActionBtn}
                   onClick={handleLocateConflict}
                 >
-                  在全板图中闪烁定位 {conflictTargets.map((c) => c.code).join(' / ')}
+                  在图中标出 {conflictTargets.map((c) => c.code).join(' / ')} 位置
                 </button>
                 {isExplorer &&
                   conflictTargets.map((c) => (
@@ -974,7 +974,7 @@ export default function KitExplorer({
                     ['M4 发射 (DAT)', 'PF26 (PWM3_P_2 / 38kHz)'],
                     ['M8 接收 (OUT)', 'PA09 (GPIO 中断 / 低有效)'],
                     ['供电 (VCC/GND)', '3.3V / GND'],
-                    ['通信验证', '自发自收 NEC / 白纸反射'],
+                    ['通信验证', '自发自收校验 / 白纸反射'],
                   ]
                 : primaryItem.pins
               ).map(([key, val]) => (
@@ -1012,9 +1012,9 @@ export default function KitExplorer({
             ) : (
               <Link
                 className={styles.primaryLink}
-                to="/docs/p1-00-交互认识实验套件/"
+                to="/docs/p1-00-认识实验套件/"
               >
-                打开全套件交互导览图 →
+                查看全板插座与复用总表 →
               </Link>
             )}
             {primaryItem.secondaryLessonPath && (
@@ -1047,7 +1047,7 @@ export default function KitExplorer({
               ))}
             </div>
             <span className={styles.trayHint}>
-              点击下方模块卡片即可高亮定位（橙色描边代表与当前模块引脚复用冲突）
+              选择下方模块可查看对应插座位置与引脚定义（橙色标记表示共用引脚冲突）
             </span>
           </div>
 

@@ -174,4 +174,4 @@ Microsoft 的[官方扩展页面](https://marketplace.visualstudio.com/items?ite
 - [ ] 能在 Windows 中找到烧录器串口 1 的 `USB-HiSpeed-SERIAL-B`，并确认其实际 COM 端口。
 - [ ] VS Code Serial Monitor 已安装并设置为 115200、8N1、无流控。
 
-[上一篇：连接并验证 JTAG](../common-04-连接JTAG与OpenOCD/README.md) · [进入一期](../p1-00-交互认识实验套件/README.md) · [进入二期](../p2-01-从example-application认识标准工程/README.md) · [进入三期](../p3-01-搭建SDK-Glue工作区/README.md) · [课程目录](../README.md)
+[上一篇：连接并验证 JTAG](../common-04-连接JTAG与OpenOCD/README.md) · [进入一期](../p1-00-认识实验套件/README.md) · [进入二期](../p2-01-从example-application认识标准工程/README.md) · [进入三期](../p3-01-搭建SDK-Glue工作区/README.md) · [课程目录](../README.md)
