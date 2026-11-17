@@ -6,7 +6,7 @@ import KitExplorer from '@site/src/components/KitExplorer';
 
 # 第 7 课：MPU6050 六轴姿态采集
 
-在 `HPM6E70` 完整工程包中编译并烧录 `applications/mpu6050_demo`，通过 I2C1 总线从底板 **M11** 插座上的 MPU6050 模块每秒读取三轴加速度、三轴角速度和芯片内部温度，并在串口以毫单位整数形式输出。
+本课下载预编译固件 [`07_mpu6050_demo.hex`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/07_mpu6050_demo.hex) 并通过 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 烧录，快速体验底板 **M11** 插座上的 MPU6050 六轴加速度、角速度与片内温度采集。
 
 ## 硬件准备与接线
 
@@ -23,27 +23,35 @@ import KitExplorer from '@site/src/components/KitExplorer';
 | INT | 陀螺仪 INT | 8 | `PF06` | 本例使用轮询模式，暂未使用 |
 | AD0 | 地址选择 | — | — | 默认接地，I2C 地址 `0x68`（若接高电平则为 `0x69`） |
 
-:::tip[可与 M1（OLED）共插共用 I2C1]
-M11（MPU6050，`0x68`）与第 3 课的 M1（OLED，`0x3C`）共用 I2C1 总线但地址不同，**两个模块可同时插在底板上，互不影响**。
+:::tip[与 M1 OLED 共插共用 I2C1，解锁 2D 电子水平仪联动]
+M11（MPU6050，`0x68`）与第 1 课的 M1（OLED，`0x3C`）共用 I2C1 总线但地址不同，**可以同时插在底板上互不冲突**。本课固件以 5 Hz 频率实时在 M1 屏幕上绘制三轴数值与 2D 电子水平仪方框；如果未插 M1 屏幕，会自动降级为仅串口输出。
 :::
 
-## 编译与烧录
+## 下载并烧录体验固件
 
-在 `HPM6E70` 工程根目录执行：
+1. **下载预编译固件**：点击下载 [`07_mpu6050_demo.hex`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/07_mpu6050_demo.hex)（若点击后浏览器直接预览文本，右键链接选择 **“链接另存为”** 保存为 `.hex` 文件）；
+2. **使用 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 烧录**：打开上位机，按图中的 `①`～`⑥` 步骤直接烧录：
 
-```powershell
-.\.venv\Scripts\python.exe -m west build -p always -b dshanmcu_hpm6e70 applications\mpu6050_demo -d build\mpu6050_demo
-.\.venv\Scripts\python.exe -m west flash -d build\mpu6050_demo
-```
+![使用 DshanPI USBToolBox 烧录体验固件的步骤图解](../p1-00-认识实验套件/images/usbtoolbox-flash-steps.jpg)
+
+1. **① 确认设备授权连接**：确保 HPM6E70 板卡已上电、调试器已通过 USB 接入电脑，软件左下角显示绿色 **`DshanPI USBToolBox 已授权`**；
+2. **② 打开 JTAG/SWD 工具**：在左侧功能栏点击 **`JTAG/SWD 工具`**，顶部保持在 **`固件烧录`** 页签；
+3. **③ 选择芯片平台**：下拉选择 **`HPMicro / HPM`**；
+4. **④ 选择目标配置**：下拉选择 **`HPM6E70`**（保持默认通信速率 `500 kHz`，勾选 **`烧录后运行`**）；
+5. **⑤ 加载固件**：点击 **`选择文件`**，导入刚下载的 `07_mpu6050_demo.hex`（`.hex` 自带烧录地址，无需填写起始地址）；
+6. **⑥ 检测并烧录**：可先点 **`检测连接`**（日志出现 `Examined RISC-V core`），再点击 **`开始烧录`**；校验完成后固件会自动复位运行。
+
+> 只需快速体验本外设功能时，以上步骤即已完成烧录；如果需要查阅源码位置、调整设备树配置并使用 `west build` / `west flash` 开发，请见 **[二期第 18 课：MPU6050 六轴姿态采集开发](../p2-18-MPU6050六轴姿态采集开发/README.md)**。
 
 ## 预期现象与串口日志
 
-烧录后打开串口终端（`115200 8-N-1`）：
+烧录后观察 M1 OLED 屏幕与串口终端（`115200 8-N-1`）：
 
-1. **核心板心跳灯**：板载绿色 LED（`PC22`）每秒翻转一次；
-2. **平放静止测试**：将开发板平放在桌面静止不动时，Z 轴加速度应接近重力加速度 `9.8 m/s²`（日志以千分之一为刻度，约在 `9815` 上下），三轴角速度接近 `0`；
-3. **倾斜与旋转测试**：晃动或倾斜开发板，可立即在下一秒的日志中看到三轴加速度和角速度数值明显变化；
-4. **串口日志示例**：
+1. **M1 OLED 2D 电子水平仪（5 Hz）**：顶部黄区显示 `M11 MPU6050`，底部蓝区左侧实时刷新 `AX/AY/AZ` 三轴加速度与芯片温度 / Z 轴角速度，右侧 **2D 十字靶框电子水平仪** 内的亮块会随底板前后左右倾斜实时移动；
+2. **核心板心跳灯**：板载绿色 LED（`PC22`）每秒翻转一次；
+3. **平放静止测试**：将开发板平放在桌面静止不动时，Z 轴加速度应接近重力加速度 `9.8 m/s²`（日志以千分之一为刻度，约在 `9815` 上下），水平仪亮块停在中心小方框附近；
+4. **倾斜与旋转测试**：晃动或倾斜开发板，可立即在 OLED 水平仪和每秒一次的串口日志中看到三轴数值与倾角响应；
+5. **串口日志示例**：
 
 ```text
 MPU6050 demo: coreboard + 6-axis motion sensor

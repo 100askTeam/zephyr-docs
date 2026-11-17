@@ -11,12 +11,12 @@ description: 将 HPM6E70 UART0 经 USB-C 分离器接入烧录器串口 1，确�
 烧录与串口日志走的是两条独立路径：一、二期使用随包 `west flash` 调用 OpenOCD 烧录，三期则在自建工作区中执行 `west flash`；两者都不会代替 UART 日志连接。日志能够显示，需要 UART 引脚、USB-C 分离器、烧录器串口通道、Windows 驱动和终端参数全部正确；本课先把这条路径准备就绪。
 
 :::info[完成后的可见结果]
-设备管理器能找到烧录器串口 1 对应的 `USB-HiSpeed-SERIAL-B` COM 端口；VS Code Serial Monitor 已安装，并按 115200、8N1、无流控配置完成。
+设备管理器能找到烧录器串口 1 对应的 `DshanPI USBToolBox UART1` COM 端口（部分未运行重命名脚本的纯 WCH 驱动环境下显示为 `USB-HiSpeed-SERIAL-B`）；VS Code Serial Monitor 已安装，并按 115200、8N1、无流控配置完成。
 :::
 
 ## UART0 日志经过哪些设备
 
-![UART0 日志与 JTAG 使用两条独立路径](./images/uart-via-ch347f.svg)
+![UART0 日志与 JTAG 使用两条独立路径](./images/uart-via-debugger.svg)
 
 本板的日志路径是：
 
@@ -27,7 +27,7 @@ description: 将 HPM6E70 UART0 经 USB-C 分离器接入烧录器串口 1，确�
 → PA00 / UART0_TX
 → USB-C SBU1
 → USB-C 分离器
-→ 烧录器串口 1（USB-HiSpeed-SERIAL-B）的 RX
+→ 烧录器串口 1（DshanPI USBToolBox UART1）的 RX
 → Windows COM 端口
 → VS Code Serial Monitor
 ```
@@ -96,7 +96,7 @@ TX 与 RX 要交叉连接，因为一端发送的数据必须进入另一端接�
 
 ## 在 Windows 中确认实际 COM 端口
 
-JTAG 教程只为 CH347F Interface 4 安装了 WinUSB；串口接口应继续使用 WCH 串口驱动。在设备管理器中展开“端口（COM 和 LPT）”，拔插 USB-UART，找出随设备一起消失和出现的端口。
+上一篇安装 DshanPI USBToolBox 驱动时，串口通道与 JTAG 烧录调试接口会一并配置就绪。在设备管理器中展开“端口（COM 和 LPT）”，拔插调试器 USB，找出随设备一起消失和出现的端口。
 
 也可以在 PowerShell 中列出串口：
 
@@ -105,11 +105,11 @@ Get-CimInstance Win32_SerialPort |
   Format-Table DeviceID, Name, PNPDeviceID -AutoSize
 ```
 
-本教程的实测接法把 UART0 接到了烧录器串口 1。该通道在 Windows 和 Serial Monitor 中显示为 `USB-HiSpeed-SERIAL-B DshanPI USBToolBox`；如果同时出现 SERIAL-A 和 SERIAL-B，应选择 SERIAL-B。
+本教程的实测接法把 UART0 接到了烧录器串口 1（硬件通道 `MI_02`）。在安装配套驱动后，该通道在 Windows 和 Serial Monitor 中通常显示为 **`DshanPI USBToolBox UART1 (COMx)`**（部分早期驱动环境下显示为 `USB-HiSpeed-SERIAL-B DshanPI USBToolBox`）；如果同时看到 `RS-485 Port`（或 `SERIAL-A`）和 `UART1`（或 `SERIAL-B`），应选择 **`UART1` / `SERIAL-B`**。
 
-`COM20` 是截图所在电脑当次分配的端口号，重新插拔设备、换 USB 接口或换一台电脑后都可能变化。识别端口时应同时核对 `USB-HiSpeed-SERIAL-B` 名称和当前 COM 编号，不能只照抄 `COM20`。
+截图中的 `COM20` 或命令行实测的 `COM9` 都是所在电脑当次分配的端口号，重新插拔设备、换 USB 接口或换一台电脑后都可能变化。识别端口时应同时核对通道名称与当前 COM 编号，不能只照抄固定端口号。
 
-设备管理器完全没有串口时，先检查 USB 连接和驱动。WCH 串口驱动可从[官方 CH343/CH347 驱动页面](https://www.wch-ic.com/downloads/CH343SER_EXE.html)取得；此时不需要修改 Zephyr 工程。
+设备管理器完全没有串口时，先检查 USB 连接并重新运行随包的 `.\sdk\driver\Install-DshanPI-USBToolBox.cmd` 安装驱动（也可从[WCH Windows 串口驱动页面](https://www.wch-ic.com/downloads/CH343SER_EXE.html)单独获取串口驱动）；此时不需要修改 Zephyr 工程。
 
 ## 使用 VS Code Serial Monitor
 
@@ -131,7 +131,7 @@ Microsoft 的[官方扩展页面](https://marketplace.visualstudio.com/items?ite
 
 | 参数 | 本板设置 |
 | --- | --- |
-| Port | `USB-HiSpeed-SERIAL-B DshanPI USBToolBox` 当前对应的 COM 端口 |
+| Port | `DshanPI USBToolBox UART1`（或 `USB-HiSpeed-SERIAL-B`）当前对应的 COM 端口 |
 | Baud rate | 115200 |
 | Data bits | 8 |
 | Parity | None |
@@ -146,7 +146,7 @@ Microsoft 的[官方扩展页面](https://marketplace.visualstudio.com/items?ite
 
 ![VS Code Serial Monitor 查看 HPM6E70 启动日志](./images/VSCode-Serial-Monitor查看日志.png)
 
-<p className="image-caption">选择 USB-HiSpeed-SERIAL-B 对应的 COM 端口，波特率设为 115200。复位后能够看到 Zephyr 启动信息、SDRAM 自检通过和 LED 初始化完成，说明 UART0 日志输出正常。</p>
+<p className="image-caption">选择烧录器串口 1（DshanPI USBToolBox UART1 / 早期驱动显示 USB-HiSpeed-SERIAL-B）对应的 COM 端口，波特率设为 115200。复位后能够看到 Zephyr 启动信息、SDRAM 自检通过和 LED 初始化完成，说明 UART0 日志输出正常。</p>
 
 ## 按现象缩小故障范围
 
@@ -171,7 +171,7 @@ Microsoft 的[官方扩展页面](https://marketplace.visualstudio.com/items?ite
 - [ ] 能区分 JTAG 与 UART0 的硬件路径和用途。
 - [ ] 能从 Board DTS 找到 `zephyr,console` 与 115200 波特率。
 - [ ] UART0_TX→RX、UART0_RX→TX、GND→GND，且没有并接两端电源。
-- [ ] 能在 Windows 中找到烧录器串口 1 的 `USB-HiSpeed-SERIAL-B`，并确认其实际 COM 端口。
+- [ ] 能在 Windows 中找到烧录器串口 1（`DshanPI USBToolBox UART1` 或 `USB-HiSpeed-SERIAL-B`），并确认其实际 COM 端口。
 - [ ] VS Code Serial Monitor 已安装并设置为 115200、8N1、无流控。
 
 [上一篇：连接并验证 JTAG](../common-04-连接JTAG与OpenOCD/README.md) · [进入一期](../p1-00-认识实验套件/README.md) · [进入二期](../p2-01-从example-application认识标准工程/README.md) · [进入三期](../p3-01-搭建SDK-Glue工作区/README.md) · [课程目录](../README.md)

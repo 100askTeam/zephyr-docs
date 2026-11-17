@@ -637,6 +637,67 @@
   overflow-wrap: break-word;
 }
 
+.quickCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.65rem 0.78rem;
+  border-radius: 10px;
+  background: rgba(2, 132, 199, 0.06);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+:global([data-theme='dark']) .quickCard {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.24);
+}
+
+.quickTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #0369a1;
+}
+
+:global([data-theme='dark']) .quickTop {
+  color: #7dd3fc;
+}
+
+.quickToolLink {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #0284c7 !important;
+  text-decoration: underline;
+}
+
+.quickGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem 0.6rem;
+}
+
+.quickCell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.06rem;
+}
+
+.quickKey {
+  font-size: 0.69rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.quickVal {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  word-break: break-all;
+}
+
 .ctaRow {
   display: flex;
   flex-wrap: wrap;

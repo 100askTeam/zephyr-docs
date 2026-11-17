@@ -1,7 +1,7 @@
 .portal {
   display: flex;
   flex-direction: column;
-  gap: 2.75rem;
+  gap: 2.25rem;
   padding-bottom: 1.5rem;
 }
 
@@ -16,8 +16,7 @@
 :global(.theme-doc-markdown) .heroTitle,
 :global(.theme-doc-markdown) .sectionTitle,
 :global(.theme-doc-markdown) .trackTitle,
-:global(.theme-doc-markdown) .prepTitle,
-:global(.theme-doc-markdown) .preflightTitle {
+:global(.theme-doc-markdown) .prepTitle {
   margin: 0;
   padding-left: 0;
   border-left: 0;
@@ -211,7 +210,7 @@
 
 .heroStats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
   margin-top: 1.65rem;
   padding-top: 1.2rem;
@@ -651,8 +650,8 @@
 .prepCard {
   display: flex;
   flex-direction: column;
-  gap: 1.05rem;
-  padding: 1.25rem 1.35rem;
+  gap: 0.85rem;
+  padding: 1rem 1.2rem;
   border: 1px solid rgba(23, 105, 170, 0.22);
   border-radius: 1.05rem;
   background: linear-gradient(110deg, rgba(23, 105, 170, 0.075) 0%, rgba(56, 189, 248, 0.03) 55%, var(--ifm-background-surface-color, #ffffff) 100%);
@@ -895,13 +894,6 @@
   font-weight: 700;
 }
 
-.trackSubtitle {
-  color: var(--track-accent);
-  font-size: 0.78rem;
-  font-weight: 700;
-  margin-bottom: 0.2rem;
-}
-
 :global(.theme-doc-markdown) .trackTitle {
   color: var(--ifm-heading-color);
   font-size: 1.15rem;
@@ -917,30 +909,27 @@
   line-height: 1.62;
 }
 
-.trackHighlights {
-  margin: 0 0 1.15rem;
-  padding: 0;
-  list-style: none;
+.trackTags {
   display: flex;
-  flex-direction: column;
-  gap: 0.42rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 1.05rem;
 }
 
-.trackHighlights li {
-  position: relative;
-  padding-left: 1.15rem;
+.trackTag {
+  padding: 0.22rem 0.56rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 0.48rem;
   color: var(--ifm-color-emphasis-800);
-  font-size: 0.8rem;
-  line-height: 1.48;
+  background: rgba(248, 250, 252, 0.85);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.35;
 }
 
-.trackHighlights li::before {
-  position: absolute;
-  left: 0;
-  top: 0.02rem;
-  color: var(--track-accent);
-  font-weight: 800;
-  content: "✓";
+:global([data-theme='dark']) .trackTag {
+  background: rgba(15, 25, 36, 0.75);
+  border-color: rgba(148, 163, 184, 0.2);
 }
 
 .trackFooter {
@@ -991,212 +980,6 @@
 }
 
 /* =========================
- * Pre-Flight & Workspace Bento
- * ========================= */
-.preflightGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
-  gap: 1rem;
-  align-items: stretch;
-}
-
-.preflightCard {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1.3rem 1.35rem;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 1.05rem;
-  background: var(--ifm-background-surface-color, #ffffff);
-  box-shadow: 0 10px 26px rgba(15, 39, 66, 0.045);
-}
-
-:global([data-theme='dark']) .preflightCard {
-  background: #131c28;
-  border-color: rgba(148, 163, 184, 0.2);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
-}
-
-.preflightHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-:global(.theme-doc-markdown) .preflightTitle {
-  color: var(--ifm-heading-color);
-  font-size: 1.05rem;
-  font-weight: 800;
-  line-height: 1.3;
-}
-
-.preflightSub {
-  color: var(--ifm-color-emphasis-600);
-  font-size: 0.8rem;
-}
-
-.reqList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-
-.reqRow {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.8rem;
-  padding: 0.78rem 0.88rem;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 0.78rem;
-  background: rgba(248, 250, 252, 0.7);
-}
-
-:global([data-theme='dark']) .reqRow {
-  background: rgba(15, 25, 36, 0.65);
-  border-color: rgba(148, 163, 184, 0.16);
-}
-
-.reqTag {
-  flex-shrink: 0;
-  min-width: 4.1rem;
-  padding: 0.22rem 0.5rem;
-  border-radius: 0.48rem;
-  color: var(--ifm-color-primary);
-  background: rgba(23, 105, 170, 0.1);
-  font-size: 0.73rem;
-  font-weight: 800;
-  text-align: center;
-}
-
-:global([data-theme='dark']) .reqTag {
-  background: rgba(105, 183, 240, 0.14);
-}
-
-.reqBody {
-  display: flex;
-  flex-direction: column;
-  gap: 0.14rem;
-}
-
-.reqBody strong {
-  color: var(--ifm-heading-color);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.reqBody span {
-  color: var(--ifm-color-emphasis-700);
-  font-size: 0.8rem;
-  line-height: 1.55;
-}
-
-.sdkCallout {
-  padding: 0.92rem 1rem;
-  border: 1px solid rgba(15, 118, 110, 0.24);
-  border-left: 4px solid #0f766e;
-  border-radius: 0.8rem;
-  background: rgba(15, 118, 110, 0.06);
-}
-
-:global([data-theme='dark']) .sdkCallout {
-  border-color: rgba(45, 212, 191, 0.26);
-  border-left-color: #2dd4bf;
-  background: rgba(45, 212, 191, 0.08);
-}
-
-.sdkCalloutTitle {
-  display: block;
-  margin-bottom: 0.35rem;
-  color: #0f766e;
-  font-size: 0.86rem;
-  font-weight: 800;
-}
-
-:global([data-theme='dark']) .sdkCalloutTitle {
-  color: #2dd4bf;
-}
-
-.sdkCallout p {
-  margin: 0;
-  color: var(--ifm-color-emphasis-800);
-  font-size: 0.8rem;
-  line-height: 1.62;
-}
-
-.dirGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem;
-}
-
-.dirBox {
-  display: flex;
-  flex-direction: column;
-  gap: 0.24rem;
-  padding: 0.78rem 0.88rem;
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 0.75rem;
-  background: rgba(248, 250, 252, 0.7);
-}
-
-:global([data-theme='dark']) .dirBox {
-  background: rgba(15, 25, 36, 0.65);
-  border-color: rgba(148, 163, 184, 0.16);
-}
-
-.dirCode {
-  align-self: flex-start;
-  padding: 0.14rem 0.48rem;
-  border-radius: 0.42rem;
-  color: var(--ifm-heading-color);
-  background: rgba(23, 105, 170, 0.1);
-  font-family: var(--ifm-font-family-monospace);
-  font-size: 0.78rem;
-  font-weight: 800;
-}
-
-:global([data-theme='dark']) .dirCode {
-  background: rgba(105, 183, 240, 0.14);
-}
-
-.dirBox span {
-  color: var(--ifm-color-emphasis-700);
-  font-size: 0.78rem;
-  line-height: 1.5;
-}
-
-.quickLinksBar {
-  margin-top: auto;
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem 0.85rem;
-  align-items: center;
-}
-
-:global([data-theme='dark']) .quickLinksBar {
-  border-top-color: rgba(148, 163, 184, 0.16);
-}
-
-.quickLinksLabel {
-  color: var(--ifm-color-emphasis-600);
-  font-size: 0.76rem;
-  font-weight: 700;
-}
-
-.quickLink {
-  color: var(--ifm-color-primary);
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.quickLink:hover {
-  text-decoration: underline;
-}
-
-/* =========================
  * Responsive Breakpoints
  * ========================= */
 @media (max-width: 1080px) {
@@ -1211,15 +994,11 @@
   .trackGrid {
     grid-template-columns: 1fr;
   }
-
-  .preflightGrid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 720px) {
   .portal {
-    gap: 2.1rem;
+    gap: 1.85rem;
   }
 
   .hero {
@@ -1237,13 +1016,8 @@
   }
 
   .heroStats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.85rem;
-  }
-
-  .heroStatItem:nth-child(2n) {
-    padding-right: 0;
-    border-right: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
   }
 
   .stageHeader,
@@ -1267,13 +1041,11 @@
   }
 
   .prepCard,
-  .trackCard,
-  .preflightCard {
+  .trackCard {
     padding: 1.05rem;
   }
 
-  .prepSteps,
-  .dirGrid {
+  .prepSteps {
     grid-template-columns: 1fr;
   }
 }

@@ -9,10 +9,13 @@ import TabItem from '@theme/TabItem';
 
 # 准备开发环境
 
-按正在学习的课程选择一项，完成对应步骤即可。
+按正在学习的课程选择对应准备方式：
+
+- **仅做一期“外设模块快速体验”**：不需要解压工程包，也不需要运行 `west` 编译命令。只需下载并安装 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/)，然后直接进入 [连接并验证 JTAG](../common-04-连接JTAG与OpenOCD/README.md) 与 [连接串口并查看日志](../common-05-连接串口并查看日志/README.md) 即可直接烧录 `.hex` 体验固件。
+- **进入二、三期源码开发与板级移植**：请按下方选择完整工程包（二期）或从零搭建（三期）。
 
 <Tabs defaultValue="phase1" queryString="phase" lazy>
-<TabItem value="phase1" label="一、二期：使用完整工程包">
+<TabItem value="phase1" label="二期开发：使用完整工程包">
 
 在现成工程中学习驱动、应用和设备树。**工具已随包提供，无需安装 Git、Python、uv，也无需创建或激活虚拟环境。**
 
@@ -38,7 +41,7 @@ Test-Path .\sdk\cmake\bin\cmake.exe
 
 `.venv\Scripts` 里只有两个原生启动器（`python.exe` 与 `west.exe`），它们按自身位置找到 `sdk/` 里的随包工具并配好环境，**不是普通虚拟环境，不需要激活**。整个工程可以换盘、换目录、换电脑。后续命令统一用 `.\.venv\Scripts\python.exe` 作为入口，不要用系统安装的 python 或 west。
 
-**一、二期环境准备到这里结束。** 下一步：[认识 Zephyr 与工程模型](../common-02-认识Zephyr与工程模型/README.md)。若直接开始验证外设模块，可从[一期：认识实验套件](../p1-00-认识实验套件/README.md)或[第 1 课：RGB 全彩 LED 调色](../p1-01-RGB全彩LED调色/README.md)进入；若学习驱动与应用开发，编译检查见[二期：构建和烧录应用](../p2-02-一键开发工作流/README.md)。
+**二期完整工程包检查到这里结束。** 下一步：[认识 Zephyr 与工程模型](../common-02-认识Zephyr与工程模型/README.md)。若直接开始外设模块快速体验，可跳转到 [连接并验证 JTAG](../common-04-连接JTAG与OpenOCD/README.md) 与 [一期：外设模块快速体验](../p1-00-认识实验套件/README.md)；二期源码构建与烧录检查见[二期：构建和烧录应用](../p2-02-一键开发工作流/README.md)。
 
 </TabItem>
 <TabItem value="phase3" label="三期：从零搭建工程">

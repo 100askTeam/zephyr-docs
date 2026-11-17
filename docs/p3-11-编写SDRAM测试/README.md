@@ -254,7 +254,7 @@ SDRAM TEST PASSED: 32 MiB verified
 
 ![完整 SDRAM 测试通过时的真机输出](./images/04-sdram-verified.png)
 
-*真机实测输出：固件由本课流程构建并经 CH347F 烧录，启动横幅显示构建分支 `zsg_v0.7.0`，Step 1 可见 FEMC 时钟 133333333 Hz 与 SDRAM 映射范围 `0x40000000..0x41ffffff`。*
+*真机实测输出：固件由本课流程构建并经 JTAG 烧录调试接口烧录，启动横幅显示构建分支 `zsg_v0.7.0`，Step 1 可见 FEMC 时钟 133333333 Hz 与 SDRAM 映射范围 `0x40000000..0x41ffffff`。*
 
 如果失败，不要只记录“SDRAM 不工作”。先看方括号中的阶段：
 

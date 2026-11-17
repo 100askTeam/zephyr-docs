@@ -10,7 +10,9 @@ import {
   KIT_ITEMS,
   KIT_ITEMS_BY_ID,
   M12_VARIANTS,
-  getAppCommands,
+  USBTOOLBOX_DOWNLOAD_URL,
+  getDevLessonPath,
+  getFirmwareDownload,
 } from './kitData';
 import styles from './styles.module.css';
 
@@ -185,7 +187,6 @@ export default function KitExplorer({
   const [panPct, setPanPct] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [conflictPulseKey, setConflictPulseKey] = useState(0);
-  const [copiedCmd, setCopiedCmd] = useState(false);
 
   const viewportRef = useRef(null);
   const dragRef = useRef({
@@ -232,6 +233,7 @@ export default function KitExplorer({
   }, [activePreset, primaryItem]);
 
   const isCoreSelected = primaryItem.id === COREBOARD_ID;
+  const isOledCoexist = Boolean(activePreset?.usesOled || primaryItem.usesOled);
 
   // Keep camera synced when switching between overview / focus or selecting module while zoomed
   const computeFocusCamera = (preset, item) => {
@@ -407,21 +409,9 @@ export default function KitExplorer({
     ? m12Info.lessonLabel
     : primaryItem.lessonLabel;
 
-  const { buildCmd, flashCmd } = getAppCommands(primaryItem, m12Variant);
-  const fullCommands = `${buildCmd}\n${flashCmd}`;
-
-  const handleCopyCommands = async () => {
-    if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
-      try {
-        await navigator.clipboard.writeText(fullCommands);
-        setCopiedCmd(true);
-        window.setTimeout(() => setCopiedCmd(false), 1800);
-        return;
-      } catch {
-        // Clipboard permission unavailable; ignore silently
-      }
-    }
-  };
+  const firmwareInfo = getFirmwareDownload(primaryItem, m12Variant);
+  const devLessonPath = getDevLessonPath(primaryItem, m12Variant);
+  const displayAppName = m12Info ? m12Info.app : primaryItem.app;
 
   const filteredTrayItems = useMemo(() => {
     if (category === 'all') {
@@ -786,7 +776,11 @@ export default function KitExplorer({
                     elbowX={item.elbowX}
                     x={item.labelX}
                     y={item.labelY}
-                    text={`${item.code} · 同总线共存`}
+                    text={
+                      isOledCoexist && item.id === 'm1'
+                        ? 'M1 · OLED 联动显示'
+                        : `${item.code} · 同总线共存`
+                    }
                     tone="coexist"
                     shadowFilterId={shadowFilterId}
                     onClick={
@@ -863,7 +857,7 @@ export default function KitExplorer({
               {coexistTargets.length > 0 && (
                 <span className={styles.legendItem}>
                   <i className={styles.swatchCoexist} />
-                  I2C1 同总线共存
+                  {isOledCoexist ? 'M1 OLED 联动显示' : 'I2C1 同总线共存'}
                 </span>
               )}
             </div>
@@ -894,7 +888,7 @@ export default function KitExplorer({
 
           {isExplorer && primaryItem.id === 'm12' && (
             <div>
-              <div className={styles.sectionLabel}>M12 共有 3 种传输实验（切换查看命令）</div>
+              <div className={styles.sectionLabel}>M12 共有 3 种传输实验（切换查看固件与模式）</div>
               <div className={styles.variantTabs}>
                 {Object.values(M12_VARIANTS).map((v) => (
                   <button
@@ -944,9 +938,13 @@ export default function KitExplorer({
           {coexistTargets.length > 0 && (
             <div className={`${styles.alertBox} ${styles.coexistBox}`}>
               <div className={styles.alertTitle}>
-                <span>✓ 总线兼容提示（可同时插在底板）</span>
+                <span>
+                  {isOledCoexist
+                    ? '✓ M1 OLED 实时显示（建议保留在底板）'
+                    : '✓ 总线兼容提示（可同时插在底板）'}
+                </span>
               </div>
-              <div>{primaryItem.coexistNote}</div>
+              <div>{activePreset?.coexistNote || primaryItem.coexistNote}</div>
               {isExplorer && (
                 <div className={styles.alertActions}>
                   {coexistTargets.map((c) => (
@@ -990,18 +988,44 @@ export default function KitExplorer({
             <p className={styles.tipText}>{primaryItem.tips}</p>
           )}
 
-          <div className={styles.cmdCard}>
-            <div className={styles.cmdTop}>
-              <span>编译与烧录命令 ({m12Info ? m12Info.app : primaryItem.app})</span>
-              <button
-                type="button"
-                className={styles.copyBtn}
-                onClick={handleCopyCommands}
+          <div className={styles.quickCard}>
+            <div className={styles.quickTop}>
+              <span>USBToolBox 快速体验参数</span>
+              <a
+                className={styles.quickToolLink}
+                href={USBTOOLBOX_DOWNLOAD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {copiedCmd ? '已复制 ✓' : '复制命令'}
-              </button>
+                下载 USBToolBox ↗
+              </a>
             </div>
-            <pre className={styles.cmdPre}>{fullCommands}</pre>
+            <div className={styles.quickGrid}>
+              <div className={styles.quickCell}>
+                <span className={styles.quickKey}>芯片平台</span>
+                <span className={styles.quickVal}>HPMicro / HPM</span>
+              </div>
+              <div className={styles.quickCell}>
+                <span className={styles.quickKey}>目标配置</span>
+                <span className={styles.quickVal}>HPM6E70</span>
+              </div>
+              <div className={styles.quickCell}>
+                <span className={styles.quickKey}>体验固件（自带地址）</span>
+                <span className={styles.quickVal}>
+                  {firmwareInfo && !firmwareInfo.isDirectory
+                    ? firmwareInfo.fileName
+                    : '01～14_*.hex'}
+                </span>
+              </div>
+              <div className={styles.quickCell}>
+                <span className={styles.quickKey}>开发源码位置</span>
+                <span className={styles.quickVal}>
+                  {isCoreSelected
+                    ? 'platform/boards/hpmicro/'
+                    : `applications/${displayAppName}`}
+                </span>
+              </div>
+            </div>
           </div>
 
           <div className={styles.ctaRow}>
@@ -1009,12 +1033,37 @@ export default function KitExplorer({
               <Link className={styles.primaryLink} to={displayLessonPath}>
                 进入 {displayLessonLabel} →
               </Link>
-            ) : (
-              <Link
+            ) : firmwareInfo ? (
+              <a
                 className={styles.primaryLink}
+                href={firmwareInfo.url}
+                download={firmwareInfo.isDirectory ? undefined : firmwareInfo.fileName}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {firmwareInfo.label} ↓
+              </a>
+            ) : null}
+            {resolvedMode === 'explorer' && firmwareInfo && (
+              <a
+                className={styles.secondaryLink}
+                href={firmwareInfo.url}
+                download={firmwareInfo.isDirectory ? undefined : firmwareInfo.fileName}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {firmwareInfo.label}
+              </a>
+            )}
+            <Link className={styles.secondaryLink} to={devLessonPath}>
+              {isCoreSelected ? '二期编译烧录流程 →' : '查看源码与编译烧录 →'}
+            </Link>
+            {resolvedMode !== 'explorer' && (
+              <Link
+                className={styles.secondaryLink}
                 to="/docs/p1-00-认识实验套件/"
               >
-                查看全板插座与复用总表 →
+                全板插座总表
               </Link>
             )}
             {primaryItem.secondaryLessonPath && (

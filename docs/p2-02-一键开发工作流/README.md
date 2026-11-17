@@ -34,7 +34,7 @@ HPM6E70 工程的 `applications/` 目录中保存多个应用。本课把其中�
 
 ## 烧录到板卡
 
-烧录前先完成[连接并验证 JTAG](../common-04-连接JTAG与OpenOCD/README.md)：五根 JTAG 线接好，CH347F 的 Interface 4 已装 WinUSB 驱动。然后执行：
+烧录前先完成[连接并验证 JTAG](../common-04-连接JTAG与OpenOCD/README.md)：五根 JTAG 线接好，已安装 DshanPI USBToolBox 驱动并识别出 JTAG 烧录调试接口。然后执行：
 
 ```powershell
 .\.venv\Scripts\python.exe -m west flash -d build\hpm6e70_demo
@@ -42,8 +42,8 @@ HPM6E70 工程的 `applications/` 目录中保存多个应用。本课把其中�
 
 `west flash` 会先自动增量重建（代码没变就是秒过），保证烧进去的是最新代码，再用板级默认的 OpenOCD runner 烧录。这套餐具在 `platform/boards/hpmicro/dshanmcu_hpm6e70/board.cmake` 里接线：
 
-- 烧录器是随包的 CH347 版 OpenOCD（`sdk/openocd`），HPMicro 官方版本不带 CH347 适配器驱动，所以工程自带了这一版；
-- 板级配置在 `support/openocd/` 下分三层：CH347 接口（500 kHz）、HPM6E70 目标、板级 Flash 与复位时序；
+- 烧录器是随包的定制版 OpenOCD（`sdk/openocd`），已集成对 JTAG 烧录调试接口与 HPM XPI Flash 的支持；
+- 板级配置在 `support/openocd/` 下分三层：JTAG 调试器接口配置（500 kHz）、HPM6E70 目标、板级 Flash 与复位时序；
 - 复位走 RISC-V 调试模块路径，不依赖 SRST 线，五根信号线即可。
 
 烧录过程包含写入、读回校验和复位。看到校验通过并复位完成，固件就已经在板上运行了。要跳过自动重建加 `--skip-rebuild`；换应用时只改 `-d`。

@@ -20,7 +20,7 @@
 
 ![U5 与 HPM6E70 的 XPI0 连接](./images/原理图-U5与HPM6E70连接.png)
 
-*图 1　板载 U5 为 MX25L12833F；`CS0、SCLK、D0～D3` 分别连接 HPM6E70 的 `PB30、PB29、PB27、PB28、PB26、PB31`。来源：课程配套原理图 `DshanMCU-HPM6E8Y_SCH_V1.pdf`（见[资料与下载](../appendix-02-资料与下载/README.md)），并与 `hpm_iomux.h` 中 XPI0 引脚复用定义核对一致。*
+*图 1　板载 U5 为 MX25L12833F；`CS0、SCLK、D0～D3` 分别连接 HPM6E70 的 `PB30、PB29、PB27、PB28、PB26、PB31`。来源：课程配套原理图 `DshanMCU-HPM6E8Y_SCH_V1.pdf`，并与 `hpm_iomux.h` 中 XPI0 引脚复用定义核对一致。*
 
 沿网络名称可以确认：U5 不是接在普通 SPI 控制器上，而是接在 HPM6E70 的 XPI0 总线上。
 

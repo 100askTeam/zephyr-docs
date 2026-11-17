@@ -106,7 +106,7 @@ west flash -d .\build\blinky --context
 
 ## 烧录当前构建
 
-连接 CH347F、板卡和 JTAG 后执行：
+连接 JTAG 烧录调试接口、板卡与电源后执行：
 
 ```powershell
 west flash -d .\build\blinky --skip-rebuild
@@ -129,9 +129,9 @@ HPM6E70 alive: LED ON
 
 ![通过烧录器串口 1 查看 UART0 日志](./images/VSCode-Serial-Monitor-UART0-串口1.png)
 
-<p className="image-caption">UART0 实测日志：烧录器串口 1 枚举为 USB-HiSpeed-SERIAL-B；图中的 COM20 是当前电脑分配的实例值。</p>
+<p className="image-caption">UART0 实测日志：烧录器串口 1 通常显示为 DshanPI USBToolBox UART1（部分早期驱动版本下显示为 USB-HiSpeed-SERIAL-B）；图中的 COM20 是当前电脑分配的实例值。</p>
 
-截图是在应用运行后打开监视器取得的，因此没有包含启动时只打印一次的 bring-up 行；按复位键即可重新观察完整输出。核对三处：当前面板是“串行监视器”，端口属于 `USB-HiSpeed-SERIAL-B`，波特率为 115200。
+截图是在应用运行后打开监视器取得的，因此没有包含启动时只打印一次的 bring-up 行；按复位键即可重新观察完整输出。核对三处：当前面板是“串行监视器”，端口属于烧录器串口 1（`DshanPI USBToolBox UART1` 或 `USB-HiSpeed-SERIAL-B`），波特率为 115200。
 
 观察下面三组对应关系：
 
@@ -147,7 +147,7 @@ HPM6E70 alive: LED ON
 
 依次检查：
 
-1. 选择的 COM 端口是否属于烧录器串口 1 的 `USB-HiSpeed-SERIAL-B`；
+1. 选择的 COM 端口是否属于烧录器串口 1（`DshanPI USBToolBox UART1` / `USB-HiSpeed-SERIAL-B`）；
 2. 板卡 UART0_TX 是否连接到转换器 RX；
 3. 两端是否共地；
 4. 参数是否为 115200、8N1、无流控；
@@ -219,7 +219,7 @@ Zephyr 3.7 的 `west debugserver` 会从指定构建目录读取 runner、ELF �
 
 ```text
 -- west debugserver: using runner openocd
-CH347 ... found
+... open success
 JTAG tap: hpm6e00.cpu tap/device found: 0x1000563d
 [hpm6e00.cpu0] Examination succeed
 Listening on port 3333 for gdb connections
@@ -230,22 +230,22 @@ Listening on port 3333 for gdb connections
 | 输出 | 已确认的环节 |
 | --- | --- |
 | `using runner openocd` | west 已读取当前 `build/blinky/` 的 runner 配置 |
-| `CH347 ... found` | WinUSB 与 CH347F JTAG 接口可访问 |
+| `... open success` | Windows 已正确安装驱动，OpenOCD 已打开 JTAG 烧录调试接口 |
 | `tap/device found: 0x1000563d` | 五根线和目标板供电正常，JTAG 扫描成功 |
 | `Examination succeed` | OpenOCD 已识别并检查 RISC-V CPU |
 | `Listening on port 3333` | GDB 服务已就绪 |
 
-配置请求的 JTAG 速度是 500 kHz。CH347F 可能报告改用硬件能够实现的相邻档位，例如 938 kHz；只要 TAP ID、CPU 检查和 GDB 监听随后成功，这条速度提示不是连接失败。
+配置请求的 JTAG 速度是 500 kHz。JTAG 烧录调试接口可能报告改用硬件能够实现的相邻档位，例如 938 kHz；只要 TAP ID、CPU 检查和 GDB 监听随后成功，这条速度提示不是连接失败。
 
 检查完成后按 `Ctrl+C` 结束 OpenOCD。CPU 在调试服务器运行期间可能保持暂停；退出后按板卡复位键即可重新运行已经烧录的应用。
 
 ### JTAG 调试排障
 
-- **Windows 找不到 CH347F**：检查 CH347F 到电脑的 USB 连接和设备管理器。此时还没有进入 JTAG 扫描，不需要修改 Board DTS 或应用代码。
-- **OpenOCD 报告无法打开 CH347F**：确认“连接并验证 JTAG”中的 Zadig 操作的是 Interface 4 / `MI_04`，并关闭其他可能占用 JTAG 接口的程序。
+- **Windows 找不到 JTAG 烧录调试接口**：检查调试器到电脑的 USB 连接和设备管理器“外部接口”下的 `DshanPI USBToolBox`。此时还没有进入 JTAG 扫描，不需要修改 Board DTS 或应用代码。
+- **OpenOCD 报告无法打开 JTAG 烧录调试接口**：确认已安装 `DshanPI USBToolBox` 驱动（可运行 `sdk\driver\Install-DshanPI-USBToolBox.cmd`），并关闭正在占用调试接口的上位机或其他程序。
 - **TAP ID 全为 0 或全为 1**：按顺序检查目标板供电、GND、TDO、TDI、TCK、TMS 和排针方向。`all ones` 常见于 TDO 未连接、目标板未供电或没有共地。
 - **TAP ID 不是 `0x1000563D`**：停止后续烧录并保存完整输出，重新确认目标芯片型号、排针方向和 OpenOCD 配置。不同的 TAP ID 不能用“通信已经成功”直接带过。
 
-至此，**三期第一阶段（第 1～8 课：从零点亮最小系统与打通烧录调试闭环）** 已经全部验收完成：构建出的固件能够输出 UART0 日志、通过 CH347F/OpenOCD 烧录调试，并经板载 Flash 实现断电自启。从第 9 课开始进入**三期第二阶段（第 9～11 课）**，在同一块 Board 上扩展 32 MiB 板载 SDRAM。
+至此，**三期第一阶段（第 1～8 课：从零点亮最小系统与打通烧录调试闭环）** 已经全部验收完成：构建出的固件能够输出 UART0 日志、通过 JTAG 烧录调试接口完成烧录与在线调试，并经板载 Flash 实现断电自启。从第 9 课开始进入**三期第二阶段（第 9～11 课）**，在同一块 Board 上扩展 32 MiB 板载 SDRAM。
 
 [上一课：配置板载 XPI NOR Flash](../p3-07-配置XPI-NOR-Flash/README.md) · [下一课：认识 SDRAM 与 FEMC](../p3-09-认识SDRAM与FEMC/README.md) · [课程目录](../README.md)

@@ -1,5 +1,9 @@
 export const IMAGE_SIZE = 1600;
 export const KIT_IMAGE_SRC = '/img/hpm6e70-phase1-kit.jpg';
+export const FIRMWARE_BASE_URL =
+  'https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware';
+export const USBTOOLBOX_DOWNLOAD_URL =
+  'https://dl.100ask.net/Tools/usbtoolsbox/';
 
 export const COREBOARD_ID = 'coreboard';
 
@@ -55,15 +59,17 @@ export const KIT_MODULES = [
     code: 'M1',
     shortTitle: '0.96 OLED 屏',
     name: '0.96 寸 OLED 双色屏',
-    subtitle: '第 3 课 · I2C1 驱动 SSD1306 显示双行字符',
+    subtitle: '第 1 课 · 黄蓝双色仪表盘展示（支持第 4~14 课联动显示）',
     category: 'av',
     voltage: '3.3V',
     bus: 'I2C1 (0x3C)',
     app: 'oled_demo',
+    firmwareFile: '03_oled_demo.hex',
     coexists: ['m11'],
-    coexistNote: '与 M11（MPU6050，0x68）共用 I2C1 总线（PF12/PF13），从机地址不同，可同时插在底板上互不冲突。',
-    lessonPath: '/docs/p1-03-OLED双色屏显示/',
-    lessonLabel: '第 3 课：OLED 双色屏显示',
+    coexistNote: '与底板全部其他模块均无引脚冲突：第 1 课插上验证后即可全程保留在底板上，第 4~14 课会自动联动此屏实时显示数据与状态。',
+    lessonPath: '/docs/p1-01-OLED双色屏显示/',
+    lessonLabel: '第 1 课：OLED 双色屏显示',
+    devLessonPath: '/docs/p2-12-OLED双色屏显示开发/',
     cx: 530,
     cy: 331,
     w: 270,
@@ -95,10 +101,15 @@ export const KIT_MODULES = [
     voltage: '3.3V',
     bus: '1-Wire 单总线',
     app: 'ds18b20_demo',
+    firmwareFile: '05_ds18b20_demo.hex',
+    usesOled: true,
+    coexists: ['m1'],
+    coexistNote: '已接入 M1 OLED 联动显示：建议保留 M1 屏幕在底板上实时查看高精度温度与进度条；未插 M1 屏时自动降级为仅串口输出。',
     conflicts: ['m10'],
     conflictNote: 'M2 与 M10（DHT11）共用单总线信号线 PC06！运行本课时请务必拔掉 M10 上的 DHT11 模块，避免总线冲突导致温度读取失败。',
     lessonPath: '/docs/p1-05-DS18B20单总线测温/',
     lessonLabel: '第 5 课：DS18B20 单总线测温',
+    devLessonPath: '/docs/p2-16-DS18B20单总线测温开发/',
     cx: 303,
     cy: 482,
     w: 342,
@@ -124,13 +135,15 @@ export const KIT_MODULES = [
     code: 'M3',
     shortTitle: 'RGB 全彩 LED',
     name: 'RGB 全彩 LED 模块',
-    subtitle: '第 1 课 · 三路 PWM 驱动 8 色循环切换',
+    subtitle: '第 2 课 · 三路 PWM 驱动 8 色循环切换',
     category: 'av',
     voltage: '3.3V',
     bus: 'PWM0 + PWM1',
     app: 'rgb_led_demo',
-    lessonPath: '/docs/p1-01-RGB全彩LED调色/',
-    lessonLabel: '第 1 课：RGB 全彩 LED 调色',
+    firmwareFile: '01_rgb_led_demo.hex',
+    lessonPath: '/docs/p1-02-RGB全彩LED调色/',
+    lessonLabel: '第 2 课：RGB 全彩 LED 调色',
+    devLessonPath: '/docs/p2-13-RGB全彩LED调色开发/',
     cx: 261,
     cy: 740,
     w: 326,
@@ -162,11 +175,16 @@ export const KIT_MODULES = [
     voltage: '3.3V',
     bus: 'PWM3 (38 kHz)',
     app: 'ir_tx_rx_demo',
+    firmwareFile: '11_ir_tx_rx_demo.hex',
+    usesOled: true,
+    coexists: ['m1'],
+    coexistNote: '已接入 M1 OLED 联动显示：保留 M1 屏幕可实时观察红外 TX/RX 收发状态与累计值；未插屏时自动降级。',
     conflicts: ['m9'],
     paired: ['m8'],
     conflictNote: 'M4 与 M9（蜂鸣器）共用引脚 PF26 (PWM3_P_2)！做红外发射/接收实验时请务必拔掉 M9 上的蜂鸣器模块。',
     lessonPath: '/docs/p1-11-红外发射与接收通信/',
     lessonLabel: '第 11 课：红外发射与接收通信',
+    devLessonPath: '/docs/p2-22-红外发射与接收通信开发/',
     cx: 283,
     cy: 1000,
     w: 290,
@@ -197,8 +215,13 @@ export const KIT_MODULES = [
     voltage: '3.3V',
     bus: 'GPIO / Sensor',
     app: 'ir_obstacle_demo',
+    firmwareFile: '10_ir_obstacle_demo.hex',
+    usesOled: true,
+    coexists: ['m1'],
+    coexistNote: '已接入 M1 OLED 联动显示：建议保留 M1 屏幕实时观察 DETECTED/CLEAR 反白横幅与触发次数；未插屏时自动降级为仅串口输出。',
     lessonPath: '/docs/p1-10-红外对管避障检测/',
     lessonLabel: '第 10 课：红外对管避障检测',
+    devLessonPath: '/docs/p2-21-红外对管避障检测开发/',
     cx: 403,
     cy: 1242,
     w: 398,
@@ -229,12 +252,15 @@ export const KIT_MODULES = [
     voltage: '3.3V / 宽压',
     bus: 'GPIO 脉宽测距',
     app: 'hc_sr04_demo',
-    conflicts: ['m12'],
-    conflictNote: 'M6 的 Trig 引脚（PB05）与 M12（W25Q64 Flash）的片选 SPI5_CSn 复用！运行超声波测距前请先拔掉 M12 上的 Flash 模块。',
+    firmwareFile: '06_hc_sr04_demo.hex',
+    usesOled: true,
+    coexists: ['m1'],
+    coexistNote: '已接入 M1 OLED 联动显示：建议保留 M1 屏幕实时显示厘米测距与声纳进度条；未插屏时自动降级为仅串口输出。',
     lessonPath: '/docs/p1-06-HC-SR04超声波测距/',
     lessonLabel: '第 6 课：HC-SR04 超声波测距',
-    secondaryLessonPath: '/docs/p2-01-从example-application认识标准工程/',
-    secondaryLessonLabel: '二期第 1 课：标准 Zephyr 驱动写法',
+    devLessonPath: '/docs/p2-17-HC-SR04超声波测距开发/',
+    secondaryLessonPath: '/docs/p2-04-认识Zephyr驱动结构/',
+    secondaryLessonLabel: '二期第 4 课：HC-SR04 驱动架构',
     cx: 756,
     cy: 1198,
     w: 220,
@@ -250,11 +276,11 @@ export const KIT_MODULES = [
     labelY: 1455,
     pins: [
       ['VCC (1)', '电源'],
-      ['Trig (2)', 'PB05'],
+      ['Trig (2)', 'PB05 (与 M12 CS 共线)'],
       ['Echo (3)', 'PE01'],
       ['GND (4)', 'GND'],
     ],
-    tips: '二期课程以本模块为主线，逐步讲解自定义设备树 Binding、Kconfig 与驱动实现。',
+    tips: 'Trig (PB05) 与 M12（W25Q64 片选 CS）共线，但 W25Q64 的 CS 为高阻输入且本例未启用 SPI5 时钟，保留 M12 在底板上不会影响超声波测距。二期课程以本模块为主线讲解自定义驱动开发。',
   },
   {
     id: 'm7',
@@ -266,8 +292,13 @@ export const KIT_MODULES = [
     voltage: '3.3V',
     bus: 'ADC0_IN15 + GPIO',
     app: 'light_sensor_demo',
+    firmwareFile: '08_light_sensor_demo.hex',
+    usesOled: true,
+    coexists: ['m1'],
+    coexistNote: '已接入 M1 OLED 联动显示：建议保留 M1 屏幕实时观察毫伏电压、光照进度条与 DO 阈值；未插屏时自动降级为仅串口输出。',
     lessonPath: '/docs/p1-08-光敏电阻亮度采集/',
     lessonLabel: '第 8 课：光敏电阻亮度采集',
+    devLessonPath: '/docs/p2-19-光敏电阻亮度采集开发/',
     cx: 1093,
     cy: 1236,
     w: 358,
@@ -298,11 +329,16 @@ export const KIT_MODULES = [
     voltage: '3.3V',
     bus: 'GPIO 中断解码',
     app: 'ir_tx_rx_demo',
+    firmwareFile: '11_ir_tx_rx_demo.hex',
+    usesOled: true,
+    coexists: ['m1'],
+    coexistNote: '已接入 M1 OLED 联动显示：保留 M1 屏幕可实时观察红外 TX/RX 收发状态与累计值；未插屏时自动降级。',
     conflicts: ['m9'],
     paired: ['m4'],
     conflictNote: '与 M4 红外发射模块成对工作；因 M4 与 M9 蜂鸣器共用 PF26，开展第 11 课前需确认 M9 已拔除。',
     lessonPath: '/docs/p1-11-红外发射与接收通信/',
     lessonLabel: '第 11 课：红外发射与接收通信',
+    devLessonPath: '/docs/p2-22-红外发射与接收通信开发/',
     cx: 1235,
     cy: 1006,
     w: 272,
@@ -328,15 +364,17 @@ export const KIT_MODULES = [
     code: 'M9',
     shortTitle: '蜂鸣器',
     name: '有源/无源蜂鸣器模块',
-    subtitle: '第 2 课 · PWM 输出三段频率测试音',
+    subtitle: '第 3 课 · PWM 输出三段频率测试音',
     category: 'av',
     voltage: '3.3V',
     bus: 'PWM3 通道 2',
     app: 'buzzer_demo',
+    firmwareFile: '02_buzzer_demo.hex',
     conflicts: ['m4'],
     conflictNote: 'M9 与 M4（红外发射）复用引脚 PF26 (PWM3_P_2)！做蜂鸣器实验前请先拔掉 M4 模块，以免红外 LED 随 PWM 同步高频闪发。',
-    lessonPath: '/docs/p1-02-有源无源蜂鸣器/',
-    lessonLabel: '第 2 课：有源/无源蜂鸣器',
+    lessonPath: '/docs/p1-03-有源无源蜂鸣器/',
+    lessonLabel: '第 3 课：有源/无源蜂鸣器',
+    devLessonPath: '/docs/p2-14-有源无源蜂鸣器开发/',
     cx: 1313,
     cy: 760,
     w: 386,
@@ -367,10 +405,15 @@ export const KIT_MODULES = [
     voltage: '3.3V',
     bus: '单总线时序',
     app: 'dht11_demo',
+    firmwareFile: '04_dht11_demo.hex',
+    usesOled: true,
+    coexists: ['m1'],
+    coexistNote: '已接入 M1 OLED 联动显示：建议保留 M1 屏幕实时显示温湿度双卡片；未插屏时自动降级为仅串口输出。',
     conflicts: ['m2'],
     conflictNote: 'M10 与 M2（DS18B20）共用单总线数据脚 PC06！做 DHT11 温湿度采集前，务必先拔掉 M2 插座上的 DS18B20 模块。',
     lessonPath: '/docs/p1-04-DHT11温湿度采集/',
     lessonLabel: '第 4 课：DHT11 温湿度采集',
+    devLessonPath: '/docs/p2-15-DHT11温湿度采集开发/',
     cx: 1247,
     cy: 474,
     w: 354,
@@ -401,10 +444,13 @@ export const KIT_MODULES = [
     voltage: '3.3V',
     bus: 'I2C1 (0x68)',
     app: 'mpu6050_demo',
+    firmwareFile: '07_mpu6050_demo.hex',
+    usesOled: true,
     coexists: ['m1'],
-    coexistNote: '与 M1（OLED 0.96 寸，0x3C）共用 I2C1 总线（PF12/PF13），硬件地址彼此独立，支持共插在同一底板上联动扩展。',
+    coexistNote: '与 M1（OLED 0.96 寸，0x3C）共用 I2C1 总线（PF12/PF13），从机地址独立可共插，建议保留 M1 实时查看三轴读数与 2D 电子水平仪。',
     lessonPath: '/docs/p1-07-MPU6050六轴姿态采集/',
     lessonLabel: '第 7 课：MPU6050 六轴姿态采集',
+    devLessonPath: '/docs/p2-18-MPU6050六轴姿态采集开发/',
     cx: 985,
     cy: 362,
     w: 138,
@@ -436,10 +482,13 @@ export const KIT_MODULES = [
     voltage: '3.3V',
     bus: 'SPI5 (8 MiB)',
     app: 'w25q64_polling_demo',
-    conflicts: ['m6'],
-    conflictNote: 'M12 的片选信号 PB05 (SPI5_CSn) 与 M6（HC-SR04 超声波 Trig）共用！进行 Flash 读写前务必先拔掉底端 M6 上的超声波模块，否则将读回全 FF 或触发校验异常。',
+    firmwareFile: '12_w25q64_polling_demo.hex',
+    usesOled: true,
+    coexists: ['m1'],
+    coexistNote: '已接入 M1 OLED 联动显示：建议保留 M1 屏幕实时查看当前传输模式（POLL/IRQ/DMA）与 PASS/FAIL 校验序号；未插屏时自动降级为仅串口输出。',
     lessonPath: '/docs/p1-12-W25Q64轮询读写/',
     lessonLabel: '第 12 课：W25Q64 轮询读写',
+    devLessonPath: '/docs/p2-23-W25Q64轮询读写开发/',
     cx: 542,
     cy: 801,
     w: 132,
@@ -455,11 +504,11 @@ export const KIT_MODULES = [
     labelY: 575,
     pins: [
       ['VCC / GND', '3.3V / GND'],
-      ['SCK / CS', 'PB04 / PB05'],
+      ['SCK / CS', 'PB04 / PB05 (与 M6 Trig 共线)'],
       ['MISO (DO)', 'PB06'],
       ['MOSI (DI)', 'PB07'],
     ],
-    tips: '位于底板左侧内圈 J2 旁；支持同一硬件连续体验第 12 课（轮询）、第 13 课（中断）与第 14 课（DMA）三种传输模式对比。',
+    tips: '片选 CS (PB05) 与 M6（超声波 Trig）共线：若同时插着 M6，片选拉高会顺带触发超声波发波耗电（通常不影响 SPI 读写，建议按需拔除 M6 以减小电源纹波）。支持连续体验第 12/13/14 课三种传输模式。',
   },
   {
     id: 'm13',
@@ -471,8 +520,13 @@ export const KIT_MODULES = [
     voltage: '5V (VCC_+5V)',
     bus: 'GPIO / Input',
     app: 'rotary_encoder_demo',
+    firmwareFile: '09_rotary_encoder_demo.hex',
+    usesOled: true,
+    coexists: ['m1'],
+    coexistNote: '已接入 M1 OLED 联动显示：建议保留 M1 屏幕实时观察正反转计数与按键状态；未插屏时自动降级为仅串口输出。',
     lessonPath: '/docs/p1-09-旋转编码器与按键/',
     lessonLabel: '第 9 课：旋转编码器与按键',
+    devLessonPath: '/docs/p2-20-旋转编码器与按键开发/',
     cx: 762,
     cy: 1002,
     w: 264,
@@ -508,25 +562,31 @@ export const M12_VARIANTS = {
     id: 'polling',
     label: '第 12 课 · 轮询模式',
     app: 'w25q64_polling_demo',
+    firmwareFile: '12_w25q64_polling_demo.hex',
     bus: 'SPI5 轮询阻塞读写',
     lessonPath: '/docs/p1-12-W25Q64轮询读写/',
     lessonLabel: '第 12 课：W25Q64 轮询读写',
+    devLessonPath: '/docs/p2-23-W25Q64轮询读写开发/',
   },
   interrupt: {
     id: 'interrupt',
     label: '第 13 课 · 中断模式',
     app: 'w25q64_interrupt_demo',
+    firmwareFile: '13_w25q64_interrupt_demo.hex',
     bus: 'SPI5 中断异步事件驱动',
     lessonPath: '/docs/p1-13-W25Q64中断读写/',
     lessonLabel: '第 13 课：W25Q64 中断读写',
+    devLessonPath: '/docs/p2-24-W25Q64中断读写开发/',
   },
   dma: {
     id: 'dma',
     label: '第 14 课 · DMA 模式',
     app: 'w25q64_dma_demo',
+    firmwareFile: '14_w25q64_dma_demo.hex',
     bus: 'SPI5 + HDMA 零拷贝搬运',
     lessonPath: '/docs/p1-14-W25Q64-DMA读写/',
     lessonLabel: '第 14 课：W25Q64 DMA 读写',
+    devLessonPath: '/docs/p2-25-W25Q64-DMA读写开发/',
   },
 };
 
@@ -536,7 +596,9 @@ export const FOCUS_PRESETS = {
     primary: 'm4',
     actives: ['m4', 'm8'],
     conflicts: ['m9'],
-    coexists: [],
+    usesOled: true,
+    coexists: ['m1'],
+    coexistNote: '已接入 M1 OLED 联动显示：保留 M1 屏幕可实时观察红外 TX/RX 收发状态与累计值；未插屏时自动降级。',
     opticalBeam: {
       path: 'M 272 1018 Q 758 1138 1232 1014',
       startX: 272,
@@ -571,4 +633,47 @@ export function getAppCommands(item, variantKey) {
     buildCmd: `.\\.venv\\Scripts\\python.exe -m west build -p always -b dshanmcu_hpm6e70 applications\\${appName} -d build\\${appName}`,
     flashCmd: `.\\.venv\\Scripts\\python.exe -m west flash -d build\\${appName}`,
   };
+}
+
+/**
+ * Resolve the prebuilt `.hex` download metadata for the active module or M12 variant.
+ */
+export function getFirmwareDownload(item, variantKey) {
+  if (!item) {
+    return null;
+  }
+  if (item.id === COREBOARD_ID) {
+    return {
+      fileName: '',
+      label: '预编译体验固件目录',
+      url: `${FIRMWARE_BASE_URL}/`,
+      isDirectory: true,
+    };
+  }
+  const fileName =
+    item.id === 'm12' && variantKey && M12_VARIANTS[variantKey]
+      ? M12_VARIANTS[variantKey].firmwareFile
+      : item.firmwareFile;
+  if (!fileName) {
+    return null;
+  }
+  return {
+    fileName,
+    label: `下载体验固件 (${fileName})`,
+    url: `${FIRMWARE_BASE_URL}/${fileName}`,
+    isDirectory: false,
+  };
+}
+
+/**
+ * Resolve the matching Phase 2 developer documentation path for the active module.
+ */
+export function getDevLessonPath(item, variantKey) {
+  if (!item || item.id === COREBOARD_ID) {
+    return '/docs/p2-02-一键开发工作流/';
+  }
+  if (item.id === 'm12' && variantKey && M12_VARIANTS[variantKey]) {
+    return M12_VARIANTS[variantKey].devLessonPath;
+  }
+  return item.devLessonPath || '/docs/p2-02-一键开发工作流/';
 }

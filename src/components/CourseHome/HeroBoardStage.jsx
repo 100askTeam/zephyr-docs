@@ -104,13 +104,13 @@ const HW_NODES = [
     lenses: ['all', 'p2', 'p3'],
     accent: 'var(--node-jtag)',
     tag: 'JTAG · OpenOCD',
-    title: 'CH347F 烧录调试座',
+    title: 'JTAG 烧录调试接口',
     card: { x: 598, y: 1234, w: 404, h: 136 },
-    reticle: { x1: 658, y1: 750, x2: 776, y2: 1060 },
-    anchor: { x: 717, y: 1060 },
-    points: '785,1234 785,1194 717,1126 717,1060',
-    telemetryCode: 'runner: openocd (ch347f)',
-    telemetryText: '搭配 CH347F 调试器完成固件烧录、停核与在线调试',
+    reticle: { x1: 658, y1: 750, x2: 776, y2: 1052 },
+    anchor: { x: 717, y: 1052 },
+    points: '785,1234 785,1194 717,1126 717,1052',
+    telemetryCode: 'runner: openocd (JTAG)',
+    telemetryText: '连接 DshanPI USBToolBox 完成固件烧录与在线调试',
     linkLabel: 'JTAG 验证指南 →',
     linkTo: '/docs/common-04-连接JTAG与OpenOCD/',
   },
@@ -121,10 +121,10 @@ const HW_NODES = [
     tag: '2×20 Pin · 14 路外设',
     title: '底板信号扩展母座',
     card: { x: 1030, y: 1234, w: 390, h: 136 },
-    reticle: { x1: 930, y1: 1058, x2: 1328, y2: 1118 },
-    secondaryReticle: { x1: 292, y1: 484, x2: 1328, y2: 542 },
-    anchor: { x: 1160, y: 1118 },
-    points: '1225,1234 1225,1194 1160,1129 1160,1118',
+    reticle: { x1: 306, y1: 1056, x2: 1338, y2: 1114 },
+    secondaryReticle: { x1: 306, y1: 488, x2: 1338, y2: 550 },
+    anchor: { x: 1160, y: 1114 },
+    points: '1225,1234 1225,1194 1160,1129 1160,1114',
     telemetryCode: 'header: 2×20 Pin GPIO/Bus',
     telemetryText: '核心板倒扣接入底板总线，映射 M1–M13 全部模块插座',
     linkLabel: '认识实验套件 →',
@@ -282,9 +282,7 @@ export default function HeroBoardStage() {
               : node.lenses.includes(lens);
             const isFocused = activeInspectId === node.id;
             const nodeOpacity = isHighlighted ? 1 : 0.24;
-            const showSecondary = Boolean(
-              node.secondaryReticle && (isFocused || (lens === 'p1' && !activeInspectId)),
-            );
+            const showSecondary = Boolean(node.secondaryReticle && isHighlighted);
 
             return (
               <g
@@ -361,7 +359,12 @@ export default function HeroBoardStage() {
                 )}
 
                 {showSecondary &&
-                  renderCornerBrackets(node.secondaryReticle, node.accent, 20, 3.6)}
+                  renderCornerBrackets(
+                    node.secondaryReticle,
+                    node.accent,
+                    22,
+                    isFocused ? 5.5 : 4.2,
+                  )}
 
                 {/* Callout Card */}
                 <rect

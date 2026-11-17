@@ -64,7 +64,7 @@ HPM6E70 属于 HPM6E00 系列。板上使用的完整型号是 `HPM6E70IGN1`：`
 
 板卡 USB-C 的 `D+/D-` 是 HPM6E70 的原生 USB；`SBU1/SBU2` 引出了 UART0。普通 USB 数据线不会自动把 SBU 上的 UART 信号转换成 COM 端口。后续串口观察需要分离器把 SBU 信号引出，再交给带 USB-UART 功能的调试器。
 
-JTAG 与 UART 是两条不同通道：JTAG 用来停止 CPU、烧录和调试，UART 用来输出运行日志。它们可以由同一块 CH347F 调试器提供，但不能混为同一组信号。
+JTAG 与 UART 是两条不同通道：JTAG 用来停止 CPU、烧录和调试，UART 用来输出运行日志。它们可以由同一块 DshanPI USBToolBox 调试器提供，但不能混为同一组信号。
 
 ## 本课得到的硬件记录
 

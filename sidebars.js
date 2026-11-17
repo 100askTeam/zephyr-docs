@@ -181,7 +181,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: '一期 · 外设模块实验',
+      label: '一期 · 外设模块快速体验',
       collapsible: true,
       collapsed: true,
       items: [
@@ -194,18 +194,18 @@ const sidebars = {
           items: [
             {
               type: 'doc',
-              id: 'p1-01-RGB全彩LED调色/README',
-              label: '第 1 课：RGB 全彩 LED 调色',
+              id: 'p1-01-OLED双色屏显示/README',
+              label: '第 1 课：OLED 双色屏显示',
             },
             {
               type: 'doc',
-              id: 'p1-02-有源无源蜂鸣器/README',
-              label: '第 2 课：有源/无源蜂鸣器',
+              id: 'p1-02-RGB全彩LED调色/README',
+              label: '第 2 课：RGB 全彩 LED 调色',
             },
             {
               type: 'doc',
-              id: 'p1-03-OLED双色屏显示/README',
-              label: '第 3 课：OLED 双色屏显示',
+              id: 'p1-03-有源无源蜂鸣器/README',
+              label: '第 3 课：有源/无源蜂鸣器',
             },
           ],
         },
@@ -378,6 +378,84 @@ const sidebars = {
             },
           ],
         },
+        {
+          type: 'category',
+          label: '配套外设 Demo 开发详解',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            {
+              type: 'doc',
+              id: 'p2-12-OLED双色屏显示开发/README',
+              label: '第 12 课：OLED 双色屏显示开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-13-RGB全彩LED调色开发/README',
+              label: '第 13 课：RGB 全彩 LED 调色开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-14-有源无源蜂鸣器开发/README',
+              label: '第 14 课：有源/无源蜂鸣器开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-15-DHT11温湿度采集开发/README',
+              label: '第 15 课：DHT11 温湿度采集开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-16-DS18B20单总线测温开发/README',
+              label: '第 16 课：DS18B20 单总线测温开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-17-HC-SR04超声波测距开发/README',
+              label: '第 17 课：HC-SR04 超声波测距开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-18-MPU6050六轴姿态采集开发/README',
+              label: '第 18 课：MPU6050 六轴姿态采集开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-19-光敏电阻亮度采集开发/README',
+              label: '第 19 课：光敏电阻亮度采集开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-20-旋转编码器与按键开发/README',
+              label: '第 20 课：旋转编码器与按键开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-21-红外对管避障检测开发/README',
+              label: '第 21 课：红外对管避障检测开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-22-红外发射与接收通信开发/README',
+              label: '第 22 课：红外发射与接收通信开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-23-W25Q64轮询读写开发/README',
+              label: '第 23 课：W25Q64 轮询读写开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-24-W25Q64中断读写开发/README',
+              label: '第 24 课：W25Q64 中断读写开发',
+            },
+            {
+              type: 'doc',
+              id: 'p2-25-W25Q64-DMA读写开发/README',
+              label: '第 25 课：W25Q64 DMA 读写开发',
+            },
+          ],
+        },
       ],
     },
     {
@@ -420,15 +498,6 @@ const sidebars = {
             'p3-11-编写SDRAM测试/README',
           ],
         },
-      ],
-    },
-    {
-      type: 'category',
-      label: '排查与资料',
-      collapsed: true,
-      items: [
-        'appendix-01-故障排查/README',
-        'appendix-02-资料与下载/README',
       ],
     },
   ],

@@ -23,7 +23,7 @@
     <rect x="55" y="228" width="145" height="82" fill="#f4e9d8"/>
     <text x="127" y="263" text-anchor="middle" font-size="21" font-weight="700" fill="#8a5a19">调试连接</text>
     <text x="127" y="289" text-anchor="middle" font-size="15" fill="#765e3e">OpenOCD</text>
-    <text x="230" y="263" font-size="18" fill="#26384e">CH347F、JTAG、CPU TAP</text>
+    <text x="230" y="263" font-size="18" fill="#26384e">JTAG 调试接口、CPU TAP</text>
     <text x="230" y="289" font-size="16" fill="#5a6b80">电脑能否访问处理器</text>
     <text x="610" y="276" font-size="18" fill="#26384e">TAP ID 0x1000563D</text>
     <text x="1015" y="272" text-anchor="middle" font-size="17" fill="#26384e">调试链路已连通</text>

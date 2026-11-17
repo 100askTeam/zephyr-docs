@@ -261,7 +261,7 @@ Move-Item .\sdk_env\tools\cmake .\sdk\cmake
 Move-Item .\sdk_env\tools\ninja .\sdk\ninja
 ```
 
-CH347 版 OpenOCD、dtc、gperf、zadig 不在 `west update` 的下载内容里，从课程资料包取得后分别放入 `sdk\openocd\`、`sdk\dtc\`、`sdk\gperf\`、`sdk\zadig\`（见[资料与下载](../appendix-02-资料与下载/README.md)）。
+适配 JTAG 烧录调试接口的随包 OpenOCD、dtc、gperf 与调试器驱动安装包（driver）不在 `west update` 的下载内容里，从课程资料包取得后分别放入 `sdk\openocd\`、`sdk\dtc\`、`sdk\gperf\`、`sdk\driver\`。
 
 然后在当前终端逐行执行：
 
