@@ -6,7 +6,7 @@ import KitExplorer from '@site/src/components/KitExplorer';
 
 # 第 14 课：W25Q64 DMA 读写
 
-本课下载预编译固件 [`14_w25q64_dma_demo.hex`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/14_w25q64_dma_demo.hex) 并通过 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 烧录，体验 **HDMA 传输模式**驱动底板 **M12** 上 W25Q64 SPI NOR Flash 的擦除、写入与读回校验。
+本课下载预编译固件 [`14_w25q64_dma_demo.zip`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/14_w25q64_dma_demo.zip)（解压得 `14_w25q64_dma_demo.hex`） 并通过 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 烧录，体验 **HDMA 传输模式**驱动底板 **M12** 上 W25Q64 SPI NOR Flash 的擦除、写入与读回校验。
 
 ## 硬件准备与接线
 
@@ -31,7 +31,7 @@ import KitExplorer from '@site/src/components/KitExplorer';
 
 ## 下载并烧录体验固件
 
-1. **下载预编译固件**：点击下载 [`14_w25q64_dma_demo.hex`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/14_w25q64_dma_demo.hex)（若点击后浏览器直接预览文本，右键链接选择 **“链接另存为”** 保存为 `.hex` 文件）；
+1. **下载并解压预编译固件**：点击下载 [`14_w25q64_dma_demo.zip`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/14_w25q64_dma_demo.zip)，解压得到 `14_w25q64_dma_demo.hex` 烧录文件；
 2. **使用 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 烧录**：打开上位机，按图中的 `①`～`⑥` 步骤直接烧录：
 
 ![使用 DshanPI USBToolBox 烧录体验固件的步骤图解](../p1-00-认识实验套件/images/usbtoolbox-flash-steps.jpg)
@@ -40,7 +40,7 @@ import KitExplorer from '@site/src/components/KitExplorer';
 2. **② 打开 JTAG/SWD 工具**：在左侧功能栏点击 **`JTAG/SWD 工具`**，顶部保持在 **`固件烧录`** 页签；
 3. **③ 选择芯片平台**：下拉选择 **`HPMicro / HPM`**；
 4. **④ 选择目标配置**：下拉选择 **`HPM6E70`**（保持默认通信速率 `500 kHz`，勾选 **`烧录后运行`**）；
-5. **⑤ 加载固件**：点击 **`选择文件`**，导入刚下载的 `14_w25q64_dma_demo.hex`（`.hex` 自带烧录地址，无需填写起始地址）；
+5. **⑤ 加载固件**：点击 **`选择文件`**，导入解压得到的 `14_w25q64_dma_demo.hex`（`.hex` 自带烧录地址，无需填写起始地址）；
 6. **⑥ 检测并烧录**：可先点 **`检测连接`**（日志出现 `Examined RISC-V core`），再点击 **`开始烧录`**；校验完成后固件会自动复位运行。
 
 > 只需快速体验本外设功能时，以上步骤即已完成烧录；如果需要查阅源码位置、调整设备树配置并使用 `west build` / `west flash` 开发，请见 **[二期第 25 课：W25Q64 DMA 读写开发](../p2-25-W25Q64-DMA读写开发/README.md)**。

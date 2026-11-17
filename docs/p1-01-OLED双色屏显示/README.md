@@ -6,7 +6,7 @@ import KitExplorer from '@site/src/components/KitExplorer';
 
 # 第 1 课：OLED 双色屏显示
 
-本课下载预编译固件 [`03_oled_demo.hex`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/03_oled_demo.hex) 并通过 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 烧录，快速点亮底板 **M1** 插座上的 0.96 寸 128×64 黄蓝双色 OLED（SSD1306），展示分区仪表盘界面（顶部黄区模块徽章 + 动态指示，底部蓝区圆角卡片、大字号标题与实时进度条）。
+本课下载预编译固件 [`03_oled_demo.zip`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/03_oled_demo.zip)（解压得 `03_oled_demo.hex`） 并通过 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 烧录，快速点亮底板 **M1** 插座上的 0.96 寸 128×64 黄蓝双色 OLED（SSD1306），展示分区仪表盘界面（顶部黄区模块徽章 + 动态指示，底部蓝区圆角卡片、大字号标题与实时进度条）。
 
 :::tip[建议全程保留 M1 OLED 在底板上]
 **M1（OLED）与底板所有其他外设模块均无引脚冲突**：第 1 课插上验证之后无需拔下，**第 4～14 课的体验固件也会自动驱动这块屏幕实时显示传感器数值、电子水平仪或校验状态**，实验效果比只看串口日志更加直观。
@@ -31,7 +31,7 @@ M1（OLED，`0x3C`）与第 7 课的 M11（MPU6050，`0x68`）共用 I2C1 总线
 
 ## 下载并烧录体验固件
 
-1. **下载预编译固件**：点击下载 [`03_oled_demo.hex`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/03_oled_demo.hex)（若点击后浏览器直接预览文本，右键链接选择 **“链接另存为”** 保存为 `.hex` 文件）；
+1. **下载并解压预编译固件**：点击下载 [`03_oled_demo.zip`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/03_oled_demo.zip)，解压得到 `03_oled_demo.hex` 烧录文件；
 2. **使用 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 烧录**：打开上位机，按图中的 `①`～`⑥` 步骤直接烧录：
 
 ![使用 DshanPI USBToolBox 烧录体验固件的步骤图解](../p1-00-认识实验套件/images/usbtoolbox-flash-steps.jpg)
@@ -40,7 +40,7 @@ M1（OLED，`0x3C`）与第 7 课的 M11（MPU6050，`0x68`）共用 I2C1 总线
 2. **② 打开 JTAG/SWD 工具**：在左侧功能栏点击 **`JTAG/SWD 工具`**，顶部保持在 **`固件烧录`** 页签；
 3. **③ 选择芯片平台**：下拉选择 **`HPMicro / HPM`**；
 4. **④ 选择目标配置**：下拉选择 **`HPM6E70`**（保持默认通信速率 `500 kHz`，勾选 **`烧录后运行`**）；
-5. **⑤ 加载固件**：点击 **`选择文件`**，导入刚下载的 `03_oled_demo.hex`（`.hex` 自带烧录地址，无需填写起始地址）；
+5. **⑤ 加载固件**：点击 **`选择文件`**，导入解压得到的 `03_oled_demo.hex`（`.hex` 自带烧录地址，无需填写起始地址）；
 6. **⑥ 检测并烧录**：可先点 **`检测连接`**（日志出现 `Examined RISC-V core`），再点击 **`开始烧录`**；校验完成后固件会自动复位运行。
 
 > 只需快速体验本外设功能时，以上步骤即已完成烧录；如果需要查阅源码位置、了解黄蓝双色仪表盘 UI 库源码并使用 `west build` / `west flash` 开发，请见 **[二期第 12 课：OLED 双色屏显示开发](../p2-12-OLED双色屏显示开发/README.md)**。

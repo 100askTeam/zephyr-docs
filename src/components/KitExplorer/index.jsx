@@ -1010,10 +1010,10 @@ export default function KitExplorer({
                 <span className={styles.quickVal}>HPM6E70</span>
               </div>
               <div className={styles.quickCell}>
-                <span className={styles.quickKey}>体验固件（自带地址）</span>
+                <span className={styles.quickKey}>烧录镜像（解压后选择）</span>
                 <span className={styles.quickVal}>
                   {firmwareInfo && !firmwareInfo.isDirectory
-                    ? firmwareInfo.fileName
+                    ? firmwareInfo.hexName
                     : '01～14_*.hex'}
                 </span>
               </div>
@@ -1038,8 +1038,8 @@ export default function KitExplorer({
                 className={styles.primaryLink}
                 href={firmwareInfo.url}
                 download={firmwareInfo.isDirectory ? undefined : firmwareInfo.fileName}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={firmwareInfo.isDirectory ? '_blank' : undefined}
+                rel={firmwareInfo.isDirectory ? 'noopener noreferrer' : undefined}
               >
                 {firmwareInfo.label} ↓
               </a>
@@ -1049,8 +1049,8 @@ export default function KitExplorer({
                 className={styles.secondaryLink}
                 href={firmwareInfo.url}
                 download={firmwareInfo.isDirectory ? undefined : firmwareInfo.fileName}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={firmwareInfo.isDirectory ? '_blank' : undefined}
+                rel={firmwareInfo.isDirectory ? 'noopener noreferrer' : undefined}
               >
                 {firmwareInfo.label}
               </a>

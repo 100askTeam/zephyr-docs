@@ -6,7 +6,7 @@ import KitExplorer from '@site/src/components/KitExplorer';
 
 # 第 2 课：RGB 全彩 LED 调色
 
-本课使用预编译固件 [`01_rgb_led_demo.hex`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/01_rgb_led_demo.hex) 配合 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 图形化烧录，通过底板 **M3** 插座上的全彩 LED 模块快速体验红、绿、蓝、黄、青、品红、白、灭 8 种颜色循环切换与串口调色日志（无需搭建编译环境）。
+本课使用预编译固件 [`01_rgb_led_demo.zip`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/01_rgb_led_demo.zip)（解压得 `01_rgb_led_demo.hex`） 配合 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 图形化烧录，通过底板 **M3** 插座上的全彩 LED 模块快速体验红、绿、蓝、黄、青、品红、白、灭 8 种颜色循环切换与串口调色日志（无需搭建编译环境）。
 
 :::tip[开始本课前先确认]
 1. 已按 [连接并验证 JTAG](../common-04-连接JTAG与OpenOCD/README.md) 接好 JTAG 烧录调试接口并确认驱动正常；
@@ -34,7 +34,7 @@ import KitExplorer from '@site/src/components/KitExplorer';
 
 ## 下载并烧录体验固件
 
-1. **下载预编译固件**：点击下载 [`01_rgb_led_demo.hex`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/01_rgb_led_demo.hex)（若点击后浏览器直接预览文本，右键链接选择 **“链接另存为”** 保存为 `.hex` 文件）；
+1. **下载并解压预编译固件**：点击下载 [`01_rgb_led_demo.zip`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/01_rgb_led_demo.zip)，解压得到 `01_rgb_led_demo.hex` 烧录文件；
 2. **使用 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 烧录**：打开上位机，按图中的 `①`～`⑥` 步骤直接烧录：
 
 ![使用 DshanPI USBToolBox 烧录体验固件的步骤图解](../p1-00-认识实验套件/images/usbtoolbox-flash-steps.jpg)
@@ -43,7 +43,7 @@ import KitExplorer from '@site/src/components/KitExplorer';
 2. **② 打开 JTAG/SWD 工具**：在左侧功能栏点击 **`JTAG/SWD 工具`**，顶部保持在 **`固件烧录`** 页签；
 3. **③ 选择芯片平台**：下拉选择 **`HPMicro / HPM`**；
 4. **④ 选择目标配置**：下拉选择 **`HPM6E70`**（保持默认通信速率 `500 kHz`，勾选 **`烧录后运行`**）；
-5. **⑤ 加载固件**：点击 **`选择文件`**，导入刚下载的 `01_rgb_led_demo.hex`（`.hex` 自带烧录地址，无需填写起始地址）；
+5. **⑤ 加载固件**：点击 **`选择文件`**，导入解压得到的 `01_rgb_led_demo.hex`（`.hex` 自带烧录地址，无需填写起始地址）；
 6. **⑥ 检测并烧录**：可先点 **`检测连接`**（日志出现 `Examined RISC-V core`），再点击 **`开始烧录`**；校验完成后固件会自动复位运行。
 
 > 只需快速体验本外设功能时，以上步骤即已完成烧录；如果需要查阅源码位置、调整设备树配置并使用 `west build` / `west flash` 开发，请见 **[二期第 13 课：RGB 全彩 LED 调色开发](../p2-13-RGB全彩LED调色开发/README.md)**。
