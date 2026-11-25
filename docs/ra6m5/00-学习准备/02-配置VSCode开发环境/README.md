@@ -1,116 +1,116 @@
 ---
 sidebar_position: 2
-sidebar_label: "配置 VS Code 开发环境"
-title: "配置 VS Code 开发环境"
+sidebar_label: "获取工程与配置 VS Code"
+title: "获取工程与配置 VS Code"
 slug: /ra6m5/preparation/vscode/
 ---
 
-# 配置 VS Code 开发环境
+# 获取工程与配置 VS Code
 
-上一节已经解压课程工程，并在设备管理器中找到了开发板的串口。接下来把工程放进 VS Code，安装代码编辑和串口查看所用的扩展，再检查电脑能否通过工程配套工具找到开发板。
+硬件串口已经识别后，接下来下载 **RA6M5 完整课程工程包**，用 VS Code 打开工程并安装两项必备扩展，最后在终端确认烧录器与串口全部就绪。
 
-课程工程的 `.venv` 与 `sdk` 已包含全部开发工具：`.venv/Scripts` 里是 python/west 两个原生启动器，真正的 Python、west、CMake、Ninja、Git、Arm 编译器和 probe-rs 都在 `sdk/` 下。VS Code 提供编辑界面，编译、烧录在终端里用 west 调用这些配套工具；保留工程目录的相对位置即可，无需重新搭建 Zephyr 工具链，换电脑也不需要重装。
+**工程包已随包内置全部开发工具**（Python、CMake、Ninja、Git、Arm GNU 编译器、probe-rs 与 `west`），**无需单独搭建 Zephyr 工具链或配置系统环境变量**。
 
-## 安装 VS Code
+## 第一步：下载并解压课程工程
 
-打开 [VS Code 官方下载页](https://code.visualstudio.com/download)，在 **Windows** 下选择 **User Installer → x64**，下载适用于普通 Intel / AMD 64 位 Windows 电脑的安装程序。这里选择的是**电脑的架构**；开发板使用 Arm 芯片，不表示电脑也要下载 Arm64 版。
+1. 从百度网盘下载 **RA6M5 完整课程工程包**（压缩包约 2.0 GB）：
+   - 下载地址：[RA6M5 Zephyr 完整课程工程（百度网盘）](https://pan.baidu.com/s/12Jvgj1c3axk7P83eyjcnKg?pwd=jam7)
+   - 提取码：`jam7`
+2. 将压缩包完整解压到**不包含中文和空格的短路径**，例如 `D:\work\RA6M5\`（避免解压到桌面、中文目录或过深路径）。
 
-运行下载的 `VSCodeUserSetup-…exe`，按安装向导完成安装，然后启动 **Visual Studio Code**。User Installer 安装到当前 Windows 用户，通常无需管理员权限；具体选项见 [VS Code 官方 Windows 安装说明](https://code.visualstudio.com/docs/setup/windows)。已经安装 VS Code 时，直接继续下面的操作。
+解压完成后，打开 `RA6M5` 根目录，确认包含以下核心目录即可（请保持相对位置不变，不要单独移动 `.venv` 或 `sdk`）：
 
-本文截图使用中文界面，正文同时给出关键菜单的英文名称。安装后的欢迎页和登录提示不影响打开本地工程。
+| 目录 | 作用 |
+| --- | --- |
+| `.venv/` | 随包命令行启动器（`python.exe`、`west.exe`），自动关联 `sdk/` 工具链 |
+| `.vscode/` | 随工程提供的 VS Code 终端环境、扩展推荐与代码索引配置 |
+| `.west/` | `west` 工作区配置，指向 `platform/west.yml` |
+| `applications/` | 9 个可独立编译运行的 Zephyr 示例应用（含 `board_bringup` 等） |
+| `platform/` | RA6M5 板卡定义、自研驱动、设备树 Binding 与烧录 runner |
+| `sdk/`、`zephyr/`、`modules/` | 内置 Arm 工具链/probe-rs、Zephyr v4.4.2 内核与依赖模块 |
 
-## 打开完整的 RA6M5 工程
+## 第二步：用 VS Code 打开 RA6M5 根目录
 
-点击 **“文件（File）” → “打开文件夹…（Open Folder…）”**（图中红框处），在文件夹选择窗口中找到解压后的 `RA6M5` 目录，点击“选择文件夹”。
+如果电脑还没有安装 VS Code，先前往 [VS Code 官方下载页](https://code.visualstudio.com/download) 下载 **Windows → User Installer → x64**（普通 64 位 Windows 电脑均选 x64，不要误选 Arm64）并按向导安装完成。
+
+启动 VS Code 后，点击顶部菜单 **文件（File） → 打开文件夹…（Open Folder…）**，选中解压后的 **`RA6M5`** 根目录：
 
 [![在 VS Code 文件菜单中选择打开文件夹](./images/vscode-open-folder.png)](./images/vscode-open-folder.png)
 
-*图 1：红框标出“文件”菜单和其中的“打开文件夹…”。点击图片可查看原图。*
+<p className="image-caption">在“文件”菜单点击“打开文件夹…”，选中包含 applications、platform 和 .west 的 RA6M5 根目录。</p>
 
-打开后，点击左侧“资源管理器（Explorer）”，检查根目录名称与目录内容：应能同时找到 `.vscode`、`.west`、`applications`、`platform`、`patches`、`scripts` 和 `zephyr`。`sdk` 与 `.venv` 默认被 `files.exclude` 隐藏，不在资源管理器里显示，但终端命令仍会使用它们。
+打开后看左侧「资源管理器（Explorer）」确认目录层级正确（`sdk` 与 `.venv` 默认被工程配置隐藏，属于正常现象，不影响终端调用）：
 
 <a href={require('./images/vscode-workspace-root.png').default}><img src={require('./images/vscode-workspace-root.png').default} alt="确认 VS Code 打开的是包含配置与工具的 RA6M5 根目录" width="380" /></a>
 
-*图 2：资源管理器中的 RA6M5 根目录，含 applications、platform、patches 等目录；sdk 与 .venv 默认隐藏。点击图片可查看原图。*
+<p className="image-caption">确认打开的是最外层 RA6M5 根目录；如弹出“是否信任此文件夹中文件的作者”，请选择信任。</p>
 
-**打开目录的层级会影响后面的操作。** VS Code 从当前文件夹的 `.vscode` 读取推荐扩展和终端环境。如果只打开 `applications/board_bringup`、`zephyr` 或一个 `main.c`，这些工程配置就不会按本教程的方式加载。后文的终端命令找不到配套工具时，先回到“打开文件夹”，重新选择整个工程根目录。
+:::caution[一定要打开整个 RA6M5 根目录]
+不要只打开 `applications/board_bringup` 或单个 `main.c`，否则 `.vscode/` 中的终端环境与代码索引配置不会加载。
+:::
 
-若首次打开时出现“是否信任此文件夹中文件的作者”提示，确认选择的是你从课程渠道取得的工程，再选择信任，以允许工程配置生效。工作区信任的作用见 [VS Code 官方说明](https://code.visualstudio.com/docs/editing/workspaces/workspace-trust)。
+## 第三步：安装两项扩展 {#安装工程使用的两项扩展}
 
-## 安装工程使用的两项扩展
+按 **`Ctrl + Shift + X`** 打开左侧「扩展（Extensions）」，安装下面两项由 **Microsoft** 发布的扩展（也可以在搜索框输入 `@recommended` 直接从工作区推荐列表查看）：
 
-工程里的 `.vscode/extensions.json` 保存推荐名单，但**推荐不代表已经安装**。即使没有看到右下角提示，也可以按 **Ctrl+Shift+X** 打开“扩展（Extensions）”，在顶部搜索框输入 `@recommended`，查看“工作区推荐（Workspace Recommendations）”。这一入口由 VS Code 提供，见[官方推荐扩展说明](https://code.visualstudio.com/docs/configure/extensions/extension-marketplace#_workspace-recommended-extensions)。
-
-课程使用以下两项。可以从推荐列表逐一打开，也可以清空搜索框，输入表中完整的 **`@id:…`** 条件直接查找：
-
-| 扩展与发布者 | 扩展搜索框中输入 | 在课程中的用途 |
+| 扩展名称（发布者：Microsoft） | 搜索关键词 / 完整 ID | 用途 |
 | --- | --- | --- |
-| [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) · Microsoft | `@id:ms-vscode.cpptools` | C 代码补全、函数跳转和编辑检查 |
-| [Serial Monitor](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-serial-monitor) · Microsoft | `@id:ms-vscode.vscode-serial-monitor` | 在 VS Code 面板中选择串口并查看打印信息 |
+| [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) | `@id:ms-vscode.cpptools` | C 代码补全、函数跳转与语法提示 |
+| [Serial Monitor](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-serial-monitor) | `@id:ms-vscode.vscode-serial-monitor` | 在 VS Code 底部面板直接查看串口日志 |
 
-### 查找扩展并确认安装状态
-
-以 **Serial Monitor** 为例，按图中的位置操作：
-
-1. 点击 **①扩展图标**。
-2. 在 **②搜索框**中输入 `Serial Monitor`；想直接定位时，也可以输入表中的完整 ID 条件。
-3. 打开扩展详情，核对 **③名称为 Serial Monitor、发布者为 Microsoft**。
-4. 查看 **④按钮区域**。未安装时点击“安装（Install）”并等待完成；若显示“禁用（Disable）”和“卸载（Uninstall）”，说明已经安装。
+以 **Serial Monitor** 为例，对照图中标号 `1`～`4` 确认安装状态：
 
 [![搜索微软 Serial Monitor 并核对安装状态](./images/vscode-serial-plugin-install.png)](./images/vscode-serial-plugin-install.png)
 
-*图 3：①扩展入口，②搜索框，③名称与发布者，④安装状态。本图是在已安装的电脑上截取的，因此④显示“禁用”和“卸载”。*
+1. 点击左侧 **扩展图标**（图中标号 `1`）；
+2. 在顶部 **搜索框** 输入 `Serial Monitor` 或表中的完整 ID（标号 `2`）；
+3. 核对扩展名称为 **Serial Monitor**、发布者为 **Microsoft**（标号 `3`）；
+4. 未安装时点击 **安装（Install）**；若已显示「禁用 / 卸载」说明安装就绪（标号 `4`）。
 
-用相同的方法检查 **C/C++**。如果详情页显示“启用（Enable）”，先启用；出现“重新加载窗口”或“重启扩展”按钮时，按提示完成后再继续。列表中暂时没有推荐项时，仍可通过表中的 ID 查找并检查状态。
+用同样的方法安装并确认 **C/C++** 扩展。烧录工具 **probe-rs** 已内置在 `sdk/probe-rs/` 中，无需额外安装烧录扩展。
 
-烧录用的 **probe-rs 0.32.0** 已在工程内 `sdk/probe-rs/` 中，由工程配置指定路径，不需要在编辑器里另装扩展。
+## 第四步：在终端检测烧录器与串口
 
-### 工程已经提供的配置
+保持开发板通过 **`Debug`** 接口连在电脑上。在 VS Code 顶部点击 **终端（Terminal） → 新建终端（New Terminal）**（窗口较窄时先点菜单栏里的 **`...`**），确认打开的是 **PowerShell** 且当前路径位于 `RA6M5` 根目录。
 
-展开资源管理器中的 `.vscode`，可以找到下面这些文件。它们随课程工程提供，首次使用不用重新创建：
-
-| 文件 | VS Code 如何使用它 |
-| --- | --- |
-| `extensions.json` | 显示前面的三项扩展推荐 |
-| `settings.json` | 配好终端环境变量，使终端里的 west 直接使用随包工具链 |
-| `c_cpp_properties.json` | 让 C/C++ 扩展使用工程内的 Arm 编译器及当前应用的代码索引 |
-
-C/C++ 扩展本身不包含编译器，见[官方 C/C++ 说明](https://code.visualstudio.com/docs/languages/cpp)。本工程已经配好 Arm 编译器，后面在终端里用 `west build` 构建整个 Zephyr 应用；不使用源码右上角的“运行 C/C++ 文件”按钮编译单个文件。
-
-初次构建前，编辑器可能提示找不到 `compile_commands.json` 或某些生成头文件。这个索引由构建过程生成，构建成功后会自动发布到 `build/compile_commands.json`，供 C/C++ 扩展读取。完成下一篇的首次构建后再检查代码提示；红色波浪线和终端中的编译结果需要分别判断。
-
-## 在终端检查工程工具与开发板
-
-保持开发板连接 **Debug** 接口。在 VS Code 中选择 **“终端（Terminal）→ 新建终端（New Terminal）”**，使用 **PowerShell**。窗口较窄时，“终端”菜单可能收在顶部的“…”中。
-
-终端提示符中 `PS` 后面的路径应是解压后的工程根目录。以下两条命令都从这一层执行；开头的 `.\` 表示从当前目录查找配套工具。
-
-先输入下面的命令，按回车列出板载烧录器：
+依次执行以下两条命令，确认工程工具能枚举到板载烧录器和串口：
 
 ```powershell
 .\sdk\probe-rs\probe-rs.exe list
-```
-
-输出中应出现 **`WCH-Link`**，设备标识包含 **`1a86:8011`**，括号内为 **`CMSIS-DAP`**。这表示工程里的 probe-rs 程序已经运行，并找到了板载烧录器。
-
-等提示符重新出现，再输入第二条命令，列出串口：
-
-```powershell
 .\.venv\Scripts\python.exe -m serial.tools.list_ports -v
 ```
 
-找到硬件标识包含 **`VID:PID=1A86:8011`** 的 USB 串口，并核对它的 COM 编号是否与设备管理器一致。不要把列表中的蓝牙串口当作开发板。
+对照下图核对输出：
 
 [![VS Code 终端中检查到 WCH-Link 烧录器和开发板串口](./images/vscode-probe-and-serial-check.png)](./images/vscode-probe-and-serial-check.png)
 
-*图 4：红框处分别为 probe-rs 枚举到的 WCH-Link（CMSIS-DAP，`1a86:8011`）与串口列表中 `VID:PID=1A86:8011` 的 USB 串行设备（本例 COM10）。COM 编号以你的电脑实际识别为准。点击图片可查看原图。*
+- 第一条命令应列出 **`WCH-Link`**，包含 **`1a86:8011`** 与 **`CMSIS-DAP`**；
+- 第二条命令应找到 **`VID:PID=1A86:8011`** 的 USB 串行设备，记下它的 COM 编号（以本机实际分配为准）。
 
-两条命令都能执行，且分别找到调试器和串口，说明工程工具与 USB 连接已具备后续操作条件。这里执行的是设备枚举，还没有编译或烧录应用。
+## 常见问题排查
 
-| 当前现象 | 处理方法 |
+| 现象 | 解决方法 |
 | --- | --- |
-| 提示找不到命令或文件 | 检查终端是否在工程根目录，以及 `.venv`、`sdk` 是否完整解压 |
-| `probe-rs list` 没有列出调试器 | 检查 USB 是否插在 Debug、线缆是否支持数据传输、开发板是否正常供电 |
-| 没有找到对应 USB 串口 | 回到[电脑识别检查](../01-准备工程与连接开发板/README.md#确认电脑识别到开发板)，查看设备管理器和串口驱动 |
+| 提示找不到命令或文件 | 确认终端当前路径在 `RA6M5` 根目录，且 `.venv`、`sdk` 已完整解压 |
+| `probe-rs list` 没有列出 `WCH-Link` | 检查 Type-C 线是否插在 **`Debug`** 口（而非 `OTG`）、线缆是否支持数据传输、开发板 `PWR` 灯是否点亮 |
+| 列表里没有 `VID:PID=1A86:8011` 串口 | 回到 [连接开发板与确认串口](../01-准备工程与连接开发板/README.md#确认电脑识别到开发板) 检查设备管理器与 WCH 串口驱动 |
 
-现在，VS Code 已打开完整工程，三项扩展已安装，工程工具也能找到开发板。继续阅读[编译与烧录程序](../03-编译与烧录程序/README.md)，通过任务选择 `board_bringup`，完成第一次构建和下载。
+<details>
+<summary>补充说明：`.vscode/` 内置配置与首次打开时的红色波浪线</summary>
+
+工程自带的 `.vscode/` 包含三个预配置文件，无需手动新建：
+
+| 文件 | 作用 |
+| --- | --- |
+| `extensions.json` | 声明 `C/C++` 与 `Serial Monitor` 两项工作区推荐扩展 |
+| `settings.json` | 自动配置 VS Code 终端环境变量，并隐藏庞大的 `sdk/`、`.venv/` 目录 |
+| `c_cpp_properties.json` | 让 C/C++ 扩展读取工程内 Arm 编译器与 `build/compile_commands.json` 代码索引 |
+
+- **关于红色波浪线**：首次编译前尚未生成 `build/compile_commands.json`，C/C++ 扩展可能暂时报头文件找不到。完成下一篇首次 `west build` 后索引会自动更新，无需手动处理。
+- **不要点右上角「运行 C/C++ 文件」**：Zephyr 工程统一通过终端 `west build` 完整构建。
+
+</details>
+
+---
+
+[上一步：连接开发板与确认串口](../01-准备工程与连接开发板/README.md) · [下一步：编译烧录第一个闪灯程序](../03-编译与烧录程序/README.md)

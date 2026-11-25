@@ -162,6 +162,17 @@
   overflow-wrap: anywhere;
 }
 
+.cmdBlock {
+  margin: 0.75rem 0 0.85rem;
+}
+
+.cmdLabel {
+  margin-bottom: 0.4rem;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
 @media (max-width: 600px) {
   .example summary {
     grid-template-columns: minmax(0, 1fr) 1.2rem;

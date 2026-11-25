@@ -15,15 +15,15 @@ import styles from './overview.module.css';
     <div className="course-hero__copy">
       <span className="course-hero__eyebrow">RA6M5 Zephyr 快速入门</span>
       <h1 id="ra6m5-course-title">从应用开发到设备驱动</h1>
-      <p className="course-hero__lead">从课程工程的 platform 与 applications 结构开始，掌握 Zephyr 工程、设备树与配置，逐步编写应用和设备驱动，在 RA6M5 开发板上完成编译与烧录。</p>
+      <p className="course-hero__lead">基于 DShanMCU RA6M5 开发板，一根 USB-C 线直连、工程内置全部工具链，从点亮板载 LED 逐步掌握 Zephyr 应用开发与自定义设备驱动。</p>
       <div className="course-hero__actions">
-        <Link className="course-button course-button--primary" to="/docs/ra6m5/preparation/project-and-board/">从学习准备开始</Link>
-        <Link className="course-button course-button--text" to="/docs/ra6m5/application/example-application/">已完成准备，进入第 1 章 →</Link>
+        <Link className="course-button course-button--primary" to="/docs/ra6m5/preparation/project-and-board/">开始之前准备 →</Link>
+        <Link className="course-button course-button--text" to="/docs/ra6m5/application/example-application/">已完成准备，进入第 1 章</Link>
       </div>
       <div className="course-hero__facts" aria-label="课程特点">
-        <span>配套完整工程</span>
-        <span>板载外设实验</span>
-        <span>逐步编写代码</span>
+        <span>一根 USB-C 线直连</span>
+        <span>工程内置全套工具链</span>
+        <span>9 个板载外设示例</span>
       </div>
     </div>
     <figure className="course-hero__visual">
@@ -32,35 +32,9 @@ import styles from './overview.module.css';
       </div>
       <figcaption>
         <strong>DShanMCU RA6M5 开发板</strong>
-        <span>板载外设与烧录器 · 一根 USB 数据线连接电脑</span>
+        <span>板载外设与 WCH-Link 调试器 · 一根 USB-C 线连接电脑</span>
       </figcaption>
     </figure>
-  </section>
-
-  <section aria-labelledby="ra6m5-capabilities">
-    <h2 id="ra6m5-capabilities">你会掌握的四项能力</h2>
-    <div className="course-capabilities">
-      <div>
-        <span>01</span>
-        <strong>组织 Zephyr 应用</strong>
-        <p>理解工作区与应用目录，通过 CMake 加入源码，用 Kconfig 选择软件功能。</p>
-      </div>
-      <div>
-        <span>02</span>
-        <strong>配置并使用设备</strong>
-        <p>从设备树找到设备实例，启用驱动，通过统一 API 完成设备访问。</p>
-      </div>
-      <div>
-        <span>03</span>
-        <strong>编写 Zephyr 驱动</strong>
-        <p>连接 Binding、设备注册、初始化与事件上报，将自定义驱动接入工程。</p>
-      </div>
-      <div>
-        <span>04</span>
-        <strong>构建与验证</strong>
-        <p>核对生成的配置与设备树，结合串口日志和实物现象检查程序。</p>
-      </div>
-    </div>
   </section>
 
   <section aria-labelledby="ra6m5-curriculum">
@@ -69,13 +43,13 @@ import styles from './overview.module.css';
       <section className={styles.stage} aria-labelledby="ra6m5-preparation">
         <span className={styles.stageNumber} aria-hidden="true">00</span>
         <div className={styles.stageIntro}>
-          <h3 id="ra6m5-preparation">学习准备</h3>
-          <p>获取课程工程，连接开发板，配置 VS Code，掌握编译与烧录操作。</p>
+          <h3 id="ra6m5-preparation">开始之前</h3>
+          <p>连接开发板并确认串口，获取完整工程配置 VS Code，编译烧录第一个闪灯程序。</p>
         </div>
         <ul className={styles.lessons}>
-          <li><Link to="/docs/ra6m5/preparation/project-and-board/">准备工程与连接开发板<span aria-hidden="true">→</span></Link></li>
-          <li><Link to="/docs/ra6m5/preparation/vscode/">配置 VS Code 开发环境<span aria-hidden="true">→</span></Link></li>
-          <li><Link to="/docs/ra6m5/preparation/build-flash-debug/">编译与烧录程序<span aria-hidden="true">→</span></Link></li>
+          <li><Link to="/docs/ra6m5/preparation/project-and-board/">连接开发板与确认串口<span aria-hidden="true">→</span></Link></li>
+          <li><Link to="/docs/ra6m5/preparation/vscode/">获取工程与配置 VS Code<span aria-hidden="true">→</span></Link></li>
+          <li><Link to="/docs/ra6m5/preparation/build-flash-debug/">编译烧录第一个闪灯程序<span aria-hidden="true">→</span></Link></li>
         </ul>
       </section>
       <section className={styles.stage} aria-labelledby="ra6m5-application">
@@ -110,7 +84,7 @@ import styles from './overview.module.css';
     <h2 id="ra6m5-references">工程参考</h2>
     <div className={styles.referenceLinks}>
       <Link to="/docs/ra6m5/reference/hardware/"><strong>RA6M5 芯片与硬件<span aria-hidden="true">→</span></strong><span>芯片规格、瑞萨官方框图与板载接口。</span></Link>
-      <Link to="/docs/ra6m5/reference/examples/"><strong>配套示例详解<span aria-hidden="true">→</span></strong><span>按功能查看 9 个应用的用途、操作和运行结果。</span></Link>
+      <Link to="/docs/ra6m5/reference/examples/"><strong>配套示例详解<span aria-hidden="true">→</span></strong><span>按功能查看 9 个应用的用途、操作、运行结果与编译命令。</span></Link>
     </div>
   </section>
 
@@ -123,7 +97,7 @@ import styles from './overview.module.css';
       </div>
       <div>
         <strong>开发主机</strong>
-        <span className="course-requirements__description">Windows 电脑与 VS Code，使用课程工程配套的开发工具和板卡支持。</span>
+        <span className="course-requirements__description">Windows 电脑与 VS Code，使用课程工程配套的内置工具链和板卡支持。</span>
       </div>
       <div>
         <strong>已有知识</strong>
@@ -131,8 +105,8 @@ import styles from './overview.module.css';
       </div>
     </div>
     <div className={styles.startRow}>
-      <p>准备好开发板，开始第一个 Zephyr 工程。</p>
-      <Link className="course-button course-button--primary" to="/docs/ra6m5/preparation/project-and-board/">准备工程与连接开发板 →</Link>
+      <p>准备好开发板，从连接 Debug 接口开始第一个 Zephyr 工程。</p>
+      <Link className="course-button course-button--primary" to="/docs/ra6m5/preparation/project-and-board/">连接开发板与确认串口 →</Link>
     </div>
   </section>
 </div>
