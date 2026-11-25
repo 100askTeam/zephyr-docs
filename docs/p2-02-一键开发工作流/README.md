@@ -34,7 +34,7 @@ HPM6E70 工程的 `applications/` 目录中保存多个应用。本课把其中�
 
 ## 烧录到板卡
 
-烧录前先完成[连接并验证 JTAG](../common-04-连接JTAG与OpenOCD/README.md)：五根 JTAG 线接好，已安装 DshanPI USBToolBox 驱动并识别出 JTAG 烧录调试接口。然后执行：
+烧录前先完成 [连接调试器与串口](../start-01-连接调试器与串口/README.md) 与 [安装 USBToolBox 与驱动](../start-02-安装USBToolBox与驱动/README.md)：五根 JTAG 线接好，已安装驱动并关闭 `USBToolBox` 上位机。然后执行：
 
 ```powershell
 .\.venv\Scripts\python.exe -m west flash -d build\hpm6e70_demo
@@ -50,7 +50,7 @@ HPM6E70 工程的 `applications/` 目录中保存多个应用。本课把其中�
 
 ## 确认程序在运行
 
-烧录完成后打开串口（115200 8N1），按一下板卡复位键，应看到 Zephyr 启动横幅和应用打印。串口的连接与查看方法见[连接串口并查看日志](../common-05-连接串口并查看日志/README.md)。
+烧录完成后打开串口（115200 8N1），按一下板卡复位键，应看到 Zephyr 启动横幅和应用打印。串口接线与工具设置见 [连接调试器与串口](../start-01-连接调试器与串口/README.md) 和 [烧录第一个闪灯程序](../start-03-烧录第一个闪灯程序/README.md)。
 
 `hpm6e70_demo` 会打印 UART 与 SDRAM 自检结果，并让板载 LED 周期性闪烁。有打印、灯在闪，本课的构建烧录链路就通了。
 

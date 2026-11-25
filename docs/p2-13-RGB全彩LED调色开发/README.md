@@ -186,7 +186,7 @@ static int set_channel(const struct pwm_dt_spec *spec, uint8_t percent)
 
 ## 编译步骤（`west build`）
 
-确认已按 [准备开发环境](../common-01-准备开发环境/README.md) 检查完 `HPM6E70` 工程根目录环境后，执行：
+确认已按 [获取源码与编译烧录](../start-04-获取源码与编译烧录/README.md) 检查完 `HPM6E70` 工程根目录环境后，执行：
 
 ```powershell
 .\.venv\Scripts\python.exe -m west build -p always -b dshanmcu_hpm6e70 applications\rgb_led_demo -d build\rgb_led_demo
@@ -197,7 +197,7 @@ static int set_channel(const struct pwm_dt_spec *spec, uint8_t percent)
 
 ## 烧录步骤与串口验证（`west flash`）
 
-确认 JTAG 与串口按 [连接并验证 JTAG](../common-04-连接JTAG与OpenOCD/README.md) 接好且板卡已上电，将 RGB LED 模块插到底板 **M3** 插座，执行：
+确认 JTAG 与串口按 [连接调试器与串口](../start-01-连接调试器与串口/README.md) 接好且板卡已上电，将 RGB LED 模块插到底板 **M3** 插座，执行：
 
 ```powershell
 .\.venv\Scripts\python.exe -m west flash -d build\rgb_led_demo

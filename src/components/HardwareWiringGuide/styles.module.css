@@ -1,0 +1,423 @@
+.root {
+  margin: 1rem 0 1.35rem;
+  border: 1px solid rgba(23, 105, 170, 0.2);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  box-shadow: 0 10px 28px rgba(15, 39, 66, 0.06);
+  overflow: hidden;
+}
+
+:global([data-theme='dark']) .root {
+  border-color: rgba(105, 183, 240, 0.24);
+  background: linear-gradient(180deg, #102030 0%, #0d1824 100%);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Header bar */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.78rem 1.05rem;
+  border-bottom: 1px solid rgba(23, 105, 170, 0.12);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+:global([data-theme='dark']) .header {
+  border-bottom-color: rgba(105, 183, 240, 0.16);
+  background: rgba(16, 32, 48, 0.88);
+}
+
+.headerTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.modePill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.62rem;
+  border-radius: 999px;
+  background: var(--ifm-color-primary);
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+:global([data-theme='dark']) .modePill {
+  background: #69b7f0;
+  color: #081826;
+}
+
+.headerTitle {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--ifm-heading-color);
+}
+
+.stickerToggle {
+  appearance: none;
+  border: 1px solid rgba(23, 105, 170, 0.28);
+  border-radius: 999px;
+  padding: 0.34rem 0.82rem;
+  background: #ffffff;
+  color: var(--ifm-color-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.stickerToggle:hover,
+.stickerToggleActive {
+  background: rgba(23, 105, 170, 0.09);
+  border-color: var(--ifm-color-primary);
+}
+
+:global([data-theme='dark']) .stickerToggle {
+  background: rgba(15, 29, 43, 0.8);
+  color: #86c6f5;
+  border-color: rgba(105, 183, 240, 0.3);
+}
+
+/* Main 2-column large hardware stage */
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: stretch;
+  padding: 0.95rem 1.05rem 0.75rem;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(15, 39, 66, 0.1);
+  border-radius: 12px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+:global([data-theme='dark']) .panel {
+  border-color: rgba(148, 163, 184, 0.18);
+  background: #132231;
+}
+
+.panelHead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid rgba(15, 39, 66, 0.08);
+  background: rgba(241, 247, 253, 0.7);
+}
+
+:global([data-theme='dark']) .panelHead {
+  border-bottom-color: rgba(148, 163, 184, 0.14);
+  background: rgba(20, 38, 56, 0.8);
+}
+
+.panelTitle {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--ifm-heading-color);
+  line-height: 1.3;
+}
+
+.panelSub {
+  font-size: 0.74rem;
+  color: var(--ifm-color-emphasis-600);
+  line-height: 1.38;
+}
+
+.svgWrap {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem;
+  background: radial-gradient(circle at 50% 50%, #f5f9fe 0%, #eef4fa 100%);
+}
+
+:global([data-theme='dark']) .svgWrap {
+  background: radial-gradient(circle at 50% 50%, #192d42 0%, #111f2d 100%);
+}
+
+.stageSvg {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+}
+
+.interactivePin {
+  cursor: pointer;
+  transition: opacity 0.18s ease;
+}
+
+/* Horizontal interactive wire strip */
+.wireStrip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0 1.05rem 0.9rem;
+}
+
+.wireGridJtag {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.wireGridUart {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.wireColHint {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.wireCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border: 1.5px solid var(--ifm-color-emphasis-200);
+  border-left: 4px solid var(--wire-color, #0284c7);
+  border-radius: 10px;
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease, opacity 0.16s ease;
+}
+
+:global([data-theme='dark']) .wireCard {
+  background: #132231;
+  border-color: rgba(148, 163, 184, 0.22);
+  border-left-color: var(--wire-color, #38bdf8);
+}
+
+.wireCard:hover {
+  transform: translateY(-1px);
+  border-color: var(--wire-color, #0284c7);
+  box-shadow: 0 6px 14px rgba(15, 39, 66, 0.08);
+}
+
+.wireCardActive {
+  border-color: var(--wire-color, #0284c7);
+  background: var(--wire-bg, rgba(2, 132, 199, 0.07));
+  box-shadow: 0 6px 16px rgba(15, 39, 66, 0.11);
+}
+
+:global([data-theme='dark']) .wireCardActive {
+  background: rgba(56, 189, 248, 0.14);
+}
+
+.wireCardDim {
+  opacity: 0.36;
+}
+
+.wireCardTop {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.numBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.28rem;
+  height: 1.28rem;
+  border-radius: 999px;
+  background: var(--wire-color, #0284c7);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1;
+  flex-shrink: 0;
+  font-family: ui-monospace, Consolas, sans-serif;
+}
+
+.wireSignal {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--wire-color, #0284c7);
+  line-height: 1.2;
+}
+
+.wireMap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+  font-family: ui-monospace, Consolas, 'Microsoft YaHei', sans-serif;
+}
+
+.wireArrow {
+  color: var(--wire-color, #0284c7);
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* Guided step footer */
+.guideBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.78rem 1.05rem;
+  border-top: 1px solid rgba(23, 105, 170, 0.12);
+  background: rgba(241, 247, 253, 0.82);
+}
+
+:global([data-theme='dark']) .guideBar {
+  border-top-color: rgba(105, 183, 240, 0.16);
+  background: rgba(16, 32, 48, 0.85);
+}
+
+.guideCopy {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+  flex: 1 1 20rem;
+}
+
+.guideStepBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.45rem;
+  height: 1.45rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  font-family: ui-monospace, Consolas, sans-serif;
+}
+
+.guideText {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--ifm-heading-color);
+  font-weight: 600;
+}
+
+.guideControls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.ctrlBtn {
+  appearance: none;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  padding: 0.36rem 0.74rem;
+  background: #ffffff;
+  color: var(--ifm-heading-color);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.14s ease, color 0.14s ease, background-color 0.14s ease;
+}
+
+.ctrlBtn:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.ctrlBtnPrimary {
+  border-color: var(--ifm-color-primary);
+  background: var(--ifm-color-primary);
+  color: #ffffff;
+}
+
+.ctrlBtnPrimary:hover {
+  color: #ffffff;
+  background: var(--ifm-color-primary-dark);
+}
+
+:global([data-theme='dark']) .ctrlBtn {
+  background: #132231;
+  border-color: rgba(148, 163, 184, 0.28);
+}
+
+:global([data-theme='dark']) .ctrlBtnPrimary {
+  background: #69b7f0;
+  border-color: #69b7f0;
+  color: #081826;
+}
+
+/* Back sticker drawer */
+.stickerDrawer {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  padding: 0.9rem 1.05rem;
+  border-top: 1px dashed rgba(23, 105, 170, 0.24);
+  background: #ffffff;
+}
+
+:global([data-theme='dark']) .stickerDrawer {
+  background: #0f1c29;
+  border-top-color: rgba(105, 183, 240, 0.24);
+}
+
+.stickerImg {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(15, 39, 66, 0.12);
+}
+
+.stickerNotes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.stickerNotes strong {
+  color: var(--ifm-heading-color);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .stage {
+    grid-template-columns: 1fr;
+  }
+
+  .wireGridJtag,
+  .wireGridUart {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .stickerDrawer {
+    grid-template-columns: 1fr;
+  }
+}

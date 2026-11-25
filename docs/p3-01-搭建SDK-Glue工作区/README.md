@@ -5,11 +5,11 @@ title: 第 1 课：搭建 SDK Glue 工作区
 
 # 第 1 课：搭建 SDK Glue 工作区
 
-HPM6E70 的 Zephyr 开发环境由多部分组成：Zephyr 内核提供操作系统能力，SDK Glue 连接 Zephyr 与 HPMicro 平台，HPM SDK 提供芯片支持，RISC-V 工具链负责生成固件。本课从已经准备好的工程目录开始，先建立 `platform/` 清单仓库，再用 `west` 把其余部分组合成一个完整工作区。最终结构与一、二期完整工程包一致。
+HPM6E70 的 Zephyr 开发环境由多部分组成：Zephyr 内核提供操作系统能力，SDK Glue 连接 Zephyr 与 HPMicro 平台，HPM SDK 提供芯片支持，RISC-V 工具链负责生成固件。本课先从空目录准备好 Git、uv、Python 3.12 虚拟环境与 `west`，再建立 `platform/` 清单仓库并用 `west` 把其余部分组合成完整工作区，最终结构与一、二期完整工程包一致。
 
 本课操作依据：[HPMicro《Zephyr SDK Glue 开发指南》](https://kb.hpmicro.com/2025/12/03/zephyr-zephyr-sdk-glue-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97/#windows-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA)。
 
-开始前请确认：当前终端位于工程根目录，提示符前有 `(.venv)`，且 Git 与 west 已完成版本检查。
+如果你只想直接使用现成工程包学习驱动与外设开发，无需执行本课，直接参考 [获取源码与编译烧录](../start-04-获取源码与编译烧录/README.md) 即可。
 
 ## 认识 west：工作区管理工具
 
@@ -51,9 +51,80 @@ D:\100ask\work\HPM6E70
 | `sdk/` | 随包工具链：RISC-V GCC、CMake、Ninja、OpenOCD、dtc、gperf |
 | `.venv/` | 本工程使用的 Python、west 和 Python 包 |
 
-## 开始前检查
+## 开始前准备（Git、uv 与 west）
 
-尚未安装 Git、uv 和 west 时，先完成[三期环境准备](../common-01-准备开发环境/README.md?phase=phase3)，再从下面的工作区初始化开始。
+三期需要从空目录亲手拉取上游源码。如果你已经安装好 Git、uv、Python 3.12 虚拟环境与 `west==1.5.0`，可直接跳到“第一步：建立 platform 清单仓库”；否则先按下面五步准备基础工具：
+
+### 1. 创建工程目录
+
+在计划存放工程的**父目录**打开 Windows PowerShell（建议使用短纯英文路径，如 `D:\work\`，避免中文、空格或覆盖已有工程包）：
+
+```powershell
+New-Item -ItemType Directory -Path .\HPM6E70 -Force
+Set-Location .\HPM6E70
+Get-Location
+```
+
+### 2. 安装 Git
+
+下载 [Git 64 位安装程序（Git 2.55.0.5）](https://repo.huaweicloud.com/git-for-windows/v2.55.0.windows.5/Git-2.55.0.5-64-bit.exe)，双击运行并按默认选项安装完成：
+
+![Git 安装向导](./images/Git-安装向导.png)
+
+安装完成后重新打开一个普通 Windows PowerShell，进入工程目录并确认：
+
+```powershell
+git --version
+```
+
+### 3. 安装 uv
+
+`uv` 用于自动下载 Python 3.12 并创建工程独立虚拟环境 `.venv`，无需事先安装系统 Python。在工程根目录的 PowerShell 中执行：
+
+```powershell
+$uvWheel = Join-Path $env:TEMP 'uv-0.9.9-py3-none-win_amd64.whl'
+Invoke-WebRequest -Uri 'https://pypi.tuna.tsinghua.edu.cn/packages/f2/38/562295348cf2eb567fd5ea44512a645ea5bec2661a7e07b7f14fda54cb07/uv-0.9.9-py3-none-win_amd64.whl' -OutFile $uvWheel
+
+$uvExtract = Join-Path $env:TEMP ('uv-extract-' + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $uvExtract | Out-Null
+tar -xf $uvWheel -C $uvExtract
+
+$uvBin = Join-Path $env:USERPROFILE '.local\bin'
+New-Item -ItemType Directory -Path $uvBin -Force | Out-Null
+Copy-Item (Join-Path $uvExtract 'uv-0.9.9.data\scripts\uv.exe') (Join-Path $uvBin 'uv.exe') -Force
+$env:Path = "$uvBin;$env:Path"
+
+uv --version
+Get-Command uv | Select-Object Source
+```
+
+确认输出 `uv 0.9.9` 且路径指向当前用户目录下的 `.local\bin\uv.exe`。
+
+### 4. 创建 Python 3.12 虚拟环境
+
+在同一个 PowerShell 窗口中依次执行：
+
+```powershell
+uv python install 3.12 --mirror https://registry.npmmirror.com/-/binary/python-build-standalone/ --no-registry
+uv venv --python 3.12 --seed .venv
+Set-ExecutionPolicy Bypass -Scope Process -Force
+.\.venv\Scripts\Activate.ps1
+```
+
+看到命令提示符前出现 `(.venv)` 表示已进入当前工程虚拟环境。
+
+### 5. 安装 west
+
+确认提示符前带有 `(.venv)` 后安装 `west==1.5.0` 并校验全部工具版本：
+
+```powershell
+python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple west==1.5.0
+git --version
+uv --version
+west --version
+```
+
+三条命令均返回版本号后，即可继续下面的工作区初始化步骤。CMake、Ninja 和交叉编译工具链将在下文由 `west update` 自动下载，无需单独安装。
 
 ## 第一步：建立 platform 清单仓库
 

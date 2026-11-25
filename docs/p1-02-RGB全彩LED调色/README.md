@@ -9,9 +9,9 @@ import KitExplorer from '@site/src/components/KitExplorer';
 本课使用预编译固件 [`01_rgb_led_demo.zip`](https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware/01_rgb_led_demo.zip)（解压得 `01_rgb_led_demo.hex`） 配合 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 图形化烧录，通过底板 **M3** 插座上的全彩 LED 模块快速体验红、绿、蓝、黄、青、品红、白、灭 8 种颜色循环切换与串口调色日志（无需搭建编译环境）。
 
 :::tip[开始本课前先确认]
-1. 已按 [连接并验证 JTAG](../common-04-连接JTAG与OpenOCD/README.md) 接好 JTAG 烧录调试接口并确认驱动正常；
-2. 已按 [连接串口并查看日志](../common-05-连接串口并查看日志/README.md) 接好 UART0 串口线，并在终端打开烧录器串口 1（`DshanPI USBToolBox UART1`）对应的 COM 端口（参数 `115200`、`8-N-1`、`无流控`）；
-3. 已下载安装 [`DshanPI USBToolBox`](https://dl.100ask.net/Tools/usbtoolsbox/) 上位机软件，准备直接烧录本课 `.hex` 体验固件。
+1. 已按 [连接调试器与串口](../start-01-连接调试器与串口/README.md) 接好 JTAG 五线与 UART0 串口线；
+2. 已按 [安装 USBToolBox 与驱动](../start-02-安装USBToolBox与驱动/README.md) 安装好上位机与驱动，并确认 `DshanPI USBToolBox UART1` 对应 COM 端口（参数 `115200`、`8-N-1`、`无流控`）；
+3. 已通过 [烧录第一个闪灯程序](../start-03-烧录第一个闪灯程序/README.md) 验证核心板烧录与串口正常。
 :::
 
 ## 硬件准备与接线
@@ -72,7 +72,7 @@ color: blue    (R=0% G=0% B=100%)
 | --- | --- |
 | 颜色变成补色（如红亮成青、绿亮成品红） | 手中模块极性与默认高电平有效配置相反；属于硬件模块版本差异，需要修改源码配置时请查看 [二期第 13 课：RGB 全彩 LED 调色开发](../p2-13-RGB全彩LED调色开发/README.md) |
 | 串口日志正常打印，但 M3 模块不亮 | 检查模块是否插紧在 **M3** 插座、引脚顺序是否反插 |
-| 无任何串口输出且 `PC22` 绿灯不闪 | 先确认 `USBToolBox` 烧录日志提示校验成功，按一次核心板 **RESET** 键再观察；如串口仍无输出，回查 [连接串口并查看日志](../common-05-连接串口并查看日志/README.md) |
+| 无任何串口输出且 `PC22` 绿灯不闪 | 先确认 `USBToolBox` 烧录日志提示校验成功，按一次核心板 **RESET** 键再观察；如串口仍无输出，回查 [连接调试器与串口](../start-01-连接调试器与串口/README.md) 与 [安装 USBToolBox 与驱动](../start-02-安装USBToolBox与驱动/README.md) |
 
 ---
 

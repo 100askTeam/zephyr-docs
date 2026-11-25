@@ -97,7 +97,7 @@ const HW_NODES = [
     telemetryCode: 'dts: &uart0 (115200 8N1)',
     telemetryText: 'D+/D- 为原生 USB，SBU1/SBU2 引出 UART0 控制台',
     linkLabel: '串口连接指南 →',
-    linkTo: '/docs/common-05-连接串口并查看日志/',
+    linkTo: '/docs/start-01-连接调试器与串口/',
   },
   {
     id: 'jtag',
@@ -111,8 +111,8 @@ const HW_NODES = [
     points: '785,1234 785,1194 717,1126 717,1052',
     telemetryCode: 'runner: openocd (JTAG)',
     telemetryText: '连接 DshanPI USBToolBox 完成固件烧录与在线调试',
-    linkLabel: 'JTAG 验证指南 →',
-    linkTo: '/docs/common-04-连接JTAG与OpenOCD/',
+    linkLabel: '驱动与验证指南 →',
+    linkTo: '/docs/start-02-安装USBToolBox与驱动/',
   },
   {
     id: 'bus',

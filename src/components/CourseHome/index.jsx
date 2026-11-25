@@ -11,11 +11,10 @@ const HERO_STATS = [
 ];
 
 const COMMON_STEPS = [
-  { num: '01', label: '准备开发环境', to: '/docs/common-01-准备开发环境/' },
-  { num: '02', label: 'Zephyr 与工程模型', to: '/docs/common-02-认识Zephyr与工程模型/' },
-  { num: '03', label: '认识 HPM6E70 板卡', to: '/docs/common-03-认识HPM6E70板卡/' },
-  { num: '04', label: '连接并验证 JTAG', to: '/docs/common-04-连接JTAG与OpenOCD/' },
-  { num: '05', label: '连接串口与 COM 端口', to: '/docs/common-05-连接串口并查看日志/' },
+  { num: '01', label: '连接调试器与串口', to: '/docs/start-01-连接调试器与串口/' },
+  { num: '02', label: '安装 USBToolBox 与驱动', to: '/docs/start-02-安装USBToolBox与驱动/' },
+  { num: '03', label: '烧录第一个闪灯程序', to: '/docs/start-03-烧录第一个闪灯程序/' },
+  { num: '04', label: '获取源码与编译烧录', to: '/docs/start-04-获取源码与编译烧录/' },
 ];
 
 const PHASE_TRACKS = [
@@ -40,6 +39,8 @@ const PHASE_TRACKS = [
     tags: ['工程结构与设备树', '自定义传感器驱动', '14 个 Demo 源码详解'],
     primaryLabel: '进入二期 →',
     primaryTo: '/docs/p2-01-从example-application认识标准工程/',
+    secondaryLabel: '认识板卡',
+    secondaryTo: '/docs/common-03-认识HPM6E70板卡/',
   },
   {
     themeClass: styles.trackPhase3,
@@ -78,11 +79,11 @@ export default function CourseHome() {
           </p>
 
           <div className={styles.heroActions}>
-            <Link className={styles.btnPrimary} to="/docs/p1-01-OLED双色屏显示/">
-              快速体验外设 →
+            <Link className={styles.btnPrimary} to="/docs/start-01-连接调试器与串口/">
+              开始之前准备 →
             </Link>
-            <Link className={styles.btnSecondary} to="/docs/common-01-准备开发环境/">
-              开始之前准备
+            <Link className={styles.btnSecondary} to="/docs/p1-01-OLED双色屏显示/">
+              快速体验外设
             </Link>
           </div>
 
@@ -112,10 +113,10 @@ export default function CourseHome() {
             <div className={styles.prepIntro}>
               <span className={styles.prepBadge} aria-hidden="true">00</span>
               <div className={styles.prepText}>
-                <h3 className={styles.prepTitle}>开始之前 · 环境与硬件连接</h3>
+                <h3 className={styles.prepTitle}>开始之前 · 接线、烧录与源码编译</h3>
               </div>
             </div>
-            <Link className={styles.prepAction} to="/docs/common-01-准备开发环境/">
+            <Link className={styles.prepAction} to="/docs/start-01-连接调试器与串口/">
               从第 1 步开始 →
             </Link>
           </div>

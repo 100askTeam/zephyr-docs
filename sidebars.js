@@ -164,19 +164,10 @@ const sidebars = {
       label: '开始之前',
       collapsed: false,
       items: [
-        'common-01-准备开发环境/README',
-        {
-          type: 'doc',
-          id: 'common-02-认识Zephyr与工程模型/README',
-          label: 'Zephyr 与工程模型',
-        },
-        {
-          type: 'doc',
-          id: 'common-03-认识HPM6E70板卡/README',
-          label: 'HPM6E70 板卡',
-        },
-        'common-04-连接JTAG与OpenOCD/README',
-        'common-05-连接串口并查看日志/README',
+        'start-01-连接调试器与串口/README',
+        'start-02-安装USBToolBox与驱动/README',
+        'start-03-烧录第一个闪灯程序/README',
+        'start-04-获取源码与编译烧录/README',
       ],
     },
     {
@@ -295,6 +286,11 @@ const sidebars = {
       label: '二期 · 驱动、应用与设备树',
       collapsed: true,
       items: [
+        {
+          type: 'doc',
+          id: 'common-03-认识HPM6E70板卡/README',
+          label: '认识 HPM6E70 板卡',
+        },
         {
           type: 'category',
           label: '认识工程与开发流程',

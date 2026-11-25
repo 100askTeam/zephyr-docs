@@ -63,4 +63,4 @@ import KitExplorer from '@site/src/components/KitExplorer';
 
 ---
 
-[上一篇：连接串口并查看日志](../common-05-连接串口并查看日志/README.md) · [下一课：OLED 双色屏显示](../p1-01-OLED双色屏显示/README.md) · [课程目录](../README.md)
+[上一篇：烧录第一个闪灯程序](../start-03-烧录第一个闪灯程序/README.md) · [下一课：OLED 双色屏显示](../p1-01-OLED双色屏显示/README.md) · [课程目录](../README.md)

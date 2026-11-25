@@ -8,9 +8,25 @@ title: 第 1 课：从 example-application 认识标准工程
 
 本课先介绍 Zephyr、应用、设备树和驱动，再阅读 `example-application` 的目录，最后找到它们在 HPM6E70 工程中的实际位置。这里只确认各类文件的职责，不编写驱动，也不要求学习工程中的全部 demo。
 
-## Zephyr、应用、设备树和驱动
+## 认识 Zephyr：不只是一个实时内核
 
-Zephyr 是一个主要运行在微控制器（MCU）上的实时操作系统，HPM6E70 就是一颗 MCU。它提供线程调度、内存管理等内核功能，也提供驱动接口、设备树和构建系统。开发一个 Zephyr 程序时，除了编写要执行的功能，还要告诉构建系统使用哪块板卡、板上有哪些硬件以及需要编译哪些驱动。
+Zephyr 是一个主要运行在微控制器（MCU）上的实时操作系统，HPM6E70 就是一颗 MCU。线程、信号量、消息队列和定时器是许多 RTOS 都具备的基础能力，而 Zephyr 在这些内核能力之外，还把硬件描述（Devicetree）、功能裁剪（Kconfig）、统一设备驱动模型、板卡支持和构建流程放进同一套工程模型中。
+
+Zephyr 官方在 *Distinguishing Features* 中列出了可配置与模块化、跨架构、编译期资源定义、统一设备驱动模型和 Devicetree 支持等核心特性（完整说明见 [Zephyr 官方 Introduction](https://docs.zephyrproject.org/latest/introduction/index.html#distinguishing-features)）：
+
+![Zephyr 官方列出的部分项目特性](./images/Zephyr官方特性说明.png)
+
+| 官方特性 | 在本课程中的落点 |
+| --- | --- |
+| Highly configurable / Modular | `prj.conf`、Kconfig，只把需要的能力编进固件 |
+| Cross Architecture | HPM6E70 复用 Zephyr 已有的 RISC-V 架构实现 |
+| Compile-time resource definition | Devicetree 和 Kconfig 在编译阶段生成配置 |
+| Optimized Device Driver Model | 应用通过 Zephyr GPIO、UART 等统一 API 使用设备 |
+| Devicetree Support | Board DTS 描述 UART、LED、Flash 和 SDRAM 的实际连接 |
+
+## 应用、设备树、Binding 和驱动
+
+开发一个 Zephyr 程序时，除了编写要执行的功能，还要告诉构建系统使用哪块板卡、板上有哪些硬件以及需要编译哪些驱动。可以把工程拆成下面五个角色：
 
 | 名称 | 在工程中负责什么 |
 | --- | --- |
