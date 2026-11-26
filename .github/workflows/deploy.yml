@@ -50,7 +50,13 @@ jobs:
           SSH_OPTS="-p ${DEPLOY_PORT} -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o ServerAliveInterval=30 -o ServerAliveCountMax=6"
           if sshpass -e ssh ${SSH_OPTS} "${DEPLOY_USER}@${DEPLOY_HOST}" "command -v rsync >/dev/null 2>&1"; then
             echo "Remote rsync available; syncing incrementally..."
-            sshpass -e rsync -avz --delete --stats -e "ssh ${SSH_OPTS}" build/ "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_TARGET}"
+            sshpass -e rsync -rlzcO --itemize-changes --stats \
+              --no-perms --no-owner --no-group \
+              --delete-delay \
+              --exclude='.user.ini' \
+              --exclude='.htaccess' \
+              --exclude='.well-known/' \
+              -e "ssh ${SSH_OPTS}" build/ "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_TARGET}"
           else
             echo "Remote rsync not found; falling back to streaming tar over SSH..."
             tar -czf - -C build . | sshpass -e ssh ${SSH_OPTS} "${DEPLOY_USER}@${DEPLOY_HOST}" "mkdir -p '${DEPLOY_TARGET}' && tar -xzf - -C '${DEPLOY_TARGET}'"
