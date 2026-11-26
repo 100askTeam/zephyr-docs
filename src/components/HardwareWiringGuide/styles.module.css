@@ -199,7 +199,7 @@
   background: #ffffff;
   text-align: left;
   cursor: pointer;
-  transition: transform 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease, opacity 0.16s ease;
+  transition: border-color 0.14s ease, box-shadow 0.14s ease, opacity 0.16s ease;
 }
 
 :global([data-theme='dark']) .wireCard {
@@ -209,9 +209,18 @@
 }
 
 .wireCard:hover {
-  transform: translateY(-1px);
   border-color: var(--wire-color, #0284c7);
   box-shadow: 0 6px 14px rgba(15, 39, 66, 0.08);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wireCard {
+    transition: transform 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease, opacity 0.16s ease;
+  }
+
+  .wireCard:hover {
+    transform: translateY(-1px);
+  }
 }
 
 .wireCardActive {

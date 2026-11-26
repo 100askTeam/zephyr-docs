@@ -85,4 +85,4 @@ CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC=200000000
 | 引脚、功能概要与电气参数 | [RA6M5 Group Datasheet](https://www.renesas.com/en/document/dst/ra6m5-group-datasheet) |
 | 外设寄存器、工作模式与操作流程 | [RA6M5 Group User's Manual: Hardware](https://www.renesas.com/en/document/man/ra6m5-group-users-manual-hardware) |
 
-返回[连接开发板与确认串口](/docs/ra6m5/preparation/project-and-board/)，或查阅[配套示例详解](/docs/ra6m5/reference/examples/)中各个应用使用的器件、运行现象与编译命令。
+返回[连接开发板](/docs/ra6m5/preparation/project-and-board/)，或查阅[配套示例详解](/docs/ra6m5/reference/examples/)中各个应用使用的器件、运行现象与编译命令。

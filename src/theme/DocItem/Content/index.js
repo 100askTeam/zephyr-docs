@@ -22,25 +22,26 @@ function loadPlayer() {
   return playerPromise;
 }
 
-function initPlayers() {
-  const players = document.querySelectorAll('.asciinema-cast:not([data-cast-ready])');
-  if (!players.length) {
+function mountPlayer(el) {
+  if (el.hasAttribute('data-cast-ready')) {
     return;
   }
-  players.forEach((el) => el.setAttribute('data-cast-ready', ''));
+  el.setAttribute('data-cast-ready', '');
   loadPlayer()
     .then(() => {
-      players.forEach((el) => {
-        window.AsciinemaPlayer.create(el.getAttribute('data-src'), el, {
-          rows: 28,
-          fit: 'width',
-          idleTimeLimit: 2,
-          speed: parseFloat(el.getAttribute('data-speed') || '1'),
-          preload: true,
-        });
+      if (!el.isConnected) {
+        return;
+      }
+      window.AsciinemaPlayer.create(el.getAttribute('data-src'), el, {
+        rows: 28,
+        fit: 'width',
+        idleTimeLimit: 2,
+        speed: parseFloat(el.getAttribute('data-speed') || '1'),
+        preload: false,
       });
     })
     .catch((err) => {
+      el.removeAttribute('data-cast-ready');
       console.error('asciinema', err);
     });
 }
@@ -48,7 +49,29 @@ function initPlayers() {
 export default function DocItemContent(props) {
   const {pathname} = useLocation();
   useEffect(() => {
-    initPlayers();
+    const players = Array.from(
+      document.querySelectorAll('.asciinema-cast:not([data-cast-ready])'),
+    );
+    if (!players.length) {
+      return undefined;
+    }
+    if (typeof IntersectionObserver === 'undefined') {
+      players.forEach(mountPlayer);
+      return undefined;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            observer.unobserve(entry.target);
+            mountPlayer(entry.target);
+          }
+        });
+      },
+      {rootMargin: '250px 0px'},
+    );
+    players.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, [pathname]);
   return <Content {...props} />;
 }

@@ -99,7 +99,7 @@ Test-Path .\sdk\cmake\bin\cmake.exe
 
 1. 在 VS Code 扩展市场搜索 **`ms-vscode.vscode-serial-monitor`**，认准发布者 **Microsoft** 并安装：
 
-![在 VS Code 扩展市场安装 Microsoft Serial Monitor](./images/VSCode-安装Serial-Monitor.png)
+![在 VS Code 扩展市场安装 Microsoft Serial Monitor](./images/VSCode-安装Serial-Monitor.webp)
 
 2. 打开 VS Code 底部 **`Serial Monitor`** 面板，端口选择 **`DshanPI USBToolBox UART1`** 对应的 COM 口，波特率选择 **`115200`**（数据位 `8`、停止位 `1`、无校验、无流控），点击 **`Start Monitoring`** 后按一下核心板 **RESET** 键，即可看到你亲手编译出来的程序打印：
 

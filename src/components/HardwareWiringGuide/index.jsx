@@ -185,8 +185,8 @@ export default function HardwareWiringGuide({ mode = 'jtag' }) {
 
   const jtagImgUrl = useBaseUrl('/img/wiring/usbtoolbox-jtag-3d.png');
   const uartImgUrl = useBaseUrl('/img/wiring/usbtoolbox-uart-3d.png');
-  const backImgUrl = useBaseUrl('/img/wiring/usbtoolbox-back-pinout.png');
-  const coreboardImgUrl = useBaseUrl('/img/wiring/hpm6e70-coreboard-tight.png');
+  const backImgUrl = useBaseUrl('/img/wiring/usbtoolbox-back-pinout.webp');
+  const coreboardImgUrl = useBaseUrl('/img/wiring/hpm6e70-coreboard-tight.webp');
 
   const wires = isJtag ? JTAG_WIRES : UART_WIRES;
   const activeId = hoveredId || selectedId;
@@ -958,6 +958,11 @@ export default function HardwareWiringGuide({ mode = 'jtag' }) {
           <img
             src={backImgUrl}
             alt="DshanPI USBToolBox 机身背面 20 针丝印贴纸"
+            width="1020"
+            height="1541"
+            loading="lazy"
+            fetchPriority="low"
+            decoding="async"
             className={styles.stickerImg}
           />
           <div className={styles.stickerNotes}>

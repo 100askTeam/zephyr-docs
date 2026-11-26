@@ -480,13 +480,9 @@
   }
 }
 
-.traceFlow {
-  animation: tracePulse 2.4s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: no-preference) {
   .traceFlow {
-    animation: none;
+    animation: tracePulse 2.4s linear infinite;
   }
 }
 

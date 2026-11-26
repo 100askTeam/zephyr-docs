@@ -10,8 +10,12 @@ title: 认识 HPM6E70 板卡
 
 <div style={{ overflow: 'hidden', borderRadius: '12px', aspectRatio: '16 / 10' }}>
   <img
-    src={require('./images/hpm6e70-chip-marking.png').default}
+    src={require('./images/hpm6e70-chip-marking.webp').default}
     alt="HPM6E70 板卡与芯片丝印"
+    width={1600}
+    height={1600}
+    fetchPriority="high"
+    decoding="async"
     style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 50%', transform: 'scale(1.48)', display: 'block' }}
   />
 </div>

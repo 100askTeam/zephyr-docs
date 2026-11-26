@@ -1,11 +1,11 @@
 ---
 sidebar_position: 1
-sidebar_label: "连接开发板与确认串口"
-title: "连接开发板与确认串口"
+sidebar_label: "连接开发板"
+title: "连接开发板"
 slug: /ra6m5/preparation/project-and-board/
 ---
 
-# 连接开发板与确认串口
+# 连接开发板
 
 **DShanMCU RA6M5** 开发板已经板载了 WCH-Link 调试器、LED、按键和 EEPROM，不需要外接调试器，也不用插任何杜邦线——准备**开发板**和**一根支持数据传输的 USB Type-C 线**，按下面两步完成连接与串口确认即可。
 

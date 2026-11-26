@@ -184,8 +184,13 @@
   width: 100%;
   height: 100%;
   transform-origin: center center;
-  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .stageCamera {
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 }
 
 .stageCameraDragging {
@@ -247,12 +252,14 @@
   transition: all 0.16s ease;
 }
 
-.activeAura {
-  animation: kitActivePulse 2.4s ease-in-out infinite;
-}
+@media (prefers-reduced-motion: no-preference) {
+  .activeAura {
+    animation: kitActivePulse 2.4s ease-in-out infinite;
+  }
 
-.conflictEmphasis {
-  animation: kitConflictFlash 0.85s ease-in-out 3;
+  .conflictEmphasis {
+    animation: kitConflictFlash 0.85s ease-in-out 3;
+  }
 }
 
 @keyframes kitActivePulse {

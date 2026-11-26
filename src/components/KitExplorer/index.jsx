@@ -526,6 +526,10 @@ export default function KitExplorer({
               <img
                 src={KIT_IMAGE_SRC}
                 alt="DshanMCU-HPM6E70 核心板与模块化底板俯视图"
+                width={IMAGE_SIZE}
+                height={IMAGE_SIZE}
+                loading="lazy"
+                decoding="async"
                 className={styles.photoImg}
                 draggable={false}
               />

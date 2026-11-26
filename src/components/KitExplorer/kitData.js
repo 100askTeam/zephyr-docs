@@ -1,5 +1,5 @@
 export const IMAGE_SIZE = 1600;
-export const KIT_IMAGE_SRC = '/img/hpm6e70-phase1-kit.jpg';
+export const KIT_IMAGE_SRC = '/img/hpm6e70-phase1-kit.webp';
 export const FIRMWARE_BASE_URL =
   'https://dl.100ask.net/Hardware/MCU/HPM6E70-ZEPHYR/firmware';
 export const USBTOOLBOX_DOWNLOAD_URL =

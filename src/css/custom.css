@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light dark;
   --ifm-color-primary: #1769aa;
   --ifm-color-primary-dark: #155f99;
   --ifm-color-primary-darker: #145a91;
@@ -9,9 +10,15 @@
   --ifm-code-font-size: 95%;
   --ifm-font-family-base: Inter, "Noto Sans SC", "Microsoft YaHei", sans-serif;
   --docusaurus-highlighted-code-line-bg: rgba(23, 105, 170, 0.12);
+  accent-color: var(--ifm-color-primary);
+}
+
+[data-theme='light'] {
+  color-scheme: light;
 }
 
 [data-theme='dark'] {
+  color-scheme: dark;
   --ifm-color-primary: #69b7f0;
   --ifm-color-primary-dark: #4ca8eb;
   --ifm-color-primary-darker: #3da1e9;
@@ -20,6 +27,7 @@
   --ifm-color-primary-lighter: #95cdf7;
   --ifm-color-primary-lightest: #c1e2fb;
   --docusaurus-highlighted-code-line-bg: rgba(105, 183, 240, 0.18);
+  accent-color: var(--ifm-color-primary);
 }
 
 .navbar__logo { height: 2.25rem; }

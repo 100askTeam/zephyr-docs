@@ -28,7 +28,7 @@ import styles from './overview.module.css';
     </div>
     <figure className="course-hero__visual">
       <div className="course-hero__image">
-        <img src={require('./images/ra6m5-board-front.jpg').default} alt="DShanMCU RA6M5 开发板正面实物图" />
+        <img src={require('./images/ra6m5-board-front.jpg').default} alt="DShanMCU RA6M5 开发板正面实物图" width={957} height={834} fetchPriority="high" decoding="async" />
       </div>
       <figcaption>
         <strong>DShanMCU RA6M5 开发板</strong>
@@ -47,7 +47,7 @@ import styles from './overview.module.css';
           <p>连接开发板并确认串口，获取完整工程配置 VS Code，编译烧录第一个闪灯程序。</p>
         </div>
         <ul className={styles.lessons}>
-          <li><Link to="/docs/ra6m5/preparation/project-and-board/">连接开发板与确认串口<span aria-hidden="true">→</span></Link></li>
+          <li><Link to="/docs/ra6m5/preparation/project-and-board/">连接开发板<span aria-hidden="true">→</span></Link></li>
           <li><Link to="/docs/ra6m5/preparation/vscode/">获取工程与配置 VS Code<span aria-hidden="true">→</span></Link></li>
           <li><Link to="/docs/ra6m5/preparation/build-flash-debug/">编译烧录第一个闪灯程序<span aria-hidden="true">→</span></Link></li>
         </ul>
@@ -106,7 +106,7 @@ import styles from './overview.module.css';
     </div>
     <div className={styles.startRow}>
       <p>准备好开发板，从连接 Debug 接口开始第一个 Zephyr 工程。</p>
-      <Link className="course-button course-button--primary" to="/docs/ra6m5/preparation/project-and-board/">连接开发板与确认串口 →</Link>
+      <Link className="course-button course-button--primary" to="/docs/ra6m5/preparation/project-and-board/">连接开发板 →</Link>
     </div>
   </section>
 </div>

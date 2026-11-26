@@ -34,20 +34,27 @@ jobs:
       - name: Check build output
         run: |
           echo "PWD=$(pwd)"
-          ls -lah
-          ls -lah build
+          du -sh build
           find build -maxdepth 2 -type f | head -n 20
 
-      - name: Copy build to server via SSH
-        uses: appleboy/scp-action@v1
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.PORT }}
-          source: "build/**"
-          target: /www/wwwroot/zephyr.100ask.net/
-          strip_components: 1
+      - name: Sync build to server via SSH (incremental rsync with fallback)
+        env:
+          SSHPASS: ${{ secrets.PASSWORD }}
+          DEPLOY_HOST: ${{ secrets.HOST }}
+          DEPLOY_USER: ${{ secrets.USERNAME }}
+          DEPLOY_PORT: ${{ secrets.PORT }}
+          DEPLOY_TARGET: /www/wwwroot/zephyr.100ask.net/
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq sshpass rsync
+          SSH_OPTS="-p ${DEPLOY_PORT} -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o ServerAliveInterval=30 -o ServerAliveCountMax=6"
+          if sshpass -e ssh ${SSH_OPTS} "${DEPLOY_USER}@${DEPLOY_HOST}" "command -v rsync >/dev/null 2>&1"; then
+            echo "Remote rsync available; syncing incrementally..."
+            sshpass -e rsync -avz --delete --stats -e "ssh ${SSH_OPTS}" build/ "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_TARGET}"
+          else
+            echo "Remote rsync not found; falling back to streaming tar over SSH..."
+            tar -czf - -C build . | sshpass -e ssh ${SSH_OPTS} "${DEPLOY_USER}@${DEPLOY_HOST}" "mkdir -p '${DEPLOY_TARGET}' && tar -xzf - -C '${DEPLOY_TARGET}'"
+          fi
 
       # Popular action to deploy to GitHub Pages:
       # Docs: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-docusaurus

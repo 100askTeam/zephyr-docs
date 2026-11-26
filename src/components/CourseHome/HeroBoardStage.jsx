@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from '@docusaurus/Head';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
@@ -166,7 +167,7 @@ function renderCornerBrackets(rect, color, len = 24, strokeWidth = 4.5) {
  * DshanMCU-HPM6E70 coreboard hardware overview panel.
  */
 export default function HeroBoardStage() {
-  const boardImgUrl = useBaseUrl('/img/hpm6e70-coreboard.png');
+  const boardImgUrl = useBaseUrl('/img/hpm6e70-coreboard.webp');
   const [lens, setLens] = useState('all');
   const [hoveredId, setHoveredId] = useState(null);
   const [pinnedId, setPinnedId] = useState(null);
@@ -195,6 +196,9 @@ export default function HeroBoardStage() {
 
   return (
     <aside className={styles.heroStage} aria-label="DshanMCU-HPM6E70 核心板硬件资源总览">
+      <Head>
+        <link rel="preload" as="image" href={boardImgUrl} fetchPriority="high" />
+      </Head>
       <div className={styles.stageGridOverlay} aria-hidden="true" />
 
       <div className={styles.stageHeader}>

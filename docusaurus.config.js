@@ -14,6 +14,15 @@ const config = {
   onBrokenLinks: 'throw',
   future: {v4: true},
   i18n: {defaultLocale: 'zh-Hans', locales: ['zh-Hans']},
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'color-scheme',
+        content: 'light dark',
+      },
+    },
+  ],
   presets: [[
     'classic',
     /** @type {import('@docusaurus/preset-classic').Options} */
@@ -26,6 +35,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      image: 'img/social-card.jpg',
       colorMode: {respectPrefersColorScheme: true},
       docs: {sidebar: {autoCollapseCategories: false, hideable: true}},
       navbar: {
@@ -49,7 +59,12 @@ const config = {
   themes: ['@docusaurus/theme-mermaid'],
   plugins: [[
     '@easyops-cn/docusaurus-search-local',
-    {hashed: true, language: ['en', 'zh']},
+    {
+      hashed: true,
+      language: ['en', 'zh'],
+      indexBlog: false,
+      ignoreCssSelectors: ['pre', '.theme-code-block'],
+    },
   ]],
 };
 
