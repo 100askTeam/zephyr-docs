@@ -1331,7 +1331,7 @@ west build -b yuzukineko -d build/g2d-api g2d_api
 
 <div class="asciinema-cast" data-src="/casts/zephyr/drivers-g2d/build.cast" data-speed="6"></div>
 
-下载运行的方法见[编译与运行](../zephyr-build-run.md)。控制台 UART1 上的完整输出：
+下载运行的方法见[Flash 布局与进阶调试](../../../boot/flash-layout.md)。控制台 UART1 上的完整输出：
 
 ```text
 [caps] g2d_get_capabilities = 0

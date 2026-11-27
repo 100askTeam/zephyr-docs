@@ -1688,7 +1688,7 @@ west build -b yuzukineko -d build/audio-api audio_api
 
 <div class="asciinema-cast" data-src="/casts/zephyr/drivers-audio/build.cast" data-speed="6"></div>
 
-下载运行的方法见[编译与运行](../zephyr-build-run.md)。运行时耳机输出会播 3 秒 440 Hz 的音调。控制台 UART1 上的完整输出：
+下载运行的方法见[Flash 布局与进阶调试](../../../boot/flash-layout.md)。运行时耳机输出会播 3 秒 440 Hz 的音调。控制台 UART1 上的完整输出：
 
 ```text
 [configure] 48000 Hz, 16 bit, stereo            = 0

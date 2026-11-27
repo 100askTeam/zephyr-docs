@@ -1071,7 +1071,7 @@ west build -b yuzukineko -d build/sdhc-api sdhc_api
 
 <div class="asciinema-cast" data-src="/casts/zephyr/drivers-sdhc/build.cast" data-speed="6"></div>
 
-下载运行的方法见[编译与运行](../zephyr-build-run.md)。运行前把 TF 卡插进卡槽。控制台 UART1 上的完整输出：
+下载运行的方法见[Flash 布局与进阶调试](../../../boot/flash-layout.md)。运行前把 TF 卡插进卡槽。控制台 UART1 上的完整输出：
 
 ```text
 [props] sdhc_get_host_props = 0: clock 400000..50000000 Hz, power-up delay 500 ms

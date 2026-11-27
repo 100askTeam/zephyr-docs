@@ -117,6 +117,69 @@
   background: rgba(241, 247, 253, 0.7);
 }
 
+.panelHeadRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.flipSwitch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.14rem;
+  padding: 0.14rem;
+  border: 1px solid rgba(23, 105, 170, 0.22);
+  border-radius: 999px;
+  background: rgba(23, 105, 170, 0.06);
+  flex-shrink: 0;
+}
+
+:global([data-theme='dark']) .flipSwitch {
+  border-color: rgba(105, 183, 240, 0.28);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.flipBtn {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.18rem 0.56rem;
+  background: transparent;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.25;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.14s ease, color 0.14s ease, box-shadow 0.14s ease;
+}
+
+.flipBtn:hover {
+  color: var(--ifm-heading-color);
+}
+
+.flipBtn:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.flipBtnActive {
+  background: var(--ifm-color-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(23, 105, 170, 0.24);
+}
+
+.flipBtnActive:hover {
+  color: #ffffff;
+}
+
+:global([data-theme='dark']) .flipBtnActive {
+  background: #69b7f0;
+  color: #081826;
+}
+
 :global([data-theme='dark']) .panelHead {
   border-bottom-color: rgba(148, 163, 184, 0.14);
   background: rgba(20, 38, 56, 0.8);
@@ -158,6 +221,22 @@
 .interactivePin {
   cursor: pointer;
   transition: opacity 0.18s ease;
+}
+
+.svgNotePrimary {
+  fill: #0f2942;
+}
+
+.svgNoteWarn {
+  fill: #b91c1c;
+}
+
+:global([data-theme='dark']) .svgNotePrimary {
+  fill: #e2e8f0;
+}
+
+:global([data-theme='dark']) .svgNoteWarn {
+  fill: #fca5a5;
 }
 
 /* Horizontal interactive wire strip */

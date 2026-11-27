@@ -1,19 +1,19 @@
 ---
-title: "板卡概览"
+title: "板卡概览与版本差异"
 ---
 
 ## 主要器件
 
 | 项目 | 说明 |
 | --- | --- |
-| SoC | F101S3（QFN68，7 mm × 7 mm），单核 XuanTie C907，rv32imacfdv，同时支持 64 位；有 MMU 但常见软件不启用 |
+| SoC | F101S3（QFN68，7 mm × 7 mm），单核 XuanTie C907，rv32imacfdv，支持 RVV 1.0 向量扩展与可选 Sv32 MMU |
 | 缓存 | 32 KB I-cache + 16 KB D-cache（缓存行 64 字节） |
 | PSRAM | SiP 16 位 PSRAM，本板 16 MiB；V1.5 面向 32 MiB 配置（F101S4） |
-| NOR Flash | 16 MiB，支持 XIP；板载 Flash 是系统资源，存放启动加载器 |
-| USB | USB-C，1 路 USB 2.0 DRD；该口同时是 FEL 下载口 |
+| NOR Flash | 16 MiB，支持 100 MHz 四线读与 XIP；板载 Flash 存放启动加载器与固件，布局见 [Flash 布局与进阶调试](../boot/flash-layout.md) |
+| USB | USB-C，1 路 USB 2.0 DRD；该口同时是 FEL 下载口与 USB 副屏口 |
 | 存储卡 | microSD 卡座，SMHC0，引脚 `PF0`–`PF5`，卡检测 `PF6` |
-| 按键 | `FEL`：上电/复位时按住进入下载模式 |
-| 排针 | 2 × 20，Pico 外形，见[引脚排布](pinout.md) |
+| 按键 | `FEL`：上电时按住进入 BROM 下载模式 |
+| 排针 | 2 × 20，Pico 外形，见 [引脚排布与外设复用](pinout.md) |
 
 ## 板上已被占用的引脚
 
@@ -22,24 +22,24 @@ title: "板卡概览"
 | 引脚 | 板上用途 | 说明 |
 | --- | --- | --- |
 | `PF0`–`PF5` | microSD（SMHC0） | 与 JTAG（`PF0/1/3/5` mux 4）复用，调试 JTAG 时 SD 不可用 |
-| `PF6` | microSD 卡检测（CD） | V1.4 及更早需要调低驱动强度，见[勘误](errata.md) |
+| `PF6` | microSD 卡检测（CD） | V1.4 及更早需要调低驱动强度，见下方 [版本差异与勘误](#v14-及更早microsd-卡检测-cd-下拉偏大) |
 | `PC0`–`PC5` | SPI NOR Flash | 不在排针上，属于系统资源 |
 | `FEL` 键 | 进入下载模式 | 板上按键，不在排针上 |
 
 ## 软件常见的引脚约定
 
-下面是现有软件对排针引脚的用法，<strong>不是硬件固定连接</strong>，但如果你直接使用这些软件镜像，它们就是默认配置：
+下面是配套 Zephyr 工程对排针引脚的默认用法（**不是裸板硬件固定连接**；配合 YuzukiCube-M 底板使用时的实际连线见 [YuzukiCube-M 底板](../baseboard.md)）：
 
 | 引脚 | 约定 | 来源 |
 | --- | --- | --- |
-| `PB0` / `PB1` | UART1 TX / RX，Zephyr 的 `yuzukineko` 板控制台 | Zephyr 板级配置 |
-| `PE2` | USB 主机模式下的 VBUS 开关 | Zephyr USB 主机驱动 |
-| `PE10` | 板载音频的喇叭功放使能（有功放的配置） | Zephyr 音频 |
-| `PD5` | UF2 下载器按键（接地有效，内部上拉）：上电时按住进入 `F101BOOT` | UF2 加载器，见 [UF2](../dev/zephyr/zephyr-uf2.md) |
-| `PD0`–`PD22` | RGB LCD 数据/时序线 | 显示栈，启用显示后占用 |
+| `PB0` / `PB1` | UART1 TX / RX，Zephyr 控制台（115200 8N1） | `yuzukineko_base` / `yuzukineko` 板级配置 |
+| `PD4` | 底板音频功放使能（`PA-SHDN`） | `yuzukineko_base` 底板配置（裸板上游默认为 `PE10`） |
+| `PD5` | 用户按键 `SW1`（接地有效，内部上拉） | `yuzukineko_base` 底板按键 |
+| `PE2` | USB 主机模式下的 VBUS 开关（仅裸板无 Wi-Fi 时） | Zephyr USB 主机驱动 |
+| `PD0`–`PD22` | 显示与触摸控制（底板为 MIPI DSI + GT967 触摸） | 显示与输入子系统 |
 
 :::caution
-控制台串口究竟接在哪组脚上，随所用软件而定（Zephyr `yuzukineko`：UART1 `PB0/PB1`）。接线前以[原理图](files.md)和你所刷固件的说明为准。
+控制台串口究竟接在哪组脚上，随所用板级配置而定（本教程配套工程统一为 UART1 `PB0/PB1`，在底板通过 `CN2` 引出）。接线前请以 [原理图](download.md) 与 [连接开发板与串口](../start/01-hardware-and-uart.md) 为准。
 :::
 
 ## 电源
@@ -48,6 +48,45 @@ title: "板卡概览"
 - `3V3`：板载稳压输出，排针第 1 行左侧。
 - 所有 GPIO 为 3.3 V 逻辑。具体电气极限、ADC 量程、基准电压请以 F101S3 数据手册和原理图为准。
 
-## 版本
+---
 
-当前最新为 <strong>V1.5</strong>，版本间的差异（PD 丝印、`R11`、PSRAM LDO）见[勘误与版本差异](errata.md)。
+## 版本差异与勘误
+
+### 版本一览
+
+| 版本 | 变化 |
+| --- | --- |
+| **V1.5** | 新增 PSRAM 专用 LDO 供电，使 **32 MiB PSRAM** 配置可用；microSD 检测下拉电阻 `R11` 由 10 kΩ 改为 **1 kΩ**（`PF6`）。 |
+| **V1.4** | 修正 PD 脚丝印编号，见下方 V1.3 勘误。只用 16 MiB 配置时，V1.4 把 `R11` 换成 1 kΩ 即可。 |
+| **V1.3** | 初始版本。 |
+
+:::caution
+**硬件版本区分**：F101S3 + 16 MiB PSRAM 对应 V1.4（将 `R11` 改为 1 kΩ 可消除 SD 卡检测问题）；V1.5 额外提供 PSRAM LDO 电源轨，用于支持 32 MiB PSRAM 配置。
+:::
+
+### V1.3：PD 丝印编号错误
+
+F101S3 **没有** `PD10` 和 `PD11`。V1.3 的 PCB 在 `PD9` 之后继续顺序编号，导致从 `PD10` 开始的所有 PD 丝印都**比真实 SoC GPIO 编号小 2**。该问题在 V1.4 已更正。做 pinmux、写设备树、看原理图时，请始终使用「**实际 GPIO / V1.4 丝印**」：
+
+| V1.3 丝印 | 实际 GPIO / V1.4 丝印 | 影响 |
+| --- | --- | --- |
+| `PD10` | `PD12` | MUX 选择必须用 `PD12` |
+| `PD11` | `PD13` | MUX 选择必须用 `PD13` |
+| `PD12`–`PD20` | `PD14`–`PD22` | 每个对应标号都偏移 +2 |
+
+整张对照表见 [引脚排布与外设复用](pinout.md#排针总表)。
+
+### V1.4 及更早：microSD 卡检测 (CD) 下拉偏大
+
+microSD 卡检测信号是 `PF6`，由 `R11` 下拉。V1.4 及更早的板子上 `R11` 是 **10 kΩ**，阻值偏大，引脚可能无法稳定拉低到逻辑低阈值以下，导致插卡检测不到。
+
+- **软件规避**：在 pinctrl 里把 `PF6` 的**输出驱动强度设为最低**（配套工程已完成适配）。
+- **硬件修复**：把 `R11` 换成 **1 kΩ**（V1.5 已默认修改）。
+
+### 遇到问题先看这里
+
+| 现象 | 可能原因 |
+| --- | --- |
+| 在 V1.3 上配置 `PD12`–`PD20` 没有反应 | 丝印偏移，实际应使用 `PD14`–`PD22` |
+| 插入 microSD 卡但系统认不到 | `PF6` 卡检测问题，按上面方法处理 |
+| 想上 32 MiB PSRAM 但不稳定 | 需要 V1.5 的 PSRAM LDO，V1.4 及以前不行 |

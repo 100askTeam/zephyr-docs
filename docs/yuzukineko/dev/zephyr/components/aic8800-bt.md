@@ -1158,7 +1158,7 @@ west build -b yuzukineko -d build/aic8800-bt examples/aic8800_bt_api
 
 <div class="asciinema-cast" data-src="/casts/zephyr/components-aic8800-bt/build.cast" data-speed="6"></div>
 
-下载运行的方法见[编译与运行](../zephyr-build-run.md)。`uart2` 的引脚 PE8、PE9 和 `i2c0` 共用，`smhc2` 的引脚和 I2S0、USB 主机的 VBUS 开关共用，运行本演示时不要同时用这些外设。
+下载运行的方法见[Flash 布局与进阶调试](../../../boot/flash-layout.md)。`uart2` 的引脚 PE8、PE9 和 `i2c0` 共用，`smhc2` 的引脚和 I2S0、USB 主机的 VBUS 开关共用，运行本演示时不要同时用这些外设。
 
 ## 板子上的完整日志
 

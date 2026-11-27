@@ -2475,7 +2475,7 @@ west build -b yuzukineko -d build/sd-api examples/sd_api
 
 <div class="asciinema-cast" data-src="/casts/zephyr/components-sd/build.cast" data-speed="6"></div>
 
-下载运行的方法见[编译与运行](../zephyr-build-run.md)。运行前把 TF 卡插进卡槽。卡槽里没有卡时，程序在 `sd_is_card_present` 之后打印 `no card in the slot, nothing more to do` 就退出；这条路径没有在板子上运行，板子上一直有卡。
+下载运行的方法见[Flash 布局与进阶调试](../../../boot/flash-layout.md)。运行前把 TF 卡插进卡槽。卡槽里没有卡时，程序在 `sd_is_card_present` 之后打印 `no card in the slot, nothing more to do` 就退出；这条路径没有在板子上运行，板子上一直有卡。
 
 ## 板子上的完整日志
 

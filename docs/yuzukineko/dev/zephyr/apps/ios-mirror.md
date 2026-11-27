@@ -19,7 +19,31 @@ flowchart TB
 
 只镜像画面。AirPlay 流里的音频会被接收，但示例的音频回调是空函数，直接丢掉，板子不出声，见 [功能范围](#功能范围)。
 
-开始前请先完成 [配置开发环境](../zephyr-setup-env.md) 和 [获取 Zephyr 代码](../zephyr-get-source.md)。
+开始前请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr-components/ios-screen-mirror/samples/ios_player` |
+| 目标板级与模式 | `yuzukineko_base` · RAM（入口 `0x40000000`） |
+| 额外板级配置 | `boards/yuzukineko.conf`、`boards/yuzukineko.overlay`（脚本自动加载） |
+| 一期快速体验 | 免编译直接烧录见 [iOS 投屏 (AirPlay)](../../../demos/03-ios-mirror.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app ios_mirror
+
+# 2. 打包整片 SPI NOR 镜像：build/ios_mirror/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app ios_mirror
+```
+
+生成的 `build/ios_mirror/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full ios_mirror`（RAM 调试阶段也可用 `./.venv/bin/python scripts/flash.py run ios_mirror` 直接载入内存运行）。
+> **当前 4.5.0 工程同步说明**：`prj.conf` 已调优为 **`960×720`**（`CONFIG_IOS_MIRROR_WIDTH=960`、`CONFIG_IOS_MIRROR_HEIGHT=720`、`CONFIG_IOS_MIRROR_THREAD_STACK=24576`、`CONFIG_AIC8800_MEM_POOL_KB=416`），结合 F101 VDEC 专用内存池与动态横竖屏居中裁剪，**已实机验证 iPhone 竖屏/横屏反复切换稳定不卡死**；`rpiplay/` 子模块已随包内置。
+
+
 
 :::caution[许可证：GPL-3.0]
 RPiPlay 的许可证是 GPL-3.0，所以整个 `ios-screen-mirror` 组件按 GPL-3.0 对待（`Kconfig` 的帮助文字、`CMakeLists.txt`、示例的源码头都写着 `GPL-3.0-or-later`；`src/ios_dnssd.c` 等少数文件头是 Apache-2.0，但它们和 RPiPlay 链接在同一个镜像里）。编进镜像并分发的固件，需要按 GPL-3.0 提供对应的源码。只想用其他协议的投屏，不要打开 `CONFIG_IOS_MIRROR`，不会链入这部分代码。
@@ -27,14 +51,9 @@ RPiPlay 的许可证是 GPL-3.0，所以整个 `ios-screen-mirror` 组件按 GPL
 
 ## 准备
 
-### 取得 RPiPlay 子模块
+### RPiPlay 子模块说明
 
-`rpiplay/` 是子模块，没有拉取时目录是空的，编译会找不到 `rpiplay/lib`。在 `zephyr-components` 里拉一下：
-
-```sh
-cd ~/f101-zephyr/zephyr-components
-git submodule update --init ios-screen-mirror/rpiplay
-```
+`rpiplay/` 是 `zephyr-components/ios-screen-mirror` 下的子模块，配套 `f101-zephyr` 工作区已随包内置，无需额外拉取（仅在从上游 Git 仓库重新克隆时需在 `zephyr-components` 下执行 `git submodule update --init ios-screen-mirror/rpiplay`）。
 
 ### 需要的东西
 
@@ -75,24 +94,23 @@ AIC8800 驱动在加入网络时会把 SSID 和密码用 `aic8800` 的日志明�
 在工作区里执行：
 
 ```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/ios-mirror zephyr-components/ios-screen-mirror/samples/ios_player
+./.venv/bin/python scripts/build_apps.py --app ios_mirror
+./.venv/bin/python scripts/pack_full_img.py --app ios_mirror
 ```
 
 <div class="asciinema-cast" data-src="/casts/zephyr/apps-ios-mirror/build.cast" data-speed="6"></div>
 
-产物是 `build/ios-mirror/zephyr/zephyr.bin`，约 3.6 MB，链接地址 `0x40000000`，RAM 占用 21.67%。示例的 `CMakeLists.txt` 自己把组件（往上两级目录）和同级的 `aic8800` 加进 `ZEPHYR_EXTRA_MODULES`，不需要手工指定。
+产物是 `build/ios_mirror/zephyr/zephyr.bin`，约 3.6 MB，链接地址 `0x40000000`，RAM 占用 21.67%。示例的 `CMakeLists.txt` 自己把组件（往上两级目录）和同级的 `aic8800` 加进 `ZEPHYR_EXTRA_MODULES`，不需要手工指定。
 
 示例的 `prj.conf` 里选了 `CONFIG_MINIMAL_LIBC=y`：AIC8800 和 RPiPlay 的适配头文件是按最小 C 库写的，自己的应用用这个组件时也要选。
 
 ## 运行
 
-用 [编译与运行](../zephyr-build-run.md) 里的任一种方式下载，控制台是 UART1（PB00/PB01，115200 8N1）。调试时用<strong>方式一</strong>：
+用 [Flash 布局与进阶调试](../../../boot/flash-layout.md) 里的任一种方式下载，控制台是 UART1（PB00/PB01，115200 8N1）。调试时用<strong>方式一</strong>：
 
 ```sh
 xfel ddr f101-s3
-xfel write 0x40000000 build/ios-mirror/zephyr/zephyr.bin
+xfel write 0x40000000 build/ios_mirror/zephyr/zephyr.bin
 xfel exec 0x40000000
 ```
 
@@ -295,9 +313,9 @@ AirPlay 线程每解出一包 H.264，就调 `on_video()`（`main.c` 359–435 �
 | `CONFIG_IOS_MIRROR` | n | 打开 iOS 投屏组件。依赖网络、TCP 和 UDP，自动选上 mDNS 应答器、DNS-SD 和 mbedTLS（SHA-512、AES CTR/CBC） |
 | `CONFIG_IOS_MIRROR_NAME` | `"F101 Mirror"` | 在“屏幕镜像”列表里显示的名字 |
 | `CONFIG_IOS_MIRROR_PORT` | 7000 | AirPlay 服务器的 TCP 端口，0 表示任意空闲端口 |
-| `CONFIG_IOS_MIRROR_WIDTH` | 1920 | 通告给手机的显示宽度（像素），手机按它决定流的尺寸，编译时替换进 RPiPlay 的 `raop_handlers.h` |
-| `CONFIG_IOS_MIRROR_HEIGHT` | 1080 | 通告给手机的显示高度 |
-| `CONFIG_IOS_MIRROR_THREAD_STACK` | 10240 | AirPlay 库每个线程的栈（字节），最忙的 HTTP/RTSP 线程约用 6 KB |
+| `CONFIG_IOS_MIRROR_WIDTH` | 960（`prj.conf` 覆盖；Kconfig 默认 1920） | 通告给手机的显示宽度（像素），手机按它决定流的尺寸，编译时替换进 RPiPlay 的 `raop_handlers.h` |
+| `CONFIG_IOS_MIRROR_HEIGHT` | 720（`prj.conf` 覆盖；Kconfig 默认 1080） | 通告给手机的显示高度 |
+| `CONFIG_IOS_MIRROR_THREAD_STACK` | 24576（`prj.conf` 覆盖；Kconfig 默认 10240） | AirPlay 库每个线程的栈（字节），最忙的 HTTP/RTSP 线程约用 6 KB |
 | `CONFIG_IOS_MIRROR_THREAD_PRIORITY` | 8 | AirPlay 库线程的优先级 |
 
 ### 示例（`samples/ios_player/Kconfig`）
@@ -311,7 +329,8 @@ AirPlay 线程每解出一包 H.264，就调 `on_video()`（`main.c` 359–435 �
 例子，把 SSID 和名字写进编译：
 
 ```sh
-west build -b yuzukineko -d build/ios-mirror zephyr-components/ios-screen-mirror/samples/ios_player -- \
+./.venv/bin/west build -b yuzukineko_base -d build/ios_mirror zephyr-components/ios-screen-mirror/samples/ios_player -- \
+  -DEXTRA_CONF_FILE=boards/yuzukineko.conf -DEXTRA_DTC_OVERLAY_FILE=boards/yuzukineko.overlay \
   -DCONFIG_SAMPLE_IOS_WIFI_SSID='"MyHomeWiFi"' \
   -DCONFIG_SAMPLE_IOS_WIFI_PSK='"my-password-123"' -DCONFIG_IOS_MIRROR_NAME='"Board A"'
 ```
@@ -411,7 +430,7 @@ void airplay_stop(void);
 ## 功能范围
 
 - <strong>只显示画面，不支持声音</strong>；需要声音时在 `audio_process()` 里接 I2S/codec。`src/airplay.c` 的 `audio_process()` 是空函数，AirPlay 音频数据被接收后直接丢弃，板子不播放。
-- <strong>分辨率受解码器内存限制</strong>。`Kconfig` 里写明：手机竖屏流（约 448×972）可以，横屏 1920×1080 会被拒绝，屏幕显示 `Unsupported resolution`。判据是 `宽 × 高 × 3/2 × (2 + HOLD_FRAMES)` 不超过 `CONFIG_VDEC_SUNXI_MAX_MEMORY_KB - 512` KB（该选项当前为 8192）。
+- <strong>分辨率与横竖屏切换</strong>：在配套 4.5.0 工程中，示例已将通告分辨率设为 `960×720` 并启用 VDEC 专用内存池，支持 iPhone 竖屏与横屏流动态切换及自动居中裁剪；若手动调高到 `1920×1080`，仍会受 16 MiB PSRAM 与 VDEC 内存池上限限制而被拒绝。
 - <strong>没有音画同步，也没有时间戳调度</strong>：画面解出来就显示。
 - <strong>没有触摸回传</strong>：iPhone 的画面只能看，不能在板子上点。
 - <strong>只用 IPv4</strong>，发现靠组播 mDNS，手机和板子必须在同一个二层网络。
@@ -424,7 +443,7 @@ void airplay_stop(void);
 
 | 现象 | 原因与处理 |
 | --- | --- |
-| 编译报 `rpiplay/lib` 找不到文件 | 子模块没拉，见 [取得 RPiPlay 子模块](#取得-rpiplay-子模块) |
+| 编译报 `rpiplay/lib` 找不到文件 | 子模块没拉（从上游源码克隆时），见 [RPiPlay 子模块说明](#rpiplay-子模块说明) |
 | 屏幕 `No WiFi: put wifi.cfg on the card` | 卡里没有 `wifi.cfg`，也没设 `CONFIG_SAMPLE_IOS_WIFI_SSID`。格式：第一行 SSID，第二行密码 |
 | `Cannot join the WiFi` | 密码错、信号弱、AP 只开了 WPA3，或 30 秒内没拿到地址 |
 | `Cannot start AirPlay` | 监听端口失败（端口被占用）或内存不足，串口里有 `ios: cannot start AirPlay: <错误码>` |

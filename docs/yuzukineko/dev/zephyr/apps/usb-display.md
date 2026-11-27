@@ -4,7 +4,28 @@ title: "USB 副屏 - 电脑扩展屏"
 
 把 F101 板子接到 Windows 电脑的 USB 口上，电脑就多出一块显示器：桌面画面被主机端驱动压成 JPEG，经 USB 批量端点发给板子，板子用片上视频引擎解码，直接放到显示的视频层上。同一个 USB 设备里还带一个 HID 多点触摸屏接口，板上的触摸屏可以回传触摸。示例是工作区里的 `samples/drivers/usb/cherryusb_display`，用的是 CherryUSB 的 vendor display 类，不需要 `zephyr-components`。
 
-开始前请先完成 [配置开发环境](../zephyr-setup-env.md) 和 [获取 Zephyr 代码](../zephyr-get-source.md)。
+开始前请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr/samples/drivers/usb/cherryusb_display` |
+| 目标板级与模式 | `yuzukineko_base` · RAM（入口 `0x40000000`） |
+| 一期快速体验 | 免编译直接烧录见 [USB 电脑扩展副屏](../../../demos/04-usb-display.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app usb_display
+
+# 2. 打包整片 SPI NOR 镜像：build/usb_display/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app usb_display
+```
+
+生成的 `build/usb_display/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full usb_display`（RAM 调试阶段也可用 `./.venv/bin/python scripts/flash.py run usb_display` 直接载入内存运行）。
+
 
 本文讲板子这一端的代码。电脑这一端是现成的第三方 Windows 驱动，不在本仓库里编译，这里只讲怎么装和怎么用。
 
@@ -15,7 +36,7 @@ title: "USB 副屏 - 电脑扩展屏"
 板子对外是一个<strong>厂商自定义类</strong>设备（接口类 0xff），Windows 自带的显示驱动不认它，需要装第三方的 usb graphic 虚拟显示驱动。CherryUSB 仓库里带了签名好的安装程序：
 
 ```text
-~/f101-zephyr/modules/lib/cherryusb/tools/display/xfz1986_usb_graphic_250224_rc_sign.exe
+modules/lib/cherryusb/tools/display/xfz1986_usb_graphic_250224_rc_sign.exe
 ```
 
 驱动出处是 [chuanjinpang/win10_idd_xfz1986_usb_graphic_driver_display](https://github.com/chuanjinpang/win10_idd_xfz1986_usb_graphic_driver_display)，要求是“使用前先在 Windows 里安装这个 exe”。步骤：
@@ -31,23 +52,22 @@ title: "USB 副屏 - 电脑扩展屏"
 在工作区里执行：
 
 ```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/usbdisp zephyr/samples/drivers/usb/cherryusb_display
+./.venv/bin/python scripts/build_apps.py --app usb_display
+./.venv/bin/python scripts/pack_full_img.py --app usb_display
 ```
 
 <div class="asciinema-cast" data-src="/casts/zephyr/apps-usb-display/build.cast" data-speed="6"></div>
 
 不需要加任何 `-D` 参数。`prj.conf` 已经带了触摸需要的 `CONFIG_INPUT=y` 和 `CONFIG_INPUT_GT967_MAX_TOUCH_POINTS=5`，生成的 `.config` 里 `CONFIG_SAMPLE_USB_DISPLAY_CTP=y`、`CONFIG_INPUT_GT967=y`。
 
-产物是 `build/usbdisp/zephyr/zephyr.bin`，约 295 KB，链接地址 `0x40000000`。
+产物是 `build/usb_display/zephyr/zephyr.bin`，约 295 KB，链接地址 `0x40000000`。
 
 ## 运行
 
-用 [编译与运行](../zephyr-build-run.md) 里的任一种方式下载，控制台是 UART1（PB00/PB01，115200 8N1）。
+用 [Flash 布局与进阶调试](../../../boot/flash-layout.md) 里的任一种方式下载，控制台是 UART1（PB00/PB01，115200 8N1）。
 
-- 调试时用<strong>方式一</strong>：`xfel ddr f101-s3`、`xfel write 0x40000000 build/usbdisp/zephyr/zephyr.bin`、`xfel exec 0x40000000`。
-- 要脱机用<strong>方式三</strong>：`mkuf2.py app build/usbdisp/zephyr/zephyr.bin -o out/usbdisp.uf2`，拖进 `F101BOOT` 盘。
+- 调试时用<strong>方式一</strong>：`xfel ddr f101-s3`、`xfel write 0x40000000 build/usb_display/zephyr/zephyr.bin`、`xfel exec 0x40000000`。
+- 要脱机用<strong>方式三</strong>：`mkuf2.py app build/usb_display/zephyr/zephyr.bin -o out/usbdisp.uf2`，拖进 `F101BOOT` 盘。
 
 :::caution
 板子只有一个 USB-C 口，既是 xfel 下载口，也是这个示例的 USB 设备口。用方式一时，`xfel exec` 之后保持这根线不动，程序起来后同一个口就枚举成显示设备，电脑装了驱动就能看到新显示器。
@@ -447,7 +467,7 @@ GT967 驱动最多报多少个点由 `CONFIG_INPUT_GT967_MAX_TOUCH_POINTS` 决�
 | `CONFIG_SAMPLE_USB_DISPLAY_CTP_FLIP_X` | n | 触摸屏 X 镜像，依赖 `CTP` |
 | `CONFIG_SAMPLE_USB_DISPLAY_CTP_FLIP_Y` | n | 触摸屏 Y 镜像，依赖 `CTP` |
 
-这些选项改 `prj.conf`，或者在 `west build` 命令最后加 `-- -DCONFIG_xxx=值`。
+这些选项改 `prj.conf`，或者在 `./.venv/bin/west build` 命令最后加 `-- -DCONFIG_xxx=值`。
 
 `prj.conf` 里和功能相关的选项：
 

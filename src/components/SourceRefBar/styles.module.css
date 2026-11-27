@@ -1,0 +1,122 @@
+.wrap {
+  container-type: inline-size;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.bar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  padding: 0.56rem 0.85rem;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-left: 3px solid rgba(23, 105, 170, 0.55);
+  border-radius: 8px;
+  background: #f8fafc;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+:global([data-theme='dark']) .bar {
+  border-color: rgba(148, 163, 184, 0.2);
+  border-left-color: rgba(105, 183, 240, 0.65);
+  background: #141d28;
+}
+
+@container (min-width: 560px) {
+  .bar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.85rem;
+  }
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.5rem;
+  min-width: 0;
+  color: #475569;
+}
+
+:global([data-theme='dark']) .left {
+  color: #94a3b8;
+}
+
+.icon {
+  flex-shrink: 0;
+  color: #64748b;
+}
+
+:global([data-theme='dark']) .icon {
+  color: #94a3b8;
+}
+
+.label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.path {
+  padding: 0.1rem 0.42rem;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #1e293b;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.8rem;
+  word-break: break-all;
+}
+
+:global([data-theme='dark']) .path {
+  border-color: rgba(148, 163, 184, 0.16);
+  background: rgba(15, 23, 42, 0.55);
+  color: #e2e8f0;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  font-weight: 600;
+  color: #1769aa;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.link:hover {
+  color: #12568c;
+  text-decoration: underline;
+}
+
+.link:focus-visible {
+  outline: 2px solid #1769aa;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+:global([data-theme='dark']) .link {
+  color: #7cc4f5;
+}
+
+:global([data-theme='dark']) .link:hover {
+  color: #a5d8fa;
+}
+
+:global([data-theme='dark']) .link:focus-visible {
+  outline-color: #7cc4f5;
+}
+
+@media (forced-colors: active) {
+  .bar {
+    border: 1px solid CanvasText;
+    border-left: 3px solid Highlight;
+  }
+
+  .path {
+    border: 1px solid CanvasText;
+  }
+}

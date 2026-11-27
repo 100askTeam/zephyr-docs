@@ -284,7 +284,7 @@ DSI 编码器 `allwinner,sun252iw2-mipi-dsi`：`reg`、`interrupts`、`phy`（�
 };
 ```
 
-完整的 22 个脚见 `f101_evb.dts`；每个引脚各复用功能的名字（`LCD0-Dx`、`LCD0-CLK`、`LCD0-DE`、`LCD0-HSYNC`、`LCD0-VSYNC`）见[引脚复用表](../../../hardware/mux.md)。
+完整的 22 个脚见 `f101_evb.dts`；每个引脚各复用功能的名字（`LCD0-Dx`、`LCD0-CLK`、`LCD0-DE`、`LCD0-HSYNC`、`LCD0-VSYNC`）见[引脚复用表](../../../hardware/pinout.md#引脚复用-mux)。
 
 ### 第三步：打开流水线，连起来
 
@@ -1660,7 +1660,7 @@ west build -b yuzukineko -d build/display-api display_api
 
 同一个程序也可以为接 RGB 屏的 `f101_evb` 编译：`west build -b f101_evb -d build/display-api-evb display_api`，显示的写法完全一样，只是设备树不同。本文的 RGB 屏适配部分来自 `f101_evb.dts`，没有在 `yuzukineko` 上运行（`yuzukineko` 没有接 RGB 屏）。
 
-下载运行的方法见[编译与运行](../zephyr-build-run.md)。控制台 UART1 上的完整输出（运行期间屏幕依次出现彩条、白块、黑屏、亮度变化、四色图片、灰度渐变）：
+下载运行的方法见[Flash 布局与进阶调试](../../../boot/flash-layout.md)。控制台 UART1 上的完整输出（运行期间屏幕依次出现彩条、白块、黑屏、亮度变化、四色图片、灰度渐变）：
 
 ```text
 [caps] 1024x768, supported pixel formats 0x10, current 0x10 (RGB_565 is 0x10), orientation 0

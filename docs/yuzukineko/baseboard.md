@@ -2,14 +2,18 @@
 title: "YuzukiCube-M 底板"
 ---
 
+import YuzukiBoardStage from '@site/src/components/YuzukiNekoHome/YuzukiBoardStage';
+
 `04_BaseBoard/V1.0/` 是 YuzukiNeko 的底板（载板）。底板上没有 SoC：YuzukiNeko 模块本身以 `U1`（BOM 中的 `YuzukiNeko-SMT`，49 个焊盘）装在底板上，底板把模块的 MIPI DSI、SDIO、UART、TWI、CAN 等信号接到实际器件和连接器上。
+
+<YuzukiBoardStage defaultBoard="base" isHero={false} />
 
 :::tip
 工程文件名为 `YuzukiCube-M`，原理图的标题栏写的还是 `YuzukiNeko`（`REV: V1.0`，2026-10-09）。两者指的是同一块底板。
 :::
 
 :::caution
-本文的引脚对应是从底板原理图 `04_BaseBoard/V1.0/01_SCH/SCH_Schematic2_2026-10-10.pdf` 的网表读出的，接线前请以该原理图为准。网络名用的是<strong>模块的实际 GPIO 名</strong>；如果你插的是 V1.3 模块，丝印要按[勘误](hardware/errata.md#v13pd-丝印编号错误)换算。
+本文的引脚对应是从底板原理图 `04_BaseBoard/V1.0/01_SCH/SCH_Schematic2_2026-10-10.pdf` 的网表读出的，接线前请以该原理图为准。网络名用的是<strong>模块的实际 GPIO 名</strong>；如果你插的是 V1.3 模块，丝印要按 [版本差异与勘误](hardware/overview.md#v13pd-丝印编号错误) 换算。
 :::
 
 ## 板载器件
@@ -18,16 +22,16 @@ title: "YuzukiCube-M 底板"
 | --- | --- | --- |
 | `U1` | YuzukiNeko-SMT | 模块本体，49 个焊盘；底板其余电路都挂在它上面 |
 | `U3` | AIC8800D80 | Wi-Fi / 蓝牙模块（LGA-44），天线经 `RF1` |
-| `U5` | TJA1051T/3/1J | CAN 收发器，接 CAN0，引出 `CANH` / `CANL` |
-| `U2` | LPA4890MSF | 音频功放，输入取自 `HPOUT`，输出 `SPKR+` / `SPKR-` |
+| `U5` | TJA1051T/3/1J | 高速 CAN 收发器，接 CAN0（`PB2` / `PB3`），经 `CN1` 引出 `CANH` / `CANL` |
+| `U2` | LPA4890MSF | 音频功放，输入取自 `HPOUT`，输出至 `CN3`（`SPKR-` / `SPKR+`） |
 | `U4` | RY3730 | 背光升压（`L1` 4.7 µH、`D1` B5819WS），输出 `VLED-A` / `VLED-K` |
 | `U10` | MT3520B | 降压，`VSYS-5V` → `VCC-3V3`（`L2` 2.2 µH） |
 | `FPC1` | FPC-05F-40PH20 | 40 脚 0.5 mm FPC：MIPI DSI + 背光 + 电容触摸 |
-| `CN1` | HC-1.25-2PLT | 2 脚 1.25 mm，`HPOUT` 模拟音频 |
-| `CN2` | 1.25-5P WT | 5 脚 1.25 mm，引出 `UART1-RX` / `UART1-TX` 与 `UART4-RX` / `UART4-TX` |
-| `CN3` | HC-1.25-2PLT | 2 脚 1.25 mm，`SPKR+` / `SPKR-` 扬声器 |
+| `CN1` | HC-1.25-2PLT | 2 脚 1.25 mm，CAN 总线接口（Pin 1 `CANH`、Pin 2 `CANL`） |
+| `CN2` | 1.25-5P WT | 5 脚 1.25 mm，串口接口（Pin 1 `UART1-RX`、Pin 2 `UART1-TX`、Pin 3 `UART4-RX`、Pin 4 `UART4-TX`、Pin 5 `GND`） |
+| `CN3` | HC-1.25-2PLT | 2 脚 1.25 mm，扬声器接口（Pin 1 `SPKR-`、Pin 2 `SPKR+`） |
 | `RF1` | BWIPX-1-001E | IPEX / u.FL 天线座（Wi-Fi / 蓝牙） |
-| `H1` | 2.54 mm 2 脚排针 | 引出 `VSYS-5V` 与 `GND` |
+| `H1` | 2.54 mm 2 脚排针 | 电源引出（Pin 1 `VSYS-5V`、Pin 2 `GND`） |
 | `SW1` | TC-6615-5-260G | 轻触开关，接 `PD5`（`DOWN` 网络） |
 
 ## 占用的模块引脚
@@ -61,12 +65,17 @@ title: "YuzukiCube-M 底板"
 - **背光**：`VLED-A` 取自 `U4` 升压输出，回路为 `VLED-K`，亮度由 `PD22` 的 `DSI-PWM` 调光。
 - **电容触摸**：`CTP-SCK` / `CTP-SDA` 走 TWI1，中断与复位是 `CTP-INT` / `CTP-RST`。
 
+## 音频与 CAN 接口
+
+- **音频功放（右上角 `U2` + `CN3`）**：模块背面 Pin 45 的 `HPOUT` 经耦合电容 `C10`（100 nF）和输入电阻 `R11`（20 kΩ）送入功放 `U2`（`LPA4890MSF`），由 `PD4`（`PA-SHDN`）控制使能，差分输出至 2 脚座子 `CN3`（Pin 1 `SPKR-`、Pin 2 `SPKR+`）。
+- **CAN 总线（左上角 `U5` + `CN1`）**：模块 `PB2`（`CAN-TX`）/ `PB3`（`CAN-RX`）接高速 CAN 收发器 `U5`（`TJA1051T/3/1J`，`S` 脚接地处于正常模式，`VIO` 接 `VSYS-3V3`），总线侧经 `R17`/`R18`（各 100 Ω）与 `C12`（4.7 µF）分裂终端网络引出至 2 脚座子 `CN1`（Pin 1 `CANH`、Pin 2 `CANL`）。
+
 ## 电源
 
-- `VSYS-5V`：来自模块的 `5V` 脚（USB-C VBUS）。降压 `U10`、CAN 收发器 `U5`、音频功放 `U2` 和 `H1` 都取这条轨道。
-- `VCC-3V3`：`U10` 从 `VSYS-5V` 降压得到。
-- `VSYS-3V3`：模块的 `3V3` 输出。
-- `VLED-A` / `VLED-K`：`U4` 升压，专供背光。
+- `VSYS-5V`：来自模块 Pin 40（USB-C VBUS）。降压 `U10`、背光升压 `U4`、CAN 收发器 `U5`（`VCC`）、音频功放 `U2`（`VDD`）和 `H1`（Pin 1）都取这条轨道。
+- `VCC-3V3`：`U10`（`MT3520B`）从 `VSYS-5V` 降压得到，给 Wi-Fi 模块 `U3` 的 `VBAT`（Pin 9）及 `FPC1` 触摸/复位上拉电阻 `R1`–`R5` 供电。
+- `VSYS-3V3`：来自模块 Pin 1（`3V3` 输出），给 `U3` 的 `VDDIO`（Pin 22）、`U5` 的 `VIO`（Pin 5）以及 `FPC1` 逻辑供电。
+- `VLED-A` / `VLED-K`：`U4`（`RY3730`）升压，专供背光。
 
 底板没有电池和充电电路，`VSYS-5V` 全部来自模块的 USB-C。
 
@@ -78,6 +87,6 @@ title: "YuzukiCube-M 底板"
 
 ## 文件
 
-`04_BaseBoard/V1.0/` 的结构与 `01_Hardware/` 的七个条目相同：`01_SCH`、`02_PCB`、`03_Gerber`、`04_3D`、`05_BOM`、`06_PickAndPlace`、`07_Project`。其中 `04_3D/` 除 PCB 模型外还有一份外壳 `3DShell_PCB2.zip`，与[模块的 3D 打印外壳](shell.md)是两回事。
+`04_BaseBoard/V1.0/` 的结构与 `01_Hardware/` 的七个条目相同：`01_SCH`、`02_PCB`、`03_Gerber`、`04_3D`、`05_BOM`、`06_PickAndPlace`、`07_Project`。其中 `04_3D/` 除 PCB 模型外还有一份底板外壳 `3DShell_PCB2.zip`。
 
-目录总览见[硬件文件说明](hardware/files.md)，协议见[许可证](license.md)。
+原理图、PCB、BOM 与 3D 外壳下载见 [原理图与资料下载](hardware/download.md)。

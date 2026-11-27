@@ -18,18 +18,36 @@ flowchart TB
     MAIN -->|"printk / fprintf"| UART["UART1<br/>115200 8N1"]
 ```
 
-开始前请先完成 [配置开发环境](../zephyr-setup-env.md) 和 [获取 Zephyr 代码](../zephyr-get-source.md)。
+开始前请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr-components/ncnn/samples/benchmark` |
+| 目标板级与模式 | `yuzukineko_base` · RAM（入口 `0x40000000`） |
+| 一期快速体验 | 免编译直接烧录见 [ncnn 神经网络推理](../../../demos/17-ncnn.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app ncnn
+
+# 2. 打包整片 SPI NOR 镜像：build/ncnn/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app ncnn
+```
+
+生成的 `build/ncnn/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full ncnn`（RAM 调试阶段也可用 `./.venv/bin/python scripts/flash.py run ncnn` 直接载入内存运行）。
+> `ncnn/ncnn` 子模块已随配套工程包内置，无需手动拉取。
+
+
 
 ## 准备：ncnn 源码和模型
 
-### 拉子模块
+### ncnn 子模块说明
 
-ncnn 是 `zephyr-components` 的 git 子模块，没拉的话目录是空的，编译会直接报 `ncnn sources missing`：
-
-```sh
-cd ~/f101-zephyr/zephyr-components
-git submodule update --init ncnn/ncnn
-```
+ncnn 是 `zephyr-components` 的 git 子模块，配套 `f101-zephyr` 工作区已随包内置，无需手动拉取（仅在从上游 Git 仓库重新克隆且子模块目录为空时，才需在 `zephyr-components` 下执行 `git submodule update --init ncnn/ncnn`）。
 
 ### 模型是怎么“放进固件”的
 
@@ -105,16 +123,15 @@ out[first] = "".join(l for _, _, l in calls)
 指定网络的例子：只跑 `blazeface` 和 `yolo-fastestv2`：
 
 ```sh
-west build -b yuzukineko -d build/ncnn zephyr-components/ncnn/samples/benchmark -- \
+./.venv/bin/west build -b yuzukineko_base -d build/ncnn zephyr-components/ncnn/samples/benchmark -- \
     '-DCONFIG_NCNN_BENCHMARK_MODELS="blazeface,yolo-fastestv2"'
 ```
 
 ## 编译
 
 ```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/ncnn zephyr-components/ncnn/samples/benchmark
+./.venv/bin/python scripts/build_apps.py --app ncnn
+./.venv/bin/python scripts/pack_full_img.py --app ncnn
 ```
 
 <div class="asciinema-cast" data-src="/casts/zephyr/apps-ncnn/build.cast" data-speed="8"></div>
@@ -129,7 +146,7 @@ west build -b yuzukineko -d build/ncnn zephyr-components/ncnn/samples/benchmark
 
 ## 运行
 
-用 [编译与运行](../zephyr-build-run.md) 里的任一种方式下载，控制台是 UART1（PB00/PB01，115200 8N1）。调试用方式一：
+用 [Flash 布局与进阶调试](../../../boot/flash-layout.md) 里的任一种方式下载，控制台是 UART1（PB00/PB01，115200 8N1）。调试用方式一：
 
 ```sh
 xfel ddr f101-s3
@@ -417,5 +434,5 @@ int ncnn_zephyr_oom_seen(void)
 | `ncnn sources missing, run: git submodule update --init` | 子模块没拉，见开头 |
 | 编译 `ncnn_libc.c` 报 `expected ')' before '*' token`（`feof`） | 应用的 `prj.conf` 里没有 `CONFIG_MINIMAL_LIBC=y`，默认的 C 库是 picolibc |
 | 某个网络没有结果行 | 运行期间有 `malloc()` 失败，结果被丢弃；缩小 `MAX_WEIGHTS_MB` 或用 `MODELS` 指定网络 |
-| 串口没有任何输出 | 确认下载方式和 UART1 接线，见 [编译与运行](../zephyr-build-run.md) |
+| 串口没有任何输出 | 确认下载方式和 UART1 接线，见 [Flash 布局与进阶调试](../../../boot/flash-layout.md) |
 | 结果比表里慢很多 | 检查启动日志是不是 `no vector extension`，以及 `cooling_down` 是否为 0 |

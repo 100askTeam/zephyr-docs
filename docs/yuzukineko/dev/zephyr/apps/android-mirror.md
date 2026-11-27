@@ -15,7 +15,31 @@ flowchart TB
     ADB -->|"ADB over TCP 控制流"| PHONE
 ```
 
-开始前请先完成 [配置开发环境](../zephyr-setup-env.md) 和 [获取 Zephyr 代码](../zephyr-get-source.md)。WiFi 部分用的是 [AIC8800 WIFI](../components/aic8800-wifi.md) 驱动，扫描、连接、DHCP 的细节看那一篇。
+开始前请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr-components/android-screen-mirror/samples/mirror_player` |
+| 目标板级与模式 | `yuzukineko_base` · RAM（入口 `0x40000000`） |
+| 额外板级配置 | `boards/yuzukineko.conf`、`boards/yuzukineko.overlay`（脚本自动加载） |
+| 一期快速体验 | 免编译直接烧录见 [安卓无线投屏](../../../demos/01-android-mirror.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app android_mirror
+
+# 2. 打包整片 SPI NOR 镜像：build/android_mirror/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app android_mirror
+```
+
+生成的 `build/android_mirror/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full android_mirror`（RAM 调试阶段也可用 `./.venv/bin/python scripts/flash.py run android_mirror` 直接载入内存运行）。
+> **当前 4.5.0 工程同步说明**：配套分支已升级至 **scrcpy v5.0.1**（`CONFIG_SAMPLE_MIRROR_SERVER_VERSION="5.0.1"`、`send_stream_meta=true` 与 12 字节 session 头），默认画幅长边调优为 `768`、码率 `2000000` bps、单流接收缓冲 `CONFIG_MIRROR_ADB_RX_BUFFER=65536`，并适配 Zephyr 4.5 / Mbed TLS 4.x 的 `CONFIG_MBEDTLS_SSL_PROTO_TLS1_3=y`。
+
+WiFi 部分用的是 [AIC8800 WIFI](../components/aic8800-wifi.md) 驱动，扫描、连接、DHCP 的细节看那一篇。
 
 ## 准备
 
@@ -62,21 +86,21 @@ adb shell ip route
 
 ### scrcpy 服务端
 
-scrcpy 的服务端是一个 jar（实际是装着 `classes.dex` 的 zip），由板子推到手机的 `/data/local/tmp/scrcpy-server.jar`，再用 `app_process` 启动。**版本必须和板子配置的版本一致**：`CONFIG_SAMPLE_MIRROR_SERVER_VERSION` 默认 `3.3.1`，服务端启动时会比对命令行里的版本号，不一致就退出（板子会把服务端的输出打印成 `server: …`）。
+scrcpy 的服务端是一个 jar（实际是装着 `classes.dex` 的 zip），由板子推到手机的 `/data/local/tmp/scrcpy-server.jar`，再用 `app_process` 启动。**版本必须和板子配置的版本一致**：`CONFIG_SAMPLE_MIRROR_SERVER_VERSION` 默认 `5.0.1`，服务端启动时会比对命令行里的版本号，不一致就退出（板子会把服务端的输出打印成 `server: …`）。
 
-在电脑上下载 3.3.1 版，改名为 `scrcpy-server.jar`，放到 TF 卡根目录：
+在电脑上下载 5.0.1 版，改名为 `scrcpy-server.jar`，放到 TF 卡根目录：
 
 ```sh
 curl -L -o scrcpy-server.jar \
-  https://github.com/Genymobile/scrcpy/releases/download/v3.3.1/scrcpy-server-v3.3.1
+  https://github.com/Genymobile/scrcpy/releases/download/v5.0.1/scrcpy-server-v5.0.1
 sha256sum scrcpy-server.jar
 ```
 
-文件大小 90788 字节，SHA-256 为 `a0f70b20aa4998fbf658c94118cd6c8dab6abbb0647a3bdab344d70bc1ebcbb8`，以 [scrcpy 发布页](https://github.com/Genymobile/scrcpy/releases/tag/v3.3.1) 上公布的校验值为准。
+校验值以 [scrcpy v5.0.1 发布页](https://github.com/Genymobile/scrcpy/releases/tag/v5.0.1) 上公布的为准。
 
 不需要手动 `adb push`：每次连接，`adb_push_file()` 先用 sync 服务的 `STAT` 查手机上这个文件的大小，和卡上的文件大小一样就跳过，不一样才推送（只比大小，不比内容；换了同样大小的另一个版本不会重推，要先在手机上删掉旧文件）。卡上没有这个文件，`fs_stat()` 失败，屏幕显示 `cannot copy the server`。
 
-想换版本：同时改卡上的 jar 和 `CONFIG_SAMPLE_MIRROR_SERVER_VERSION`。服务端的控制消息格式随版本变，`scrcpy.c` 里的消息布局对应 3.x，换到别的大版本需要对照 scrcpy 的 `doc/develop.md` 检查。
+想换版本：同时改卡上的 jar 和 `CONFIG_SAMPLE_MIRROR_SERVER_VERSION`。服务端的控制消息格式随版本变，`scrcpy.c` 里的消息布局对应 5.x（含 `send_stream_meta=true` 与 12 字节 session 头），换到别的大版本需要对照 scrcpy 的 `doc/develop.md` 检查。
 
 ### 配置 WiFi
 
@@ -113,14 +137,14 @@ list(APPEND ZEPHYR_EXTRA_MODULES ${CMAKE_CURRENT_SOURCE_DIR}/../..
 所以不需要在命令行指定模块路径。在工作区里执行：
 
 ```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/android-mirror zephyr-components/android-screen-mirror/samples/mirror_player
+./.venv/bin/python scripts/build_apps.py --app android_mirror
+# 修改 prj.conf 后如需强制重新配置编译：
+# ./.venv/bin/python scripts/build_apps.py --app android_mirror --pristine
 ```
 
 <div class="asciinema-cast" data-src="/casts/zephyr/apps-android-mirror/build.cast" data-speed="6"></div>
 
-产物是 `build/android-mirror/zephyr/zephyr.bin`，7567584 字节（约 7.2 MiB，包含 AIC8800 固件），链接地址 `0x40000000`，RAM 占用 7567584 字节，占 16320 KB 的 45.28%。
+产物是 `build/android_mirror/zephyr/zephyr.bin`，7567584 字节（约 7.2 MiB，包含 AIC8800 固件），链接地址 `0x40000000`，RAM 占用 7567584 字节，占 16320 KB 的 45.28%。
 
 示例的 `prj.conf` 里设了 `CONFIG_MINIMAL_LIBC=y`：AIC8800 驱动的 `compat/` 头文件按最小 C 库写，用板子默认的 picolibc 会在 `getchar` 的声明上冲突，见 [AIC8800 WIFI](../components/aic8800-wifi.md)。自己的应用用这个驱动时也要设。
 
@@ -136,11 +160,11 @@ CONFIG_SAMPLE_MIRROR_PHONE_IP="192.168.1.23"
 
 ## 运行
 
-下载方式见 [编译与运行](../zephyr-build-run.md)，控制台是 UART1（PB00/PB01，115200 8N1）。镜像有 7.2 MiB，调试时用方式一：
+下载方式见 [Flash 布局与进阶调试](../../../boot/flash-layout.md)，控制台是 UART1（PB00/PB01，115200 8N1）。镜像有 7.2 MiB，调试时用方式一：
 
 ```sh
 xfel ddr f101-s3
-xfel write 0x40000000 build/android-mirror/zephyr/zephyr.bin
+xfel write 0x40000000 build/android_mirror/zephyr/zephyr.bin
 xfel exec 0x40000000
 ```
 
@@ -298,7 +322,7 @@ wifi: address 192.168.1.55
 | --- | --- | --- |
 | `CONFIG_MIRROR` | `n` | 打开组件。依赖 `NETWORKING`、`NET_TCP`、`FILE_SYSTEM`，并选中 mbed TLS 的 RSA、PKCS#1 v1.5、SHA-1/256/512、HKDF、GCM 和 `RING_BUFFER` |
 | `CONFIG_MIRROR_ADB_MAX_PAYLOAD` | 65536 | 板子接受的最大 ADB 数据包，范围 4096–262144；发送、接收缓冲各按这个大小分配一块 |
-| `CONFIG_MIRROR_ADB_RX_BUFFER` | 262144 | 每条流的接收环形缓冲（字节）。满了以后接收线程等读者取走，TCP 窗口随之收紧 |
+| `CONFIG_MIRROR_ADB_RX_BUFFER` | 65536（`prj.conf` 覆盖；Kconfig 默认 262144） | 每条流的接收环形缓冲（字节）。满了以后接收线程等读者取走，TCP 窗口随之收紧 |
 | `CONFIG_MIRROR_ADB_TRACE` | 0 | 设为 1，每收到一个 ADB 包打印一行包头 |
 
 使用组件的应用还必须设 `CONFIG_MBEDTLS_USER_CONFIG_FILE="mirror_mbedtls.h"`，头文件在 `android-screen-mirror/include/`，用来打开 PEM、X.509 生成和 TLS 密钥导出等 mbed TLS 功能。
@@ -313,10 +337,10 @@ wifi: address 192.168.1.55
 | `CONFIG_SAMPLE_MIRROR_PHONE_PORT` | 5555 | 上面这种方式的端口 |
 | `CONFIG_SAMPLE_MIRROR_KEY_FILE` | `"/SD:/adbkey"` | ADB 私钥文件，不存在就生成。可以直接放电脑上 `~/.android/adbkey`，这样手机认为是同一台电脑，不再弹窗 |
 | `CONFIG_SAMPLE_MIRROR_SERVER_FILE` | `"/SD:/scrcpy-server.jar"` | 卡上的 scrcpy 服务端文件 |
-| `CONFIG_SAMPLE_MIRROR_SERVER_VERSION` | `"3.3.1"` | 服务端版本，要和 jar 一致 |
-| `CONFIG_SAMPLE_MIRROR_MAX_SIZE` | 1024 | 画面长边最多多少像素，服务端会等比缩小 |
+| `CONFIG_SAMPLE_MIRROR_SERVER_VERSION` | `"5.0.1"` | 服务端版本，要和 jar 一致 |
+| `CONFIG_SAMPLE_MIRROR_MAX_SIZE` | 768 | 画面长边最多多少像素，服务端会等比缩小 |
 | `CONFIG_SAMPLE_MIRROR_MAX_FPS` | 30 | 帧率上限 |
-| `CONFIG_SAMPLE_MIRROR_BIT_RATE` | 4000000 | 视频码率（比特每秒） |
+| `CONFIG_SAMPLE_MIRROR_BIT_RATE` | 2000000 | 视频码率（比特每秒） |
 
 ### prj.conf 里和投屏有关的选项
 
@@ -343,7 +367,7 @@ wifi: address 192.168.1.55
 | `CONFIG_NET_BUF_DATA_SIZE=1536` | 每个网络缓冲的数据区 |
 | `CONFIG_NET_IPV4_IGMP=y` | 加入 mDNS 组播组 |
 | `CONFIG_NET_CONTEXT_REUSEADDR=y`、`CONFIG_NET_CONTEXT_REUSEPORT=y` | mDNS 的 5353 端口复用 |
-| `CONFIG_MBEDTLS_TLS_VERSION_1_3=y` | 无线调试的 TLS 1.3 |
+| `CONFIG_MBEDTLS_SSL_PROTO_TLS1_3=y` | 无线调试的 TLS 1.3 |
 | `CONFIG_MBEDTLS_HEAP_SIZE=131072` | mbed TLS 专用堆，生成 RSA 密钥和 TLS 握手要用 |
 | `CONFIG_TEST_RANDOM_GENERATOR=y` | SoC 的随机数发生器还没有驱动，用伪随机源。ADB 密钥、TLS 和配对都用它，不能用于正式产品 |
 | `CONFIG_HEAP_MEM_POOL_SIZE=262144` | 内核堆，AIC8800 驱动从这里分配；ADB 收发缓冲和 1 MiB 的视频包缓冲用 `malloc()` |
@@ -589,7 +613,7 @@ sequenceDiagram
     A-->>B: 文件大小
     B->>A: SEND, DATA..., DONE (大小不同才推送)
     A-->>B: OKAY
-    B->>A: OPEN shell:CLASSPATH=... app_process / com.genymobile.scrcpy.Server 3.3.1 ...
+    B->>A: OPEN shell:CLASSPATH=... app_process / com.genymobile.scrcpy.Server 5.0.1 ...
     A->>S: 启动进程
     S->>S: 监听抽象套接字 scrcpy_xxxxxxxx
     loop 每 250 ms, 最多 60 次

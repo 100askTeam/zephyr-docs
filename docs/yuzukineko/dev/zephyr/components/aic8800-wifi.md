@@ -1105,7 +1105,7 @@ west build -b yuzukineko -d build/aic8800-wifi examples/aic8800_wifi_api
 
 <div class="asciinema-cast" data-src="/casts/zephyr/components-aic8800-wifi/build.cast" data-speed="6"></div>
 
-下载运行的方法见[编译与运行](../zephyr-build-run.md)。`smhc2` 的引脚和 I2S0、USB 主机的 VBUS 开关共用，运行这个程序时不要同时用这些外设。
+下载运行的方法见[Flash 布局与进阶调试](../../../boot/flash-layout.md)。`smhc2` 的引脚和 I2S0、USB 主机的 VBUS 开关共用，运行这个程序时不要同时用这些外设。
 
 ### 上电后第一条 SDIO 命令失败
 

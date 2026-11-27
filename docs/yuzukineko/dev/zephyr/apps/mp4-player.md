@@ -16,7 +16,30 @@ flowchart TB
 
 音频是主时钟：每一帧画面等声音播放到它的时间戳才显示，晚得太多的帧直接丢掉。屏幕左上角叠一块统计面板（帧率、SD 读取速率、解码耗时等），用 LVGL 画在 ARGB 层上。
 
-开始前请先完成 [配置开发环境](../zephyr-setup-env.md) 和 [获取 Zephyr 代码](../zephyr-get-source.md)。
+开始前请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr/samples/drivers/mp4_player` |
+| 目标板级与模式 | `yuzukineko_base` · RAM（入口 `0x40000000`） |
+| 一期快速体验 | 免编译直接烧录见 [MP4 本地播放器](../../../demos/07-mp4-player.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app mp4_player
+
+# 2. 打包整片 SPI NOR 镜像：build/mp4_player/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app mp4_player
+```
+
+生成的 `build/mp4_player/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full mp4_player`（RAM 调试阶段也可用 `./.venv/bin/python scripts/flash.py run mp4_player` 直接载入内存运行）。
+> **当前 4.5.0 工程同步说明**：配套分支 `samples/drivers/mp4_player/src/main.c` 已增加**连续循环播放**支持，视频播放至结尾时自动安全复位音频与 VDEC 解码会话并从第 0 帧无缝续播（原 4.2.2 版本播完即退出）。
+
+
 
 ## 准备视频
 
@@ -77,21 +100,20 @@ ffmpeg -i 363550.mp4 -map 0:v:0 -map 0:a:0 \
 ## 编译
 
 ```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/mp4 zephyr/samples/drivers/mp4_player
+./.venv/bin/python scripts/build_apps.py --app mp4_player
+./.venv/bin/python scripts/pack_full_img.py --app mp4_player
 ```
 
 <div class="asciinema-cast" data-src="/casts/zephyr/apps-mp4-player/build.cast" data-speed="6"></div>
 
-产物是 `build/mp4/zephyr/zephyr.bin`，约 4.2 MB，链接地址 `0x40000000`，和其他 Zephyr 程序一样。
+产物是 `build/mp4_player/zephyr/zephyr.bin`，约 4.2 MB，链接地址 `0x40000000`，和其他 Zephyr 程序一样。
 
 ## 运行
 
-用 [编译与运行](../zephyr-build-run.md) 里的任一种方式下载，控制台是 UART1（PB00/PB01，115200 8N1）。
+用 [Flash 布局与进阶调试](../../../boot/flash-layout.md) 里的任一种方式下载，控制台是 UART1（PB00/PB01，115200 8N1）。
 
-- 调试时用<strong>方式一</strong>：`xfel ddr f101-s3`、`xfel write 0x40000000 build/mp4/zephyr/zephyr.bin`、`xfel exec 0x40000000`。
-- 要脱机播放用<strong>方式三</strong>：`mkuf2.py app build/mp4/zephyr/zephyr.bin -o out/mp4.uf2`，拖进 `F101BOOT` 盘。
+- 调试时用<strong>方式一</strong>：`xfel ddr f101-s3`、`xfel write 0x40000000 build/mp4_player/zephyr/zephyr.bin`、`xfel exec 0x40000000`。
+- 要脱机播放用<strong>方式三</strong>：`mkuf2.py app build/mp4_player/zephyr/zephyr.bin -o out/mp4.uf2`，拖进 `F101BOOT` 盘。
 
 <div class="asciinema-cast" data-src="/casts/zephyr/apps-mp4-player/run.cast" data-speed="4"></div>
 
@@ -255,7 +277,7 @@ int mp4_seek_time(const struct mp4_track *t, struct mp4_iter *it, int64_t time);
 改法有两种，任选一种。编译时覆盖：
 
 ```sh
-west build -b yuzukineko -d build/mp4 zephyr/samples/drivers/mp4_player -- -DCONFIG_SAMPLE_MP4_FILE='"/SD:/movie/demo.mp4"'
+./.venv/bin/west build -b yuzukineko_base -d build/mp4_player zephyr/samples/drivers/mp4_player -- -DCONFIG_SAMPLE_MP4_FILE='"/SD:/movie/demo.mp4"'
 ```
 
 或者写进应用目录的 `prj.conf`。注意字符串要带引号。

@@ -2,11 +2,11 @@
 title: "LVGL - 图形界面"
 ---
 
-LVGL 是一个嵌入式图形库：控件（按钮、标签、滑条、图表……）、样式、动画、触摸事件都有现成的。在 F101 的 Zephyr 上，LVGL 作为 west 模块（`modules/lib/gui/lvgl`，版本 9.3.0）编进应用，通过标准的显示接口画到屏幕上，通过标准的输入子系统读触摸屏。不需要 `zephyr-components`，也不需要外部素材。
+LVGL 是一个嵌入式图形库：控件（按钮、标签、滑条、图表……）、样式、动画、触摸事件都有现成的。在 F101 的 Zephyr 上，LVGL 作为 west 模块（`modules/lib/gui/lvgl`，版本 9.6.0）编进应用，通过标准的显示接口画到屏幕上，通过标准的输入子系统读触摸屏。不需要 `zephyr-components`，也不需要外部素材。
 
 ```mermaid
 flowchart TB
-    APP["应用 lv_button_create<br/>LVGL 9.3 软件渲染"] -->|"部分渲染缓冲<br/>CONFIG_LV_Z_VDB_SIZE"| FLUSH["lvgl_flush_cb_16bit<br/>display_write"]
+    APP["应用 lv_button_create<br/>LVGL 9.6 软件渲染"] -->|"部分渲染缓冲<br/>CONFIG_LV_Z_VDB_SIZE"| FLUSH["lvgl_flush_cb_16bit<br/>display_write"]
     TP["GT967 触摸<br/>I2C1 + INT"] -->|"input 子系统<br/>ABS_X / ABS_Y / BTN_TOUCH"| PTR["lvgl_pointer_input.c"]
     PTR -->|"lv_indev 指针"| APP
     FLUSH -->|"memcpy + cache flush"| FB["帧缓冲层<br/>RGB565 / ARGB8888"]
@@ -17,18 +17,42 @@ flowchart TB
 
 本文依次讲：准备、编译和运行 hello 程序，在板子上跑官方 demo，然后是 LVGL 怎么接到显示和触摸、最小界面的完整代码，以及推荐的 Kconfig。每个运行步骤都写明串口和屏幕上会出现什么。
 
-开始前请先完成 [配置开发环境](../zephyr-setup-env.md) 和 [获取 Zephyr 代码](../zephyr-get-source.md)。
+开始前请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr/samples/modules/lvgl/demos` |
+| 目标板级与模式 | `yuzukineko_base` · RAM（入口 `0x40000000`） |
+| 额外板级配置 | `boards/yuzukineko.conf`、`platform/apps/lvgl_yuzukineko_base.conf`、`boards/yuzukineko.overlay`（脚本自动加载） |
+| 一期快速体验 | 免编译直接烧录见 [LVGL 图形界面](../../../demos/08-lvgl.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app lvgl
+
+# 2. 打包整片 SPI NOR 镜像：build/lvgl/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app lvgl
+```
+
+生成的 `build/lvgl/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full lvgl`（RAM 调试阶段也可用 `./.venv/bin/python scripts/flash.py run lvgl` 直接载入内存运行）。
+> **当前 4.5.0 工程同步说明**：工作区内置 **LVGL 9.6.0**（配套分支已从早期 9.3.0 升级至 9.6.0）；`scripts/build_apps.py --app lvgl` 默认编译官方 **Music Player 交互演示（`CONFIG_LV_Z_DEMO_MUSIC=y`）**，并叠加 `platform/apps/lvgl_yuzukineko_base.conf` 将全帧 VDB（`CONFIG_LV_Z_VDB_SIZE=100`）、60 Hz 刷新周期（`CONFIG_LV_DEF_REFR_PERIOD=16`）以及 GT967 触摸队列（`CONFIG_INPUT_QUEUE_MAX_MSGS=64`、`CONFIG_LV_Z_POINTER_INPUT_MSGQ_COUNT=64`）调至流畅不丢事件。
+
+
 
 ## 准备
 
 | 项 | 说明 |
 | --- | --- |
-| LVGL 源码 | 随 Zephyr 的 west manifest 拉下来，在 `~/f101-zephyr/modules/lib/gui/lvgl`，版本 9.3.0。Zephyr 一侧的粘合层在 `zephyr/modules/lvgl/` |
+| LVGL 源码 | 随 Zephyr 的 west manifest 拉下来，在 `modules/lib/gui/lvgl`，版本 9.6.0。Zephyr 一侧的粘合层在 `zephyr/modules/lvgl/` |
 | 屏幕 | `yuzukineko` 载板的 1024×768 MIPI DSI 屏，设备树里是 `chosen { zephyr,display = &display; }`，见 [显示](../drivers/display.md) |
 | 触摸 | 载板上的 GT967 触摸控制器，在 `i2c1` 的 0x5d，设备树里是 `touch` 节点，见 [I2C](../drivers/i2c.md)。没有触摸也能跑，只是点不了控件 |
 | 素材 | 不需要。字体、图标都编进了 LVGL；demo 的图片也编在 demo 里 |
 | 外部硬件 | 只要板子能显示。官方 demo 的音乐播放器不会出声，它只是个界面 |
-| hello 程序 | `examples/lvgl_hello/`，源码见下面的 [新建一个最小的 UI](#新建一个最小的-ui) |
+| 最小 hello 参考工程 | 可在工作区 `applications/lvgl_hello/` 自建，完整源码见下文 [新建一个最小的 UI](#新建一个最小的-ui) |
 
 :::note
 本文的命令和日志都是 `yuzukineko` 板（载板，DSI 屏）。`f101_evb` 是 1024×600 的 RGB 屏，没有 GT967。
@@ -39,10 +63,10 @@ flowchart TB
 在工作区里执行：
 
 
+若按文末 [新建一个最小的 UI](#新建一个最小的-ui) 在 `applications/lvgl_hello/` 新建最小工程，可在工作区根目录直接编译：
+
 ```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/lvgl-hello examples/lvgl_hello
+./.venv/bin/west build -b yuzukineko_base -d build/lvgl-hello applications/lvgl_hello
 ```
 
 <div class="asciinema-cast" data-src="/casts/zephyr/apps-lvgl/build.cast" data-speed="6"></div>
@@ -51,7 +75,7 @@ west build -b yuzukineko -d build/lvgl-hello examples/lvgl_hello
 
 ## 运行
 
-用 xfel 下载运行（见 [编译与运行](../zephyr-build-run.md)），控制台是 UART1（115200 8N1）。
+用 xfel 下载运行（见 [Flash 布局与进阶调试](../../../boot/flash-layout.md)），控制台是 UART1（115200 8N1）。
 
 ### 1. 启动 hello 程序
 
@@ -176,9 +200,8 @@ CONFIG_CPU_LOAD=y
 选 demo 用 `CONFIG_LV_Z_DEMO_*`，选 benchmark：
 
 ```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/lvgl-bench zephyr/samples/modules/lvgl/demos -- -DCONFIG_LV_Z_DEMO_BENCHMARK=y
+./.venv/bin/west build -b yuzukineko_base -d build/lvgl-bench zephyr/samples/modules/lvgl/demos -- \
+  -DEXTRA_CONF_FILE=boards/yuzukineko.conf -DEXTRA_DTC_OVERLAY_FILE=boards/yuzukineko.overlay -DCONFIG_LV_Z_DEMO_BENCHMARK=y
 xfel ddr f101-s3
 xfel write 0x40000000 build/lvgl-bench/zephyr/zephyr.bin
 xfel exec 0x40000000
@@ -203,7 +226,7 @@ Heap at 0x40266fb0 contains 32767 units in 15 buckets
        14        16384            1        31770       254160
 
 254184 free bytes, 7872 allocated bytes, overhead = 84 bytes (0.0%)
-[00:01:09.822,000] <inf> lvgl: Benchmark Summary (9.3.0 )
+[00:01:09.822,000] <inf> lvgl: Benchmark Summary (9.6.0 )
 [00:01:09.822,000] <inf> lvgl: Name, Avg. CPU, Avg. FPS, Avg. time, render time, flush time
 [00:01:09.823,000] <inf> lvgl: Empty screen, 72%, 27, 21, 5, 16
 [00:01:09.823,000] <inf> lvgl: Moving wallpaper, 97%, 29, 32, 16, 16
@@ -238,7 +261,8 @@ Heap at 0x40266fb0 contains 32767 units in 15 buckets
 ### 5. 运行 widgets demo
 
 ```sh
-west build -b yuzukineko -d build/lvgl-widgets zephyr/samples/modules/lvgl/demos -- -DCONFIG_LV_Z_DEMO_WIDGETS=y
+./.venv/bin/west build -b yuzukineko_base -d build/lvgl-widgets zephyr/samples/modules/lvgl/demos -- \
+  -DEXTRA_CONF_FILE=boards/yuzukineko.conf -DEXTRA_DTC_OVERLAY_FILE=boards/yuzukineko.overlay -DCONFIG_LV_Z_DEMO_WIDGETS=y
 xfel ddr f101-s3
 xfel write 0x40000000 build/lvgl-widgets/zephyr/zephyr.bin
 xfel exec 0x40000000
@@ -266,14 +290,14 @@ Heap at 0x4023e568 contains 32767 units in 15 buckets
 内存池 262144 字节，demo 画出第一屏后用掉 46280 字节，空闲 215776 字节。
 ![板子屏幕上的 LVGL widgets demo](figures/lvgl-widgets.webp)
 
-屏幕上是 LVGL v9.3.0 的 widgets demo：顶部是 Profile、Analytics、Shop 三个选项卡，下面是头像和个人信息、输入框、下拉框、滑条和开关。左上角和右下角是性能监视器。
+屏幕上是 LVGL v9.6.0 的 widgets demo：顶部是 Profile、Analytics、Shop 三个选项卡，下面是头像和个人信息、输入框、下拉框、滑条和开关。左上角和右下角是性能监视器。
 
 ### 6. 其他 sample
 
 | sample | 命令 | 说明 |
 | --- | --- | --- |
-| `samples/subsys/display/lvgl` | `west build -b yuzukineko -d build/lvgl-sub zephyr/samples/subsys/display/lvgl` | 该 sample 的 `boards/` 下有 `yuzukineko.conf` 和 `yuzukineko.overlay` |
-| `samples/modules/lvgl/screen_transparency` | `west build -b yuzukineko -d build/lvgl-trans zephyr/samples/modules/lvgl/screen_transparency` | sample 要求显示支持 ARGB8888，它的 `boards/yuzukineko.conf` 里打开了 `CONFIG_DISPLAY_SUNXI_ARGB8888` |
+| `samples/subsys/display/lvgl` | `./.venv/bin/west build -b yuzukineko_base -d build/lvgl-sub zephyr/samples/subsys/display/lvgl -- -DEXTRA_CONF_FILE=boards/yuzukineko.conf -DEXTRA_DTC_OVERLAY_FILE=boards/yuzukineko.overlay` | 该 sample 的 `boards/` 下有 `yuzukineko.conf` 和 `yuzukineko.overlay` |
+| `samples/modules/lvgl/screen_transparency` | `./.venv/bin/west build -b yuzukineko_base -d build/lvgl-trans zephyr/samples/modules/lvgl/screen_transparency -- -DEXTRA_CONF_FILE=boards/yuzukineko.conf` | sample 要求显示支持 ARGB8888，它的 `boards/yuzukineko.conf` 里打开了 `CONFIG_DISPLAY_SUNXI_ARGB8888` |
 | `samples/modules/lvgl/multi_display` | - | 不适用：需要设备树里有 `zephyr,displays` 节点，板子只有一个显示 |
 | `samples/modules/lvgl/accelerometer_chart` | - | 不适用：需要 `accel0` 别名，板子上没有加速度计 |
 
@@ -367,7 +391,7 @@ nes 的 `pad.c` 就是这么做的：背景透明，按键是 30% 不透明度�
 
 <strong>LVGL 在 F101 上全部是软件渲染（`LV_USE_DRAW_SW`），G2D 和 RVV 都没有接。</strong>
 
-- G2D：F101 有 [G2D](../drivers/g2d.md) 2D 加速器，Zephyr 里也有它的驱动，但 LVGL 9.3 里没有对应的绘制单元。`LV_USE_DRAW_G2D` 是 NXP 的 G2D，和 F101 的不是一回事，不能打开。LVGL 绘制的填充、混合、图像缩放都不会交给 G2D。
+- G2D：F101 有 [G2D](../drivers/g2d.md) 2D 加速器，Zephyr 里也有它的驱动，但 LVGL 9.6 里没有对应的绘制单元。`LV_USE_DRAW_G2D` 是 NXP 的 G2D，和 F101 的不是一回事，不能打开。LVGL 绘制的填充、混合、图像缩放都不会交给 G2D。
 - RVV：[RISC-V 向量扩展](../zephyr-riscv-vector.md)可以用 `CONFIG_SUN252I_F101_RVV=y` 打开，nes 的配置里就打开了。但 LVGL 的汇编加速选项 `LV_USE_DRAW_SW_ASM` 只有 `NONE`、`NEON`、`HELIUM`、`CUSTOM` 四种，没有 RVV 的实现；只有 `CUSTOM` 可以自己提供汇编，需要向量版混合函数时自己写。
 - 渲染并行：`CONFIG_LV_Z_USE_OSAL` 可以让 LVGL 用多个线程渲染，默认不打开。
 
@@ -415,7 +439,7 @@ GT967 的分辨率在 `yuzukineko.dts` 里是 `screen-width = <1024>; screen-hei
 下面是一个完整的 hello 程序：标题、一个按钮、一个点击计数、一个显示触摸坐标的标签。目录结构：
 
 ```text
-examples/lvgl_hello/
+applications/lvgl_hello/
 ├── CMakeLists.txt
 ├── prj.conf
 ├── boards/
@@ -424,7 +448,7 @@ examples/lvgl_hello/
     └── main.c
 ```
 
-放在 `~/f101-zephyr/examples/` 下，和 [驱动](../drivers/display.md) 一章的演示在一起。
+可放在工作区 `applications/lvgl_hello/` 目录下（与 `applications/hello_f101` 同级）。
 
 `CMakeLists.txt`：
 
@@ -619,14 +643,14 @@ int main(void)
 | `drivers/display/sunxi/display_sunxi.c` | 显示驱动：`display_write()` 拷贝到帧缓冲 |
 | `drivers/input/input_gt967.c` | GT967 触摸驱动 |
 | `samples/modules/lvgl/demos/` | 官方 demo 的 Zephyr 外壳 |
-| `modules/lib/gui/lvgl/` | LVGL 本体（9.3.0） |
-| `examples/lvgl_hello/` | 本文的 hello 程序 |
+| `modules/lib/gui/lvgl/` | LVGL 本体（9.6.0） |
+| `applications/lvgl_hello/` | 按文末源码自建的最小 hello 程序 |
 | `samples/drivers/vdec/h264_player/src/overlay.c` | 叠加层用法：MP4 播放器的统计面板，折线图 |
 | `zephyr-components/nes/samples/nes_player/src/pad.c` | 叠加层用法：屏幕按键 |
 
 ## 功能范围
 
-- G2D 和 RVV：LVGL 全部软件渲染。LVGL 9.3 没有对应 F101 G2D 的绘制单元；需要向量加速时，把 `LV_USE_DRAW_SW_ASM` 选成 `CUSTOM` 自己提供汇编。
+- G2D 和 RVV：LVGL 全部软件渲染。LVGL 9.6 没有对应 F101 G2D 的绘制单元；需要向量加速时，把 `LV_USE_DRAW_SW_ASM` 选成 `CUSTOM` 自己提供汇编。
 - 触摸：LVGL 的指针只有一个手指。要多点（比如游戏按键），像 nes 的 `pad.c` 那样自己读 `input` 事件，并把 `CONFIG_INPUT_GT967_MAX_TOUCH_POINTS` 调到 5。
 - 显示：板子只有一个显示，不支持多显示。
 - 像素格式：编译时用 `CONFIG_DISPLAY_SUNXI_RGB565` 或 `ARGB8888` 选定，不能在运行时切换，也不能旋转。

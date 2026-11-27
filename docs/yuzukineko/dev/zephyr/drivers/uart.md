@@ -128,7 +128,7 @@ uart1: serial@2500400 {
 };
 ```
 
-引脚的详细复用关系见[引脚复用表](../../../hardware/mux.md)，各 UART 可选的引脚组见[外设引脚分组](../../../hardware/groups.md)。
+引脚的详细复用关系见[引脚复用表](../../../hardware/pinout.md#引脚复用-mux)，各 UART 可选的引脚组见[外设引脚分组](../../../hardware/pinout.md#常用外设引脚组合)。
 
 ### 绑定的属性
 
@@ -866,7 +866,7 @@ west build -b yuzukineko -d build/uart-api uart_api
 
 <div class="asciinema-cast" data-src="/casts/zephyr/drivers-uart/build.cast" data-speed="6"></div>
 
-下载运行的方法见[编译与运行](../zephyr-build-run.md)。程序运行到 `[poll_in]` 和 `[irq]` 时会等主机从控制台串口发字符进来（各等 20 秒）：先发 5 个字符，再发 4 个字符。控制台 UART1 上的完整输出：
+下载运行的方法见[Flash 布局与进阶调试](../../../boot/flash-layout.md)。程序运行到 `[poll_in]` 和 `[irq]` 时会等主机从控制台串口发字符进来（各等 20 秒）：先发 5 个字符，再发 4 个字符。控制台 UART1 上的完整输出：
 
 ```text
 [config] uart_config_get = 0: 115200 baud, parity 0, stop bits 1, data bits 3, flow control 0

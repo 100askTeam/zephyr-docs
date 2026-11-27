@@ -2,7 +2,7 @@
 title: "Win95 - Bochs x86 模拟"
 ---
 
-在板子上用 [Bochs](https://github.com/bochs-emu/Bochs) 模拟一台 486 级的 x86 PC，从 TF 卡上的磁盘镜像启动 Windows 95。组件是 `~/f101-zephyr/zephyr-components/bochs`，示例是 `samples/pc`。Bochs 是用 C++ 写的解释型模拟器，在 RISC-V 板子上整个跑在软件里，没有任何硬件加速，所以很慢。
+在板子上用 [Bochs](https://github.com/bochs-emu/Bochs) 模拟一台 486 级的 x86 PC，从 TF 卡上的磁盘镜像启动 Windows 95。组件位于工作区 `zephyr-components/bochs`，示例是 `samples/pc`。Bochs 是用 C++ 写的解释型模拟器，在 RISC-V 板子上整个跑在软件里，没有任何硬件加速，所以很慢。
 
 ```mermaid
 flowchart TB
@@ -18,7 +18,30 @@ flowchart TB
 
 ## 准备
 
-开始前请先完成 [配置开发环境](../zephyr-setup-env.md) 和 [获取 Zephyr 代码](../zephyr-get-source.md)。需要：
+开始前请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr-components/bochs/samples/pc` |
+| 目标板级与模式 | `yuzukineko_base` · RAM（入口 `0x40000000`） |
+| 一期快速体验 | 免编译直接烧录见 [Win95 · Bochs x86](../../../demos/16-win95.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app win95_bochs
+
+# 2. 打包整片 SPI NOR 镜像：build/win95_bochs/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app win95_bochs
+```
+
+生成的 `build/win95_bochs/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full win95_bochs`（RAM 调试阶段也可用 `./.venv/bin/python scripts/flash.py run win95_bochs` 直接载入内存运行）。
+> **当前 4.5.0 工程同步说明**：`bochs/Bochs` 子模块及补丁均已随包就绪；配套源码在 `bochs/src/bochs_gui.cc` 中将 `struct display_sunxi_rgb img = {};` 做了零初始化，避免 Zephyr 4.5.0 显示驱动新增字段出现未初始化值。
+
+需要：
 
 - 一块插好的 TF 卡，根目录放着已装好 Windows 95 的硬盘镜像；
 - 串口终端，接 UART1（PB00/PB01，115200 8N1），键盘输入就在这个终端里打字；
@@ -47,24 +70,16 @@ flowchart TB
 
 ## 编译
 
-在工作区里执行下面的命令。组件在 `zephyr-components/bochs`，Bochs 本体是它的 git 子模块 `Bochs/`。<strong>子模块没拉的话先拉</strong>，否则 CMake 会报 `Bochs sources missing`：
+组件位于 `zephyr-components/bochs`，Bochs 本体是它的 git 子模块 `Bochs/`，配套 `f101-zephyr` 工作区已随包内置并完成源码就绪，无需手动拉取（仅在从上游 Git 仓库重新克隆时需在 `zephyr-components` 下执行 `git submodule update --init bochs/Bochs`）。`samples/pc` 自己的 `CMakeLists.txt` 已经用 `ZEPHYR_EXTRA_MODULES` 把 `bochs` 组件加进来，`prj.conf` 里已经选好了 Windows 95 镜像，不需要额外参数：
 
 ```sh
-cd ~/f101-zephyr/zephyr-components
-git submodule update --init bochs/Bochs
-```
-
-然后编译。`samples/pc` 自己的 `CMakeLists.txt` 已经用 `ZEPHYR_EXTRA_MODULES` 把 `bochs` 组件加进来，`prj.conf` 里已经选好了 Windows 95 镜像，不需要额外参数：
-
-```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/win95 zephyr-components/bochs/samples/pc
+./.venv/bin/python scripts/build_apps.py --app win95_bochs
+./.venv/bin/python scripts/pack_full_img.py --app win95_bochs
 ```
 
 <div class="asciinema-cast" data-src="/casts/zephyr/apps-win95/build.cast" data-speed="6"></div>
 
-产物是 `build/win95/zephyr/zephyr.bin`，约 2.9 MB，链接地址 `0x40000000`。第一次配置时 CMake 会用 `git apply` 把 `patches/` 里的补丁打到 Bochs 子模块上（见 [补丁](#补丁)），子模块的工作区因此显示为已修改，这是预期的。
+产物是 `build/win95_bochs/zephyr/zephyr.bin`，约 2.9 MB，链接地址 `0x40000000`。第一次配置时 CMake 会用 `git apply` 把 `patches/` 里的补丁打到 Bochs 子模块上（见 [补丁](#补丁)），子模块的工作区因此显示为已修改，这是预期的。
 
 `samples/pc/prj.conf` 里和镜像有关的几行（磁盘路径、几何参数、文本镜像）：
 
@@ -83,11 +98,11 @@ CONFIG_BOCHS_TEXT_MIRROR=y
 
 ## 运行
 
-下载方式见 [编译与运行](../zephyr-build-run.md)。调试用方式一：
+下载方式见 [Flash 布局与进阶调试](../../../boot/flash-layout.md)。调试用方式一：
 
 ```sh
 xfel ddr f101-s3
-xfel write 0x40000000 build/win95/zephyr/zephyr.bin
+xfel write 0x40000000 build/win95_bochs/zephyr/zephyr.bin
 xfel exec 0x40000000
 ```
 

@@ -18,6 +18,7 @@ NekoBox 是 YuzukiNeko 的媒体与游戏应用：触摸界面（LVGL，1024×76
 | 游戏 | `NEKOBOX_FEATURE_GAMES` | NES（nofrendo）、Game Boy / Color（mGBA，从 flash 窗口运行）、Game Boy Advance（带 RISC-V 重编译器的 gpSP，ROM 最大 32 MiB） |
 | USB 副屏 | `NEKOBOX_FEATURE_USB_DISPLAY` | 电脑的扩展屏，带触摸 |
 | 网络 | `NEKOBOX_FEATURE_NET` | Wi-Fi（AIC8800，保存密码）和 NTP 校时 |
+| DLNA / Miracast | `NEKOBOX_FEATURE_DLNA`、`NEKOBOX_FEATURE_MIRACAST` | 局域网 DLNA 投屏与 Wi-Fi Direct Miracast 接收端（4.5.0 工程默认开启） |
 | 蓝牙 | `NEKOBOX_FEATURE_BT` | 启动时检查一次，然后随芯片一起关闭；结果显示在设置里 |
 
 ```mermaid
@@ -39,7 +40,31 @@ flowchart TB
 
 LVGL 把界面画在 ARGB 帧缓冲层上。视频、照片、游戏和 USB 屏走视频引擎或缩放通路，输出到下面的视频层，再由显示引擎把两层混合。在显示视频层的界面上，没有东西可画时界面层会被关掉（`ui_overlay_set()`），把内存带宽还给解码器。
 
-开始之前，请先完成[配置开发环境](../zephyr-setup-env.md)和[获取 Zephyr 代码](../zephyr-get-source.md)。
+开始之前，请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr-components/nekobox` |
+| 目标板级与模式 | `yuzukineko_base` · XIP（SPI NOR 就地执行，入口 `0x0e000000`） |
+| 额外板级配置 | `boards/yuzukineko.conf`、`boards/yuzukineko.overlay`（脚本自动加载） |
+| 一期快速体验 | 免编译直接烧录见 [NekoBox 综合媒体盒](../../../demos/05-nekobox.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app nekobox
+
+# 2. 打包整片 SPI NOR 镜像：build/nekobox/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app nekobox
+```
+
+生成的 `build/nekobox/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full nekobox`。
+> **当前 4.5.0 工程同步说明**：配套构建已启用 **Miracast（`CONFIG_NEKOBOX_FEATURE_MIRACAST=y`）** 与 **DLNA** 磁贴，并通过 `scripts/pack_full_img.py --app nekobox` 自动把 XIP 引导头 `tools/loaders/xip-boot_spi_s3.bin` 与应用合成整片 `zephyr-full.img`，无需手动分两次烧录。
+
+
 
 ## 准备
 
@@ -62,15 +87,14 @@ LVGL 把界面画在 ARGB 帧缓冲层上。视频、照片、游戏和 USB 屏�
 
 ```mermaid
 flowchart LR
-    A["env.sh"] --> B["west build -b yuzukineko<br/>-d build/nekobox"]
+    A["scripts/build_apps.py --app nekobox"] --> B["west build -b yuzukineko_base<br/>-d build/nekobox"]
     B --> C["ZEPHYR_EXTRA_MODULES：mgba、gbsp、nes、aic8800"]
     C --> D["build/nekobox/zephyr/zephyr.bin"]
 ```
 
 ```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/nekobox zephyr-components/nekobox
+./.venv/bin/python scripts/build_apps.py --app nekobox
+./.venv/bin/python scripts/pack_full_img.py --app nekobox
 ```
 
 顶层 `CMakeLists.txt` 通过 `ZEPHYR_EXTRA_MODULES` 加入放在应用旁边的模拟器和 Wi-Fi 模块（`../mgba`、`../gbsp`、`../nes`、`../aic8800`），命令行不需要再传参数。输出是 `build/nekobox/zephyr/zephyr.bin`；镜像链接在 XIP 窗口，而不是像其他示例那样链接在 `0x40000000`。
@@ -101,7 +125,7 @@ xfel exec 0x20000
 
 ### 完整 flash 镜像
 
-`tools/mkimage.py` 把引导桩（`xip-boot_spi.bin`）放在 flash 开头、应用放在 `0x80000`，合成一个文件；应用之前的所有内容都会被覆盖。
+在配套 `f101-zephyr` 工程中，直接执行 `./.venv/bin/python scripts/pack_full_img.py --app nekobox` 即可自动调用 `tools/mkimage.py` 将内置引导桩（`tools/loaders/xip-boot_spi_s3.bin`）放在 flash 开头、应用放在 `0x80000`，生成可直接烧录的 `build/nekobox/zephyr/zephyr-full.img`；应用之前的所有内容都会被覆盖。
 
 ```mermaid
 flowchart TD
@@ -114,11 +138,15 @@ flowchart TD
 ```
 
 ```sh
-python3 zephyr-components/nekobox/tools/mkimage.py \
-    --boot out/syterkit/build/yuzukineko/app_sram/xip-boot/xip-boot_spi.bin \
-    --app build/nekobox/zephyr/zephyr.bin -o nekobox-full.img
-# 板子处于 FEL 模式（上电时按住 FEL 键）
-xfel spinor write 0 nekobox-full.img
+# 方式 A（推荐）：一键打包（自动选用 tools/loaders/xip-boot_spi_s3.bin）
+./.venv/bin/python scripts/pack_full_img.py --app nekobox
+
+# 方式 B：手工调用 mkimage.py
+./.venv/bin/python zephyr-components/nekobox/tools/mkimage.py \
+    --boot tools/loaders/xip-boot_spi_s3.bin \
+    --app build/nekobox/zephyr/zephyr.bin -o build/nekobox/zephyr/zephyr-full.img
+# 板子处于 FEL 模式（上电时按住 FEL 键）后使用 LYNX Imager 或 xfel 写入
+xfel spinor write 0 build/nekobox/zephyr/zephyr-full.img
 ```
 
 下次上电后，BROM 从 flash 启动引导桩，由它映射窗口并跳进应用。只更新应用时，像上面那样把 `zephyr.bin` 写到 `0x80000`（仍需 FEL 模式，板子不再自己进入 FEL）。
@@ -130,7 +158,7 @@ xfel spinor write 0 nekobox-full.img
 | `512 KiB (0x80000)` 到镜像末尾 | 应用 |
 
 :::caution
-镜像从 `0x80000` 起占用 flash，与 [UF2 下载器](../zephyr-uf2.md)的应用区（`0x200000`）重叠，二者只能用其一。
+镜像从 `0x80000` 起占用 flash，与 [RAM 模式应用区（`0x200000`）](../../../boot/flash-layout.md)重叠，二者只能用其一。
 :::
 
 板子只有一个 USB-C 口，它既是 xfel 下载口，也是 USB 副屏口。先下载，再接其他设备。

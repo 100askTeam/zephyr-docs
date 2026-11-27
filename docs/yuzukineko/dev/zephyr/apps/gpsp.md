@@ -22,7 +22,31 @@ flowchart TB
 
 这里没有单独的定时器：模拟器每完成一帧就检查声音队列，堆积太多就 `k_msleep(1)` 等待，所以<strong>声音输出的速度决定游戏速度</strong>。
 
-开始之前，请先完成[配置开发环境](../zephyr-setup-env.md)和[获取 Zephyr 代码](../zephyr-get-source.md)。
+开始之前，请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr-components/gbsp/samples/gbsp_player` |
+| 目标板级与模式 | `yuzukineko_base` · RAM（入口 `0x40000000`） |
+| 额外板级配置 | `boards/yuzukineko.conf`（脚本自动加载） |
+| 一期快速体验 | 免编译直接烧录见 [gpSP 动态重编译](../../../demos/15-gpsp.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app gpsp
+
+# 2. 打包整片 SPI NOR 镜像：build/gpsp/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app gpsp
+```
+
+生成的 `build/gpsp/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full gpsp`（RAM 调试阶段也可用 `./.venv/bin/python scripts/flash.py run gpsp` 直接载入内存运行）。
+> **当前 4.5.0 工程同步说明**：为适配 Zephyr 4.5.0 与 LVGL 9.6，配套源码已将 `audio_stack` 扩容至 `8192` 字节、`pad_stack` 扩容至 `16384` 字节。
+
+
 
 ## 准备
 
@@ -44,21 +68,20 @@ flowchart TB
 在工作区里执行：
 
 ```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/gbsp zephyr-components/gbsp/samples/gbsp_player
+./.venv/bin/python scripts/build_apps.py --app gpsp
+./.venv/bin/python scripts/pack_full_img.py --app gpsp
 ```
 
-输出是 `build/gbsp/zephyr/zephyr.bin`，链接在 `0x40000000`。示例的 `CMakeLists.txt` 通过 `ZEPHYR_EXTRA_MODULES` 引入该组件，命令行不需要再传参数。`boards/yuzukineko.conf` 会自动合并：它打开 I2C 和 INPUT 以支持触摸屏（5 点触控，输入线程优先级 4，高于模拟线程，这样一帧运行期间手指不会丢）。
+输出是 `build/gpsp/zephyr/zephyr.bin`，链接在 `0x40000000`。示例的 `CMakeLists.txt` 通过 `ZEPHYR_EXTRA_MODULES` 引入该组件，命令行不需要再传参数。`boards/yuzukineko.conf` 会自动合并：它打开 I2C 和 INPUT 以支持触摸屏（5 点触控，输入线程优先级 4，高于模拟线程，这样一帧运行期间手指不会丢）。
 
 示例的 `prj.conf` 有 `CONFIG_MINIMAL_LIBC=y`、`CONFIG_CPP=y` 和 `CONFIG_STD_CPP17=y`（内核有两个源文件是 C++）；你自己的应用使用这个模块时也必须设置。
 
 ## 运行
 
-用[编译与运行](../zephyr-build-run.md)里的任一方式下载；控制台是 UART1（PB00/PB01，115200 8N1）。
+用[Flash 布局与进阶调试](../../../boot/flash-layout.md)里的任一方式下载；控制台是 UART1（PB00/PB01，115200 8N1）。
 
-- 调试用<strong>方式一</strong>：`xfel ddr f101-s3`、`xfel write 0x40000000 build/gbsp/zephyr/zephyr.bin`、`xfel exec 0x40000000`。
-- 独立运行用<strong>方式三</strong>：`mkuf2.py app build/gbsp/zephyr/zephyr.bin -o out/gbsp.uf2`，再拖到 `F101BOOT` 盘上。
+- 调试用<strong>方式一</strong>：`xfel ddr f101-s3`、`xfel write 0x40000000 build/gpsp/zephyr/zephyr.bin`、`xfel exec 0x40000000`。
+- 独立运行用<strong>方式三</strong>：`mkuf2.py app build/gpsp/zephyr/zephyr.bin -o out/gbsp.uf2`，再拖到 `F101BOOT` 盘上。
 
 :::caution
 板子只有一个 USB-C 口，它既是 xfel 下载口也是 UF2 盘口。先下载，再接其他设备。

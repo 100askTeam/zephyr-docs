@@ -17,7 +17,31 @@ flowchart TB
     DRAW -->|"display_sunxi_show_rgb"| PLANE["视频层<br/>缩放到整屏"]
 ```
 
-开始前请先完成 [配置开发环境](../zephyr-setup-env.md) 和 [获取 Zephyr 代码](../zephyr-get-source.md)。
+开始前请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr-components/doom/samples/doom_player` |
+| 目标板级与模式 | `yuzukineko_base` · RAM（入口 `0x40000000`） |
+| 额外板级配置 | `boards/yuzukineko.conf`（脚本自动加载） |
+| 一期快速体验 | 免编译直接烧录见 [Doom 毁灭战士](../../../demos/12-doom.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app doom
+
+# 2. 打包整片 SPI NOR 镜像：build/doom/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app doom
+```
+
+生成的 `build/doom/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full doom`（RAM 调试阶段也可用 `./.venv/bin/python scripts/flash.py run doom` 直接载入内存运行）。
+> **当前 4.5.0 工程同步说明**：`doomgeneric` 子模块已随包内置；为适配 Zephyr 4.5.0 与 LVGL 9.6，配套源码已将 `audio_stack` 扩容至 `8192` 字节、`pad_stack` 扩容至 `16384` 字节以避免栈溢出。
+
+
 
 ## 准备游戏数据（WAD）
 
@@ -92,32 +116,24 @@ static int pick_wad(void)
 
 ## 编译
 
-以下命令都在工作区里执行。doomgeneric 是 git 子模块，第一次编译前要把它取下来，否则 CMake 会报 `doomgeneric sources missing`：
+配套 `f101-zephyr` 工作区已内置 `doomgeneric` 子模块，无需再手动拉取（仅在从上游 Git 仓库重新克隆时才需执行 `git submodule update --init doomgeneric`）。示例的 `CMakeLists.txt` 自己把 `../..`（也就是 `doom` 组件）加进了 `ZEPHYR_EXTRA_MODULES`，不用在命令行再指定：
 
 ```sh
-cd ~/f101-zephyr/zephyr-components/doom
-git submodule update --init doomgeneric
-```
-
-然后编译。示例的 `CMakeLists.txt` 自己把 `../..`（也就是 `doom` 组件）加进了 `ZEPHYR_EXTRA_MODULES`，不用在命令行再指定：
-
-```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/doom-app zephyr-components/doom/samples/doom_player
+./.venv/bin/python scripts/build_apps.py --app doom
+./.venv/bin/python scripts/pack_full_img.py --app doom
 ```
 
 <div class="asciinema-cast" data-src="/casts/zephyr/apps-doom/build.cast" data-speed="6"></div>
 
-产物是 `build/doom-app/zephyr/zephyr.bin`，约 4.8 MB（RAM 区使用 28.89%），链接地址 `0x40000000`。
+产物是 `build/doom/zephyr/zephyr.bin`，约 4.8 MB（RAM 区使用 28.89%），链接地址 `0x40000000`。
 
 ## 运行
 
-下载方式见 [编译与运行](../zephyr-build-run.md)：
+下载方式见 [Flash 布局与进阶调试](../../../boot/flash-layout.md)：
 
 ```sh
 xfel ddr f101-s3
-xfel write 0x40000000 build/doom-app/zephyr/zephyr.bin
+xfel write 0x40000000 build/doom/zephyr/zephyr.bin
 xfel exec 0x40000000
 ```
 
@@ -366,7 +382,7 @@ static void pad_main(void *a, void *b, void *c)
 
 坐标是按 1024×600 画的；`dy` 是实际屏幕高度减 600，这块板子是 1024×768，所以 `dy` 是 168，下半部分的按键整体下移，贴着屏幕底边。顶部的 ESC、ENTER、STR< 、STR> 不加 `dy`，固定在上方。
 
-线程由 `pad_start()` 创建（栈 4096 字节，优先级 7），在 `main.c` 里调用，时机在 `doom_open()` 之前：
+线程由 `pad_start()` 创建（4.5.0 工程中栈已扩容至 16384 字节，优先级 7），在 `main.c` 里调用，时机在 `doom_open()` 之前：
 
 ```c
 int pad_start(void)
@@ -622,7 +638,8 @@ static void key_event(lv_event_t *e)
 改法：
 
 ```sh
-west build -b yuzukineko -d build/doom-app zephyr-components/doom/samples/doom_player -- -DCONFIG_SAMPLE_DOOM_WAD='"/SD:/freedoom1.wad"'
+./.venv/bin/west build -b yuzukineko_base -d build/doom zephyr-components/doom/samples/doom_player -- \
+  -DEXTRA_CONF_FILE=boards/yuzukineko.conf -DCONFIG_SAMPLE_DOOM_WAD='"/SD:/freedoom1.wad"'
 ```
 
 ### `prj.conf` 里的主要选项

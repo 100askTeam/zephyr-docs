@@ -17,22 +17,46 @@ Bilibili 是 YuzukiNeko 上的 B 站客户端：触摸界面（LVGL，1024×768�
 | 界面 | `src/ui/` | 首页、卡片、封面、搜索、播放页、账号、设置 |
 | 账号与 Wi-Fi | `src/api/account.c`、`src/net/wifi.c` | 扫码登录、连接、忘记 |
 
-开始之前，请先完成[配置开发环境](../zephyr-setup-env.md)和[获取 Zephyr 源码](../zephyr-get-source.md)。
+开始之前，请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr-components/bilibili-tv` |
+| 目标板级与模式 | `yuzukineko_base` · XIP（SPI NOR 就地执行，入口 `0x0e000000`） |
+| 额外板级配置 | `boards/yuzukineko.conf`、`boards/yuzukineko.overlay`（脚本自动加载） |
+| 一期快速体验 | 免编译直接烧录见 [Bilibili 在线视频](../../../demos/06-bilibili.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app bilibili
+
+# 2. 打包整片 SPI NOR 镜像：build/bilibili/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app bilibili
+```
+
+生成的 `build/bilibili/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full bilibili`。
+> **当前 4.5.0 工程同步说明**：针对 Zephyr 4.5.0 / Mbed TLS 4.x，`bilibili-tv/prj.conf` 已补充开启 PSA ECC 公钥与 P-384 支持（`CONFIG_PSA_WANT_KEY_TYPE_ECC_PUBLIC_KEY=y`、`CONFIG_PSA_WANT_ECC_SECP_R1_384=y`）以及显式 TLS 1.2 密码套件；整片 XIP 镜像直接通过 `scripts/pack_full_img.py --app bilibili` 一键打包。
+
+
 
 ## 构建与运行
 
 ```mermaid
 flowchart LR
-    A["env.sh：工具链和 ZEPHYR_BASE"] --> B["west build -b yuzukineko"]
-    B --> C["build/bili/zephyr/zephyr.bin"]
+    A["scripts/build_apps.py --app bilibili"] --> B["west build -b yuzukineko_base"]
+    B --> C["build/bilibili/zephyr/zephyr.bin"]
 ```
 
 ```sh
-. ~/f101-zephyr/env.sh
-west build -b yuzukineko -d build/bili zephyr-components/bilibili-tv
+./.venv/bin/python scripts/build_apps.py --app bilibili
+./.venv/bin/python scripts/pack_full_img.py --app bilibili
 ```
 
-镜像从 flash 窗口运行，所以开发流程与 NekoBox 相同：把 `zephyr.bin` 写到 flash `0x80000`，再从 RAM 运行 XIP 加载器（见[构建与运行](../zephyr-build-run.md)）。这会替换该位置上的 NekoBox；开发时不需要写入启动桩。
+镜像从 flash 窗口运行，所以开发流程与 NekoBox 相同：把 `zephyr.bin` 写到 flash `0x80000`，再从 RAM 运行 XIP 加载器（见[Flash 布局与进阶调试](../../../boot/flash-layout.md)）。这会替换该位置上的 NekoBox；开发时不需要写入启动桩。
 
 ```mermaid
 flowchart LR

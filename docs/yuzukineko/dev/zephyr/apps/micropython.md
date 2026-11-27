@@ -12,15 +12,39 @@ flowchart TB
     F101 -->|"hwinfo"| SID["熔丝：芯片 ID"]
     F101 -->|"g2d_*"| G2D["2D 加速器"]
     F101 -->|"i2s + codec"| AUDIO["片上 codec"]
-    UART["UART3 控制台"] <-->|"键盘 + 输出"| MP
+    UART["UART1 控制台"] <-->|"键盘 + 输出"| MP
     MP -.->|"每一行输出"| SCR["屏幕控制台<br/>LCD 上 10x16 的字符网格"]
 ```
 
-开始之前，请先完成[配置开发环境](../zephyr-setup-env.md)和[获取 Zephyr 代码](../zephyr-get-source.md)。
+开始之前，请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr-components/micropython/micropython/ports/zephyr` |
+| 目标板级与模式 | `yuzukineko_base` · RAM（入口 `0x40000000`） |
+| 额外板级配置 | `conf/f101.conf`、`conf/f101.overlay`、`usermod/f101/micropython.cmake`（脚本自动两步配置与编译） |
+| 一期快速体验 | 免编译直接烧录见 [MicroPython 脚本](../../../demos/11-micropython.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app micropython
+
+# 2. 打包整片 SPI NOR 镜像：build/micropython/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app micropython
+```
+
+生成的 `build/micropython/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full micropython`（RAM 调试阶段也可用 `./.venv/bin/python scripts/flash.py run micropython` 直接载入内存运行）。
+> **当前 4.5.0 工程同步说明**：MicroPython 及其内部子模块（`oofatfs`、`littlefs`、`micropython-lib`）均已随包内置；`scripts/build_apps.py --app micropython` 自动完成 `--cmake-only` 配置并在清空 `CROSS_COMPILE` 后构建主机端 `mpy-cross` 与目标固件，避免交叉编译冲突。
+
+
 
 ## 能用的功能
 
-下表是在应用迁到 `yuzukineko` 之前在 F101 EVB 上验证的；现在已为 `yuzukineko` 编译通过，但还没有在上面重新运行。两块板子不同的条目已标出。
+本应用已在 Zephyr 4.5.0 配套工程 `yuzukineko_base` 板级上完成编译与串口/屏幕控制台运行验证，可用功能如下：
 
 | MicroPython | 硬件 |
 | --- | --- |
@@ -41,25 +65,19 @@ I2C 不在列表里：`i2c1` 是触摸屏，`i2c0` 是关闭的。需要的话�
 
 只有 `/sd` 才需要 TF 卡。它在启动时由移植自带的 `_boot.py` 挂载（FAT），并成为当前目录，`/sd/lib` 会加进 `sys.path`；卡上有 `main.py` 时，像标准 Zephyr 移植一样在启动时运行。
 
-编译需要子模块：
-
-```sh
-git submodule update --init
-git -C zephyr-components/micropython/micropython submodule update --init --depth 1 \
-	lib/oofatfs lib/littlefs lib/micropython-lib
-```
+配套 `f101-zephyr` 工作区已随包内置 MicroPython 以及 `lib/oofatfs`、`lib/littlefs`、`lib/micropython-lib` 全部子模块，无需手动拉取（仅在从上游 Git 仓库重新克隆时才需要初始化子模块）。
 
 ## 编译
 
 ```sh
-. ./env.sh
-zephyr-components/micropython/build.sh [build/upy] [-DCONFIG_MICROPY_HEAP_SIZE=...]
+./.venv/bin/python scripts/build_apps.py --app micropython
+./.venv/bin/python scripts/pack_full_img.py --app micropython
 ```
 
-`build.sh` 先用交叉工具链配置，然后在<strong>不设置</strong> `CROSS_COMPILE` 的情况下编译：编译过程还会为主机编译 `mpy-cross`，设了 `CROSS_COMPILE` 就会把它编成 RISC-V 版，链接失败。它背后是下面这条 `west` 命令，应用是 `micropython/ports/zephyr`：
+`scripts/build_apps.py --app micropython`（与组件目录下的 `build.sh` 同理）先用交叉工具链配置，然后在<strong>不设置</strong> `CROSS_COMPILE` 的情况下执行 `cmake --build`：编译过程还会为主机编译 `mpy-cross`，设了 `CROSS_COMPILE` 就会把它编成 RISC-V 版，导致链接失败。它背后相当于下面这条 `west` 配置命令，应用位于 `zephyr-components/micropython/micropython/ports/zephyr`：
 
 ```sh
-west build -b yuzukineko -d build/upy --cmake-only micropython/ports/zephyr -- \
+./.venv/bin/west build -b yuzukineko_base -d build/micropython --cmake-only zephyr-components/micropython/micropython/ports/zephyr -- \
 	-DZEPHYR_EXTRA_MODULES=<本目录> \
 	-DEXTRA_CONF_FILE=conf/f101.conf \
 	-DEXTRA_DTC_OVERLAY_FILE=conf/f101.overlay \
@@ -79,7 +97,7 @@ west build -b yuzukineko -d build/upy --cmake-only micropython/ports/zephyr -- \
 
 ## 运行
 
-用[编译与运行](../zephyr-build-run.md)里的任一方式下载；REPL 在控制台 UART1（115200）上。调试用方式一：`xfel ddr f101-s3`、`xfel write 0x40000000 build/upy/zephyr/zephyr.bin`、`xfel exec 0x40000000`。
+用[Flash 布局与进阶调试](../../../boot/flash-layout.md)里的任一方式下载；REPL 在控制台 UART1（115200）上。调试用方式一：`xfel ddr f101-s3`、`xfel write 0x40000000 build/micropython/zephyr/zephyr.bin`、`xfel exec 0x40000000`。
 
 ```text
 >>> import f101

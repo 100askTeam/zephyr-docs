@@ -904,6 +904,6 @@ west build -b yuzukineko -d build/usb-api usb_api
 
 <div class="asciinema-cast" data-src="/casts/zephyr/drivers-usb/build.cast" data-speed="6"></div>
 
-下载运行的方法见[编译与运行](../zephyr-build-run.md)。注意：用 xfel 下载到 RAM 时，板子是通过同一个 USB 口进入 FEL 的；程序一运行，这个口就变成了 CDC ACM 设备，FEL 设备消失。
+下载运行的方法见[Flash 布局与进阶调试](../../../boot/flash-layout.md)。注意：用 xfel 下载到 RAM 时，板子是通过同一个 USB 口进入 FEL 的；程序一运行，这个口就变成了 CDC ACM 设备，FEL 设备消失。
 
 另外还有三个示例：`samples/drivers/usb/cherryusb_cdc_acm`（CherryUSB 自带的 CDC ACM 演示）、`cherryusb_display`（vendor display 类，把屏幕投给主机上的程序）、`cherryusb_host`（主机模式，读 U 盘等；需要有 VBUS 开关的板子，如 `f101_evb`）。

@@ -115,7 +115,7 @@ gpiob: gpio@2000030 {
 };
 ```
 
-`ALLWINNER_PINMUX(bank, 引脚号, 复用功能)` 的复用功能：0 是输入，1 是输出，2…15 是外设功能，14 是外部中断。每个引脚各功能是什么，见[引脚复用表](../../../hardware/mux.md)。可以写在同一个组里的属性：
+`ALLWINNER_PINMUX(bank, 引脚号, 复用功能)` 的复用功能：0 是输入，1 是输出，2…15 是外设功能，14 是外部中断。每个引脚各功能是什么，见[引脚复用表](../../../hardware/pinout.md#引脚复用-mux)。可以写在同一个组里的属性：
 
 | 属性 | 含义 |
 | --- | --- |
@@ -975,7 +975,7 @@ west build -b yuzukineko -d build/gpio-api gpio_api
 
 <div class="asciinema-cast" data-src="/casts/zephyr/drivers-gpio/build.cast" data-speed="6"></div>
 
-下载运行的方法见[编译与运行](../zephyr-build-run.md)。控制台 UART1 上的完整输出：
+下载运行的方法见[Flash 布局与进阶调试](../../../boot/flash-layout.md)。控制台 UART1 上的完整输出：
 
 ```text
 [configure] PD5 output, low                 = 0

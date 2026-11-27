@@ -60,7 +60,128 @@
 .theme-doc-markdown thead { background: #eaf4fc; }
 [data-theme='dark'] .theme-doc-markdown thead { background: #17364d; }
 .alert { border-radius: 0.75rem; }
-.menu__link { line-height: 1.45; }
+
+/* Refined sidebar hierarchy & typography */
+.theme-doc-sidebar-menu.menu__list {
+  padding: 0.35rem 0.25rem 1.5rem;
+}
+
+.theme-doc-sidebar-menu .menu__link {
+  min-block-size: 2rem;
+  padding: 0.36rem 0.65rem;
+  border-radius: 0.5rem;
+  font-size: 0.84rem;
+  font-weight: 450;
+  line-height: 1.4;
+  color: var(--ifm-color-emphasis-700);
+  transition: color 0.14s ease, background-color 0.14s ease;
+}
+
+.theme-doc-sidebar-menu .menu__link:hover {
+  color: var(--ifm-heading-color);
+  background: rgba(23, 105, 170, 0.06);
+}
+
+[data-theme='dark'] .theme-doc-sidebar-menu .menu__link:hover {
+  background: rgba(105, 183, 240, 0.1);
+}
+
+.theme-doc-sidebar-menu .menu__link:focus-visible,
+.theme-doc-sidebar-menu .menu__caret:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* Top-level standalone links (e.g. 课程介绍) */
+.theme-doc-sidebar-item-link-level-1 > .menu__link {
+  font-size: 0.89rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+}
+
+/* Level 1 category sections: strong visual anchor + subtle top divider */
+.theme-doc-sidebar-item-category-level-1:not(:first-child) {
+  margin-top: 0.65rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .theme-doc-sidebar-item-category-level-1:not(:first-child) {
+  border-top-color: rgba(148, 163, 184, 0.16);
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link {
+  font-size: 0.89rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--ifm-heading-color);
+}
+
+/* Level 2 sub-categories: clear mid-tier weight between L1 and leaf items */
+.theme-doc-sidebar-item-category-level-2 {
+  margin-top: 0.35rem;
+}
+
+.theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link {
+  font-size: 0.81rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-800);
+}
+
+/* Subtle vertical tree guide rail for nested lists */
+.theme-doc-sidebar-menu .menu__list {
+  margin-top: 0.2rem;
+  margin-left: 0.68rem;
+  padding-left: 0.55rem;
+  border-left: 1px solid var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .theme-doc-sidebar-menu .menu__list {
+  border-left-color: rgba(148, 163, 184, 0.18);
+}
+
+/* Refined subtle collapse chevrons */
+.theme-doc-sidebar-menu .menu__link--sublist-caret::after,
+.theme-doc-sidebar-menu .menu__caret::before {
+  background-size: 1.1rem 1.1rem;
+  opacity: 0.52;
+}
+
+.theme-doc-sidebar-menu .menu__list-item-collapsible:hover .menu__link--sublist-caret::after,
+.theme-doc-sidebar-menu .menu__list-item-collapsible:hover .menu__caret::before {
+  opacity: 0.9;
+}
+
+/* Active leaf item: crisp tinted pill + 3px left accent bar */
+.theme-doc-sidebar-item-link .menu__link--active {
+  color: var(--ifm-color-primary);
+  font-weight: 650;
+  background: rgba(23, 105, 170, 0.1);
+  box-shadow: inset 3px 0 0 var(--ifm-color-primary);
+}
+
+.theme-doc-sidebar-item-link .menu__link--active:hover {
+  color: var(--ifm-color-primary);
+  background: rgba(23, 105, 170, 0.14);
+}
+
+[data-theme='dark'] .theme-doc-sidebar-item-link .menu__link--active {
+  color: #86c6f5;
+  background: rgba(105, 183, 240, 0.15);
+  box-shadow: inset 3px 0 0 #69b7f0;
+}
+
+[data-theme='dark'] .theme-doc-sidebar-item-link .menu__link--active:hover {
+  color: #95cdf7;
+  background: rgba(105, 183, 240, 0.2);
+}
+
+/* Keep active category label highlighted without a solid box fill */
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link--active {
+  color: var(--ifm-color-primary);
+  background: transparent;
+  box-shadow: none;
+}
 
 .asciinema-cast { margin: 1.25rem auto; }
 

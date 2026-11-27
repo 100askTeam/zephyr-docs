@@ -42,7 +42,7 @@ vsetvli  vl, 剩余元素数, e32, m8, ta, ma
 
 ## Zephyr 里的 RVV 支持
 
-这套支持是在 Zephyr v4.2.2 上实现的，针对 F101。包括：
+配套 `f101-zephyr`（Zephyr 4.5.0）工作区已完整支持 F101 的 RVV 1.0 向量扩展，包括：
 
 - <strong>编译</strong>：打开后，编译参数里的 `-march` 带上 `v`（实际是 `rv32imafdcv_zicsr_zifencei_xtheadcmo`），可以用 `<riscv_vector.h>` 里的内建函数，也可以写汇编。
 - <strong>使用权限</strong>：`mstatus.VS` 在任何 C 代码运行之前就已经打开（编译器可能把向量指令用在 `memcpy()` 这类函数里），新建的线程也一样。
@@ -246,15 +246,13 @@ int main(void)
 }
 ```
 
-编译，参数的含义见 [编译与运行](zephyr-build-run.md)：
+在配套 `f101-zephyr` 工作区根目录直接编译：
 
 ```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/rvv-demo /path/to/rvv-demo
+./.venv/bin/west build -b yuzukineko_base -d build/rvv-demo applications/rvv_demo
 ```
 
-这个应用在 `yuzukineko` 上能编译通过，反汇编里 `vec_add_u32()` 的循环体就是 `vsetvli`、两条 `vle32.v`、`vadd.vv` 和 `vse32.v`：
+这个应用在 `yuzukineko_base` 上可直接编译通过，反汇编里 `vec_add_u32()` 的循环体就是 `vsetvli`、两条 `vle32.v`、`vadd.vv` 和 `vse32.v`：
 
 ```text
 vsetvli  a5,a3,e32,m8,ta,ma
@@ -264,7 +262,7 @@ vadd.vv  v8,v8,v16
 vse32.v  v8,(a0)
 ```
 
-下载运行的步骤见 [编译与运行](zephyr-build-run.md)。程序正确时，串口应打印 `VLENB = 16`、`add: 0 wrong elements`，并且 `dot` 和 `expected` 两个数相同。
+烧录或 RAM 快速调试步骤见 [Flash 布局与进阶调试](../../boot/flash-layout.md)。程序正确时，串口应打印 `VLENB = 16`、`add: 0 wrong elements`，并且 `dot` 和 `expected` 两个数相同。
 
 ## 示例：向量状态能不能在中断和线程切换后保留
 
@@ -332,7 +330,7 @@ uint32_t rvv_hold_v8(uint32_t seed, uint32_t iters)
 编译它：
 
 ```sh
-west build -b yuzukineko -d build/rvv zephyr/samples/drivers/rvv
+./.venv/bin/west build -b yuzukineko_base -d build/rvv zephyr/samples/drivers/rvv
 ```
 
 全部检查通过时，最后一行输出是 `RVV: all checks passed`，示例的 `sample.yaml` 就是用这一行判断测试是否通过。示例的 `sample.yaml` 里 `platform_allow` 写的是评估板 `f101_evb`；`yuzukineko` 同样是 F101，示例已在 `yuzukineko` 上编译通过，没有上板运行。

@@ -20,7 +20,31 @@ flowchart TB
 
 没有单独的定时器：模拟器每算完一帧，就检查声音队列，队列里积的声音多了就 `k_msleep(1)` 等一等，所以<strong>声音输出的速度决定游戏速度</strong>。
 
-开始前请先完成 [配置开发环境](../zephyr-setup-env.md) 和 [获取 Zephyr 代码](../zephyr-get-source.md)。
+开始前请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr-components/mgba/samples/gba_player` |
+| 目标板级与模式 | `yuzukineko_base` · RAM（入口 `0x40000000`） |
+| 额外板级配置 | `boards/yuzukineko.conf`（脚本自动加载） |
+| 一期快速体验 | 免编译直接烧录见 [mGBA 掌机模拟](../../../demos/14-mgba.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app mgba
+
+# 2. 打包整片 SPI NOR 镜像：build/mgba/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app mgba
+```
+
+生成的 `build/mgba/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full mgba`（RAM 调试阶段也可用 `./.venv/bin/python scripts/flash.py run mgba` 直接载入内存运行）。
+> **当前 4.5.0 工程同步说明**：`mgba` 子模块已随包内置；为适配 Zephyr 4.5.0 与 LVGL 9.6，配套源码已将 `audio_stack` 扩容至 `8192` 字节、`pad_stack` 扩容至 `16384` 字节。
+
+
 
 ## 准备
 
@@ -39,23 +63,17 @@ flowchart TB
 
 ROM 整个读进内存，所以大小受 `CONFIG_MGBA_MAX_ROM_SIZE_MB` 限制。超过 10 MiB 的 ROM（最大 32 MiB）需要打开按需分页：编译时加 `-DEXTRA_CONF_FILE=…/paged.conf`，让 ROM 作为文件映射、用到哪一页才从卡里读，见 [配置选项](#配置选项)。`paged.conf` 不改 ROM 的选法，仍然是 `game.gba` 或根目录第一个文件。
 
-### 拉取 mGBA 子模块
+### mGBA 子模块说明
 
-mGBA 本体是组件里的 git 子模块，第一次编译前要拉下来：
-
-```sh
-cd ~/f101-zephyr/zephyr-components/mgba
-git submodule update --init mgba
-```
+mGBA 本体是组件里的 git 子模块，配套 `f101-zephyr` 工作区已随包内置，无需手动拉取（仅在从上游 Git 仓库重新克隆时需在 `zephyr-components/mgba` 下执行 `git submodule update --init mgba`）。
 
 ## 编译
 
 在工作区里执行：
 
 ```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/mgba zephyr-components/mgba/samples/gba_player
+./.venv/bin/python scripts/build_apps.py --app mgba
+./.venv/bin/python scripts/pack_full_img.py --app mgba
 ```
 
 <div class="asciinema-cast" data-src="/casts/zephyr/apps-mgba/build.cast" data-speed="6"></div>
@@ -73,7 +91,7 @@ list(APPEND ZEPHYR_EXTRA_MODULES ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 
 ## 运行
 
-用 [编译与运行](../zephyr-build-run.md) 里的任一种方式下载，控制台是 UART1（115200 8N1）。
+用 [Flash 布局与进阶调试](../../../boot/flash-layout.md) 里的任一种方式下载，控制台是 UART1（115200 8N1）。
 
 - 调试时用<strong>方式一</strong>：`xfel ddr f101-s3`、`xfel write 0x40000000 build/mgba/zephyr/zephyr.bin`、`xfel exec 0x40000000`。
 - 脱机运行用<strong>方式三</strong>：`mkuf2.py app build/mgba/zephyr/zephyr.bin -o out/mgba.uf2`，拖进 `F101BOOT` 盘。
@@ -443,7 +461,7 @@ static uint32_t touch_scan(void)
 
 ### 线程与状态传递
 
-`pad_start()` 起一个叫 `pad` 的线程（优先级 7，栈 4096 字节），`pad_main()` 里先建按键，再进入循环：每 16 ms 扫描一次触摸、写入 `keys`、调用一次 `lv_timer_handler()` 让 LVGL 刷新。第 193–199 行：
+`pad_start()` 起一个叫 `pad` 的线程（优先级 7，4.5.0 工程中栈已扩容至 16384 字节），`pad_main()` 里先建按键，再进入循环：每 16 ms 扫描一次触摸、写入 `keys`、调用一次 `lv_timer_handler()` 让 LVGL 刷新。第 193–199 行：
 
 ```c
 while (true) {

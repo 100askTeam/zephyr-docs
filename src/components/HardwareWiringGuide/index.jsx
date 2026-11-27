@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
@@ -177,16 +177,24 @@ const UART_WIRES = [
   },
 ];
 
-export default function HardwareWiringGuide({ mode = 'jtag' }) {
+export default function HardwareWiringGuide({ mode = 'jtag', board = 'hpm6e70' }) {
   const isJtag = mode !== 'uart';
+  const isYuzuki = board === 'yuzukineko';
+  const shadowFilterId = useId();
   const [selectedId, setSelectedId] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
   const [showSticker, setShowSticker] = useState(false);
+  const [yuzukiSide, setYuzukiSide] = useState('back');
 
   const jtagImgUrl = useBaseUrl('/img/wiring/usbtoolbox-jtag-3d.png');
   const uartImgUrl = useBaseUrl('/img/wiring/usbtoolbox-uart-3d.png');
   const backImgUrl = useBaseUrl('/img/wiring/usbtoolbox-back-pinout.webp');
-  const coreboardImgUrl = useBaseUrl('/img/wiring/hpm6e70-coreboard-tight.webp');
+  const coreboardImgUrl = useBaseUrl(
+    isYuzuki ? '/img/wiring/yuzukineko-coreboard-horiz.webp' : '/img/wiring/hpm6e70-coreboard-tight.webp',
+  );
+  const yuzukiBackImgUrl = useBaseUrl('/img/wiring/yuzukineko-coreboard-back-horiz.webp');
+  const splitterUartImgUrl = useBaseUrl('/img/wiring/avaota-splitter-uart-3d.webp');
+  const splitterUsbcImgUrl = useBaseUrl('/img/wiring/avaota-splitter-usbc-3d.webp');
 
   const wires = isJtag ? JTAG_WIRES : UART_WIRES;
   const activeId = hoveredId || selectedId;
@@ -211,13 +219,25 @@ export default function HardwareWiringGuide({ mode = 'jtag' }) {
   return (
     <section
       className={styles.root}
-      aria-label={isJtag ? 'JTAG 5 线 3D 交互引脚定位图' : 'UART0 3 线 3D 交互引脚定位图'}>
+      aria-label={
+        isJtag
+          ? 'JTAG 5 线 3D 交互引脚定位图'
+          : isYuzuki
+            ? 'YuzukiNeko UART1 3 线 3D 交互引脚定位图'
+            : 'UART0 3 线 3D 交互引脚定位图'
+      }>
       {/* Focused Single-Purpose Header */}
       <div className={styles.header}>
         <div className={styles.headerTitleGroup}>
-          <span className={styles.modePill}>{isJtag ? 'JTAG · 5 根线' : 'UART0 · 3 根线'}</span>
+          <span className={styles.modePill}>
+            {isJtag ? 'JTAG · 5 根线' : isYuzuki ? 'UART1 · 3 根线' : 'UART0 · 3 根线'}
+          </span>
           <span className={styles.headerTitle}>
-            {isJtag ? '3D 引脚精准定位图（点「下一根 →」逐根照着插）' : '3D 引脚精准定位图（看分线器左排丝印交叉接 RX ↔ TX）'}
+            {isJtag
+              ? '3D 引脚精准定位图（点「下一根 →」逐根照着插）'
+              : isYuzuki
+                ? '3D 正反定位与接线图（支持切换正反面，按白座 1/2/3 交叉接 RX ↔ TX）'
+                : '3D 引脚精准定位图（看分线器左排丝印交叉接 RX ↔ TX）'}
           </span>
         </div>
 
@@ -238,12 +258,18 @@ export default function HardwareWiringGuide({ mode = 'jtag' }) {
         <div className={styles.panel}>
           <div className={styles.panelHead}>
             <span className={styles.panelTitle}>
-              {isJtag ? '调试器端 · 20 针调试口' : '调试器端 · 7 针 UART1 排针'}
+              {isJtag
+                ? '调试器端 · 20 针调试口'
+                : isYuzuki
+                  ? '串口工具端 · USBToolBox 演示（可选购）'
+                  : '调试器端 · 7 针 UART1 排针'}
             </span>
             <span className={styles.panelSub}>
               {isJtag
                 ? '正对 20 针排针、文字朝上，只插最右侧 1～4 列'
-                : 'USB 朝左，对照外壳 1～7 丝印插 3 根线（P1 3V3 不接）'}
+                : isYuzuki
+                  ? '以 USBToolBox UART1 作演示，任意 3.3V USB 转串口模块同理（不接 3V3）'
+                  : 'USB 朝左，对照外壳 1～7 丝印插 3 根线（P1 3V3 不接）'}
             </span>
           </div>
 
@@ -542,13 +568,41 @@ export default function HardwareWiringGuide({ mode = 'jtag' }) {
         {/* Right Large Panel: HPM6E70 Coreboard Photo + Magnified Socket / USB-C Splitter */}
         <div className={styles.panel}>
           <div className={styles.panelHead}>
-            <span className={styles.panelTitle}>
-              {isJtag ? '核心板端 · 白色 7 针 DAPLink 座' : '核心板端 · USB-C 串口分线器'}
-            </span>
+            <div className={styles.panelHeadRow}>
+              <span className={styles.panelTitle}>
+                {isJtag
+                  ? '核心板端 · 白色 7 针 DAPLink 座'
+                  : isYuzuki
+                    ? 'YuzukiNeko 端 · 3D 分线器正反定位'
+                    : '核心板端 · 3D USB-C 串口分线器'}
+              </span>
+              {!isJtag && isYuzuki && (
+                <div className={styles.flipSwitch} role="group" aria-label="切换 YuzukiNeko 正反面视图">
+                  <button
+                    type="button"
+                    aria-pressed={yuzukiSide === 'back'}
+                    className={`${styles.flipBtn} ${yuzukiSide === 'back' ? styles.flipBtnActive : ''}`}
+                    onClick={() => setYuzukiSide('back')}>
+                    背面 · 白座接线
+                  </button>
+                  <button
+                    type="button"
+                    aria-pressed={yuzukiSide === 'front'}
+                    className={`${styles.flipBtn} ${yuzukiSide === 'front' ? styles.flipBtnActive : ''}`}
+                    onClick={() => setYuzukiSide('front')}>
+                    正面 · FEL / 母口
+                  </button>
+                </div>
+              )}
+            </div>
             <span className={styles.panelSub}>
               {isJtag
                 ? 'USB-C 朝左摆放，认准白座左上角 ▼（前 2 孔留空）'
-                : '白座朝上插核心板 USB-C 口，看靠近白座（左排）丝印交叉接 RX ↔ TX'}
+                : isYuzuki
+                  ? yuzukiSide === 'back'
+                    ? '背面猫咪面朝上 ↔ 分线器白座朝上，按 1/2/3 丝印交叉接 RX ↔ TX'
+                    : '正面芯片面朝上 ↔ 分线器 AvaotaUART / USB-C 母口朝上（白座朝下）'
+                  : '白座朝上直插核心板 USB-C 口，按 1 / 2 / 3 丝印交叉接 RX ↔ TX'}
             </span>
           </div>
 
@@ -725,153 +779,491 @@ export default function HardwareWiringGuide({ mode = 'jtag' }) {
                   );
                 })}
               </svg>
+            ) : isYuzuki ? (
+              <svg
+                className={styles.stageSvg}
+                viewBox="0 0 1240 691"
+                role="img"
+                aria-label={
+                  yuzukiSide === 'back'
+                    ? 'YuzukiNeko 背面与 3D USB-C 分线器白座朝上接线示意图'
+                    : 'YuzukiNeko 正面与 3D AvaotaUART USB-C 母口朝上及 FEL 键示意图'
+                }>
+                <defs>
+                  <filter id={shadowFilterId} x="-8%" y="-14%" width="116%" height="136%">
+                    <feDropShadow dx="0" dy="10" stdDeviation="10" floodColor="#0f2942" floodOpacity="0.18" />
+                  </filter>
+                </defs>
+
+                {yuzukiSide === 'back' ? (
+                  <>
+                    {/* 3D Green Splitter (white 3-pin socket side UP), plugged into YuzukiNeko USB-C */}
+                    <image
+                      href={splitterUartImgUrl}
+                      x="266"
+                      y="256"
+                      width="330"
+                      height="167"
+                      filter={`url(#${shadowFilterId})`}
+                    />
+                    {/* 3D YuzukiNeko Back View (Cat illustration UP) */}
+                    <image
+                      href={yuzukiBackImgUrl}
+                      x="532"
+                      y="200"
+                      width="684"
+                      height="280"
+                      filter={`url(#${shadowFilterId})`}
+                    />
+
+                    {/* Top orientation badges */}
+                    <g style={{ opacity: activeId ? 0.45 : 0.96 }}>
+                      <rect x="256" y="76" width="266" height="54" rx="13" fill="#ecfdf5" stroke="#059669" strokeWidth="3" />
+                      <text
+                        x="389"
+                        y="104"
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize="24"
+                        fontWeight="900"
+                        fill="#047857">
+                        分线器：白座朝上
+                      </text>
+                      <line
+                        x1="389"
+                        y1="130"
+                        x2="389"
+                        y2="248"
+                        stroke="#059669"
+                        strokeWidth="3.2"
+                        strokeDasharray="7 5"
+                      />
+
+                      <rect x="688" y="76" width="388" height="54" rx="13" fill="#eff6ff" stroke="#0284c7" strokeWidth="3" />
+                      <text
+                        x="882"
+                        y="104"
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize="24"
+                        fontWeight="900"
+                        fill="#0369a1">
+                        YuzukiNeko：背面朝上（猫咪面）
+                      </text>
+                      <line
+                        x1="882"
+                        y1="130"
+                        x2="882"
+                        y2="194"
+                        stroke="#0284c7"
+                        strokeWidth="3.2"
+                        strokeDasharray="7 5"
+                      />
+                    </g>
+
+                    {/* 3 Interactive pin badges wired smoothly to Pins 1, 2, 3 on the 3D white socket */}
+                    {UART_WIRES.map((w, idx) => {
+                      const isFocused = !activeId || activeId === w.id;
+                      const op = isFocused ? 1 : 0.2;
+                      const rowActive = activeId === w.id;
+                      const pillY = [218, 312, 406][idx];
+                      const pillCy = pillY + 27;
+                      const pinY = [308, 339, 370][idx];
+
+                      return (
+                        <g
+                          key={w.id}
+                          className={styles.interactivePin}
+                          style={{ opacity: op }}
+                          onMouseEnter={() => setHoveredId(w.id)}
+                          onMouseLeave={() => setHoveredId(null)}
+                          onClick={() => handleToggleWire(w.id)}>
+                          <path
+                            d={`M 222 ${pillCy} C 248 ${pillCy}, 244 ${pinY}, 270 ${pinY}`}
+                            fill="none"
+                            stroke="#ffffff"
+                            strokeWidth="8"
+                            strokeLinecap="round"
+                            strokeOpacity="0.92"
+                          />
+                          <path
+                            d={`M 222 ${pillCy} C 248 ${pillCy}, 244 ${pinY}, 270 ${pinY}`}
+                            fill="none"
+                            stroke={w.color}
+                            strokeWidth={rowActive ? 5 : 3.8}
+                            strokeLinecap="round"
+                          />
+                          <circle
+                            cx="270"
+                            cy={pinY}
+                            r={rowActive ? 11 : 8.5}
+                            fill={w.color}
+                            stroke="#ffffff"
+                            strokeWidth="3"
+                          />
+
+                          <rect
+                            x="14"
+                            y={pillY}
+                            width="208"
+                            height="54"
+                            rx="12"
+                            fill={rowActive ? w.color : '#ffffff'}
+                            stroke={w.color}
+                            strokeWidth="3.2"
+                          />
+                          <circle cx="42" cy={pillCy} r="16" fill={rowActive ? '#ffffff' : w.color} />
+                          <text
+                            x="42"
+                            y={pillCy + 1}
+                            textAnchor="middle"
+                            dominantBaseline="central"
+                            fontSize="21"
+                            fontWeight="900"
+                            fill={rowActive ? w.color : '#ffffff'}
+                            fontFamily="ui-monospace, Consolas, sans-serif">
+                            {w.num}
+                          </text>
+                          <text
+                            x="68"
+                            y={pillCy + 1}
+                            dominantBaseline="central"
+                            fontSize="24"
+                            fontWeight="900"
+                            fill={rowActive ? '#ffffff' : '#0f2942'}
+                            fontFamily="ui-monospace, Consolas, sans-serif">
+                            {w.dot ? '• ' : ''}
+                            {w.padName}
+                          </text>
+                          <text
+                            x="208"
+                            y={pillCy + 1}
+                            textAnchor="end"
+                            dominantBaseline="central"
+                            fontSize="21"
+                            fontWeight="800"
+                            fill={rowActive ? '#ffffff' : w.color}
+                            fontFamily="ui-monospace, Consolas, sans-serif">
+                            {w.leftLabel.split(' · ')[0]}
+                          </text>
+                        </g>
+                      );
+                    })}
+
+                    <text
+                      x="620"
+                      y="580"
+                      textAnchor="middle"
+                      fontSize="23"
+                      fontWeight="800"
+                      fill="#0f2942"
+                      fontFamily="Inter, 'Microsoft YaHei', sans-serif">
+                      背面（猫咪面）朝上 ↔ 分线器白座朝上（插反 180° 串口无输出）
+                    </text>
+                    <text
+                      x="620"
+                      y="626"
+                      textAnchor="middle"
+                      fontSize="22"
+                      fontWeight="700"
+                      fill="#0284c7"
+                      fontFamily="Inter, 'Microsoft YaHei', sans-serif">
+                      照图按白座 1 / 2 / 3 脚依次接入 TXD / RXD / GND（红线为 GND）
+                    </text>
+                  </>
+                ) : (
+                  <>
+                    {/* 3D Green Splitter (AvaotaUART / USB-C female port UP), plugged into YuzukiNeko */}
+                    <image
+                      href={splitterUsbcImgUrl}
+                      x="248"
+                      y="262"
+                      width="360"
+                      height="152"
+                      filter={`url(#${shadowFilterId})`}
+                    />
+                    {/* 3D YuzukiNeko Front View (F101 chip + FEL button UP) */}
+                    <image
+                      href={coreboardImgUrl}
+                      x="524"
+                      y="200"
+                      width="692"
+                      height="277"
+                      filter={`url(#${shadowFilterId})`}
+                    />
+
+                    {/* Top splitter orientation badge */}
+                    <rect x="190" y="76" width="388" height="54" rx="13" fill="#ecfdf5" stroke="#059669" strokeWidth="3" />
+                    <text
+                      x="384"
+                      y="104"
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fontSize="23"
+                      fontWeight="900"
+                      fill="#047857">
+                      分线器：AvaotaUART / 母口朝上
+                    </text>
+                    <line
+                      x1="384"
+                      y1="130"
+                      x2="384"
+                      y2="254"
+                      stroke="#059669"
+                      strokeWidth="3.2"
+                      strokeDasharray="7 5"
+                    />
+
+                    {/* Left USB-C female port callout */}
+                    <rect x="16" y="284" width="194" height="106" rx="14" fill="#eff6ff" stroke="#0284c7" strokeWidth="3" />
+                    <text
+                      x="113"
+                      y="320"
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fontSize="23"
+                      fontWeight="900"
+                      fill="#0369a1">
+                      尾部 USB-C 母口
+                    </text>
+                    <text
+                      x="113"
+                      y="358"
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fontSize="20"
+                      fontWeight="700"
+                      fill="#0284c7">
+                      接数据线（供电+FEL）
+                    </text>
+                    <line x1="210" y1="338" x2="246" y2="338" stroke="#0284c7" strokeWidth="4" strokeLinecap="round" />
+                    <circle cx="246" cy="338" r="7" fill="#0284c7" />
+
+                    {/* FEL button highlight */}
+                    <circle cx="1012" cy="284" r="32" fill="none" stroke="#f59e0b" strokeWidth="4.5" />
+                    <path d="M 1012 252 L 1012 132" fill="none" stroke="#f59e0b" strokeWidth="3.8" />
+                    <rect x="774" y="76" width="424" height="54" rx="13" fill="#fffbeb" stroke="#f59e0b" strokeWidth="3" />
+                    <text
+                      x="986"
+                      y="104"
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fontSize="24"
+                      fontWeight="900"
+                      fill="#b45309">
+                      FEL 键（按住插线进烧录模式）
+                    </text>
+
+                    <text
+                      x="620"
+                      y="580"
+                      textAnchor="middle"
+                      fontSize="23"
+                      fontWeight="800"
+                      fill="#0f2942"
+                      fontFamily="Inter, 'Microsoft YaHei', sans-serif">
+                      正面（F101 芯片面）朝上 ↔ 分线器 AvaotaUART / USB-C 母口朝上（白座朝下）
+                    </text>
+                    <text
+                      x="620"
+                      y="626"
+                      textAnchor="middle"
+                      fontSize="22"
+                      fontWeight="700"
+                      fill="#0284c7"
+                      fontFamily="Inter, 'Microsoft YaHei', sans-serif">
+                      提示：点击右上角「背面 · 白座接线」即可翻面核对 3 根串口线
+                    </text>
+                  </>
+                )}
+              </svg>
             ) : (
               <svg
                 className={styles.stageSvg}
                 viewBox="0 0 1240 691"
                 role="img"
-                aria-label="HPM6E70 核心板 USB-C 串口分线器连接示意图">
-                <image href={coreboardImgUrl} x="360" y="70" width="860" height="539" />
+                aria-label="HPM6E70 核心板与 3D USB-C 串口分线器白座朝上连接示意图">
+                <defs>
+                  <filter id={shadowFilterId} x="-8%" y="-14%" width="116%" height="136%">
+                    <feDropShadow dx="0" dy="10" stdDeviation="10" floodColor="#0f2942" floodOpacity="0.18" />
+                  </filter>
+                </defs>
 
-                <rect
-                  x="366"
-                  y="274"
-                  width="128"
-                  height="148"
-                  rx="14"
-                  fill="none"
-                  stroke="#0284c7"
-                  strokeWidth="4.5"
-                  strokeDasharray="9 5"
+                {/* 3D Green Splitter (white 3-pin socket side UP), plugged straight into HPM6E70 USB-C */}
+                <image
+                  href={splitterUartImgUrl}
+                  x="266"
+                  y="250"
+                  width="330"
+                  height="167"
+                  filter={`url(#${shadowFilterId})`}
+                />
+                {/* HPM6E70 Coreboard Photo (USB-C receptacle overlaps male plug cleanly) */}
+                <image
+                  href={coreboardImgUrl}
+                  x="500"
+                  y="114"
+                  width="716"
+                  height="449"
+                  filter={`url(#${shadowFilterId})`}
                 />
 
-                <g>
-                  {/* Rear 5V USB-C power plug */}
-                  <rect x="8" y="330" width="54" height="56" rx="10" fill="#1e293b" stroke="#0f172a" strokeWidth="2.5" />
-                  <rect x="0" y="346" width="16" height="24" rx="4" fill="#334155" />
+                {/* Top splitter orientation badge */}
+                <g style={{ opacity: activeId ? 0.45 : 0.96 }}>
+                  <rect x="248" y="34" width="256" height="52" rx="13" fill="#ecfdf5" stroke="#059669" strokeWidth="3" />
                   <text
-                    x="185"
-                    y="556"
+                    x="376"
+                    y="61"
                     textAnchor="middle"
-                    fontSize="22"
-                    fontWeight="700"
-                    fill="#475569"
-                    fontFamily="Inter, 'Microsoft YaHei', sans-serif">
-                    尾部母口接 5V USB 供电线
-                  </text>
-
-                  {/* Metal Type-C male plug */}
-                  <rect x="320" y="322" width="52" height="66" rx="6" fill="#94a3b8" stroke="#475569" strokeWidth="3" />
-                  <line x1="332" y1="334" x2="362" y2="334" stroke="#cbd5e1" strokeWidth="2.5" />
-                  <line x1="332" y1="376" x2="362" y2="376" stroke="#cbd5e1" strokeWidth="2.5" />
-
-                  {/* Green splitter PCB */}
-                  <rect x="58" y="246" width="266" height="226" rx="20" fill="#15803d" stroke="#166534" strokeWidth="4" />
-                  <rect x="72" y="260" width="238" height="198" rx="14" fill="#16a34a" stroke="#86efac" strokeWidth="1.8" strokeOpacity="0.65" />
-
-                  {/* Pin-1 dot on splitter */}
-                  <circle cx="88" cy="276" r="6" fill="#ffffff" />
-
-                  <text
-                    x="191"
-                    y="192"
-                    textAnchor="middle"
-                    fontSize="27"
+                    dominantBaseline="central"
+                    fontSize="24"
                     fontWeight="900"
-                    fill="#0f2942"
-                    fontFamily="Inter, 'Microsoft YaHei', sans-serif">
-                    USB-C 分线器（白座朝上）
+                    fill="#047857">
+                    分线器：白座朝上
                   </text>
-                  <text
-                    x="191"
-                    y="226"
-                    textAnchor="middle"
-                    fontSize="22"
-                    fontWeight="800"
-                    fill="#15803d"
-                    fontFamily="Inter, 'Microsoft YaHei', sans-serif">
-                    看靠近白座（左排）丝印交叉接
-                  </text>
-                  <text
-                    x="191"
-                    y="514"
-                    textAnchor="middle"
-                    fontSize="22"
-                    fontWeight="800"
-                    fill="#b91c1c"
-                    fontFamily="Inter, 'Microsoft YaHei', sans-serif">
-                    注意：以丝印为准，勿按红黑线色盲猜
-                  </text>
-
-                  {UART_WIRES.map((w) => {
-                    const isFocused = !activeId || activeId === w.id;
-                    const op = isFocused ? 1 : 0.22;
-                    const rowActive = activeId === w.id;
-
-                    return (
-                      <g
-                        key={w.id}
-                        className={styles.interactivePin}
-                        style={{ opacity: op }}
-                        onMouseEnter={() => setHoveredId(w.id)}
-                        onMouseLeave={() => setHoveredId(null)}
-                        onClick={() => handleToggleWire(w.id)}>
-                        <rect
-                          x="82"
-                          y={w.padY - 25}
-                          width="218"
-                          height="50"
-                          rx="11"
-                          fill={rowActive ? w.color : '#ffffff'}
-                          stroke={w.color}
-                          strokeWidth="3.2"
-                        />
-                        <circle cx="108" cy={w.padY} r="16" fill={rowActive ? '#ffffff' : w.color} />
-                        <text
-                          x="108"
-                          y={w.padY + 1}
-                          textAnchor="middle"
-                          dominantBaseline="central"
-                          fontSize="21"
-                          fontWeight="900"
-                          fill={rowActive ? w.color : '#ffffff'}
-                          fontFamily="ui-monospace, Consolas, sans-serif">
-                          {w.num}
-                        </text>
-                        <text
-                          x="134"
-                          y={w.padY + 1}
-                          dominantBaseline="central"
-                          fontSize="24"
-                          fontWeight="900"
-                          fill={rowActive ? '#ffffff' : '#0f2942'}
-                          fontFamily="ui-monospace, Consolas, sans-serif">
-                          {w.dot ? '• ' : ''}
-                          {w.padName}
-                        </text>
-                        <text
-                          x="288"
-                          y={w.padY + 1}
-                          textAnchor="end"
-                          dominantBaseline="central"
-                          fontSize="20"
-                          fontWeight="800"
-                          fill={rowActive ? '#ffffff' : w.color}
-                          fontFamily="ui-monospace, Consolas, sans-serif">
-                          {w.leftLabel.split(' · ')[0]}
-                        </text>
-                      </g>
-                    );
-                  })}
+                  <line
+                    x1="376"
+                    y1="86"
+                    x2="376"
+                    y2="244"
+                    stroke="#059669"
+                    strokeWidth="3.2"
+                    strokeDasharray="7 5"
+                  />
                 </g>
 
-                <g style={{ opacity: activeId ? 0.35 : 0.96 }}>
-                  <circle cx="496" cy="199" r="24" fill="none" stroke="#f59e0b" strokeWidth="4.5" />
-                  <path d="M 496 175 L 496 114 L 568 114" fill="none" stroke="#f59e0b" strokeWidth="3.8" />
-                  <rect x="568" y="86" width="320" height="54" rx="13" fill="#fffbeb" stroke="#f59e0b" strokeWidth="3" />
+                {/* Underside 5V USB-C power port callout */}
+                <g style={{ opacity: activeId ? 0.35 : 0.95 }}>
+                  <line
+                    x1="354"
+                    y1="458"
+                    x2="354"
+                    y2="420"
+                    stroke="#0284c7"
+                    strokeWidth="3.2"
+                    strokeDasharray="6 4"
+                  />
+                  <circle cx="354" cy="420" r="6" fill="#0284c7" />
+                  <rect x="226" y="458" width="260" height="78" rx="13" fill="#eff6ff" stroke="#0284c7" strokeWidth="3" />
                   <text
-                    x="728"
-                    y="114"
+                    x="356"
+                    y="486"
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize="23"
+                    fontWeight="900"
+                    fill="#0369a1">
+                    背面尾部 USB-C 母口
+                  </text>
+                  <text
+                    x="356"
+                    y="518"
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize="21"
+                    fontWeight="700"
+                    fill="#0284c7">
+                    接 5V USB 供电线
+                  </text>
+                </g>
+
+                {/* 3 Interactive pin badges wired smoothly to Pins 1, 2, 3 on the 3D white socket */}
+                {UART_WIRES.map((w, idx) => {
+                  const isFocused = !activeId || activeId === w.id;
+                  const op = isFocused ? 1 : 0.2;
+                  const rowActive = activeId === w.id;
+                  const pillY = [212, 306, 400][idx];
+                  const pillCy = pillY + 27;
+                  const pinY = [302, 333, 364][idx];
+
+                  return (
+                    <g
+                      key={w.id}
+                      className={styles.interactivePin}
+                      style={{ opacity: op }}
+                      onMouseEnter={() => setHoveredId(w.id)}
+                      onMouseLeave={() => setHoveredId(null)}
+                      onClick={() => handleToggleWire(w.id)}>
+                      <path
+                        d={`M 222 ${pillCy} C 248 ${pillCy}, 244 ${pinY}, 270 ${pinY}`}
+                        fill="none"
+                        stroke="#ffffff"
+                        strokeWidth="8"
+                        strokeLinecap="round"
+                        strokeOpacity="0.92"
+                      />
+                      <path
+                        d={`M 222 ${pillCy} C 248 ${pillCy}, 244 ${pinY}, 270 ${pinY}`}
+                        fill="none"
+                        stroke={w.color}
+                        strokeWidth={rowActive ? 5 : 3.8}
+                        strokeLinecap="round"
+                      />
+                      <circle
+                        cx="270"
+                        cy={pinY}
+                        r={rowActive ? 11 : 8.5}
+                        fill={w.color}
+                        stroke="#ffffff"
+                        strokeWidth="3"
+                      />
+
+                      <rect
+                        x="14"
+                        y={pillY}
+                        width="208"
+                        height="54"
+                        rx="12"
+                        fill={rowActive ? w.color : '#ffffff'}
+                        stroke={w.color}
+                        strokeWidth="3.2"
+                      />
+                      <circle cx="42" cy={pillCy} r="16" fill={rowActive ? '#ffffff' : w.color} />
+                      <text
+                        x="42"
+                        y={pillCy + 1}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize="21"
+                        fontWeight="900"
+                        fill={rowActive ? w.color : '#ffffff'}
+                        fontFamily="ui-monospace, Consolas, sans-serif">
+                        {w.num}
+                      </text>
+                      <text
+                        x="68"
+                        y={pillCy + 1}
+                        dominantBaseline="central"
+                        fontSize="24"
+                        fontWeight="900"
+                        fill={rowActive ? '#ffffff' : '#0f2942'}
+                        fontFamily="ui-monospace, Consolas, sans-serif">
+                        {w.dot ? '• ' : ''}
+                        {w.padName}
+                      </text>
+                      <text
+                        x="208"
+                        y={pillCy + 1}
+                        textAnchor="end"
+                        dominantBaseline="central"
+                        fontSize="21"
+                        fontWeight="800"
+                        fill={rowActive ? '#ffffff' : w.color}
+                        fontFamily="ui-monospace, Consolas, sans-serif">
+                        {w.leftLabel.split(' · ')[0]}
+                      </text>
+                    </g>
+                  );
+                })}
+
+                {/* RESET tactile button highlight */}
+                <g style={{ opacity: activeId ? 0.35 : 0.96 }}>
+                  <circle cx="617" cy="217" r="23" fill="none" stroke="#f59e0b" strokeWidth="4.5" />
+                  <path d="M 617 194 L 617 60 L 672 60" fill="none" stroke="#f59e0b" strokeWidth="3.8" />
+                  <rect x="672" y="34" width="328" height="52" rx="13" fill="#fffbeb" stroke="#f59e0b" strokeWidth="3" />
+                  <text
+                    x="836"
+                    y="61"
                     textAnchor="middle"
                     dominantBaseline="central"
                     fontSize="24"
@@ -880,6 +1272,27 @@ export default function HardwareWiringGuide({ mode = 'jtag' }) {
                     RESET 键（复位看日志）
                   </text>
                 </g>
+
+                <text
+                  x="620"
+                  y="608"
+                  textAnchor="middle"
+                  fontSize="24"
+                  fontWeight="800"
+                  className={styles.svgNotePrimary}
+                  fontFamily="Inter, 'Microsoft YaHei', sans-serif">
+                  分线器白座朝上直插核心板 USB-C 口，按 1 / 2 / 3 脚交叉接 RX ↔ TX
+                </text>
+                <text
+                  x="620"
+                  y="652"
+                  textAnchor="middle"
+                  fontSize="23"
+                  fontWeight="700"
+                  className={styles.svgNoteWarn}
+                  fontFamily="Inter, 'Microsoft YaHei', sans-serif">
+                  注意：以白座 1 / 2 / 3 位置与丝印为准，切勿按红黑线色盲猜（红线常为 GND）
+                </text>
               </svg>
             )}
           </div>
@@ -897,6 +1310,7 @@ export default function HardwareWiringGuide({ mode = 'jtag' }) {
               <button
                 key={w.id}
                 type="button"
+                aria-pressed={selectedId === w.id}
                 className={`${styles.wireCard} ${isActive ? styles.wireCardActive : ''} ${isDim ? styles.wireCardDim : ''}`}
                 style={{ '--wire-color': w.color, '--wire-bg': w.softBg }}
                 onMouseEnter={() => setHoveredId(w.id)}
@@ -930,7 +1344,9 @@ export default function HardwareWiringGuide({ mode = 'jtag' }) {
               ? activeWire.guide
               : isJtag
                 ? '共接 5 根线（顶部 3.3V 与 RST 留空不接）。点击右侧「下一根 →」可以一根一根跟着插。'
-                : '共接 3 根线（分线器白座朝上，看靠近白座一排丝印：第 1 脚 RX 接 P3 TXD1，第 2 脚 TX 接 P2 RXD1，第 3 脚 GND 接 P7；P1 3V3 不接）。'}
+                : isYuzuki
+                  ? '共接 3 根线（背面猫咪面朝上时分线器白座朝上：第 1 脚 RX 接 TXD，第 2 脚 TX 接 RXD，第 3 脚 GND 接 GND；3V3 不接）。'
+                  : '共接 3 根线（分线器白座朝上，看靠近白座一排丝印：第 1 脚 RX 接 P3 TXD1，第 2 脚 TX 接 P2 RXD1，第 3 脚 GND 接 P7；P1 3V3 不接）。'}
           </span>
         </div>
 

@@ -19,7 +19,31 @@ flowchart TB
 
 运行速度由声音决定：模拟器每跑完一帧，把这一帧的声音推进环形缓冲；缓冲里排队的声音超过 `RATE / 15` 个采样帧就暂停模拟，等 codec 播掉一部分。排队的声音少于 `RATE / 30` 时，下一帧只模拟、不画，保证声音不断。
 
-开始前请先完成 [配置开发环境](../zephyr-setup-env.md) 和 [获取 Zephyr 代码](../zephyr-get-source.md)。
+开始前请先准备好配套工程（见 [获取工程与编译烧录](../../../start/03-get-sdk-and-build.md)）。
+
+## 配套工程源码位置与一键编译
+
+| 项目 | 说明 |
+| --- | --- |
+| 源码目录 | `zephyr-components/nes/samples/nes_player` |
+| 目标板级与模式 | `yuzukineko_base` · RAM（入口 `0x40000000`） |
+| 额外板级配置 | `boards/yuzukineko.conf`（脚本自动加载） |
+| 一期快速体验 | 免编译直接烧录见 [NES 红白机模拟](../../../demos/13-nes.md) |
+
+在配套 `f101-zephyr` 工作区根目录直接执行（全部交叉工具链、依赖与子模块均已随包内置，无需 `source env.sh` 或手动 `git submodule update`）：
+
+```sh
+# 1. 一键编译（自动关联 yuzukineko_base 板级与对应 conf/overlay）
+./.venv/bin/python scripts/build_apps.py --app nes
+
+# 2. 打包整片 SPI NOR 镜像：build/nes/zephyr/zephyr-full.img
+./.venv/bin/python scripts/pack_full_img.py --app nes
+```
+
+生成的 `build/nes/zephyr/zephyr-full.img` 可直接用 Windows 下的 **LYNX Imager**（主线 · SPI NOR）写入开发板，或在已透传 USB 的 WSL2 / Linux 终端执行 `./.venv/bin/python scripts/flash.py flash-full nes`（RAM 调试阶段也可用 `./.venv/bin/python scripts/flash.py run nes` 直接载入内存运行）。
+> **当前 4.5.0 工程同步说明**：为适配 Zephyr 4.5.0 与 LVGL 9.6，配套源码已将 `audio_stack` 扩容至 `8192` 字节、`pad_stack` 扩容至 `16384` 字节。
+
+
 
 ## 准备
 
@@ -44,9 +68,8 @@ flowchart TB
 在工作区里执行。示例在自己的 `CMakeLists.txt` 里用 `ZEPHYR_EXTRA_MODULES` 引入组件，不需要额外参数：
 
 ```sh
-. ~/f101-zephyr/env.sh
-cd ~/f101-zephyr
-west build -b yuzukineko -d build/nes zephyr-components/nes/samples/nes_player
+./.venv/bin/python scripts/build_apps.py --app nes
+./.venv/bin/python scripts/pack_full_img.py --app nes
 ```
 
 <div class="asciinema-cast" data-src="/casts/zephyr/apps-nes/build.cast" data-speed="6"></div>
@@ -55,7 +78,7 @@ west build -b yuzukineko -d build/nes zephyr-components/nes/samples/nes_player
 
 ## 运行
 
-用 [编译与运行](../zephyr-build-run.md) 里的任一种方式下载，控制台是 UART1（PB00/PB01，115200 8N1）。
+用 [Flash 布局与进阶调试](../../../boot/flash-layout.md) 里的任一种方式下载，控制台是 UART1（PB00/PB01，115200 8N1）。
 
 - 调试用方式一：`xfel ddr f101-s3`、`xfel write 0x40000000 build/nes/zephyr/zephyr.bin`、`xfel exec 0x40000000`。
 - 脱机运行用方式三：`mkuf2.py app build/nes/zephyr/zephyr.bin -o out/nes.uf2`，拖进 `F101BOOT` 盘。
@@ -449,7 +472,8 @@ static void pad_main(void *a, void *b, void *c)
 改法是在编译命令后面加 `-D`，字符串要带引号；也可以直接写进 `prj.conf`：
 
 ```sh
-west build -b yuzukineko -d build/nes zephyr-components/nes/samples/nes_player -- -DCONFIG_SAMPLE_NES_ROM='"/SD:/roms/demo.nes"'
+./.venv/bin/west build -b yuzukineko_base -d build/nes zephyr-components/nes/samples/nes_player -- \
+  -DEXTRA_CONF_FILE=boards/yuzukineko.conf -DCONFIG_SAMPLE_NES_ROM='"/SD:/roms/demo.nes"'
 ```
 
 `prj.conf` 里的主要选项：

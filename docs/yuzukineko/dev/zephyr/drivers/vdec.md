@@ -1159,7 +1159,7 @@ west build -b yuzukineko -d build/vdec-jpeg zephyr/samples/drivers/vdec/jpeg
 
 <div class="asciinema-cast" data-src="/casts/zephyr/drivers-vdec/build.cast" data-speed="6"></div>
 
-下载和运行的方法见 [编译与运行](../zephyr-build-run.md)。
+下载和运行的方法见 [Flash 布局与进阶调试](../../../boot/flash-layout.md)。
 
 ## 在自己的应用里使用
 
@@ -1770,7 +1770,7 @@ cd ~/f101-zephyr
 west build -b yuzukineko -d build/vdec-api vdec_api
 ```
 
-下载运行的方法见 [编译与运行](../zephyr-build-run.md)。控制台 UART1 上输出的演示程序自己的行如下（驱动的 `<err>` 日志已去掉，见 [驱动日志](#驱动日志)）：
+下载运行的方法见 [Flash 布局与进阶调试](../../../boot/flash-layout.md)。控制台 UART1 上输出的演示程序自己的行如下（驱动的 `<err>` 日志已去掉，见 [驱动日志](#驱动日志)）：
 
 ```text
 [jpeg] vdec_decode_image(format 2) = 0, 2 ms

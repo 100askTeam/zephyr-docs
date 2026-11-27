@@ -1,86 +1,75 @@
 ---
-title: "SPI NOR 布局与备份"
+title: "Flash 布局与进阶调试"
 ---
 
-板载 NOR Flash 共 <strong>16 MiB</strong>（地址 `0x000000`–`0xFFFFFF`），是系统资源：启动加载器、固件和应用都在里面。<strong>写之前请先看一眼自己想覆盖的范围里有什么，并先备份。</strong>
+日常整片烧录推荐直接使用 Windows 下的 **LYNX Imager**（见 [烧录第一个体验固件](../start/02-flash-first-firmware.md)）。本页整理板载 16 MiB SPI NOR 的分区布局，以及开发调试阶段通过配套工程 `scripts/flash.py` 进行 **RAM 快速载入调试、整片备份与救砖** 的参考说明。
 
-## 备份整片 Flash
+## 16 MiB SPI NOR 布局
 
-进入 FEL 后：
+板载 SPI NOR Flash 共 **16 MiB**（`0x000000`–`0xFFFFFF`）。配套工程的 `scripts/pack_full_img.py` 会自动读取 `zephyr.elf` 入口地址，按应用类型生成对应的整片镜像 `zephyr-full.img`：
 
-```sh
-xfel spinor read 0x0 0x1000000 neko-backup.bin
-# 或
-rfel spinor read 0x0 0x1000000 neko-backup.bin
-```
+### RAM 模式应用（入口 `0x40000000`，共 15 个应用及 `hello_f101`）
 
-保存好备份文件和它的 SHA-256，<strong>不要覆盖上一次的备份</strong>。
+| 偏移范围 | 内容 | 说明 |
+| --- | --- | --- |
+| `0x000000` / `0x010000` / `0x020000` | SyterKit 引导（`flash-boot_spi_s3.bin` 三份） | 上电初始化 16 MiB PSRAM 与 SPIF |
+| `0x02f000` | Flash 采样点参数区 | 引导器自动维护，手工写片时不要覆盖 |
+| `0x200000` 起 | 应用原始镜像（含 4 KiB 头页） | 上电后由引导器搬运至 PSRAM `0x40000000` 运行 |
 
-恢复：
+### XIP 模式应用（入口 `0x0e000000`，如 `nekobox`、`bilibili`）
 
-```sh
-xfel spinor write 0x0 neko-backup.bin
-```
+| 偏移范围 | 内容 | 说明 |
+| --- | --- | --- |
+| `0x000000`–`0x01FFFF` | SyterKit XIP 引导（`xip-boot_spi_s3.bin`） | 初始化 312 MHz PSRAM 并把 Flash `0x80000` 映射到 `0x0e000000` |
+| `0x020000`–`0x02FFFF` | Flash 采样点参数区 | 首次启动完成训练后保存，后续启动加速约 0.55 s |
+| `0x080000` 起 | XIP 应用镜像（`zephyr.bin`） | 代码与只读数据在 Flash 原地执行，RAM 仅放 `.data`/`.bss`/堆 |
 
-写完回读校验，再复位。
-
-## 校验文件
-
-写入前后都应该核对 SHA-256。
-
-| 平台 | 命令 |
-| --- | --- |
-| Windows PowerShell | `Get-FileHash -Algorithm SHA256 <文件>` |
-| Linux | `sha256sum <文件>`；对照校验表：`sha256sum -c SHA256SUMS` |
-| macOS | `shasum -a 256 <文件>`；对照校验表：`shasum -a 256 -c SHA256SUMS` |
-
-## 常见的布局
-
-Flash 的划分取决于你装的是哪套软件。同一块板子可以有以下几种布局之一，<strong>它们互相不兼容</strong>，换用时需要重新写入引导部分。
-
-### RustSBI + Asterinas 镜像
-
-| 组件 | NOR 偏移 | 本布局预留 | 载入 RAM 地址 |
-| --- | --- | --- | --- |
-| SyterKit | `0x000000` | 64 KiB | `0x00020000` |
-| 设备树 | `0x010000` | 256 KiB | `0x40f40000` |
-| RustSBI | `0x050000` | 512 KiB | `0x40f80000` |
-| Asterinas | `0x0d0000` | 5 MiB（到 initramfs 之前） | `0x40000000` |
-| initramfs | `0x5d0000` | 1 MiB | `0x40500000` |
-
-完整镜像写入 `0x000000..0x6d0000`；`0x6d0000..0x1000000` 不会被碰到。详见 [RustSBI + Asterinas](../dev/asterinas/rustsbi-asterinas.md)。
-
-### Linux + Buildroot 镜像
-
-| 组件 | NOR 偏移 | 本布局预留 | 载入 RAM 地址 |
-| --- | --- | --- | --- |
-| SyterKit | `0x000000` | 64 KiB | `0x00020000` |
-| 设备树 | `0x010000` | 256 KiB | `0x40f40000` |
-| OpenSBI `fw_jump` | `0x050000` | 512 KiB | `0x40f80000` |
-| Linux Image | `0x0d0000` | 6 MiB | `0x40000000` |
-| SquashFS 根文件系统 | `0x6d0000` | 到 `0xf00000`（约 8.2 MiB） | 从 MTD 挂载 |
-| JFFS2 overlay | `0xf00000` | 1 MiB | 从 MTD 挂载 |
-
-完整镜像覆盖<strong>整片 16 MiB</strong>，包括 overlay 分区，所以写入会丢掉板上已经持久化的改动。详见 [预编译镜像](../dev/linux/linux-prebuilt.md)。
-
-### UF2 布局
-
-| 内容 | NOR 偏移 |
-| --- | --- |
-| SyterKit 加载器（三份） | `0x000000` / `0x010000` / `0x020000` |
-| 已保存的 Flash 采样点参数 | `0x02f000` |
-| 系统程序头页（UF2 下载器） | `0x030000` |
-| 应用头页（Zephyr 应用） | `0x200000`（最大约 `0x4CF000` 字节） |
-
-详见 [UF2 拖放烧录](../dev/zephyr/zephyr-uf2.md)。
-
-:::tip
-上面几张表里的区域有重叠（例如都从 `0x000000` 开始放 SyterKit），<strong>不要在同一块 Flash 上混着写</strong>。从一种布局换到另一种时，写入新布局的完整引导部分，并用 `xfel spinor read` 回读确认。
+:::caution
+RAM 模式与 XIP 模式的 Flash 布局互不兼容。使用 `scripts/pack_full_img.py` + LYNX Imager 或 `scripts/flash.py flash-full` 整片烧录时会自动写齐对应引导，无需手工拼接。
 :::
 
-## 写入前自检清单
+## 命令行快速调试（`scripts/flash.py`）
 
-1. 已经备份整片 Flash，备份文件的 SHA-256 已记录。
-2. 要写的地址范围没有压到你想保留的数据。
-3. 写入后回读并比较 SHA-256，一致后再复位。
-4. 失败（命令报错或校验不一致）时，先解决问题再启动，不要强行复位。
+如果已在 WSL2（配合 `usbipd-win`，详见 [获取工程与编译烧录](../start/03-get-sdk-and-build.md#第四步打包整片镜像并烧录验证)）或原生 Linux 环境下连接了处于 **FEL 模式** 的开发板，可直接使用工作区内置的 `scripts/flash.py`（已内置 `tools/host/bin/xfel` 与全部引导器，无需单独安装）：
+
+| 命令 | 作用 |
+| --- | --- |
+| `./.venv/bin/python scripts/flash.py version` | 确认 FEL 设备连接（正常应输出 `AWUSBFEX ID=0x00193700(F101)`） |
+| `./.venv/bin/python scripts/flash.py run <应用名>` | **快速调试**：RAM 应用直接初始化 PSRAM 并载入 `0x40000000` 运行（不写 Flash，断电即失）；XIP 应用写入 `0x80000`、校验 SHA-256 后直接通过 RAM 引导启动 |
+| `./.venv/bin/python scripts/flash.py flash-full <应用名>` | 将 `build/<应用名>/zephyr/zephyr-full.img` 写入 `0x000000`、回读校验 SHA-256 并复位 |
+| `./.venv/bin/python scripts/flash.py backup -o build/neko-backup.bin` | 备份整片 16 MiB SPI NOR 并打印 SHA-256 |
+| `./.venv/bin/python scripts/flash.py clear-boot` | 擦除 `0x000000`–`0x010000` 启动头，使开发板下次上电**自动进入 FEL**（适合高频 RAM 调试，省去每次按 FEL 键） |
+
+### 开发调试小技巧
+
+- **进入 FEL**：Flash 内已有有效引导时，上电会直接运行固件而不会停在 FEL，必须按「拔线断电 → 按住 FEL → 插回通电 → 1 秒后松手」进入（图文步骤见 [烧录第一个体验固件](../start/02-flash-first-firmware.md)）。
+- **高频改代码调试**：先执行一次 `scripts/flash.py clear-boot` 清除启动头，之后每次断电重插都会自动进入 FEL，改完代码直接 `build` + `scripts/flash.py run <应用名>`，几秒就能在串口 `UART1`（`PB0/PB1`，`115200 8N1`）看到输出；调试完成后再刷一次 `zephyr-full.img` 恢复脱机自启。
+- **关于 `exec` 后的 USB 报错**：`scripts/flash.py run` 或 `xfel exec` 跳转后 CPU 离开 BROM，USB 链路会立即断开，终端偶尔出现 `usb bulk send/recv error` 属正常现象，以串口输出为准。
+
+## 整片 Flash 备份与恢复
+
+在尝试自定义分区或刷写第三方固件前，建议先备份当前整片 16 MiB Flash：
+
+```sh
+# 备份整片 16 MiB SPI NOR（自动打印 SHA-256）
+./.venv/bin/python scripts/flash.py backup -o build/neko-backup.bin
+
+# 恢复备份并复位
+./tools/host/bin/xfel spinor write 0x0 build/neko-backup.bin
+./tools/host/bin/xfel reset
+```
+
+写入前后建议用 `sha256sum`（Linux/WSL）或 `Get-FileHash -Algorithm SHA256`（Windows PowerShell）核对文件摘要，确保镜像完整无损。
+
+## 常见连接问题排查
+
+| 提示 / 现象 | 原因与处理 |
+| --- | --- |
+| 找不到 FEL 设备（`1f3a:efe8`） | 确认已按住 FEL 键重新上电、使用带数据线的 USB-C 线；WSL2 需先用 `usbipd attach --wsl` 透传；Windows 使用 `xfel` 需确认已装 WinUSB 驱动（LYNX Imager 安装驱动时会自动配置） |
+| Linux / WSL2 报 USB 权限不足 | 按 [获取工程与编译烧录](../start/03-get-sdk-and-build.md#第四步打包整片镜像并烧录验证) 配置 `/etc/udev/rules.d/70-allwinner-fel.rules` 后重新插拔 |
+| 刷写后无法开机 / 救砖 | 按住 FEL 键重新上电即可回到 BROM（硬件级不可写坏），再用 LYNX Imager 重新刷入任一整片 `-full.img` 固件即可恢复 |
+| 串口没有任何输出 | 确认串口接在底板 `CN2` 的 `UART1`（`PB0` TX / `PB1` RX）、交叉接线（TX↔RX）与共地，波特率 `115200 8N1` |
+
+:::info 更多上游底层工具
+如需了解手动编译 `xfel` / `rfel` 或从零配置 UF2 拖放下载器，可查阅 [YuzukiNeko 原版文档](https://yuzukihd.github.io/YuzukiNeko/zh)。
+:::

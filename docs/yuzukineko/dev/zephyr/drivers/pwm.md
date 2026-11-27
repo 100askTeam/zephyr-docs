@@ -663,7 +663,7 @@ west build -b yuzukineko -d build/pwm-api pwm_api
 
 <div class="asciinema-cast" data-src="/casts/zephyr/drivers-pwm/build.cast" data-speed="6"></div>
 
-下载运行的方法见[编译与运行](../zephyr-build-run.md)。控制台 UART1 上的完整输出（运行期间屏幕亮度会变化）：
+下载运行的方法见[Flash 布局与进阶调试](../../../boot/flash-layout.md)。控制台 UART1 上的完整输出（运行期间屏幕亮度会变化）：
 
 ```text
 [clock] pwm_get_cycles_per_sec(channel 2) = 0, 24000000 Hz
